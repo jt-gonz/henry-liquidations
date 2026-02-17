@@ -57,7 +57,11 @@
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
-					items: items.map((item) => ({ id: item.id, quantity: item.quantity }))
+					items: items.map((item) => ({
+						id: item.id,
+						quantity: item.quantity,
+						...(item.color ? { color: item.color } : {})
+					}))
 				})
 			});
 
@@ -123,6 +127,16 @@
 							{item.name}
 						</a>
 						<p class="mt-1 text-sm font-medium text-brand-brown">${item.price.toFixed(2)}</p>
+						{#if item.color}
+							<div class="mt-1 flex items-center gap-1.5">
+								<span class="text-xs text-gray-500">Color:</span>
+								<div
+									class="h-3 w-3 rounded-full border border-gray-300"
+									style="background-color: {item.color}"
+								></div>
+								<span class="text-xs text-gray-600">{item.color}</span>
+							</div>
+						{/if}
 					</div>
 
 					<!-- Quantity Controls -->
