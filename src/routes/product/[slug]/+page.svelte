@@ -8,6 +8,11 @@
 	let product = $derived(data.product);
 	let added = $state(false);
 
+	// Image gallery state
+	let images = $derived(product.image_url || []);
+	let currentImageIndex = $state(0);
+	let currentImage = $derived(images[currentImageIndex] || '');
+
 	// Colors - initialize as null, then set in effect
 	let selectedColor = $state(product.colors?.[0] ?? null);
 
@@ -27,12 +32,31 @@
 		showLightbox = false;
 	}
 
+	function nextImage() {
+		if (images.length > 1) {
+			currentImageIndex = (currentImageIndex + 1) % images.length;
+		}
+	}
+
+	function prevImage() {
+		if (images.length > 1) {
+			currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+		}
+	}
+
+	/**
+	 * @param {number} index
+	 */
+	function selectImage(index) {
+		currentImageIndex = index;
+	}
+
 	function handleAddToCart() {
 		addToCart({
 			id: product.id,
 			name: product.name,
 			price: Number(product.price),
-			image_url: product.image_url?.[0] ?? '',
+			image_url: currentImage,
 			slug: product.slug,
 			color: selectedColor
 		});
@@ -44,6 +68,17 @@
 
 	/** @type {Record<string, string>} */
 	const unitLabels = { in: '"', cm: ' cm', ft: ' ft' };
+
+	/**
+	 * Format description by inserting newlines before "-" characters
+	 * @param {string} desc
+	 */
+	function formatDescription(desc) {
+		if (!desc) return '';
+		// Insert newline before "-" at the start of lines or after other content
+		// But preserve the HTML tags that might already be there
+		return desc.replace(/([^\n])\s*-\s/g, '$1\n- ');
+	}
 </script>
 
 <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -69,37 +104,120 @@
 	</nav>
 
 	<div class="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
-		<!-- Product Image (Clickable) -->
-		<button
-			class="group relative aspect-square w-full cursor-zoom-in overflow-hidden rounded-2xl border border-brand-light bg-brand-bg object-cover sm:rounded-3xl"
-			onclick={openLightbox}
-			aria-label="View full size image"
-		>
-			<img
-				src={product.image_url?.[0] ?? ''}
-				alt={product.name}
-				class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-				loading="lazy"
-			/>
-			<div
-				class="absolute right-4 bottom-4 rounded-full bg-white/90 p-2 text-brand-dark opacity-70 shadow-sm backdrop-blur-sm transition-opacity group-hover:opacity-100"
+		<!-- Product Image Gallery -->
+		<div class="flex flex-col gap-4">
+			<!-- Main Image -->
+			<button
+				class="group relative aspect-square w-full cursor-zoom-in overflow-hidden rounded-2xl border border-brand-light bg-brand-bg object-cover sm:rounded-3xl"
+				onclick={openLightbox}
+				aria-label="View full size image"
 			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					class="h-5 w-5"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6"
+				{#if images.length > 0}
+					<img
+						src={currentImage}
+						alt={product.name}
+						class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+						loading="lazy"
 					/>
-				</svg>
-			</div>
-		</button>
+				{:else}
+					<div class="flex h-full w-full items-center justify-center text-brand-mid">
+						No image available
+					</div>
+				{/if}
+
+				<!-- Navigation arrows (only show if multiple images) -->
+				{#if images.length > 1}
+					<button
+						type="button"
+						class="absolute top-1/2 left-4 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-brand-dark opacity-0 shadow-md transition-opacity group-hover:opacity-100 hover:bg-white"
+						onclick={(e) => {
+							e.stopPropagation();
+							prevImage();
+						}}
+						aria-label="Previous image"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="2"
+							stroke="currentColor"
+							class="h-5 w-5"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M15.75 19.5L8.25 12l7.5-7.5"
+							/>
+						</svg>
+					</button>
+					<button
+						type="button"
+						class="absolute top-1/2 right-4 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-brand-dark opacity-0 shadow-md transition-opacity group-hover:opacity-100 hover:bg-white"
+						onclick={(e) => {
+							e.stopPropagation();
+							nextImage();
+						}}
+						aria-label="Next image"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="2"
+							stroke="currentColor"
+							class="h-5 w-5"
+						>
+							<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+						</svg>
+					</button>
+				{/if}
+
+				<div
+					class="absolute right-4 bottom-4 rounded-full bg-white/90 p-2 text-brand-dark opacity-70 shadow-sm backdrop-blur-sm transition-opacity group-hover:opacity-100"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+						class="h-5 w-5"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6"
+						/>
+					</svg>
+				</div>
+			</button>
+
+			<!-- Thumbnail Gallery -->
+			{#if images.length > 1}
+				<div class="flex gap-2 overflow-x-auto pb-2">
+					{#each images as img, index (img)}
+						<button
+							type="button"
+							class="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all {index ===
+							currentImageIndex
+								? 'border-brand-dark ring-2 ring-brand-dark ring-offset-2'
+								: 'border-brand-light hover:border-brand-mid'}"
+							onclick={() => selectImage(index)}
+							aria-label="View image {index + 1} of {images.length}"
+							aria-current={index === currentImageIndex ? 'true' : 'false'}
+						>
+							<img
+								src={img}
+								alt="{product.name} - view {index + 1}"
+								class="h-full w-full object-cover"
+								loading="lazy"
+							/>
+						</button>
+					{/each}
+				</div>
+			{/if}
+		</div>
 
 		<!-- Product Info -->
 		<div class="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
@@ -128,10 +246,12 @@
 				</div>
 			</div>
 
-			<!-- Description -->
+			<!-- Description with formatted newlines -->
 			<div class="mt-6 space-y-4 text-base text-gray-600">
 				{#if product.description}
-					<p class="leading-relaxed">{@html product.description}</p>
+					<div class="leading-relaxed whitespace-pre-line">
+						{@html formatDescription(product.description)}
+					</div>
 				{:else}
 					<p>No description available.</p>
 				{/if}
@@ -284,8 +404,68 @@
 							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 						</svg>
 					</button>
+
+					<!-- Lightbox Navigation -->
+					{#if images.length > 1}
+						<button
+							type="button"
+							class="absolute top-1/2 left-4 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70"
+							onclick={(e) => {
+								e.stopPropagation();
+								prevImage();
+							}}
+							aria-label="Previous image"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="2"
+								stroke="currentColor"
+								class="h-6 w-6"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M15.75 19.5L8.25 12l7.5-7.5"
+								/>
+							</svg>
+						</button>
+						<button
+							type="button"
+							class="absolute top-1/2 right-4 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70"
+							onclick={(e) => {
+								e.stopPropagation();
+								nextImage();
+							}}
+							aria-label="Next image"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="2"
+								stroke="currentColor"
+								class="h-6 w-6"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M8.25 4.5l7.5 7.5-7.5 7.5"
+								/>
+							</svg>
+						</button>
+
+						<!-- Image counter -->
+						<div
+							class="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/50 px-4 py-2 text-sm text-white"
+						>
+							{currentImageIndex + 1} / {images.length}
+						</div>
+					{/if}
+
 					<img
-						src={product.image_url?.[0] ?? ''}
+						src={currentImage}
 						alt={product.name}
 						class="mx-auto max-h-[90vh] w-auto rounded-md object-contain"
 						onclick={(e) => e.stopPropagation()}
