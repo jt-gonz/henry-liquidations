@@ -2,6 +2,7 @@
 <script>
 	import { cart, removeFromCart, updateQuantity, clearCart } from '$lib/stores/cart.js';
 	import { onMount } from 'svelte';
+	import { getColorName } from '$lib/constants/colors.js';
 
 	let items = $derived($cart);
 	let total = $derived(items.reduce((sum, item) => sum + item.price * item.quantity, 0));
@@ -134,7 +135,7 @@
 									class="h-3 w-3 rounded-full border border-gray-300"
 									style="background-color: {item.color}"
 								></div>
-								<span class="text-xs text-gray-600">{item.color}</span>
+								<span class="text-xs text-gray-600">{getColorName(item.color)}</span>
 							</div>
 						{/if}
 					</div>

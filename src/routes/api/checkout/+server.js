@@ -2,6 +2,7 @@ import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
 import { STRIPE_SECRET_KEY } from '$env/static/private';
 import { supabase } from '$lib/server/supabase.js';
+import { getColorName } from '$lib/constants/colors.js';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY);
 
@@ -68,7 +69,7 @@ export async function POST({ request, url }) {
 				product_data: {
 					name: product.name,
 					...(product.image_url?.[0] ? { images: [product.image_url[0]] } : {}),
-					...(item.color ? { description: `Color: ${item.color}` } : {})
+					...(item.color ? { description: `Color: ${getColorName(item.color)}` } : {})
 				},
 				unit_amount: unitAmount
 			},

@@ -2,6 +2,7 @@
 <script>
 	import { addToCart } from '$lib/stores/cart.js';
 	import { fade, scale } from 'svelte/transition';
+	import { getColorName } from '$lib/constants/colors.js';
 
 	/** @type {{ data: { product: any } }} */
 	let { data } = $props();
@@ -291,7 +292,12 @@
 			<!-- Color Selection -->
 			{#if product.colors && product.colors.length > 0}
 				<div class="mt-6">
-					<h3 class="text-sm font-bold text-brand-dark">Color</h3>
+					<div class="flex items-center justify-between">
+						<h3 class="text-sm font-bold text-brand-dark">Color</h3>
+						{#if selectedColor}
+							<span class="text-sm text-brand-mid">{getColorName(selectedColor)}</span>
+						{/if}
+					</div>
 					<div class="mt-2 flex items-center space-x-3">
 						{#each product.colors as color (color)}
 							<button
@@ -299,7 +305,7 @@
 								color
 									? 'ring-2 ring-offset-1'
 									: ''}"
-								aria-label="Select color {color}"
+								aria-label="Select color {getColorName(color)}"
 								style="--tw-ring-color: {color === '#ffffff' ? '#e5e7eb' : color}"
 								onclick={() => (selectedColor = color)}
 							>
