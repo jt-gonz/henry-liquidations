@@ -1,5 +1,7 @@
 <!-- Add Product Page -->
 <script>
+	import { CATEGORIES } from '$lib/constants/categories.js';
+
 	let { form } = $props();
 	let submitting = $state(false);
 
@@ -18,8 +20,8 @@
 	}
 </script>
 
-<div class="max-w-2xl mx-auto">
-	<h1 class="mb-6 text-2xl font-bold text-center text-gray-900">Add New Product</h1>
+<div class="mx-auto max-w-2xl">
+	<h1 class="mb-6 text-center text-2xl font-bold text-gray-900">Add New Product</h1>
 
 	{#if form?.error}
 		<div class="mb-4 rounded-md bg-red-50 px-4 py-3 text-sm text-red-700">
@@ -71,13 +73,10 @@
 					required
 					class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none sm:text-sm"
 				>
-					<option value="">Select</option>
-					<option value="Living Room" selected={form?.category === 'Living Room'}>Living Room</option>
-					<option value="Bedroom" selected={form?.category === 'Bedroom'}>Bedroom</option>
-					<option value="Dining" selected={form?.category === 'Dining'}>Dining</option>
-					<option value="Office" selected={form?.category === 'Office'}>Office</option>
-					<option value="Outdoor" selected={form?.category === 'Outdoor'}>Outdoor</option>
-					<option value="Other" selected={form?.category === 'Other'}>Other</option>
+					<option value="">Select Category</option>
+					{#each CATEGORIES as cat}
+						<option value={cat.value} selected={form?.category === cat.value}>{cat.label}</option>
+					{/each}
 				</select>
 			</div>
 		</div>
@@ -96,23 +95,48 @@
 
 		<!-- Row 4: Dimensions -->
 		<fieldset class="rounded-md border border-gray-200 p-4">
-			<legend class="text-sm font-medium text-gray-700 px-1">Dimensions (optional)</legend>
-			<div class="grid grid-cols-4 gap-4 mt-2">
+			<legend class="px-1 text-sm font-medium text-gray-700">Dimensions (optional)</legend>
+			<div class="mt-2 grid grid-cols-4 gap-4">
 				<div>
-					<label for="dim_width" class="block text-xs text-gray-500 mb-1">Width</label>
-					<input id="dim_width" name="dim_width" type="number" step="0.1" min="0" class="block w-full rounded-md border border-gray-300 px-2 py-1.5 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none sm:text-sm" />
+					<label for="dim_width" class="mb-1 block text-xs text-gray-500">Width</label>
+					<input
+						id="dim_width"
+						name="dim_width"
+						type="number"
+						step="0.1"
+						min="0"
+						class="block w-full rounded-md border border-gray-300 px-2 py-1.5 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none sm:text-sm"
+					/>
 				</div>
 				<div>
-					<label for="dim_height" class="block text-xs text-gray-500 mb-1">Height</label>
-					<input id="dim_height" name="dim_height" type="number" step="0.1" min="0" class="block w-full rounded-md border border-gray-300 px-2 py-1.5 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none sm:text-sm" />
+					<label for="dim_height" class="mb-1 block text-xs text-gray-500">Height</label>
+					<input
+						id="dim_height"
+						name="dim_height"
+						type="number"
+						step="0.1"
+						min="0"
+						class="block w-full rounded-md border border-gray-300 px-2 py-1.5 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none sm:text-sm"
+					/>
 				</div>
 				<div>
-					<label for="dim_depth" class="block text-xs text-gray-500 mb-1">Depth</label>
-					<input id="dim_depth" name="dim_depth" type="number" step="0.1" min="0" class="block w-full rounded-md border border-gray-300 px-2 py-1.5 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none sm:text-sm" />
+					<label for="dim_depth" class="mb-1 block text-xs text-gray-500">Depth</label>
+					<input
+						id="dim_depth"
+						name="dim_depth"
+						type="number"
+						step="0.1"
+						min="0"
+						class="block w-full rounded-md border border-gray-300 px-2 py-1.5 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none sm:text-sm"
+					/>
 				</div>
 				<div>
-					<label for="dim_unit" class="block text-xs text-gray-500 mb-1">Unit</label>
-					<select id="dim_unit" name="dim_unit" class="block w-full rounded-md border border-gray-300 px-2 py-1.5 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none sm:text-sm">
+					<label for="dim_unit" class="mb-1 block text-xs text-gray-500">Unit</label>
+					<select
+						id="dim_unit"
+						name="dim_unit"
+						class="block w-full rounded-md border border-gray-300 px-2 py-1.5 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none sm:text-sm"
+					>
 						<option value="in">inches</option>
 						<option value="cm">cm</option>
 						<option value="ft">feet</option>
@@ -123,39 +147,42 @@
 
 		<!-- Row 5: Colors -->
 		<fieldset class="rounded-md border border-gray-200 p-4">
-				<legend class="text-xs font-medium text-gray-700 px-1">Colors (optional)</legend>
-				<div class="flex items-center gap-2 mt-1">
-					<input
-						type="color"
-						bind:value={newColor}
-						class="h-8 w-8 cursor-pointer rounded border border-gray-300"
-					/>
-					<button
-						type="button"
-						onclick={addColor}
-						class="rounded bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700 hover:bg-gray-200"
-					>
-						Add
-					</button>
-				</div>
-				{#if colors.length > 0}
-					<div class="mt-2 flex flex-wrap gap-1.5">
-						{#each colors as color (color)}
-							<button
-								type="button"
-								onclick={() => removeColor(color)}
-								class="group relative h-6 w-6 rounded-full ring-1 ring-gray-300 hover:ring-red-400 transition-all"
-								style="background-color: {color}"
-								title="Click to remove {color}"
+			<legend class="px-1 text-xs font-medium text-gray-700">Colors (optional)</legend>
+			<div class="mt-1 flex items-center gap-2">
+				<input
+					type="color"
+					bind:value={newColor}
+					class="h-8 w-8 cursor-pointer rounded border border-gray-300"
+				/>
+				<button
+					type="button"
+					onclick={addColor}
+					class="rounded bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700 hover:bg-gray-200"
+				>
+					Add
+				</button>
+			</div>
+			{#if colors.length > 0}
+				<div class="mt-2 flex flex-wrap gap-1.5">
+					{#each colors as color (color)}
+						<button
+							type="button"
+							onclick={() => removeColor(color)}
+							class="group relative h-6 w-6 rounded-full ring-1 ring-gray-300 transition-all hover:ring-red-400"
+							style="background-color: {color}"
+							title="Click to remove {color}"
+						>
+							<span
+								class="absolute inset-0 flex items-center justify-center text-xs font-bold text-white opacity-0 drop-shadow-md group-hover:opacity-100"
+								>✕</span
 							>
-								<span class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 text-white text-xs font-bold drop-shadow-md">✕</span>
-							</button>
-						{/each}
-					</div>
-				{/if}
-				<!-- Hidden inputs for form submission -->
-				<input type="hidden" name="colors" value={JSON.stringify(colors)} />
-			</fieldset>
+						</button>
+					{/each}
+				</div>
+			{/if}
+			<!-- Hidden inputs for form submission -->
+			<input type="hidden" name="colors" value={JSON.stringify(colors)} />
+		</fieldset>
 
 		<!-- Row 6: Image -->
 		<div>
