@@ -131,7 +131,7 @@
 			<!-- Description -->
 			<div class="mt-6 space-y-4 text-base text-gray-600">
 				{#if product.description}
-					<p class="leading-relaxed">{product.description}</p>
+					<p class="leading-relaxed">{@html product.description}</p>
 				{:else}
 					<p>No description available.</p>
 				{/if}

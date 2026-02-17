@@ -98,15 +98,16 @@
 							<td
 								class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-6"
 							>
-								<a href="/admin/edit/{product.id}" class="mr-4 text-brand-mid hover:text-brand-dark"
-									>Edit</a
+								<a
+									href="/admin/edit/{product.id}"
+									class="mr-4 cursor-pointer text-brand-mid hover:text-brand-dark">Edit</a
 								>
 								<form method="POST" action="?/delete" class="inline">
 									<input type="hidden" name="id" value={product.id} />
 									<input type="hidden" name="image_url" value={product.image_url} />
 									<button
 										type="submit"
-										class="text-brand-brown transition-colors hover:text-brand-dark"
+										class="cursor-pointer text-brand-brown transition-colors hover:text-brand-dark"
 										onclick={(e) => {
 											if (!confirm(`Delete "${product.name}"?`)) e.preventDefault();
 										}}
