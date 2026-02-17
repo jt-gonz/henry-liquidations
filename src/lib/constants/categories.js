@@ -21,7 +21,7 @@ export const CATEGORIES = [
     { value: 'ACCENTS COLLECTION', label: 'Accents Collection' },
     { value: 'OCCASIONAL COLLECTION', label: 'Occasional Collection' },
     { value: 'ACCESSORIES COLLECTION', label: 'Accessories Collection' },
-    { value: 'UTILITIES', label: 'Utilities' },
+    { value: 'APPLIANCES', label: 'Appliances' },
     { value: 'OTHER', label: 'Other' }
 ];
 

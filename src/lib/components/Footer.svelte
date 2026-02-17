@@ -29,10 +29,10 @@
 						<span class="mr-2">📧</span> support@henrysliquidation.com
 					</li>
 					<li class="flex items-center text-base text-brand-light">
-						<span class="mr-2">📞</span> (555) 123-4567
+						<span class="mr-2">📞</span> (765) 977-2492
 					</li>
 					<li class="flex items-center text-base text-brand-light">
-						<span class="mr-2">📍</span> 1234 Market St, Warehouse 5
+						<span class="mr-2">📍</span> 1355 Sagamore Pkwy N, Lafayette, IN 47904
 					</li>
 				</ul>
 			</div>
