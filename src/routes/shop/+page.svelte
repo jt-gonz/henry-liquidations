@@ -12,7 +12,14 @@
 	let loading = $state(false);
 
 	// ── Filters ─────────────────────────────────────────────
-	const categories = ['Living Room', 'Bedroom', 'Dining', 'Office', 'Outdoor', 'Other'];
+	// Categories mapped from units_processed.csv
+	const categories = [
+		'LIVING ROOM COLLECTION',
+		'RECLINER COLLECTION',
+		'ACCENTS COLLECTION',
+		'OCCASIONAL COLLECTION',
+		'ACCESSORIES COLLECTION'
+	];
 
 	let selectedCategory = $state('');
 
