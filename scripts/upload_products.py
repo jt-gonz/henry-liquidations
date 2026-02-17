@@ -3,7 +3,7 @@
 Upload units_processed.csv to Supabase products table.
 
 This script reads the CSV file, processes the descriptions to convert **text** to <strong>text</strong>,
-and uploads all products to the Supabase database.
+handles multiple image URLs, and uploads all products to the Supabase database.
 
 Usage:
     # With encrypted .env (recommended):
@@ -66,6 +66,39 @@ def process_description(desc: str) -> str:
     return desc
 
 
+def parse_image_urls(image_url_str: str) -> list:
+    """
+    Parse the image_url column which can be either:
+    - A single URL string
+    - A Python list of URLs: ['url1', 'url2']
+    
+    Returns a list of URLs since the database schema expects an array.
+    """
+    if not image_url_str or image_url_str.strip() == '':
+        return []
+    
+    image_url_str = image_url_str.strip()
+    
+    # Check if it's a list format
+    if image_url_str.startswith('[') and image_url_str.endswith(']'):
+        try:
+            # Try to parse as Python list
+            urls = eval(image_url_str)
+            if isinstance(urls, list):
+                return urls  # Return all image URLs
+        except:
+            try:
+                # Try JSON
+                urls = json.loads(image_url_str)
+                if isinstance(urls, list):
+                    return urls
+            except:
+                pass
+    
+    # Return as single-item list if it's a single URL
+    return [image_url_str]
+
+
 def parse_colors(colors_str: str) -> List[str]:
     """
     Parse the colors column from the CSV.
@@ -82,6 +115,15 @@ def parse_colors(colors_str: str) -> List[str]:
             return []
 
 
+def clean_slug(slug: str) -> str:
+    """
+    Clean up the slug by removing 'nannan-' prefix if present.
+    """
+    if slug.startswith('nannan-'):
+        return slug[7:]  # Remove 'nannan-' prefix
+    return slug
+
+
 def parse_csv_multiline(filepath: str) -> List[Dict[str, Any]]:
     """
     Parse the CSV file handling multiline descriptions.
@@ -95,11 +137,11 @@ def parse_csv_multiline(filepath: str) -> List[Dict[str, Any]]:
             try:
                 product = {
                     'name': row['name'].strip(),
-                    'slug': row['slug'].strip(),
+                    'slug': clean_slug(row['slug'].strip()),
                     'description': process_description(row['description']),
                     'price': float(row['price']) if row['price'] else 0.0,
                     'category': row['category'].strip() if row['category'] else None,
-                    'image_url': row['image_url'].strip() if row['image_url'] else None,
+                    'image_url': parse_image_urls(row['image_url']),
                     'in_stock': row['in_stock'].strip().lower() == 'true' if row['in_stock'] else True,
                     'colors': parse_colors(row.get('colors', ''))
                 }
@@ -181,15 +223,16 @@ def main():
         print("No products found in CSV file!")
         sys.exit(1)
     
-    # Show first product as example
+    # Show first few products as examples
     print(f"\nFound {len(products)} products")
-    print("\nFirst product example:")
-    print(f"  Name: {products[0]['name']}")
-    print(f"  Slug: {products[0]['slug']}")
-    print(f"  Price: ${products[0]['price']}")
-    print(f"  Category: {products[0]['category']}")
-    print(f"  Description preview:")
-    print(f"    {products[0]['description'][:150]}...")
+    print("\nFirst 3 products examples:")
+    for i, p in enumerate(products[:3]):
+        print(f"\n{i+1}. {p['name']}:")
+        print(f"   Slug: {p['slug']}")
+        print(f"   Price: ${p['price']}")
+        print(f"   Category: {p['category']}")
+        print(f"   Images: {len(p['image_url'])} image(s)")
+        print(f"   In Stock: {p['in_stock']}")
     
     # Ask for confirmation
     confirm = input("\nProceed with upload? (yes/no): ").strip().lower()

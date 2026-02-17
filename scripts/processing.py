@@ -14,15 +14,34 @@ def process_data(input_file, output_file):
     }
 
     def parse_unit_id(uid):
-        # Format: [Prefix][Number] [Name] -> (Prefix, Number, Name)
-        # Handles U13 Elle, ST110 Amelia, etc.
-        match = re.match(r'([A-Z]+)(\d+)\s+(.+)', str(uid))
-        if match:
-            return match.group(1), int(match.group(2)), match.group(3).strip()
-        return None, None, str(uid).strip()
+        # Robust parsing: Split on the first space only.
+        # "U13 Elle" -> code="U13", name="Elle"
+        # "U93-R Hunnely" -> code="U93-R", name="Hunnely"
+        s = str(uid).strip()
+        parts = s.split(' ', 1)
+        
+        if len(parts) == 2:
+            id_code = parts[0].strip()
+            name = parts[1].strip()
+        else:
+            # Fallback for weird data
+            id_code = s
+            name = s
 
-    # Create temporary columns for logic
-    df[['uid_prefix', 'uid_num', 'model_name']] = df['unit_id'].apply(lambda x: pd.Series(parse_unit_id(x)))
+        # Extract a number for sorting purposes (e.g., 93 from U93-R)
+        # If no number found, default to 0
+        num_match = re.search(r'(\d+)', id_code)
+        num = int(num_match.group(1)) if num_match else 0
+        
+        return id_code, num, name
+
+    # Apply the parsing logic
+    df['unit_id'] = df['unit_id'].str.strip()
+    # Create new columns: 'uid_code' (e.g. U93-R), 'sort_num' (93), 'model_name' (Hunnely)
+    df[['uid_code', 'sort_num', 'model_name']] = df['unit_id'].apply(lambda x: pd.Series(parse_unit_id(x)))
+    
+    # Handle price
+    df['price'] = pd.to_numeric(df['price'], errors='coerce').fillna(0)
 
     def extract_colors(text):
         found_hex = []
@@ -34,25 +53,47 @@ def process_data(input_file, output_file):
 
     processed_rows = []
 
-    # Group by model_name and collection to combine sequential unit_ids (e.g. U30, U31 Phillip)
-    for (model_name, collection), group in df.groupby(['model_name', 'collection'], sort=False):
-        group = group.sort_values('uid_num')
+    # GROUPING LOGIC:
+    # Group by model_name, collection AND price.
+    for (model_name, collection, price), group in df.groupby(['model_name', 'collection', 'price'], sort=False):
+        # Sort by the extracted number so U13 comes before U14
+        group = group.sort_values('sort_num')
         
-        # Use the first unit_id in the sequence as the primary name
-        primary_unit_id = group.iloc[0]['unit_id']
-        
-        # Combine colors from all descriptions in the group
+        # 1. Product Name: Just the model name (e.g., "Elle")
+        product_name = model_name
+
+        # 2. Slug & Image Arrays
+        slug_ids = []
+        image_urls = []
+
+        for _, row in group.iterrows():
+            # Use the extracted code directly (e.g., "U93-R")
+            code = row['uid_code']
+            slug_ids.append(code)
+
+            # Image URL
+            safe_filename = row['unit_id'].replace(' ', '_')
+            url = f"https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/{safe_filename}.png"
+            image_urls.append(url)
+
+        # Construct Slug: u93-r-u94-r-hunnely
+        # Join all IDs with dashes, then add the model name
+        slug_base = "-".join(slug_ids)
+        slug_model = model_name.lower().replace(' ', '-')
+        final_slug = f"{slug_base}-{slug_model}".lower()
+
+        # Combine colors
         all_colors = []
         for desc in group['description']:
             all_colors.extend(extract_colors(desc))
         unique_colors = sorted(list(set(all_colors)))
 
-        # Format Description (Bullets)
+        # Format Description
         first_row = group.iloc[0]
         desc_parts = [p.strip() for p in str(first_row['description']).split(';') if p.strip()]
         formatted_desc = "\n".join([f"- {p}" for p in desc_parts])
 
-        # Format Dimensions (Bullets + Bold Titles)
+        # Format Dimensions
         dim_parts = [p.strip() for p in str(first_row['dimensions']).split(';') if p.strip()]
         formatted_dims = []
         for d in dim_parts:
@@ -62,19 +103,21 @@ def process_data(input_file, output_file):
             else:
                 formatted_dims.append(f"- {d}")
         
-        # Dimensions are placed lower than description
         combined_text = formatted_desc + "\n" + "\n".join(formatted_dims)
+
+        # Stock logic
+        raw_available = bool(first_row.get('available', 1))
+        is_in_stock = raw_available and (price > 0)
 
         # Build Entry
         entry = {
-            'name': primary_unit_id,
-            'slug': primary_unit_id.lower().replace(' ', '-'),
+            'name': product_name,
+            'slug': final_slug,
             'description': combined_text,
-            'price': 0,
+            'price': price,
             'category': collection,
-            # Path matches name with space replaced by underscore
-            'image_url': f"https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/{primary_unit_id.replace(' ', '_')}.png",
-            'in_stock': True,
+            'image_url': image_urls,
+            'in_stock': is_in_stock,
             'colors': unique_colors
         }
         processed_rows.append(entry)
@@ -82,7 +125,15 @@ def process_data(input_file, output_file):
     # Final output
     out_df = pd.DataFrame(processed_rows)
     out_df.to_csv(output_file, index=False)
-    print(f"Successfully processed {len(out_df)} unique products.")
+    print(f"Successfully processed {len(out_df)} products.")
+    
+    # Debug print to verify fix
+    sample = out_df[out_df['slug'].str.contains('nan', na=False)]
+    if not sample.empty:
+        print("WARNING: 'nan' still found in slugs!")
+        print(sample[['name', 'slug']].head())
+    else:
+        print("Verification: No 'nan' found in slugs.")
 
 if __name__ == "__main__":
-    process_data('~/projects/product/units_output.csv', 'units_processed.csv')
+    process_data('~/projects/product/full_catalog_with_price.csv', 'units_processed.csv')

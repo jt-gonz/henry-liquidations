@@ -74,12 +74,26 @@
 					class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none sm:text-sm"
 				>
 					<option value="">Select</option>
-					<option value="Living Room" selected={(form?.category ?? data.product.category) === 'Living Room'}>Living Room</option>
-					<option value="Bedroom" selected={(form?.category ?? data.product.category) === 'Bedroom'}>Bedroom</option>
-					<option value="Dining" selected={(form?.category ?? data.product.category) === 'Dining'}>Dining</option>
-					<option value="Office" selected={(form?.category ?? data.product.category) === 'Office'}>Office</option>
-					<option value="Outdoor" selected={(form?.category ?? data.product.category) === 'Outdoor'}>Outdoor</option>
-					<option value="Other" selected={(form?.category ?? data.product.category) === 'Other'}>Other</option>
+					<option
+						value="Living Room"
+						selected={(form?.category ?? data.product.category) === 'Living Room'}
+						>Living Room</option
+					>
+					<option value="Bedroom" selected={(form?.category ?? data.product.category) === 'Bedroom'}
+						>Bedroom</option
+					>
+					<option value="Dining" selected={(form?.category ?? data.product.category) === 'Dining'}
+						>Dining</option
+					>
+					<option value="Office" selected={(form?.category ?? data.product.category) === 'Office'}
+						>Office</option
+					>
+					<option value="Outdoor" selected={(form?.category ?? data.product.category) === 'Outdoor'}
+						>Outdoor</option
+					>
+					<option value="Other" selected={(form?.category ?? data.product.category) === 'Other'}
+						>Other</option
+					>
 				</select>
 			</div>
 		</div>
@@ -99,24 +113,54 @@
 		<!-- Row 4: Dimensions + Colors -->
 		<div class="grid grid-cols-2 gap-4">
 			<fieldset class="rounded-md border border-gray-200 p-3">
-				<legend class="text-xs font-medium text-gray-700 px-1">Dimensions (optional)</legend>
-				<div class="grid grid-cols-3 gap-2 mt-1">
+				<legend class="px-1 text-xs font-medium text-gray-700">Dimensions (optional)</legend>
+				<div class="mt-1 grid grid-cols-3 gap-2">
 					<div>
 						<label for="dim_width" class="block text-xs text-gray-500">W</label>
-						<input id="dim_width" name="dim_width" type="number" step="0.1" min="0" value={data.product.dimensions?.width ?? ''} class="mt-0.5 block w-full rounded-md border border-gray-300 px-1.5 py-1 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none text-xs" />
+						<input
+							id="dim_width"
+							name="dim_width"
+							type="number"
+							step="0.1"
+							min="0"
+							value={data.product.dimensions?.width ?? ''}
+							class="mt-0.5 block w-full rounded-md border border-gray-300 px-1.5 py-1 text-xs shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none"
+						/>
 					</div>
 					<div>
 						<label for="dim_height" class="block text-xs text-gray-500">H</label>
-						<input id="dim_height" name="dim_height" type="number" step="0.1" min="0" value={data.product.dimensions?.height ?? ''} class="mt-0.5 block w-full rounded-md border border-gray-300 px-1.5 py-1 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none text-xs" />
+						<input
+							id="dim_height"
+							name="dim_height"
+							type="number"
+							step="0.1"
+							min="0"
+							value={data.product.dimensions?.height ?? ''}
+							class="mt-0.5 block w-full rounded-md border border-gray-300 px-1.5 py-1 text-xs shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none"
+						/>
 					</div>
 					<div>
 						<label for="dim_depth" class="block text-xs text-gray-500">D</label>
-						<input id="dim_depth" name="dim_depth" type="number" step="0.1" min="0" value={data.product.dimensions?.depth ?? ''} class="mt-0.5 block w-full rounded-md border border-gray-300 px-1.5 py-1 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none text-xs" />
+						<input
+							id="dim_depth"
+							name="dim_depth"
+							type="number"
+							step="0.1"
+							min="0"
+							value={data.product.dimensions?.depth ?? ''}
+							class="mt-0.5 block w-full rounded-md border border-gray-300 px-1.5 py-1 text-xs shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none"
+						/>
 					</div>
 				</div>
 				<div class="mt-2">
-					<select id="dim_unit" name="dim_unit" class="block w-full rounded-md border border-gray-300 px-1.5 py-1 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none text-xs">
-						<option value="in" selected={(data.product.dimensions?.unit ?? 'in') === 'in'}>inches</option>
+					<select
+						id="dim_unit"
+						name="dim_unit"
+						class="block w-full rounded-md border border-gray-300 px-1.5 py-1 text-xs shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none"
+					>
+						<option value="in" selected={(data.product.dimensions?.unit ?? 'in') === 'in'}
+							>inches</option
+						>
 						<option value="cm" selected={data.product.dimensions?.unit === 'cm'}>cm</option>
 						<option value="ft" selected={data.product.dimensions?.unit === 'ft'}>feet</option>
 					</select>
@@ -124,8 +168,8 @@
 			</fieldset>
 
 			<fieldset class="rounded-md border border-gray-200 p-3">
-				<legend class="text-xs font-medium text-gray-700 px-1">Colors (optional)</legend>
-				<div class="flex items-center gap-2 mt-1">
+				<legend class="px-1 text-xs font-medium text-gray-700">Colors (optional)</legend>
+				<div class="mt-1 flex items-center gap-2">
 					<input
 						type="color"
 						bind:value={newColor}
@@ -145,11 +189,14 @@
 							<button
 								type="button"
 								onclick={() => removeColor(color)}
-								class="group relative h-6 w-6 rounded-full ring-1 ring-gray-300 hover:ring-red-400 transition-all"
+								class="group relative h-6 w-6 rounded-full ring-1 ring-gray-300 transition-all hover:ring-red-400"
 								style="background-color: {color}"
 								title="Click to remove {color}"
 							>
-								<span class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 text-white text-xs font-bold drop-shadow-md">✕</span>
+								<span
+									class="absolute inset-0 flex items-center justify-center text-xs font-bold text-white opacity-0 drop-shadow-md group-hover:opacity-100"
+									>✕</span
+								>
 							</button>
 						{/each}
 					</div>
@@ -163,12 +210,14 @@
 			<label for="image" class="block text-sm font-medium text-gray-700">Current Image</label>
 			<div class="mt-2 flex items-center gap-4">
 				<img
-					src={data.product.image_url}
+					src={data.product.image_url?.[0] ?? ''}
 					alt={data.product.name}
-					class="h-20 w-20 rounded-md object-cover border border-gray-200"
+					class="h-20 w-20 rounded-md border border-gray-200 object-cover"
 				/>
 				<div class="flex-1">
-					<label for="image-upload" class="block text-xs text-gray-500 mb-1">Upload new image (optional)</label>
+					<label for="image-upload" class="mb-1 block text-xs text-gray-500"
+						>Upload new image (optional)</label
+					>
 					<input
 						id="image-upload"
 						name="image"

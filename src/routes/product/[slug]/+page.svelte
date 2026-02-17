@@ -32,7 +32,7 @@
 			id: product.id,
 			name: product.name,
 			price: Number(product.price),
-			image_url: product.image_url,
+			image_url: product.image_url?.[0] ?? '',
 			slug: product.slug,
 			color: selectedColor
 		});
@@ -76,7 +76,7 @@
 			aria-label="View full size image"
 		>
 			<img
-				src={product.image_url}
+				src={product.image_url?.[0] ?? ''}
 				alt={product.name}
 				class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
 				loading="lazy"
@@ -285,7 +285,7 @@
 						</svg>
 					</button>
 					<img
-						src={product.image_url}
+						src={product.image_url?.[0] ?? ''}
 						alt={product.name}
 						class="mx-auto max-h-[90vh] w-auto rounded-md object-contain"
 						onclick={(e) => e.stopPropagation()}

@@ -1,5 +1,5 @@
 name,slug,description,price,category,image_url,in_stock,colors
-U13 Elle,u13-elle,"- Gray Corduroy Fabric
+Elle,u13-u14-elle,"- Gray Corduroy Fabric
 - Dual Side Power Reclining
 - USB Ports
 - Contrast Stitching
@@ -11,8 +11,8 @@ U13 Elle,u13-elle,"- Gray Corduroy Fabric
 - **Wedge:** 67""W x 44""D x 33""H
 - **Console:** 12""W x 39""D x 26""H
 - **Power LAF Reclining Chair:** 42""W x 42""D x 33""H
-- **Power RAF Reclining Chair:** 42""W x 42""D x 33""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U13_Elle.png,True,"['#808080', '#F5F5DC']"
-U15 Akira,u15-akira,"- Ivory Woven Fabric
+- **Power RAF Reclining Chair:** 42""W x 42""D x 33""H",4279.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U13_Elle.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U14_Elle.png']",True,"['#808080', '#F5F5DC']"
+Akira,u15-akira,"- Ivory Woven Fabric
 - Dual Side Power Reclining
 - USB Ports Adjustable Headrest
 - Reenforced Steel Reclining Mechanism
@@ -21,8 +21,8 @@ U15 Akira,u15-akira,"- Ivory Woven Fabric
 - **Wedge:** 66""W x 41""D x 33""H
 - **Console:** 13""W x 39""D x 26""H
 - **Power LAF Reclining Chair:** 43""W x 41""D x 33""H
-- **Power RAF Reclining Chair:** 43""W x 41""D x 33""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U15_Akira.png,True,['#FFFFF0']
-U17 Hazel,u17-hazel,"- Charcoal Gray Woven Fabric
+- **Power RAF Reclining Chair:** 43""W x 41""D x 33""H",4279.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U15_Akira.png'],True,['#FFFFF0']
+Hazel,u17-hazel,"- Charcoal Gray Woven Fabric
 - Dual Side Power Reclining
 - USB Ports
 - Power Adjustable Headrest
@@ -34,8 +34,8 @@ U17 Hazel,u17-hazel,"- Charcoal Gray Woven Fabric
 - **Wedge:** 66""W x 41""D x 33""H
 - **Console:** 13""W x 39""D x 26""H
 - **Power LAF Reclining Chair:** 43""W x 41""D x 33""H
-- **Power RAF Reclining Chair:** 43""W x 41""D x 33""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U17_Hazel.png,True,"['#36454F', '#808080']"
-U19 Agrippina,u19-agrippina,"- Ivory Woven Fabric
+- **Power RAF Reclining Chair:** 43""W x 41""D x 33""H",3829.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U17_Hazel.png'],True,"['#36454F', '#808080']"
+Agrippina,u19-agrippina,"- Ivory Woven Fabric
 - Dual Side Power Reclining
 - USB Ports
 - Power Adjustable Headrest
@@ -47,8 +47,8 @@ U19 Agrippina,u19-agrippina,"- Ivory Woven Fabric
 - **Wedge:** 63""W x 41""D x 42""H
 - **Console:** 12""W x 37""D x 42""H
 - **Power LAF Reclining Chair:** 41""W x 39""D x 42""H
-- **Power RAF Reclining Chair:** 41""W x 39""D x 42""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U19_Agrippina.png,True,"['#000000', '#FFFFF0']"
-U20 Edward,u20-edward,"- Black Gel Leather
+- **Power RAF Reclining Chair:** 41""W x 39""D x 42""H",3719.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U19_Agrippina.png'],True,"['#000000', '#FFFFF0']"
+Edward,u20-edward,"- Black Gel Leather
 - Pillow Top Backs and Arms
 - Accent Stitching
 - Hidden Power Entertainment Tablet
@@ -59,8 +59,20 @@ U20 Edward,u20-edward,"- Black Gel Leather
 - **Overall Dim:** 138""W x 148""D x 41""H
 - **Wedge:** 69""W x 42""D x 41""H
 - **Power LAF Loveseat:** 69""W x 39""D x 41 H
-- **Power RAF Sofa:** 79""W x 39""D x 41""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U20_Edward.png,True,"['#000000', '#808080']"
-U22 Atronia,u22-atronia,"- Black Air Gel Leather
+- **Power RAF Sofa:** 79""W x 39""D x 41""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U20_Edward.png'],False,['#000000']
+Edward,u21-edward,"- Gray Gel Leather
+- Pillow Top Backs and Arms
+- Accent Stitching
+- Hidden Power Entertainment Tablet
+- USB Charging Port
+- Cup Holder Console
+- Vertical Accent Design
+- Three Power Motion Recliners
+- **Overall Dim:** 138""W x 148'D x 41""H
+- **Power LAF Loveseat:** 69""W x 39""D x 41 H
+- **Wedge:** 69""W x 42""D x 41""H
+- **Power RAF Sofa:** 79""W x 39""D x 41""H",2819.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U21_Edward.png'],True,['#808080']
+Atronia,u22-u23-atronia,"- Black Air Gel Leather
 - Power Reclining
 - Tightly Knit Contrast Stitching
 - Cup Holder Console Storage
@@ -72,8 +84,8 @@ U22 Atronia,u22-atronia,"- Black Air Gel Leather
 - **Power LAF Loveseat:** 69""W x 39""D x 41""H
 - **Wedge:** 69""W x 42""D x 41""H
 - **Power RAF Sofa:** 79""W x 39""D x 41""H
-- **Overall Dim:** 138'W x 148""D x 41""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U22_Atronia.png,True,"['#000000', '#808080']"
-U30 Philip,u30-philip,"- Black Air Gel Leather
+- **Overall Dim:** 138'W x 148""D x 41""H",3149.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U22_Atronia.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U23_Atronia.png']",True,"['#000000', '#808080']"
+Philip,u30-u31-u32-u33-philip,"- Black Air Gel Leather
 - Power Recliners
 - LED Lit Cup Holders
 - LED Under Glow
@@ -82,16 +94,16 @@ U30 Philip,u30-philip,"- Black Air Gel Leather
 - Pillowtop Arms
 - **Power LAF Loveseat:** 68""W x 38""D x 41""H
 - **Wedge:** 63""W x 40""D x 41""H
-- **Power RAF Loveseat:** 68""W x 38""D x 41""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U30_Philip.png,True,"['#000000', '#808080', '#964B00', '#FFFFFF']"
-U35 Henry,u35-henry,"- Black Gel Leather
+- **Power RAF Loveseat:** 68""W x 38""D x 41""H",2819.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U30_Philip.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U31_Philip.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U32_Philip.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U33_Philip.png']",True,"['#000000', '#808080', '#964B00', '#FFFFFF']"
+Henry,u35-u36-u37-henry,"- Black Gel Leather
 - Power Motion Recliners
 - Cup Holder Console with Storage
 - Pillowtop Arms and Headrest
 - Full LED Underglow
 - **Power LAF Loveseat:** 66""W x 38""D x 41 ""H
 - Wedge 65""W x 41""D x 41""H
-- **Power RAF Loveseat:** 66""W x 38""D x 41""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U35_Henry.png,True,"['#000000', '#808080', '#FF0000']"
-U51 Philippa,u51-philippa,"- Gray Treated Microfiber Fabric
+- **Power RAF Loveseat:** 66""W x 38""D x 41""H",2819.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U35_Henry.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U36_Henry.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U37_Henry.png']",True,"['#000000', '#808080', '#FF0000']"
+Philippa,u51-philippa,"- Gray Treated Microfiber Fabric
 - Coil Spring Cushions
 - Power Reclining
 - Pillowtop Arms and Headrest
@@ -104,8 +116,8 @@ U51 Philippa,u51-philippa,"- Gray Treated Microfiber Fabric
 - **Armless Chair:** 31""W x 41""D x 42""H
 - **Power Armless Reclining Chair:** 31""W x 41""D x 42""H
 - **Console:** 13""W x 41""D x 42""H
-- **Wedge:** 70""W x 43""D x 42""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U51_Philippa.png,True,['#808080']
-U55 Dixon,u55-dixon,"- Gray Gel Leather
+- **Wedge:** 70""W x 43""D x 42""H",2969.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U51_Philippa.png'],True,['#808080']
+Dixon,u55-dixon,"- Gray Gel Leather
 - Black Accent Pattern
 - Dual Power Reclining
 - One Armless Manual Recliner
@@ -117,8 +129,8 @@ U55 Dixon,u55-dixon,"- Gray Gel Leather
 - **Armless Chair:** 26""W x 40""D x 39""H
 - **Wedge:** 68""W x 43""D x 39""H
 - **Armless Recliner:** 26""W x 40""D x 39""H
-- **RAF Power Recliner:** 34""W x 40""D x 39""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U55_Dixon.png,True,"['#000000', '#808080']"
-U63 Benz,u63-benz,"- Black Air Gel Leather
+- **RAF Power Recliner:** 34""W x 40""D x 39""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U55_Dixon.png'],False,"['#000000', '#808080']"
+Benz,u63-benz,"- Black Air Gel Leather
 - Diamond Accented Stitching
 - Pillowtop Arms and Headrest
 - Four Cup Holder Storage Compartments
@@ -127,8 +139,8 @@ U63 Benz,u63-benz,"- Black Air Gel Leather
 - Manual Reclining
 - **LAF Loveseat:** 65”W x 38”D x 40”H
 - **Wedge:** 62”W x 38”D x 40”H
-- RAF Loveseat 65”W x 38”D x 40”H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U63_Benz.png,True,['#000000']
-U65 Leopold,u65-leopold,"- Charcoal Gray Teddy Bear Fabric
+- RAF Loveseat 65”W x 38”D x 40”H",2249.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U63_Benz.png'],True,['#000000']
+Leopold,u65-leopold,"- Charcoal Gray Teddy Bear Fabric
 - Pillowtop Arms, Back, and Seat Cushions
 - Cup Holder Console with Storage
 - Manual Motion Recliners
@@ -138,8 +150,8 @@ U65 Leopold,u65-leopold,"- Charcoal Gray Teddy Bear Fabric
 - **Armless Chair:** 28""W x 39°D x 41""H
 - **Wedge:** 67""W x 43° D x 41""H
 - **Armless Recliner:** 28""W x 39""D x 41 H
-- **RAF Manual Recliner:** 37°W x 39""D x 41 H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U65_Leopold.png,True,"['#36454F', '#808080']"
-U76 Samuel,u76-samuel,"- Gray Tightly Woven Fabric
+- **RAF Manual Recliner:** 37°W x 39""D x 41 H",2479.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U65_Leopold.png'],True,"['#36454F', '#808080']"
+Samuel,u76-samuel,"- Gray Tightly Woven Fabric
 - Pillowtop Headrests and Arms
 - Cup Holder Console with Storage
 - High Density Foam Cushion
@@ -147,8 +159,8 @@ U76 Samuel,u76-samuel,"- Gray Tightly Woven Fabric
 - Manual Motion Recliners
 - **LAF Loveseat W/Console:** 75""W x 38""D x 40""H
 - **Wedge:** 63""W x 40""D x 40""H
-- **RAF Loveseat:** 63""W x 38""D x 40""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U76_Samuel.png,True,['#808080']
-U77 Frederick,u77-frederick,"- Gray Soft Microfiber
+- **RAF Loveseat:** 63""W x 38""D x 40""H",2299.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U76_Samuel.png'],True,['#808080']
+Frederick,u77-u78-frederick,"- Gray Soft Microfiber
 - Charcoal Gray Side and Bottom Accents
 - Tightly Knit Contrast Stitching
 - Side Arm Storage
@@ -160,8 +172,8 @@ U77 Frederick,u77-frederick,"- Gray Soft Microfiber
 - Reenforced Steel reclining Mechanism
 - Power Reclining Sofa 87""W x 39""D x 43""H
 - Power Reclining Chair 40""W x 39""D x 43""H
-- Power Reclining Loveseat 77""W x 39""D x 43""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U77_Frederick.png,True,"['#36454F', '#808080', '#964B00', '#C2B280']"
-U85 Zane,u85-zane,"- Brown PU Leather
+- Power Reclining Loveseat 77""W x 39""D x 43""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U77_Frederick.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U78_Frederick.png']",False,"['#36454F', '#808080', '#964B00', '#C2B280']"
+Zane,u85-zane,"- Brown PU Leather
 - Dual Manual Reclining
 - Pillow Top Arms and Headrest
 - Two Storage Console
@@ -169,8 +181,8 @@ U85 Zane,u85-zane,"- Brown PU Leather
 - Backs Detach for Easy Delivery
 - LAF Loveseat 74""W x 38""D x 40""H
 - Wedge 68""W x 38""D x 40""H
-- RAF Loveseat 74""W x 38""D x 40""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U85_Zane.png,True,['#964B00']
-U87 Fallon,u87-fallon,"- Gray Plush Fabric
+- RAF Loveseat 74""W x 38""D x 40""H",2249.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U85_Zane.png'],True,['#964B00']
+Fallon,u87-fallon,"- Gray Plush Fabric
 - Dual Manual Reclining
 - Velvet Feel Fabric Material
 - Contrast Stitching
@@ -181,8 +193,8 @@ U87 Fallon,u87-fallon,"- Gray Plush Fabric
 - Backs Detach for Easy Delivery
 - **LAF Loveseat:** 72""W x 38""D x 39""H
 - **Wedge:** 65""W x 41""D x 39""H
-- **RAF Loveseat:** 59""W x 38'D x 39""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U87_Fallon.png,True,['#808080']
-U90 Hadley,u90-hadley,"- Brown Plush Fabric
+- **RAF Loveseat:** 59""W x 38'D x 39""H",2249.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U87_Fallon.png'],True,['#808080']
+Hadley,u90-u91-hadley,"- Brown Plush Fabric
 - Dual Manual Reclining
 - Contrast Stitching
 - Pillow Top Arms and Headrest
@@ -193,8 +205,8 @@ U90 Hadley,u90-hadley,"- Brown Plush Fabric
 - Backs Detach for Easy Delivery
 - **LAF Loveseat:** 66""W x 38""D x 39""H
 - **Wedge:** 63""W x 39'D x 39""H
-- **RAF Loveseat:** 66""W x 38""D x 39""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U90_Hadley.png,True,"['#808080', '#964B00']"
-U92 Hunnely,u92-hunnely,"- Black Air Gel Leather
+- **RAF Loveseat:** 66""W x 38""D x 39""H",2099.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U90_Hadley.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U91_Hadley.png']",True,"['#808080', '#964B00']"
+Hunnely,u92-u93-u94-hunnely,"- Black Air Gel Leather
 - Tightly Knit Contrast Stitching
 - Power Adjustable Headrest
 - Side Arm Storage
@@ -205,8 +217,8 @@ U92 Hunnely,u92-hunnely,"- Black Air Gel Leather
 - Reenforced Steel Reclining Mechanism
 - Power Reclining Sofa 85""W x 39°D x 46""H
 - Power Reclining Loveseat 75""W x 39°D x 46""H
-- Power Reclining Chair 36""W x 39°D x 46""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U92_Hunnely.png,True,"['#000000', '#808080', '#FFFFFF']"
-U100 Altari,u100-altari,"- Black Gel Leather
+- Power Reclining Chair 36""W x 39°D x 46""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U92_Hunnely.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U93_Hunnely.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U94_Hunnely.png']",False,"['#000000', '#808080', '#FFFFFF']"
+Altari,u100-u101-altari,"- Black Gel Leather
 - Accent Stitching
 - Power Motion Recliners
 - Pillowtop Headrests and Arms
@@ -219,8 +231,8 @@ U100 Altari,u100-altari,"- Black Gel Leather
 - USB Charging Ports+ Type C
 - Power Reclining Sofa 89""W x 37D"" x 40""H
 - Power Reclining Loveseat 77""W x 37D"" x 40""H
-- Power Reclining Chair 41'W x 37""D x 40' H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U100_Altari.png,True,"['#000000', '#808080']"
-U104 Paulina,u104-paulina,"- Dark Brown Air Gel Leather
+- Power Reclining Chair 41'W x 37""D x 40' H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U100_Altari.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U101_Altari.png']",False,"['#000000', '#808080']"
+Paulina,u104-paulina,"- Dark Brown Air Gel Leather
 - Tightly Knit Contrast Stitching
 - Power Adjustable Headrest
 - Side Arm Storage
@@ -231,8 +243,8 @@ U104 Paulina,u104-paulina,"- Dark Brown Air Gel Leather
 - Reenforced Steel Reclining Mechanism
 - Power Reclining Sofa 82""W x 38.5”D x 43.5”H
 - Power Reclining Loveseat 72""W x 38.5°D x 43.5”H
-- Power Reclining Chair 37.5”W x 38.5°D x 43.5”H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U104_Paulina.png,True,['#964B00']
-U105 Emelen,u105-emelen,"- Black Gel Leather
+- Power Reclining Chair 37.5”W x 38.5°D x 43.5”H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U104_Paulina.png'],False,['#964B00']
+Emelen,u105-u106-emelen,"- Black Gel Leather
 - Manual Motion Recliners
 - Pillow Top Arms and Headrest
 - Cup Holder Console with Storage
@@ -244,8 +256,8 @@ U105 Emelen,u105-emelen,"- Black Gel Leather
 - Hidden Storage Compartment in Sofa
 - Motion Sofa 88""W x 38""D x 41""H
 - Motion Loveseat 79""W x 38""D x 41""H
-- Motion Chair 42""W x 38""D x 41 H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U105_Emelen.png,True,"['#000000', '#808080']"
-U107 Bexley,u107-bexley,"- Gray Teddy Bear Fabric
+- Motion Chair 42""W x 38""D x 41 H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U105_Emelen.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U106_Emelen.png']",False,"['#000000', '#808080']"
+Bexley,u107-bexley,"- Gray Teddy Bear Fabric
 - Dual Manual Reclining
 - Contrast Stitching
 - Pillowtop Arms and Headrest
@@ -253,8 +265,8 @@ U107 Bexley,u107-bexley,"- Gray Teddy Bear Fabric
 - Reenforced Steel Mechanism
 - Motion Sofa 85""W x 38""D x 41 ""H
 - Motion Loveseat 78""W x 38° D x 41""H
-- Motion Chair 41'W x 38 D x 41 H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U107_Bexley.png,True,['#808080']
-U108 Maximilla,u108-maximilla,"- Gray Air Gel Leather
+- Motion Chair 41'W x 38 D x 41 H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U107_Bexley.png'],False,['#808080']
+Maximilla,u108-maximilla,"- Gray Air Gel Leather
 - Dual-Sided Power Reclining
 - Power Adjustable Headrest
 - Wireless Charging
@@ -265,8 +277,8 @@ U108 Maximilla,u108-maximilla,"- Gray Air Gel Leather
 - Reenforced Steel Reclining Mechanism
 - **Power Reclining Sofa:** 84""W x 39.5""D x 42""H
 - **Power Reclining Loveseat:** 74""W x 39.5""D x 42""H
-- **Power Reclining Chair:** 39""W x 39.5""D x 42""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U108_Maximilla.png,True,['#808080']
-U110 Odelia,u110-odelia,"- Gray PU Match
+- **Power Reclining Chair:** 39""W x 39.5""D x 42""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U108_Maximilla.png'],False,['#808080']
+Odelia,u110-odelia,"- Gray PU Match
 - Pillow Top Headrest
 - Manual Motion Reclining
 - Hidden Dropdown Table
@@ -276,8 +288,8 @@ U110 Odelia,u110-odelia,"- Gray PU Match
 - Horizontal Accented Design
 - Motion Sofa 89""W x 38""D x 41 ""H
 - Motion Loveseat 77""W x 38"" D x 41""H
-- Motion Chair 42 W x 39""D x 41'D",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U110_Odelia.png,True,"['#808080', '#C0C0C0']"
-U115 Leah,u115-leah,"- Gray Treated Microfiber
+- Motion Chair 42 W x 39""D x 41'D",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U110_Odelia.png'],False,"['#808080', '#C0C0C0']"
+Leah,u115-leah,"- Gray Treated Microfiber
 - Pillow Top Headrest
 - Manual Motion Reclining
 - Hidden Drop Down Table
@@ -285,8 +297,8 @@ U115 Leah,u115-leah,"- Gray Treated Microfiber
 - Reenforced Steel Reclining Mechanism
 - Motion Sofa 83""W x 38""D x 41 ""H
 - Motion Loveseat 74""W x 38"" D x 41""H
-- Motion Chair 36""W x 38""D x 41 H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U115_Leah.png,True,['#808080']
-U120 Bence,u120-bence,"- Brown Treated Microfiber
+- Motion Chair 36""W x 38""D x 41 H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U115_Leah.png'],False,['#808080']
+Bence,u120-u121-bence,"- Brown Treated Microfiber
 - Accented Tan Stitching
 - Dual Reclining Loveseat
 - Pillowtop Arm and Headrest
@@ -296,8 +308,8 @@ U120 Bence,u120-bence,"- Brown Treated Microfiber
 - Wireless Charger
 - Motion Sofa 84""W x 37""D x 39""H
 - Motion Loveseat 62""W x 37""D x 39""H
-- Motion Chair 39""W x 37""D x 39""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U120_Bence.png,True,"['#808080', '#964B00']"
-U125 Avanti,u125-avanti,"- Brown Air Gel Leather
+- Motion Chair 39""W x 37""D x 39""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U120_Bence.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U121_Bence.png']",False,"['#808080', '#964B00']"
+Avanti,u125-avanti,"- Brown Air Gel Leather
 - Pillowtop Arms and Headrest
 - Manual Reclining
 - Cup Holder Console Storage
@@ -305,8 +317,8 @@ U125 Avanti,u125-avanti,"- Brown Air Gel Leather
 - Reenforced Steel Reclining Mechanism
 - Motion Sofa 88""W x 41""D x 41""H
 - Motion Loveseat 80""W x 42"" D x 41""H
-- Motion Chair 42""W x 41""D x 41""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U125_Avanti.png,True,['#964B00']
-U130 Ximena,u130-ximena,"- Gray Tightly Woven Fabric
+- Motion Chair 42""W x 41""D x 41""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U125_Avanti.png'],False,['#964B00']
+Ximena,u130-ximena,"- Gray Tightly Woven Fabric
 - Pillowtop Headrests and Arms
 - Cup Holder Console with Storage
 - High Density Foam Cushion
@@ -315,8 +327,8 @@ U130 Ximena,u130-ximena,"- Gray Tightly Woven Fabric
 - Reenforced Steel Reclining Mechanism
 - **Motion Sofa:** 85""W x 55""D x 38""H
 - **Motion Loveseat:** 75""W x 55""D x 38""H
-- **Motion Chair:** 38""W x 55""D x 38""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U130_Ximena.png,True,['#808080']
-U136 Stephen,u136-stephen,"- Black Gel Leather
+- **Motion Chair:** 38""W x 55""D x 38""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U130_Ximena.png'],False,['#808080']
+Stephen,u136-stephen,"- Black Gel Leather
 - Diamond Stitching Pattern
 - Dual Manual Reclining
 - Pillow Top Arms and Headrest
@@ -325,8 +337,8 @@ U136 Stephen,u136-stephen,"- Black Gel Leather
 - Reenforced Steel Mechanism and Frame
 - **Motion Sofa:** 82""W x 37""D x 40""H
 - **Motion Loveseat:** 74""W x 37""D x 40""H
-- Motion Chair 39""W x 37""D x 40""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U136_Stephen.png,True,['#000000']
-U145 Dorsten,u145-dorsten,"- Black Gel Leather
+- Motion Chair 39""W x 37""D x 40""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U136_Stephen.png'],False,['#000000']
+Dorsten,u145-u146-dorsten,"- Black Gel Leather
 - Pillow Top Back, Headrest, and Arms
 - Dropdown Table in Sofa
 - Cup Holder Storage Console
@@ -335,8 +347,8 @@ U145 Dorsten,u145-dorsten,"- Black Gel Leather
 - Reenforced Steel Mechanism and Frame
 - **Motion Sofa:** 87""W X 39""D X 40""H
 - **Motion Loveseat:** 77""W X 39""D X 40""H
-- Motion Chair 41""W X 39""D X 40""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U145_Dorsten.png,True,"['#000000', '#808080']"
-U154 Ashley,u154-ashley,"- Black Gel Leather
+- Motion Chair 41""W X 39""D X 40""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U145_Dorsten.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U146_Dorsten.png']",False,"['#000000', '#808080']"
+Ashley,u154-u155-u156-u157-ashley,"- Black Gel Leather
 - Underlit LED
 - Motion Manual Reclining
 - Drop Down Table
@@ -347,8 +359,8 @@ U154 Ashley,u154-ashley,"- Black Gel Leather
 - Backs Detach for Easy Delivery
 - **Motion Sofa:** 77""W x 39""D x 40""H
 - **Motion Loveseat:** 67""W x 39""D x 40""H
-- Motion Chair 34""W x 39""D x 40""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U154_Ashley.png,True,"['#000000', '#808080', '#964B00', '#FFFFFF']"
-U160 Conway,u160-conway,"- Dove Gray Fabric
+- Motion Chair 34""W x 39""D x 40""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U154_Ashley.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U155_Ashley.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U156_Ashley.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U157_Ashley.png']",False,"['#000000', '#808080', '#964B00', '#FFFFFF']"
+Conway,u160-conway,"- Dove Gray Fabric
 - Motion Manual Reclining
 - Drop Down Table
 - Storage Console
@@ -358,16 +370,16 @@ U160 Conway,u160-conway,"- Dove Gray Fabric
 - Backs Detach for Easy Delivery
 - **Motion Sofa:** 79""W x 38'D x 41""H
 - **Motion Loveseat:** 69""W x 38""D x 41""H
-- Motion Chair 37""W x 38""D x 41 H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U160_Conway.png,True,['#808080']
-U170 Austin,u170-austin,"- Charcoal Gray Treated Microfiber
+- Motion Chair 37""W x 38""D x 41 H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U160_Conway.png'],False,['#808080']
+Austin,u170-austin,"- Charcoal Gray Treated Microfiber
 - Pillowtop Arm and Headrest
 - Light Gray Accented Stitching
 - Reenforced Steel Mechanism
 - Side Pull Tab
 - **Motion Sofa:** 83""W x 38""D x 41""H
 - **Motion Loveseat:** 62""W x 38° D x 41""H
-- Motion Chair 39""W x 37""D x 41 H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U170_Austin.png,True,"['#36454F', '#808080']"
-U172 Audra,u172-audra,"- Gray Treated Microfiber Fabric
+- Motion Chair 39""W x 37""D x 41 H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U170_Austin.png'],False,"['#36454F', '#808080']"
+Audra,u172-audra,"- Gray Treated Microfiber Fabric
 - Manual Reclining
 - Cup Holder Console Storage
 - Vertical Pattern Accents
@@ -376,16 +388,16 @@ U172 Audra,u172-audra,"- Gray Treated Microfiber Fabric
 - Reenforced Steel Reclining Mechanism
 - **Motion Sofa:** 80""W x 40""D x 42 ""H
 - **Motion Loveseat:** 70""W x 40""D x 42""H
-- Motion Chair 35""W x 40""D x 42""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U172_Audra.png,True,['#808080']
-U184 Theo,u184-theo,"- Black PU Leather
+- Motion Chair 35""W x 40""D x 42""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U172_Audra.png'],False,['#808080']
+Theo,u184-u185-theo,"- Black PU Leather
 - Dual-Sided Manual Reclining
 - Hidden Drop-Down Table
 - Cup Holder Console Storage
 - Reenforced Steel Reclining Mechanism
 - **Motion Sofa:** 76""W x 37""D x 38""H
 - **Motion Loveseat:** 67""W x 37""D x 38""H
-- **Motion Chair:** 34""W x 37""D x 38""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U184_Theo.png,True,"['#000000', '#808080']"
-U190 Alexia,u190-alexia,"- Black Gel Leather
+- **Motion Chair:** 34""W x 37""D x 38""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U184_Theo.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U185_Theo.png']",False,"['#000000', '#808080']"
+Alexia,u190-u191-u192-alexia,"- Black Gel Leather
 - Dual Manual Reclining
 - Drop Down Table
 - Storage Console
@@ -395,8 +407,8 @@ U190 Alexia,u190-alexia,"- Black Gel Leather
 - Backs Detach for Easy Delivery
 - Motion Sofa 77""W x 39""D x 40""H
 - Motion Loveseat 67""W x 39""D x 40""H
-- Motion Chair 34""W x 39""D x 40""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U190_Alexia.png,True,"['#000000', '#964B00', '#D2691E', '#FF0000']"
-U194 Abaco,u194-abaco,"- Gray Plush Fabric
+- Motion Chair 34""W x 39""D x 40""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U190_Alexia.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U191_Alexia.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U192_Alexia.png']",False,"['#000000', '#964B00', '#D2691E', '#FF0000']"
+Abaco,u194-abaco,"- Gray Plush Fabric
 - Dual Manual Reclining
 - Wall Hugger
 - Velvet Feel Fabric Material
@@ -405,8 +417,8 @@ U194 Abaco,u194-abaco,"- Gray Plush Fabric
 - Backs Detach for Easy Delivery
 - **Motion Sofa:** 77""W x 39""D x 40""H
 - **Motion Loveseat:** 67""W x 39""D x 40""H
-- Motion Chair 34""W x 39""D x 40""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U194_Abaco.png,True,['#808080']
-U197 Quincy,u197-quincy,"- Hardwood Constructed Frame
+- Motion Chair 34""W x 39""D x 40""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U194_Abaco.png'],False,['#808080']
+Quincy,u197-quincy,"- Hardwood Constructed Frame
 - Button Tufted Accents
 - Hand Carved Traditional Accents
 - Brown/Blue Seat Cushions
@@ -418,8 +430,8 @@ U197 Quincy,u197-quincy,"- Hardwood Constructed Frame
 - **Loveseat:** 67""W x 39""D x 48""H
 - **Chair:** 31""W x 35""D x 48""H
 - **Coffee Table:** 58""W x 32' D x 20 H
-- **End Table:** 30""W x 30""D x 22""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U197_Quincy.png,True,"['#0000FF', '#964B00']"
-U198 Uriah,u198-uriah,"- Hardwood Constructed Frame
+- **End Table:** 30""W x 30""D x 22""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U197_Quincy.png'],False,"['#0000FF', '#964B00']"
+Uriah,u198-uriah,"- Hardwood Constructed Frame
 - Gray Luxuries Fabric
 - Pillow Back
 - Hand Carved Traditional Accents
@@ -432,8 +444,8 @@ U198 Uriah,u198-uriah,"- Hardwood Constructed Frame
 - **Loveseat:** 76""W x 41""D x 44""H
 - **Chair:** 31""W x 39""D x 41""H
 - **Coffee Table:** 55""W x 31""D x 20""H
-- **End Table:** 27""W x 27""D x 22""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U198_Uriah.png,True,"['#808080', '#C0C0C0']"
-U199 Valor,u199-valor,"- Hardwood Constructed Frame
+- **End Table:** 27""W x 27""D x 22""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U198_Uriah.png'],False,"['#808080', '#C0C0C0']"
+Valor,u199-valor,"- Hardwood Constructed Frame
 - Beige Luxuries Fabric
 - Pillow Back
 - Hand Carved Traditional Accents
@@ -446,8 +458,8 @@ U199 Valor,u199-valor,"- Hardwood Constructed Frame
 - **Loveseat:** 73""W x 40""D x 45""H
 - **Chair:** 38""W x 37""D x 45""H
 - **Coffee Table:** 55""W x 31""D x 20""H
-- **End Table:** 27""W x 27""D x 24""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U199_Valor.png,True,"['#F5F5DC', '#FFD700']"
-U202 Cloria,u202-cloria,"- Hand Carved Stone Color Wood Trim
+- **End Table:** 27""W x 27""D x 24""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U199_Valor.png'],False,"['#F5F5DC', '#FFD700']"
+Cloria,u202-cloria,"- Hand Carved Stone Color Wood Trim
 - Dark Gray Fabric Woven Seat Cushions
 - Certi-Pur Foam Cushions
 - Black Faux Leather Arms
@@ -456,8 +468,8 @@ U202 Cloria,u202-cloria,"- Hand Carved Stone Color Wood Trim
 - Coordinates with the T202 Tables
 - Sofa 93""W x 38""D x 40""H
 - Loveseat 71""W x 38""D x 40""H
-- Chaise 60""W x 35""D x 35""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U202_Cloria.png,True,"['#000000', '#808080']"
-U204 Enzo,u204-enzo,"- Espresso Brown Air Gel Leather
+- Chaise 60""W x 35""D x 35""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U202_Cloria.png'],False,"['#000000', '#808080']"
+Enzo,u204-u205-enzo,"- Espresso Brown Air Gel Leather
 - Hand Carved Wood Trim Accents
 - Roll Arms
 - High Density Foam Cushion Seating
@@ -466,8 +478,8 @@ U204 Enzo,u204-enzo,"- Espresso Brown Air Gel Leather
 - Traditional Style Design
 - Sofa 92""W x 35""D x 50""H
 - Loveseat 72""W x 35""D x 50""H
-- Chair 52""W x 35""D x 50""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U204_Enzo.png,True,['#964B00']
-U206 Ardsley,u206-ardsley,"- Gray Luxurious Fabric
+- Chair 52""W x 35""D x 50""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U204_Enzo.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U205_Enzo.png']",False,['#964B00']
+Ardsley,u206-ardsley,"- Gray Luxurious Fabric
 - Button Tufting
 - Silver Metallic Hand Carved Wood Accents
 - High Density Foam Cushion Seating
@@ -475,8 +487,8 @@ U206 Ardsley,u206-ardsley,"- Gray Luxurious Fabric
 - Roll Arms
 - **Sofa:** 87""W x 36""D x 48""H
 - **Loveseat:** 70""W x 36""D x 48""H
-- **Chair:** 49""W x 36""D x 48""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U206_Ardsley.png,True,"['#808080', '#C0C0C0']"
-U207 Roma,u207-roma,"- Hand Carved Brown Color Wood Trim
+- **Chair:** 49""W x 36""D x 48""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U206_Ardsley.png'],False,"['#808080', '#C0C0C0']"
+Roma,u207-roma,"- Hand Carved Brown Color Wood Trim
 - Brown Seat Cushions
 - Certi-Pur Foam Cushions
 - Espresso Brown Faux Leather Arms
@@ -485,8 +497,8 @@ U207 Roma,u207-roma,"- Hand Carved Brown Color Wood Trim
 - Coordinates with the 1207 Tables
 - **Sofa:** 93""W x 38""D x 40""H
 - **Loveseat:** 71""W x 38""D x 40""H
-- **Chaise:** 60""W x 35""D x 35""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U207_Roma.png,True,['#964B00']
-U208 Carolmore,u208-carolmore,"- Charcoal Gray Woven Chenille Fabric
+- **Chaise:** 60""W x 35""D x 35""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U207_Roma.png'],False,['#964B00']
+Carolmore,u208-carolmore,"- Charcoal Gray Woven Chenille Fabric
 - Roll Arm
 - Hand Carved Wood Front
 - Solid Wood Construction
@@ -496,8 +508,8 @@ U208 Carolmore,u208-carolmore,"- Charcoal Gray Woven Chenille Fabric
 - Subtle Pattern Accent Pillows
 - Sofa 92""W x 35""D x 38""H
 - Loveseat 71""W x 35""D x 38""H
-- Chair 49""W x 35""D x 38""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U208_Carolmore.png,True,"['#36454F', '#808080']"
-U210 Ariana,u210-ariana,"- Royal Blue Velvet
+- Chair 49""W x 35""D x 38""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U208_Carolmore.png'],False,"['#36454F', '#808080']"
+Ariana,u210-ariana,"- Royal Blue Velvet
 - Wavy Posterior Design
 - Chrome Nail Head Trim Accents
 - Single Solid Seat Cushions
@@ -507,8 +519,8 @@ U210 Ariana,u210-ariana,"- Royal Blue Velvet
 - Coordinating Accent Pillows
 - **Sofa:** 89""W x 37""D x 39""H
 - **Loveseat:** 74""W x 37""D x 39""H
-- **Chair:** 32""W x 34""D x 41""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U210_Ariana.png,True,['#0000FF']
-U215 Capella,u215-capella,"- Tufted Seat, Back, and Arms
+- **Chair:** 32""W x 34""D x 41""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U210_Ariana.png'],False,['#0000FF']
+Capella,u215-u217-u218-u219-u220-capella,"- Tufted Seat, Back, and Arms
 - Turquoise Luxurious Velvet
 - Rolled Arms
 - One Solid Cushion Seating
@@ -519,46 +531,31 @@ U215 Capella,u215-capella,"- Tufted Seat, Back, and Arms
 - Removable Backs and Arms For Easy Delivery
 - **Sofa:** 91""W x 39""D x 39""H
 - **Loveseat:** 77""W x 39""D x 39""H
-- **Chair:** 50""W x 39""D x 39""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U215_Capella.png,True,"['#000000', '#000080', '#0000FF', '#808080', '#FFC0CB']"
-U215-CH Capella,u215-ch-capella,"- Tufted Seat, Back
+- **Chair:** 50""W x 39""D x 39""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U215_Capella.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U217_Capella.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U218_Capella.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U219_Capella.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U220_Capella.png']",False,"['#000000', '#000080', '#0000FF', '#808080', '#FFC0CB']"
+Capella,u215-ch-u220-ch-capella,"- Tufted Seat, Back
 - Turquoise Luxurious Velvet
 - Rolled Arms
 - One Solid Cushion Seating
 - Chrome Nail Head Trim Accents
 - Acrylic Bun Feet
 - Faux Fur Accent Pillows
-- Chaise 69""W x 29°D x 37”H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U215-CH_Capella.png,True,[]
-U217-CH Capella,u217-ch-capella,"- Tufted Seat and Back
+- Chaise 69""W x 29°D x 37”H",409.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U215-CH_Capella.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U220-CH_Capella.png']",True,"['#000000', '#FFC0CB']"
+Capella,u217-ch-u218-ch-capella,"- Tufted Seat and Back
 - Black Luxurious Velvet
 - One Solid Chaise Cushion
 - Chrome Nail Head Trim Accents
 - Acrylic Bun Feet
 - Faux Fur Accent Pillow
-- Chaise 69""W x 29°D x 37""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U217-CH_Capella.png,True,['#000000']
-U218-CH Capella,u218-ch-capella,"- Tufted Seat and Back
-- Navy Blue Luxurious Velvet
-- One Solid Chaise Cushion
-- Chrome Nail Head Trim Accents
-- Acrylic Bun Feet
-- Faux Fur Accent Pillow
-- **Chaise:** 69""W x 29""D x 37""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U218-CH_Capella.png,True,"['#000080', '#0000FF']"
-U219-CH Capella,u219-ch-capella,"- Tufted Seat and Back
+- Chaise 69""W x 29°D x 37""H",499.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U217-CH_Capella.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U218-CH_Capella.png']",True,"['#000000', '#000080', '#0000FF']"
+Capella,u219-ch-capella,"- Tufted Seat and Back
 - Gray Luxurious Velvet
 - One Solid Chaise Cushion
 - Chrome Nail Head Trim Accents
 - Ebony Black Bun Feet
 - Faux Fur Accent Pillows
 - Solid Wood Leg
-- **Chaise:** 69""W x 29°D x 37""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U219-CH_Capella.png,True,"['#000000', '#808080']"
-U220-CH Capella,u220-ch-capella,"- Tufted Seat and Back
-- Pink Luxurious Velvet
-- One Solid Chaise Cushion
-- Chrome Nail Head Trim Accents
-- Ebony Black Bun Feet
-- Faux Fur Accent Pillows
-- Solid Wood Leg
-- **Chaise:** 69""W x 29°D x 37""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U220-CH_Capella.png,True,"['#000000', '#FFC0CB']"
-U221 Sadie,u221-sadie,"- Neutral Tone Color
+- **Chaise:** 69""W x 29°D x 37""H",449.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U219-CH_Capella.png'],True,"['#000000', '#808080']"
+Sadie,u221-sadie,"- Neutral Tone Color
 - Tufted Button Seating and Back
 - Wavy Back and Circular Arms
 - High Density Foam Cushion
@@ -567,8 +564,8 @@ U221 Sadie,u221-sadie,"- Neutral Tone Color
 - Brown Twisted Feet
 - **Sofa:** 85""W x 38""D x 35""H
 - **Loveseat:** 63""W x 38""D x 35""H
-- **Chair:** 33""W x 31""D x 37"" H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U221_Sadie.png,True,"['#964B00', '#C0C0C0']"
-U223 Georgia,u223-georgia,"- Tufted Seat and Back
+- **Chair:** 33""W x 31""D x 37"" H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U221_Sadie.png'],False,"['#964B00', '#C0C0C0']"
+Georgia,u223-u224-georgia,"- Tufted Seat and Back
 - Navy Blue Luxurious Velvet
 - One Solid Cushion Seating
 - Round Shape Design
@@ -579,8 +576,8 @@ U223 Georgia,u223-georgia,"- Tufted Seat and Back
 - Sofa is Supported with Middle Leg for Stability
 - Sofa 85""W x 38""D x 35""H
 - Loveseat 63""W x 38"" D x 35""H
-- Chair 33""W x 31""D x 37"" H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U223_Georgia.png,True,"['#000080', '#0000FF', '#808080']"
-U227 Jade,u227-jade,"- Navy Blue Luxurious Velvet
+- Chair 33""W x 31""D x 37"" H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U223_Georgia.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U224_Georgia.png']",False,"['#000080', '#0000FF', '#808080']"
+Jade,u227-u228-jade,"- Navy Blue Luxurious Velvet
 - Tufted Seat and Back
 - One Solid Cushion Seating
 - Squared Design
@@ -591,8 +588,8 @@ U227 Jade,u227-jade,"- Navy Blue Luxurious Velvet
 - Faux Fur Accent Pillows
 - **Sofa:** 85""W x 35""D x 29""H
 - **Loveseat:** 63""W x 35' D x 29""H
-- **Chair:** 40""W x 35""D x 29""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U227_Jade.png,True,"['#000080', '#0000FF', '#808080']"
-U230 Fabia,u230-fabia,"- Crushed Velvet Blue Fabric
+- **Chair:** 40""W x 35""D x 29""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U227_Jade.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U228_Jade.png']",False,"['#000080', '#0000FF', '#808080']"
+Fabia,u230-u231-u232-fabia,"- Crushed Velvet Blue Fabric
 - Vertical Accents
 - Squared Arms and Back
 - Single Seat Cushion
@@ -600,8 +597,8 @@ U230 Fabia,u230-fabia,"- Crushed Velvet Blue Fabric
 - Chrome Feet
 - Sofa 87""W x 35""D x 31 ""H
 - Loveseat 64""W x 35' D x 31""H
-- Chair 41""W x 35""D x 31""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U230_Fabia.png,True,"['#0000FF', '#808080']"
-U234 Avalon,u234-avalon,"- Neutral Tone Tightly Woven Fabric
+- Chair 41""W x 35""D x 31""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U230_Fabia.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U231_Fabia.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U232_Fabia.png']",False,"['#0000FF', '#808080']"
+Avalon,u234-u235-u236-avalon,"- Neutral Tone Tightly Woven Fabric
 - Button Tutting Back
 - Square Arms
 - Brushed Bronze Hand Applied Nailhead Trim
@@ -611,8 +608,8 @@ U234 Avalon,u234-avalon,"- Neutral Tone Tightly Woven Fabric
 - **Sofa:** 88""W x 38""D x 32""H
 - **Loveseat:** 65""W x 38""D x 32""H
 - **Chair:** 42""W x 38""D x 32""H
-- **Ottoman:** 41""W x 29""D x 19""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U234_Avalon.png,True,"['#000000', '#808080']"
-U249 Lamar,u249-lamar,"- Black Velvet
+- **Ottoman:** 41""W x 29""D x 19""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U234_Avalon.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U235_Avalon.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U236_Avalon.png']",False,"['#000000', '#808080']"
+Lamar,u249-u250-u251-lamar,"- Black Velvet
 - Button Tufted Arms
 - Squared Arms and Back
 - Double Seat Cushions
@@ -623,8 +620,8 @@ U249 Lamar,u249-lamar,"- Black Velvet
 - Faux Fur and Coordinating Accent Throw Pillows
 - Sofa 94""W x 38""D x 33""H
 - Loveseat 67""W x 38""D x 33""H
-- Chair 52""W x 38""D x 33""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U249_Lamar.png,True,"['#000000', '#808080']"
-U253 Bailey,u253-bailey,"- Ultra Plush High Density Foam Cushion
+- Chair 52""W x 38""D x 33""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U249_Lamar.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U250_Lamar.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U251_Lamar.png']",False,"['#000000', '#808080']"
+Bailey,u253-bailey,"- Ultra Plush High Density Foam Cushion
 - Gray Corduroy Fabric
 - Separates into Five Pieces
 - Hardwood Constructed Frame
@@ -632,8 +629,8 @@ U253 Bailey,u253-bailey,"- Ultra Plush High Density Foam Cushion
 - Convertible Sectional
 - **Armless Chair:** 44.5""W x 44.5""D x 34""H
 - **Wedge:** 44.5""W x 44.5""D x 34""H
-- **Ottoman:** 44.5""W x 44.5""D x 18""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U253_Bailey.png,True,"['#000000', '#808080']"
-U255 Bellagio,u255-bellagio,"- Ultra Plush High Density Foam Cushion
+- **Ottoman:** 44.5""W x 44.5""D x 18""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U253_Bailey.png'],False,"['#000000', '#808080']"
+Bellagio,u255-u256-bellagio,"- Ultra Plush High Density Foam Cushion
 - Ivory Color Corduroy Fabric
 - Separates into Five Pieces
 - Hardwood Constructed Frame
@@ -643,8 +640,8 @@ U255 Bellagio,u255-bellagio,"- Ultra Plush High Density Foam Cushion
 - **Armless Chair:** 35""W x 35""D x 35""H
 - **Wedge:** 35""W x 35""D x 35""H
 - **RAF Chair:** 35""W x 35""D x 35""H
-- **Ottoman:** 35""W x 35""D x 19""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U255_Bellagio.png,True,"['#000000', '#FFFFF0']"
-U266 Maier,u266-maier,"- Oyster Color Chanel Fabric
+- **Ottoman:** 35""W x 35""D x 19""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U255_Bellagio.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U256_Bellagio.png']",False,"['#000000', '#FFFFF0']"
+Maier,u266-u267-maier,"- Oyster Color Chanel Fabric
 - Pillow Back
 - Multi-Color Accent Pillows
 - High Density Cushions
@@ -653,8 +650,8 @@ U266 Maier,u266-maier,"- Oyster Color Chanel Fabric
 - Faux Rabbit Fur Pillows
 - LAF Sofa 80""W x 37""D x 39""H
 - RAF Chaise 86""W x 37""D x 39""H
-- Chaise End 31""W x 24""D x 13""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U266_Maier.png,True,"['#36454F', '#808080', '#EAE0C8']"
-U268 Sierra,u268-sierra,"- Gray Woven Fabric
+- Chaise End 31""W x 24""D x 13""H",2069.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U266_Maier.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U267_Maier.png']",True,"['#36454F', '#808080', '#EAE0C8']"
+Sierra,u268-sierra,"- Gray Woven Fabric
 - Sewn on Seat Cushions
 - Interchangeable Back Cushions
 - Ultra-Modern Styling
@@ -662,8 +659,8 @@ U268 Sierra,u268-sierra,"- Gray Woven Fabric
 - Reenforced Gun Metal Gray Legs
 - LAF Loveseat 73""W x 43""D x 36""H
 - Corner 50""W x 50""D x 25""H
-- RAF Loveseat 73""W x 43""D x 36""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U268_Sierra.png,True,['#808080']
-U270 Xerxes,u270-xerxes,"- Tightly woven material
+- RAF Loveseat 73""W x 43""D x 36""H",2249.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U268_Sierra.png'],True,['#808080']
+Xerxes,u270-xerxes,"- Tightly woven material
 - Gray linen like fabric
 - Hand applied nail head trim accents
 - High density foam cushion
@@ -671,8 +668,8 @@ U270 Xerxes,u270-xerxes,"- Tightly woven material
 - Black 3"" legs
 - Sofa 91""W x 38""D x 39""H
 - Loveseat 69""W x 38"" D x 39""H
-- Chair 44""H x 38""H x 39""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U270_Xerxes.png,True,"['#000000', '#808080']"
-U277 Susanna,u277-susanna,"- Gray Tightly Woven Chenille Fabric
+- Chair 44""H x 38""H x 39""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U270_Xerxes.png'],False,"['#000000', '#808080']"
+Susanna,u277-u278-susanna,"- Gray Tightly Woven Chenille Fabric
 - Squared Arm Design
 - Attached seat Cushions.
 - Removeable Back Pillows
@@ -682,8 +679,8 @@ U277 Susanna,u277-susanna,"- Gray Tightly Woven Chenille Fabric
 - Hidden Pop-Up Sleeper
 - Sofa W/Corner Wedge 94""W x 37""D x 38""H
 - Pop-Up Sleeper 66""W x 37""D x 38 ""H
-- Chaise 36""W x 65""D x 38""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U277_Susanna.png,True,"['#000000', '#808080', '#F5F5DC']"
-U279 Ayrshire,u279-ayrshire,"- Gray Tightly Woven Chenille Fabric
+- Chaise 36""W x 65""D x 38""H",2249.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U277_Susanna.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U278_Susanna.png']",True,"['#000000', '#808080', '#F5F5DC']"
+Ayrshire,u279-ayrshire,"- Gray Tightly Woven Chenille Fabric
 - Separates into Separate Pieces
 - Black Plastic Legs
 - High Density Foam Cushions
@@ -693,8 +690,8 @@ U279 Ayrshire,u279-ayrshire,"- Gray Tightly Woven Chenille Fabric
 - **RAF Chair:** 33.5""W x 33.5""D x 35""H
 - **Wedge:** 39""W x 39""D x 35""H
 - **Armless Chair:** 25""W x 33.5""D x 35""H
-- **Ottoman:** 34""W x 26""D x 18""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U279_Ayrshire.png,True,"['#000000', '#808080']"
-U280 Dillon,u280-dillon,"- Burgundy Luxurious Velvet
+- **Ottoman:** 34""W x 26""D x 18""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U279_Ayrshire.png'],False,"['#000000', '#808080']"
+Dillon,u280-dillon,"- Burgundy Luxurious Velvet
 - Tufted Seat Cushions and Back
 - Silver Hand Applied Nailhead Trim
 - Roll Arms
@@ -704,8 +701,8 @@ U280 Dillon,u280-dillon,"- Burgundy Luxurious Velvet
 - Chrome Legs
 - LAF Chaise 91""W x 47""D x 35""H
 - Armless Loveseat 64""W x 38°D x 35""H
-- RAF Chaise 91""W x 47""D x 35 H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U280_Dillon.png,True,['#C0C0C0']
-U284 Carlin,u284-carlin,"- Burgundy Luxurious Velvet
+- RAF Chaise 91""W x 47""D x 35 H",2949.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U280_Dillon.png'],True,['#C0C0C0']
+Carlin,u284-carlin,"- Burgundy Luxurious Velvet
 - Tufted Seats and Backs
 - Square Arms
 - Double Chaise
@@ -713,8 +710,26 @@ U284 Carlin,u284-carlin,"- Burgundy Luxurious Velvet
 - Faux Fur Accent Pillows
 - LAF Chaise 74""W x 41""D x 34""H
 - RAF Chaise 74""W x 41""D x 34""H
-- Armless Loveseat 62""W x 38""D x 34""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U284_Carlin.png,True,"['#000000', '#0000FF', '#808080']"
-U290 Eris,u290-eris,"- Navy Blue Luxurious Velvet
+- Armless Loveseat 62""W x 38""D x 34""H",2249.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U284_Carlin.png'],True,[]
+Carlin,u285-u287-carlin,"- Black Luxurious Velvet
+- Tufted Seats and Backs
+- Square Arms
+- Double Chaise
+- Chrome Feet
+- Faux Fur Accent Pillows
+- LAF Chaise 74""W x 41""D x 34""H
+- RAF Chaise 74""W x 41D x 34""H
+- Armless Loveseat 62""W x 38""D x 34""H",2949.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U285_Carlin.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U287_Carlin.png']",True,"['#000000', '#808080']"
+Carlin,u286-carlin,"- Blue Luxurious Velvet
+- Tufted Seats and Backs
+- Square Arms
+- Double Chaise
+- Chrome Feet
+- Faux Fur Accent Pillows
+- **LAF Chaise:** 74""W x 41""D x 34""H
+- **RAF Chaise:** 74""W x 41""D x 34""H
+- **Armless Loveseat:** 62""W x 38""D x 34""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U286_Carlin.png'],False,['#0000FF']
+Eris,u290-eris,"- Navy Blue Luxurious Velvet
 - Tufted Back and Arms
 - Rolled Arms and Backs
 - Separates in Four Separate Pieces
@@ -722,8 +737,17 @@ U290 Eris,u290-eris,"- Navy Blue Luxurious Velvet
 - Acrylic Bun Feet
 - RAF Chair 57""W x 39""D x 32""H
 - Armless Chair 49""W x 39"" D x 32""H
-- LAF Chaise 60""W x 39""D x 32""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U290_Eris.png,True,"['#000080', '#0000FF', '#808080']"
-U294 Aspen,u294-aspen,"- Button Tufting Back and Arms
+- LAF Chaise 60""W x 39""D x 32""H",1689.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U290_Eris.png'],True,"['#000080', '#0000FF']"
+Eris,u291-eris,"- Gray Luxurious Velvet
+- Tufted Back and Arms
+- Rolled Arms and Backs
+- Separates in Four Separate Pieces
+- Chrome Accent Nail Head Trim
+- Acrylic Bun Feet
+- **RAF Chair:** 57""W x 39""D x 32""H
+- **Armless Chair:** 49""W x 39""D x 32""H
+- **LAF Chaise:** 60""W x 39""D x 32""H",2029.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U291_Eris.png'],True,['#808080']
+Aspen,u294-u296-aspen,"- Button Tufting Back and Arms
 - Black Luxurious Velvet
 - High Density Foam Cushion
 - Detachable Seat Cushions
@@ -731,8 +755,17 @@ U294 Aspen,u294-aspen,"- Button Tufting Back and Arms
 - LAF Loveseat 60""W x 40""D x 29""H
 - Wedge 45""W x 45""D x 29""H
 - RAF Sofa 83""W x 40""D x 29""H
-- Ottoman 32""W x 32""D x 18""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U294_Aspen.png,True,"['#000000', '#0000FF', '#808080']"
-U300 Margaret,u300-margaret,"- Black Luxurious Velvet
+- Ottoman 32""W x 32""D x 18""H",2139.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U294_Aspen.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U296_Aspen.png']",True,"['#000000', '#808080']"
+Aspen,u295-aspen,"- Button Tufting Back and Arms
+- Blue Luxurious Velvet
+- High Density Foam Cushion
+- Detachable Seat Cushions
+- Chrome Feet
+- LAF Loveseat 60""W x 40""D x 29""H
+- Wedge 45""W x 45""D x 29""H
+- RAF Sofa 83""W x 40""D x 29""H
+- Ottoman 32""W x 32""D x 18""H",1799.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U295_Aspen.png'],True,['#0000FF']
+Margaret,u300-margaret,"- Black Luxurious Velvet
 - Faux Fur Accent Pillows
 - Crystal Tufted Back and Arms
 - Chrome Nail Head Trim Accents
@@ -744,8 +777,21 @@ U300 Margaret,u300-margaret,"- Black Luxurious Velvet
 - **Wedge:** 35""W x 35 D x 36""H
 - **Armless Chair:** 24""W x 35 D x 36""H
 - **RAF Loveseat:** 66""W x 35°D x 36""H
-- **Ottoman:** 43""W x 25 D x 19""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U300_Margaret.png,True,"['#000000', '#000080', '#0000FF']"
-U303 Helena,u303-helena,"- Black Luxurious Velvet
+- **Ottoman:** 43""W x 25 D x 19""H",1579.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U300_Margaret.png'],True,['#000000']
+Margaret,u301-margaret,"- Navy Blue Luxurious Velvet
+- Faux Fur Accent Pillows
+- Crystal Tufted Back and Arms
+- Chrome Nail Head Trim Accents
+- Black Solid Wood Turned Legs
+- Armless Chair Not Sold Separately
+- Removable Backs for Easy Delivery
+- **Overall Sectional:** 125""W x 99""D x 36""H
+- **LAF Loveseat:** 66""W x 35°D x 36""H
+- **Wedge:** 35""W x 35 D x 36""H
+- **Armless Chair:** 24""W x 35""D x 36""H
+- **RAF Loveseat:** 66""W x 35°D x 36""H
+- **Ottoman:** 43 W x 25 D x 19""H",1469.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U301_Margaret.png'],True,"['#000000', '#000080', '#0000FF']"
+Helena,u303-u304-u305-u306-helena,"- Black Luxurious Velvet
 - Coordinating Scatter Back Cushions
 - Faux Fur Accent Pillows
 - Double Nail Head Trim Accents
@@ -754,16 +800,16 @@ U303 Helena,u303-helena,"- Black Luxurious Velvet
 - **Overall Sectional:** 122""W x 90""D x 35""H
 - **LAF Loveseat:** 75""W x 38""D x 35""H
 - **RAF Chaise:** 47""W x 90""D x 35""H
-- **Squared Ottoman:** 40""W x 40""D x 20""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U303_Helena.png,True,"['#000000', '#000080', '#0000FF', '#808080', '#FFC0CB']"
-U307 Azura,u307-azura,"- Light Gray Tightly Woven Chenille Fabric
+- **Squared Ottoman:** 40""W x 40""D x 20""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U303_Helena.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U304_Helena.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U305_Helena.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U306_Helena.png']",False,"['#000000', '#000080', '#0000FF', '#808080', '#FFC0CB']"
+Azura,u307-azura,"- Light Gray Tightly Woven Chenille Fabric
 - Plush Foam Seating
 - Rolled Back
 - Contouring Stitching
 - Comfort Wrinkle Accents
 - Navy Blue and Light Gray Accent Pillows
 - 4 STR Sofa 123""W x 57""D x 27""H
-- 1 STR Sofa 44""W x 37""D x 27""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U307_Azura.png,True,"['#000080', '#0000FF', '#808080']"
-U310 Gabriella,u310-gabriella,"- Charcoal Gray Tightly Woven Fabric
+- 1 STR Sofa 44""W x 37""D x 27""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U307_Azura.png'],False,"['#000080', '#0000FF', '#808080']"
+Gabriella,u310-u311-gabriella,"- Charcoal Gray Tightly Woven Fabric
 - Teddy Bear Fabric
 - Squared Arms
 - High Density Foam Cushion
@@ -771,8 +817,8 @@ U310 Gabriella,u310-gabriella,"- Charcoal Gray Tightly Woven Fabric
 - Plastic Feet
 - Sewn On Back Cushions
 - **LAF Sofa:** 78""W x 34""D x 40""H
-- **RAF Chaise:** 35""W x 77""D x 40""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U310_Gabriella.png,True,"['#36454F', '#808080']"
-U313 Dream,u313-dream,"- Gray Fabric
+- **RAF Chaise:** 35""W x 77""D x 40""H",1309.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U310_Gabriella.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U311_Gabriella.png']",True,"['#36454F', '#808080']"
+Dream,u313-u314-u315-u316-dream,"- Gray Fabric
 - Chrome Nailhead Trim Accents
 - Contrasting Pillows
 - Pillow back
@@ -781,8 +827,8 @@ U313 Dream,u313-dream,"- Gray Fabric
 - Faux Fur Accent Pillows
 - Black Solid Wood Legs
 - **LAF Sofa:** 78""W x 33""D x 38""H
-- **RAF Chaise:** 33""W x 75""D x 38""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U313_Dream.png,True,"['#000000', '#0000FF', '#808080']"
-U318 Bend,u318-bend,"- Charcoal Gray Tightly Woven Material
+- **RAF Chaise:** 33""W x 75""D x 38""H",1239.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U313_Dream.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U314_Dream.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U315_Dream.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U316_Dream.png']",True,"['#000000', '#0000FF', '#808080']"
+Bend,u318-bend,"- Charcoal Gray Tightly Woven Material
 - Square Arms
 - High Density Foam Cushions
 - Sinuous Spring Support System
@@ -791,8 +837,8 @@ U318 Bend,u318-bend,"- Charcoal Gray Tightly Woven Material
 - Neutral Color Accent Pillows
 - **LAF Sofa:** 91 ""W x 38""D x 37""H
 - **RAF Sofa:** 78""W x 38""D x 37""H
-- **Ottoman:** 40""W x 25""D x 18""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U318_Bend.png,True,"['#000000', '#36454F', '#808080']"
-U323 Abigail,u323-abigail,"- Smoke Gray Woven Material
+- **Ottoman:** 40""W x 25""D x 18""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U318_Bend.png'],False,"['#000000', '#36454F', '#808080']"
+Abigail,u323-u324-abigail,"- Smoke Gray Woven Material
 - Button Tufting
 - High Density Foam Cushion
 - Squared Arms
@@ -801,8 +847,8 @@ U323 Abigail,u323-abigail,"- Smoke Gray Woven Material
 - 3º Black Plastic Legs
 - **LAF Sofa:** 67""W x 33""D x 38""H
 - **RAF Chaise:** 33""W x 65""D x 38""H
-- **Ottoman:** 33.5""W x 26°D x 18""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U323_Abigail.png,True,"['#000000', '#808080', '#F5F5DC']"
-U331 Eden,u331-eden,"- Black Luxurious Velvet
+- **Ottoman:** 33.5""W x 26°D x 18""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U323_Abigail.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U324_Abigail.png']",False,"['#000000', '#808080', '#F5F5DC']"
+Eden,u331-u333-eden,"- Black Luxurious Velvet
 - Button Tufting
 - Squared Arms
 - Sewn on Seat and Back Cushions
@@ -812,8 +858,19 @@ U331 Eden,u331-eden,"- Black Luxurious Velvet
 - **LAF Loveseat:** 52""W x 32""D x 35""H
 - **Armless Chair:** 23""W x 32""D x 35""H
 - **Wedge:** 32""W x 32""D x 35""H
-- **RAF Loveseat:** 52""W x 32""D x 35""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U331_Eden.png,True,"['#000000', '#0000FF', '#808080', '#C0C0C0']"
-U334 Edge,u334-edge,"- Black PU Leather
+- **RAF Loveseat:** 52""W x 32""D x 35""H",1129.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U331_Eden.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U333_Eden.png']",True,"['#000000', '#808080', '#C0C0C0']"
+Eden,u332-eden,"- Blue Luxurious Velvet
+- Button Tufting
+- Squared Arms
+- Sewn on Seat and Back Cushions
+- Reversible Accent Cushions
+- Silver Nail Head Trim Accents
+- Chrome Feet
+- **LAF Loveseat:** 52""W x 32""D x 35""H
+- **Armless Chair:** 23""W x 32""D x 35""H
+- **Wedge:** 32""W x 32""D x 35""H
+- **RAF Loveseat:** 52""W x 32""D x 35""H",1019.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U332_Eden.png'],True,"['#0000FF', '#C0C0C0']"
+Edge,u334-edge,"- Black PU Leather
 - Separates into Four Separate Pieces
 - Sewn on Seat Cushions and Back
 - Center Button Tufting
@@ -824,8 +881,8 @@ U334 Edge,u334-edge,"- Black PU Leather
 - **LAF Loveseat:** 52""W x 32""D x 35""H
 - **Armless Chair:** 23""W x 32""D x 35""H
 - **Wedge:** 32""W x 32""D x 35""H
-- **RAF Loveseat:** 52""W x 32""D x 35""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U334_Edge.png,True,['#000000']
-U336 Edie,u336-edie,"- Black Velvet
+- **RAF Loveseat:** 52""W x 32""D x 35""H",969.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U334_Edge.png'],True,['#000000']
+Edie,u336-edie,"- Black Velvet
 - Separates into Four Pieces
 - Sewn on Seat Cushions and Back
 - Button Tufting on Seat Cushions and Back
@@ -837,8 +894,8 @@ U336 Edie,u336-edie,"- Black Velvet
 - **LAF Loveseat:** 52""W x 32""D x 35""H
 - **Armless Chair:** 23""W x 32""D x 35 H
 - **Wedge:** 32""W x 32""D x 35""H
-- **RAF Loveseat:** 52""W x 32""D x 35 H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U336_Edie.png,True,['#000000']
-U338 Odin,u338-odin,"- Gray Fabric
+- **RAF Loveseat:** 52""W x 32""D x 35 H",969.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U336_Edie.png'],True,['#000000']
+Odin,u338-odin,"- Gray Fabric
 - Separates into Four Pieces
 - Sewn on Seat Cushions and Back
 - Squared Arms
@@ -847,8 +904,8 @@ U338 Odin,u338-odin,"- Gray Fabric
 - **LAF Loveseat:** 52""W x 32""D x 35""H
 - **Armless Chair:** 23""W x 32""D x 35""H
 - **Wedge:** 32""W x 32""D x 35""H
-- **RAF Loveseat:** 52""W x 32""D x 35""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U338_Odin.png,True,"['#000000', '#808080']"
-U345 Alessia,u345-alessia,"- Black Gel Leather
+- **RAF Loveseat:** 52""W x 32""D x 35""H",859.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U338_Odin.png'],True,"['#000000', '#808080']"
+Alessia,u345-u346-u347-u348-alessia,"- Black Gel Leather
 - Tufted Seat Cushions and Back
 - Equipped with Side Hook
 - Drop Down Table
@@ -857,8 +914,8 @@ U345 Alessia,u345-alessia,"- Black Gel Leather
 - Rectangular Storage Ottoman
 - **RAF Sofa:** 68""W x 34""D x 35""H
 - **LAF Chaise:** 34""W x 81""D x 35""H
-- **Ottoman:** 37""W x 18""D x 26 H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U345_Alessia.png,True,"['#000000', '#964B00', '#FF0000', '#FFFFFF']"
-U350 Alamo,u350-alamo,"- Charcoal Fabric
+- **Ottoman:** 37""W x 18""D x 26 H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U345_Alessia.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U346_Alessia.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U347_Alessia.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U348_Alessia.png']",False,"['#000000', '#964B00', '#FF0000', '#FFFFFF']"
+Alamo,u350-alamo,"- Charcoal Fabric
 - Tufted Seat Cushions and Back
 - Equipped with Side Hook
 - Drop Down Table
@@ -867,56 +924,56 @@ U350 Alamo,u350-alamo,"- Charcoal Fabric
 - Rectangular Storage Ottoman
 - **RAF Sofa:** 68""W x 34""D x 35""H
 - **LAF Chaise:** 34""W x 81""D x 35""H
-- **Ottoman:** 37""W x 18""D x 26""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U350_Alamo.png,True,['#36454F']
-U355 Bartlett,u355-bartlett,"- Black Velvet
+- **Ottoman:** 37""W x 18""D x 26""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U350_Alamo.png'],False,['#36454F']
+Bartlett,u355-u357-bartlett,"- Black Velvet
 - High Density Foam Cushions
 - Multicolor Pillow Backs
 - Squared Arms
 - Plastic Feet
 - Faux Fur Accent Pillows
 - **LAF Sofa:** 78""W x 33""D x 38""H
-- **RAF Chaise:** 33""W x 75""D x 38""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U355_Bartlett.png,True,"['#000000', '#808080']"
-U356 Barlett,u356-barlett,"- Blue Velvet
+- **RAF Chaise:** 33""W x 75""D x 38""H",1129.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U355_Bartlett.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U357_Bartlett.png']",True,"['#000000', '#808080']"
+Barlett,u356-barlett,"- Blue Velvet
 - High Density Foam Cushions
 - Multicolor Pillow Backs
 - Squared Arms
 - Plastic Feet
 - Faux Fur Accent Pillows
 - **LAF Sofa:** 78""W x 33""D x 38""H
-- **RAF Chaise:** 33""W x 75""D x 38""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U356_Barlett.png,True,['#0000FF']
-U366 Junia,u366-junia,"- Oyster Color Chanel Fabric
+- **RAF Chaise:** 33""W x 75""D x 38""H",899.99,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U356_Barlett.png'],True,['#0000FF']
+Junia,u366-u367-junia,"- Oyster Color Chanel Fabric
 - Pillow Back
 - Multi-Color Accent Pillows
 - High Density Cushions
 - Squared Arm
 - Faux Rabbit Fur Pillows
 - LAF Sofa 80""W x 37""D x 39""H
-- RAF Chaise 37""W x 86""D x 39""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U366_Junia.png,True,"['#36454F', '#EAE0C8']"
-U380 Ramses,u380-ramses,"- Tan Chenille Fabric
+- RAF Chaise 37""W x 86""D x 39""H",1919.99,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U366_Junia.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U367_Junia.png']",True,"['#36454F', '#EAE0C8']"
+Ramses,u380-ramses,"- Tan Chenille Fabric
 - Squared Arms
 - Black Plastic Legs
 - High Density Foam Cushion
 - Interchangeable RAF and LAF Chaise
 - Faux Fur Accent Pillows
 - **RAF Loveseat:** 92""W x 35""D x 37""H
-- **LAF Chaise:** 26""W x 25""D x 10""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U380_Ramses.png,True,['#000000']
-U416 Bermuda,u416-bermuda,"- Light Gray Tightly Woven Material
+- **LAF Chaise:** 26""W x 25""D x 10""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U380_Ramses.png'],False,['#000000']
+Bermuda,u416-bermuda,"- Light Gray Tightly Woven Material
 - Roll Arms
 - High Density Foam Cushion Seating
 - Multi Color Accent Pillows
 - Black Plastic Legs
 - **Sofa:** 81""W x 32""D x 35""H
 - **Loveseat:** 59""W x 32""D x 35""H
-- **Chair:** 37""W x 32""D x 35""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U416_Bermuda.png,True,"['#000000', '#808080']"
-U418 Blackstone,u418-blackstone,"- Taupe Tightly Woven Fabric
+- **Chair:** 37""W x 32""D x 35""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U416_Bermuda.png'],False,"['#000000', '#808080']"
+Blackstone,u418-blackstone,"- Taupe Tightly Woven Fabric
 - High Density Foam Cushion Seating
 - Square Arm
 - Neutral Color Accent Pillows
 - Black Plastic Legs
 - **Sofa:** 78""W x 32""D x 36""H
 - **Loveseat:** 56""W x 32""D x 36""H
-- **Chair:** 34""W x 32"" D x 36""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U418_Blackstone.png,True,['#000000']
-U431 Farrah,u431-farrah,"- Black Luxurious Velvet
+- **Chair:** 34""W x 32"" D x 36""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U418_Blackstone.png'],False,['#000000']
+Farrah,u431-u432-u433-farrah,"- Black Luxurious Velvet
 - Button Tufting
 - Squared Arms
 - Sewn on Seat and Back Cushions
@@ -925,8 +982,8 @@ U431 Farrah,u431-farrah,"- Black Luxurious Velvet
 - Chrome Feet
 - **Sofa:** 72""W x 32""D x 35""H
 - **Loveseat:** 57""W x 32""D x 35""H
-- **Chair:** 33""W x 32""D x 35""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U431_Farrah.png,True,"['#000000', '#0000FF', '#808080', '#C0C0C0']"
-U434 Ford,u434-ford,"- Black PU Leather
+- **Chair:** 33""W x 32""D x 35""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U431_Farrah.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U432_Farrah.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U433_Farrah.png']",False,"['#000000', '#0000FF', '#808080', '#C0C0C0']"
+Ford,u434-ford,"- Black PU Leather
 - Sewn on Seat Cushions and Back
 - Center Button Tutting
 - Waved Arms
@@ -934,8 +991,8 @@ U434 Ford,u434-ford,"- Black PU Leather
 - Black Plastic Legs
 - **Sofa:** 72""W x 32""D x 35""H
 - **Loveseat:** 57""W x 32""D x 35""H
-- **Chair:** 33""W x 32""D x 35""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U434_Ford.png,True,['#000000']
-U436 Elisa,u436-elisa,"- Black Velvet
+- **Chair:** 33""W x 32""D x 35""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U434_Ford.png'],False,['#000000']
+Elisa,u436-elisa,"- Black Velvet
 - Sewn on Seat Cushions and Back
 - Button Tufting on Seat Cushions and Back
 - Squared Arms
@@ -944,15 +1001,15 @@ U436 Elisa,u436-elisa,"- Black Velvet
 - Black Plastic Legs
 - Sofa 72""W x 32""D x 35""H
 - Loveseat 57""W x 32'D x 35""H
-- Chair 33""W x 32""D x 35 H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U436_Elisa.png,True,['#000000']
-U438 Allura,u438-allura,"- Gray Fabric
+- Chair 33""W x 32""D x 35 H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U436_Elisa.png'],False,['#000000']
+Allura,u438-allura,"- Gray Fabric
 - Sewn on Seat Cushions and Back
 - Squared Arms
 - Black Plastic Legs
 - Sofa 72""W x 32""D x 35""H
 - Loveseat 57""W x 32""D x 35""H
-- Chair 33""W x 32""D x 35""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U438_Allura.png,True,"['#000000', '#808080']"
-U453 Ilaria,u453-ilaria,"- Charcoal Chenille
+- Chair 33""W x 32""D x 35""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U438_Allura.png'],False,"['#000000', '#808080']"
+Ilaria,u453-ilaria,"- Charcoal Chenille
 - Durable Poly-Chenille
 - Sewn on Seat Cushions and Back
 - Nail Head Trim Accents
@@ -960,16 +1017,16 @@ U453 Ilaria,u453-ilaria,"- Charcoal Chenille
 - Backs Detach for Easy Delivery
 - **Sofa:** 78""W x 35""D x 39""H
 - **Loveseat:** 59""W x 35""D x 39""H
-- **Chair:** 37""W x 35""D x 39""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U453_Ilaria.png,True,['#36454F']
-U455 Mariana,u455-mariana,"- Black PU Leather
+- **Chair:** 37""W x 35""D x 39""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U453_Ilaria.png'],False,['#36454F']
+Mariana,u455-mariana,"- Black PU Leather
 - Sown on Seat Cushions and Back
 - Nail Head Trim Accents
 - Tight Seat Cushions
 - Backs Detach for Easy Delivery
 - **Sofa:** 78""W x 35""D x 39""H
 - **Loveseat:** 59""W x 35""D x 39""H
-- **Chair:** 37""W x 35""D x 39""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U455_Mariana.png,True,['#000000']
-U467 Paola,u467-paola,"- Black PU Leather
+- **Chair:** 37""W x 35""D x 39""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U455_Mariana.png'],False,['#000000']
+Paola,u467-paola,"- Black PU Leather
 - Tight Seat Cushions
 - Tufted Back Cushions
 - Pillow Top Arms and Headrest
@@ -977,16 +1034,16 @@ U467 Paola,u467-paola,"- Black PU Leather
 - Backs Detach for Easy Delivery
 - **Sofa:** 79""W x 35""D x 39""H
 - **Loveseat:** 59""W x 35""D x 39""H
-- **Chair:** 37""W x 35""D x 39""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U467_Paola.png,True,"['#000000', '#964B00']"
-U484 Barcelona,u484-barcelona,"- Black PU Leather
+- **Chair:** 37""W x 35""D x 39""H",0.0,LIVING ROOM COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U467_Paola.png'],False,"['#000000', '#964B00']"
+Barcelona,u484-u485-u486-u487-barcelona,"- Black PU Leather
 - Sewn on Seat Cushions and Back
 - Pillow Top Arms
 - Chrome Legs
 - Backs Detach for Easy Delivery
 - **Sofa:** 78""W x 38""D x 33""H
 - **Loveseat:** 62""W x 38""D x 33""H
-- **Chair:** 47""W x 38""D x 33""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U484_Barcelona.png,True,"['#000000', '#808080', '#FF0000', '#FFFFFF']"
-U510 Earsom,u510-earsom,"- Charcoal Gray Woven Fabric
+- **Chair:** 47""W x 38""D x 33""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U484_Barcelona.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U485_Barcelona.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U486_Barcelona.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U487_Barcelona.png']",False,"['#000000', '#808080', '#FF0000', '#FFFFFF']"
+Earsom,u510-u511-earsom,"- Charcoal Gray Woven Fabric
 - Teddy Bear Fabric
 - Squared Arms
 - High Density Foam Cushion
@@ -995,8 +1052,8 @@ U510 Earsom,u510-earsom,"- Charcoal Gray Woven Fabric
 - Sewn on Back Cushions
 - **Sofa:** 83""W x 34""D x 38""H
 - **Loveseat:** 59""W x 34""D x 38""H
-- **Chair:** 37""W x 34""D x 38""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U510_Earsom.png,True,"['#36454F', '#808080']"
-U513 Yuina,u513-yuina,"- Gray Luxurious Velvet
+- **Chair:** 37""W x 34""D x 38""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U510_Earsom.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U511_Earsom.png']",False,"['#36454F', '#808080']"
+Yuina,u513-u514-u516-yuina,"- Gray Luxurious Velvet
 - Silver Nail Head Trim
 - Sewn on Seat Cushions
 - High Density Foam Cushion
@@ -1005,16 +1062,16 @@ U513 Yuina,u513-yuina,"- Gray Luxurious Velvet
 - Faux Fur Accent Pillows
 - **Sofa:** 83""W x 34""D x 38""H
 - **Loveseat:** 60""W x 34""D x 38""H
-- **Chair:** 37""W x 34""D x 38""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U513_Yuina.png,True,"['#000000', '#0000FF', '#808080', '#C0C0C0']"
-U530 Asherton,u530-asherton,"- Charcoal Gray Chanel Fabric
+- **Chair:** 37""W x 34""D x 38""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U513_Yuina.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U514_Yuina.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U516_Yuina.png']",False,"['#000000', '#0000FF', '#808080', '#C0C0C0']"
+Asherton,u530-u531-asherton,"- Charcoal Gray Chanel Fabric
 - Sewn On Seat and Back Cushion
 - Black Plastic Legs
 - Pillow Top Arms
 - Removable Backs for Easy Delivery
 - Sofa 81""W x 37""D x 35""H
 - Loveseat 61""W x 37""D x 35""H
-- Chair 41""W x 37""D x 35""H",0,LIVING ROOM COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U530_Asherton.png,True,"['#000000', '#36454F', '#808080']"
-U77-R Frederick,u77-r-frederick,"- Gray Soft Microfiber
+- Chair 41""W x 37""D x 35""H",0.0,LIVING ROOM COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U530_Asherton.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U531_Asherton.png']",False,"['#000000', '#36454F', '#808080']"
+Frederick,u77-r-u78-r-frederick,"- Gray Soft Microfiber
 - Charcoal Gray Side and Bottom Accents
 - Tightly Knit Contrast Stitching
 - Side Arm Storage
@@ -1022,17 +1079,8 @@ U77-R Frederick,u77-r-frederick,"- Gray Soft Microfiber
 - Wireless Charging Capability with On/Off Feature
 - Built In USB Ports
 - Reenforced Steel reclining Mechanism
-- **Power Reclining Chair:** 40”W x 39""D x 43""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U77-R_Frederick.png,True,"['#36454F', '#808080']"
-U78-R Frederick,u78-r-frederick,"- Sand Color Microfiber
-- Brown Side and Bottom Accents
-- Tightly Knit Contrast Stitching
-- Side Arm Storage
-- Power Adjustable Headrest
-- Wireless Charging Capability with On/Off Feature
-- Built In USB Ports
-- Reenforced Steel reclining Mechanism
-- **Power Reclining Chair:** 40”W x 39""D x 43""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U78-R_Frederick.png,True,"['#964B00', '#C2B280']"
-U92-R Hunnely,u92-r-hunnely,"- Black Air Gel Leather
+- **Power Reclining Chair:** 40”W x 39""D x 43""H",1129.99,RECLINER COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U77-R_Frederick.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U78-R_Frederick.png']",True,"['#36454F', '#808080', '#964B00', '#C2B280']"
+Hunnely,u92-r-u93-r-u94-r-hunnely,"- Black Air Gel Leather
 - Tightly Knit Contrast Stitching
 - Power Adjustable Headrest
 - Side Arm Storage
@@ -1041,40 +1089,14 @@ U92-R Hunnely,u92-r-hunnely,"- Black Air Gel Leather
 - Diamond Accented Stitching
 - Led Underiit Cup Holders
 - Reenforced Steel Reclining Mechanism
-- **Power Reclining Chair:** 36”W x 39""D x 46""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U92-R_Hunnely.png,True,['#000000']
-U93-R Hunnely,u93-r-hunnely,"- Gray Air Gel Leather
-- Tightly Knit Contrast Stitching
-- Power Adjustable Headrest
-- Side Arm Storage
-- Led Underglow
-- USB and Type C Ports
-- Diamond Accented Stitching
-- Led Underiit Cup Holders
-- Reenforced Steel Reclining Mechanism
-- Power Reclining Chair 36""W x 39""D x 46""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U93-R_Hunnely.png,True,['#808080']
-U94-R Hunnely,u94-r-hunnely,"- White Air Gel Leather
-- Tightly Knit Contrast Stitching
-- Power Adjustable Headrest
-- Side Arm Storage
-- Led Underglow
-- USB and Type C Ports
-- Diamond Accented Stitching
-- Led Underiit Cup Holders
-- Reenforced Steel Reclining Mechanism
-- **Power Reclining Chair:** 36”W x 39""D x 46""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U94-R_Hunnely.png,True,['#FFFFFF']
-U100-R Altari,u100-r-altari,"- Black Air Gel Leather
+- **Power Reclining Chair:** 36”W x 39""D x 46""H",879.99,RECLINER COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U92-R_Hunnely.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U93-R_Hunnely.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U94-R_Hunnely.png']",True,"['#000000', '#808080', '#FFFFFF']"
+Altari,u100-r-u101-r-altari,"- Black Air Gel Leather
 - Power Reclining
 - Pillowtop Arms and Headrest
 - Led Underglow
 - Reenforced Steel Reclining Mechanism
-- **Power Reclining Chair:** 41”W x 37""D x 40""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U100-R_Altari.png,True,['#000000']
-U101-R Altari,u101-r-altari,"- Gray Air Gel Leather
-- Power Reclining
-- Pillowtop Arms and Headrest
-- Led Underglow
-- Reenforced Steel Reclining Mechanism
-- **Power Reclining Chair:** 41”W x 37""D x 40""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U101-R_Altari.png,True,['#808080']
-U104-R Paulina,u104-r-paulina,"- Dark Brown Air Gel Leather
+- **Power Reclining Chair:** 41”W x 37""D x 40""H",679.99,RECLINER COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U100-R_Altari.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U101-R_Altari.png']",True,"['#000000', '#808080']"
+Paulina,u104-r-paulina,"- Dark Brown Air Gel Leather
 - Tightly Knit Contrast Stitching
 - Power Adjustable Headrest
 - Side Arm Storage
@@ -1083,307 +1105,262 @@ U104-R Paulina,u104-r-paulina,"- Dark Brown Air Gel Leather
 - Diamond Accented Stitching
 - Stainless Steel Cup Holders
 - Reenforced Steel Reclining Mechanism
-- **Power Reclining Chair:** 37.5”W x 38.5""D x 43.5 H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U104-R_Paulina.png,True,['#964B00']
-U105-R Emelen,u105-r-emelen,"- Black Gel Leather
+- **Power Reclining Chair:** 37.5”W x 38.5""D x 43.5 H",989.99,RECLINER COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U104-R_Paulina.png'],True,['#964B00']
+Emelen,u105-r-emelen,"- Black Gel Leather
 - Manual Motion Recliner
 - Pillow Top Arms and Headrest
 - Sinuous Spring Support System
 - Reenforced Steel Recliner Mechanism
 - Backs Detach for Easy Delivery
-- **Motion Chair:** 42""W x 38""D x 41""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U105-R_Emelen.png,True,['#000000']
-U106-R Emelen,u106-r-emelen,"- Gray Gel Leather
+- **Motion Chair:** 42""W x 38""D x 41""H",0.0,RECLINER COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U105-R_Emelen.png'],False,['#000000']
+Emelen,u106-r-emelen,"- Gray Gel Leather
 - Manual Motion Recliner
 - Pillow Top Arms and Headrest
 - Sinuous Spring Support System
 - Reenforced Steel Recliner Mechanism
 - Backs Detach for Easy Delivery
-- **Motion Chair:** 42""W x 38""D x 41""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U106-R_Emelen.png,True,['#808080']
-U107-R Bexley,u107-r-bexley,"- Gray Teddy Bear Fabric
+- **Motion Chair:** 42""W x 38""D x 41""H",629.99,RECLINER COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U106-R_Emelen.png'],True,['#808080']
+Bexley,u107-r-bexley,"- Gray Teddy Bear Fabric
 - Manual Reclining
 - Contrast Stitching
 - Pillowtop Arms and Headrest
 - Side Pull Tab
 - Reenforced Steel Mechanism
 - Swivel Capability
-- **Motion Chair:** 41""W x 38°D x 41""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U107-R_Bexley.png,True,['#808080']
-U108-R Maximilla,u108-r-maximilla,"- Gray Air Gel Leather
+- **Motion Chair:** 41""W x 38°D x 41""H",679.99,RECLINER COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U107-R_Bexley.png'],True,['#808080']
+Maximilla,u108-r-maximilla,"- Gray Air Gel Leather
 - Contrast Stitching
 - Power Reclining
 - Power Adjustable Headrest
 - USB and Type C Ports
 - Reenforced Steel Reclining Mechanism
-- **Power Reclining Chair:** 39""W x 39.5""D x 42""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U108-R_Maximilla.png,True,['#808080']
-U110-R Odelia,u110-r-odelia,"- Gray PU Match
+- **Power Reclining Chair:** 39""W x 39.5""D x 42""H",1019.99,RECLINER COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U108-R_Maximilla.png'],True,['#808080']
+Odelia,u110-r-odelia,"- Gray PU Match
 - Pillow Top Headrest
 - Manual Motion Recliner
 - Silver Nailhead Accents
 - Reenforced Steel Recliner Mechanism
 - Horizontal Accented Design
 - Backs Detach for Easy Delivery
-- **Motion Chair:** 42""W x 39""D x 41""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U110-R_Odelia.png,True,"['#808080', '#C0C0C0']"
-U115-R Leah,u115-r-leah,"- Gray Treated Microfiber
+- **Motion Chair:** 42""W x 39""D x 41""H",569.99,RECLINER COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U110-R_Odelia.png'],True,"['#808080', '#C0C0C0']"
+Leah,u115-r-leah,"- Gray Treated Microfiber
 - Pillow Top Headrest
 - Manual Motion Recliner
 - Reenforced Steel Recliner Mechanism
 - Backs Detach for Easy Delivery
-- **Motion Chair:** 36”W x 38""D x 41""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U115-R_Leah.png,True,['#808080']
-U120-R Bence,u120-r-bence,"- Brown Treated Microfiber
+- **Motion Chair:** 36”W x 38""D x 41""H",539.99,RECLINER COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U115-R_Leah.png'],True,['#808080']
+Bence,u120-r-u121-r-bence,"- Brown Treated Microfiber
 - Accented Tan Stitching
 - Pillowtop Arm and Headrest
 - Reenforced Steel Reclining Mechanism
 - Side Pull Tab
-- **Motion Chair:** 39”W x 37""D x 39""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U120-R_Bence.png,True,['#964B00']
-U121-R Bence,u121-r-bence,"- Gray Treated Microfiber
-- Light Gray Accent Stitching
-- Dual Reclining Loveseat
-- Pillowtop Arm and Headrest
-- Reenforced Steel Reclining Mechanism
-- Side Pull Tab
-- **Motion Chair:** 39”W x 37""D x 39""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U121-R_Bence.png,True,['#808080']
-U125-R Avanti,u125-r-avanti,"- Brown Gel Leather
+- **Motion Chair:** 39”W x 37""D x 39""H",609.99,RECLINER COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U120-R_Bence.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U121-R_Bence.png']",True,"['#808080', '#964B00']"
+Avanti,u125-r-avanti,"- Brown Gel Leather
 - Pillowtop Arm and Headrest
 - Tan Accent Stitching
 - Diamond Pattern Accents
 - Reenforced Steel Mechanism
 - Side Pull Tab
-- **Motion Chair:** 42""W x 41""D x 41""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U125-R_Avanti.png,True,['#964B00']
-U130-R Ximena,u130-r-ximena,"- Gray Tightly Woven Fabric
+- **Motion Chair:** 42""W x 41""D x 41""H",569.99,RECLINER COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U125-R_Avanti.png'],True,['#964B00']
+Ximena,u130-r-ximena,"- Gray Tightly Woven Fabric
 - Pillow Top Headrest and Arms
 - High Density Foam Cushion
 - Sinuous Spring Support System
 - Manual Motion Recliner
 - Reenforced Steel Recliner Mechanism
 - Backs Detach for Easy Delivery
-- **Motion Chair:** 38”W x 55""D x 38""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U130-R_Ximena.png,True,['#808080']
-U145-R Dorsten,u145-r-dorsten,"- Black Gel Leather
+- **Motion Chair:** 38”W x 55""D x 38""H",519.99,RECLINER COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U130-R_Ximena.png'],True,['#808080']
+Dorsten,u145-r-u146-r-dorsten,"- Black Gel Leather
 - Pillow Top Back, headrest, and Arms
 - Manual Motion Recliner
 - High Density Foam Cushion
 - Reenforced Steel Mechanism and Frame
 - Backs Detach for Easy Delivery
-- **Motion Chair:** 41""W x 39""D x 40""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U145-R_Dorsten.png,True,['#000000']
-U146-R Dorsten,u146-r-dorsten,"- Gray Gel Leather
-- Pillow Top Back, headrest, and Arms
-- Manual Motion Recliner
-- High Density Foam Cushion
-- Reenforced Steel Mechanism and Frame
-- Backs Detach for Easy Delivery
-- **Motion Chair:** 41”W x 39”D x 40”H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U146-R_Dorsten.png,True,['#808080']
-U154-R Ashley,u154-r-ashley,"- Black Gel Leather
+- **Motion Chair:** 41""W x 39""D x 40""H",0.0,RECLINER COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U145-R_Dorsten.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U146-R_Dorsten.png']",False,"['#000000', '#808080']"
+Ashley,u154-r-u155-r-u156-r-u157-r-ashley,"- Black Gel Leather
 - Underlit LED
 - Motion Manual Recliner
 - Pocket Coil Cushions
 - Coordinated Stitching
 - Pillow Top Arms and Headrest
 - Backs Detach for Easy Delivery
-- **Motion Chair:** 34”W x 39""D x 40""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U154-R_Ashley.png,True,['#000000']
-U155-R Ashley,u155-r-ashley,"- Brown Gel Leather
-- Underlit LED
-- Motion Manual Recliner
-- Pocket Coil Cushions
-- Coordinated Stitching
-- Pillow Top Arms and Headrest
-- Backs Detach for Easy Delivery
-- **Motion Chair:** 34”W x 39""D x 40""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U155-R_Ashley.png,True,['#964B00']
-U156-R Ashley,u156-r-ashley,"- Gray Gel Leather
-- Underlit LED
-- Motion Manual Recliner
-- Pocket Coil Cushions
-- Coordinated Stitching
-- Pillow Top Arms and Headrest
-- Backs Detach for Easy Delivery
-- **Motion Chair:** 34""W x 39""D x 40""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U156-R_Ashley.png,True,['#808080']
-U157-R Ashley,u157-r-ashley,"- White Gel Leather
-- Underlit LED
-- Motion Manual Recliner
-- Pocket Coil Cushions
-- Coordinated Stitching
-- Pillow Top Arms and Headrest
-- Backs Detach for Easy Delivery
-- **Motion Chair:** 34”W x 39""D x 40""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U157-R_Ashley.png,True,['#FFFFFF']
-U160-R Conway,u160-r-conway,"- Dove Gray Fabric
+- **Motion Chair:** 34”W x 39""D x 40""H",519.99,RECLINER COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U154-R_Ashley.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U155-R_Ashley.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U156-R_Ashley.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U157-R_Ashley.png']",True,"['#000000', '#808080', '#964B00', '#FFFFFF']"
+Conway,u160-r-conway,"- Dove Gray Fabric
 - Motion Manual Reclining
 - Pocket Coil Cushions
 - Coordinated Stitching
 - Pillow Top Arms and Headrest
 - Backs Detach for Easy Delivery
-- **Motion Chair:** 37”W x 38”D x 41""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U160-R_Conway.png,True,['#808080']
-U170-R Austin,u170-r-austin,"- Charcoal Gray Treated Microfiber
+- **Motion Chair:** 37”W x 38”D x 41""H",519.99,RECLINER COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U160-R_Conway.png'],True,['#808080']
+Austin,u170-r-austin,"- Charcoal Gray Treated Microfiber
 - Pillowtop Arm and Headrest
 - Light Gray Accented Stitching
 - Reenforced Steel Mechanism
 - Side Pull Tab
-- **Motion Chair:** 39”W x 37”D x 41""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U170-R_Austin.png,True,"['#36454F', '#808080']"
-U172-R Audra,u172-r-audra,"- Gray Treated Microfiber Fabric
+- **Motion Chair:** 39”W x 37”D x 41""H",519.99,RECLINER COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U170-R_Austin.png'],True,"['#36454F', '#808080']"
+Audra,u172-r-audra,"- Gray Treated Microfiber Fabric
 - Manual Reclining
 - Vertical Pattern Accents
 - Pillowtop Headrest
 - Reenforced Steel Reclining Mechanism
 - Side Pull Tab
-- **Motion Chair:** 35”W x 40”D x 42”H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U172-R_Audra.png,True,['#808080']
-U190-R Alexia,u190-r-alexia,"- Black Gel Leather
+- **Motion Chair:** 35”W x 40”D x 42”H",519.99,RECLINER COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U172-R_Audra.png'],True,['#808080']
+Alexia,u190-r-u191-r-alexia,"- Black Gel Leather
 - Pocket Coil Seat Cushions
 - Pillow Top Arms and Headrest
 - Coordinated Stitching
 - Side Pull Tab
 - Back Detaches for Easy Delivery
-- **Motion Chair:** 36”W x 39""D x 40""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U190-R_Alexia.png,True,['#000000']
-U191-R Alexia,u191-r-alexia,"- Chocolate Brown Gel Leather
-- Pocket Coil Seat Cushions
-- Pillow Top Arms and Headrest
-- Coordinated Stitching
-- Side Pull Tab
-- Back Detaches for Easy Delivery
-- **Motion Chair:** 36”W x 39""D x 40""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U191-R_Alexia.png,True,"['#964B00', '#D2691E']"
-U192-R Alexia,u192-r-alexia,"- Red Air Gel Leather
+- **Motion Chair:** 36”W x 39""D x 40""H",859.99,RECLINER COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U190-R_Alexia.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U191-R_Alexia.png']",True,"['#000000', '#964B00', '#D2691E']"
+Alexia,u192-r-alexia,"- Red Air Gel Leather
 - Pillowtop Arms and Headrest
 - Manual Reclining
 - Side Pull Tab for Motion
 - Reenforced Steel Reclining Mechanism
-- **Motion Chair:** 36""W x 39""D x 40""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U192-R_Alexia.png,True,['#FF0000']
-U194-R Abaco,u194-r-abaco,"- Gray Plush Fabric
+- **Motion Chair:** 36""W x 39""D x 40""H",449.99,RECLINER COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U192-R_Alexia.png'],True,['#FF0000']
+Abaco,u194-r-abaco,"- Gray Plush Fabric
 - Manual reclining
 - Wall Hugger Capability
 - Coordinated Stitching
 - Pillowtop arms and Headrest
-- **Motion Chair:** 36”W x 39""D x 40""H",0,RECLINER COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U194-R_Abaco.png,True,['#808080']
-T025 Addison,t025-addison,"- Platinum Silver Finish
+- **Motion Chair:** 36”W x 39""D x 40""H",519.99,RECLINER COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/U194-R_Abaco.png'],True,['#808080']
+Addison,t025-addison,"- Platinum Silver Finish
 - Mirror Insert Accents
 - 8mm Clear Beveled Glass
 - Mirrored Table Aprons
 - Beveled Top Edges with Ruffled Accent
 - **Coffee Table:** 48”W x 24""D x 18""H
-- **End Table:** 25""W x 23 D x 24""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T025_Addison.png,True,['#C0C0C0']
-T027 Ginevra,t027-ginevra,"- Platinum Silver Finish
+- **End Table:** 25""W x 23 D x 24""H",0.0,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T025_Addison.png'],False,['#C0C0C0']
+Ginevra,t027-ginevra,"- Platinum Silver Finish
 - 8mm Clear Tempered Glass inserted Top
 - Beveled Glass
 - Mirrored Leg Accents
 - Wavy Side Apron Design
 - Coffee Table 48'W x 26°D x 19""H
-- End Table 26""W x 24 D x 23""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T027_Ginevra.png,True,['#C0C0C0']
-T035 Giada,t035-giada,"- Platinum Silver Finish
+- End Table 26""W x 24 D x 23""H",0.0,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T027_Ginevra.png'],False,['#C0C0C0']
+Giada,t035-giada,"- Platinum Silver Finish
 - Mirrored Top
 - Mirrored Leg Accents
 - Contemporary Apron Design
 - Coordinates with B035 Bedroom Collection
 - Coordinates with D082 Dining Collection
 - **Coffee Table:** 48""W x 24""D x 18""H
-- **End Table:** 25""W x 23""D x 24""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T035_Giada.png,True,['#C0C0C0']
-T130 Elena,t130-elena,"- Off White Faux Marble Top
+- **End Table:** 25""W x 23""D x 24""H",0.0,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T035_Giada.png'],False,['#C0C0C0']
+Elena,t130-elena,"- Off White Faux Marble Top
 - Neutral Color Accents
 - Ebony Black Table Legs
 - Coordinates with D130 and D131 Dining Collection
 - **Coffee Table:** 48""W x 24""D x 19""H
-- **End Table:** 24""W x 22""D x 24""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T130_Elena.png,True,"['#000000', '#FFFFFF']"
-T132 Zoya,t132-zoya,"- Ebony Black Faux Marble Top
+- **End Table:** 24""W x 22""D x 24""H",359.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T130_Elena.png'],True,"['#000000', '#FFFFFF']"
+Zoya,t132-zoya,"- Ebony Black Faux Marble Top
 - Hint of White Swirl Accents
 - Ebony Black Table Legs
 - Coordinates with D132 and D133 Dining Collections
 - **Coffee Table:** 48""W x 24""D x 19""H
-- **End Table:** 24""W x 22""D x 24""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T132_Zoya.png,True,"['#000000', '#FFFFFF']"
-T150 Patrizia,t150-patrizia,"- Brown Faux Marble Top
+- **End Table:** 24""W x 22""D x 24""H",359.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T132_Zoya.png'],True,"['#000000', '#FFFFFF']"
+Patrizia,t150-patrizia,"- Brown Faux Marble Top
 - Neutral Brown Print Accents
 - Espresso Dining Table Legs
 - Coordinates with D150 Dining Collection
 - **Coffee Table:** 48""W x 24""D x 19""H
-- **End Table:** 24""W x 22""D x 24""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T150_Patrizia.png,True,['#964B00']
-T160 Antonia,t160-antonia,"- Platinum Silver Finish
+- **End Table:** 24""W x 22""D x 24""H",249.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T150_Patrizia.png'],True,['#964B00']
+Antonia,t160-t161-antonia,"- Platinum Silver Finish
 - 8mm Mirrored Leg Insert Accents
 - Subtle Table Apron Design
 - Hardwood/Plywood Mixed Construction
 - **Coffee Table:** 48""W x 24""D x 19""H
-- **End Table:** 22""W x 20""D x 21""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T160_Antonia.png,True,"['#000000', '#C0C0C0']"
-T175 Tutan,t175-tutan,"- Brown Finish
+- **End Table:** 22""W x 20""D x 21""H",409.99,OCCASIONAL COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T160_Antonia.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T161_Antonia.png']",True,"['#000000', '#C0C0C0']"
+Tutan,t175-tutan,"- Brown Finish
 - Hardwood/Plywood Mixed Construction
 - 8mm Clear Tempered Glass Tops
 - Beveled Glass Edges
 - Equipped with Under Table Stools
 - Stools Coordinate with Shape of Table Base
 - **Coffee Table:** 36""W x 36""D x 17""H
-- **End Table:** 16""W x 16”D x 14""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T175_Tutan.png,True,['#964B00']
-T180 Gia,t180-gia,"- Espresso Brown Finish
+- **End Table:** 16""W x 16”D x 14""H",299.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T175_Tutan.png'],True,['#964B00']
+Gia,t180-gia,"- Espresso Brown Finish
 - 8mm Tempered Glass
 - Beveled Edges
 - Underline Shelf
 - **Coffee Table:** 48""W x 24""D x 17""H
-- **End Table:** 22""W x 20""D x 22""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T180_Gia.png,True,['#964B00']
-T197 Quincy,t197-quincy,"- Solid Wood Construction
+- **End Table:** 22""W x 20""D x 22""H",429.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T180_Gia.png'],True,['#964B00']
+Quincy,t197-quincy,"- Solid Wood Construction
 - Champagne Color
 - Victorian Accents
 - High Gloss Finish
 - Tables Coordinate with U197 Collection
 - **Coffee Table:** 58""W x 32”D x 20""H
-- **End Table:** 30""W x 30""D x 22""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T197_Quincy.png,True,[]
-T198 Uriah,t198-uriah,"- Solid Wood Construction
+- **End Table:** 30""W x 30""D x 22""H",0.0,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T197_Quincy.png'],False,[]
+Uriah,t198-uriah,"- Solid Wood Construction
 - Champagne Silver Color
 - Victorian Accents
 - High Gloss Finish
 - Tables Coordinate with U198 Collection
 - **Coffee Table:** 55""W x 31""D x 20""H
-- **End Table:** 27”W x 27”D x 22""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T198_Uriah.png,True,['#C0C0C0']
-T199 Valor,t199-valor,"- Solid Wood Construction
+- **End Table:** 27”W x 27”D x 22""H",0.0,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T198_Uriah.png'],False,['#C0C0C0']
+Valor,t199-valor,"- Solid Wood Construction
 - Champagne Gold Color
 - Victorian Accents
 - High Gloss Finish
 - Tables Coordinate with U199 Collection
 - **Coffee Table:** 55""W x 31”D x 20""H
-- **End Table:** 27 W x 27”D x 24”H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T199_Valor.png,True,['#FFD700']
-T202 Cloria,t202-cloria,"- Bone Tone Solid Wood Construction
+- **End Table:** 27 W x 27”D x 24”H",0.0,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T199_Valor.png'],False,['#FFD700']
+Cloria,t202-cloria,"- Bone Tone Solid Wood Construction
 - Traditional Accented Table Apron
 - Squared Edge Tabletop
 - Coordinates with U201 and U202 Collections
 - **Coffee Table:** 48""W x 24”D x 18""H
-- **End Table:** 22”W x 21”D x 20""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T202_Cloria.png,True,[]
-T204 Enzo,t204-enzo,"- Warm Brown Finish
+- **End Table:** 22”W x 21”D x 20""H",0.0,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T202_Cloria.png'],False,[]
+Enzo,t204-enzo,"- Warm Brown Finish
 - Hand Carved Table Accents
 - Traditional Accented Table Apron
 - Hardwood Mixed Construction
 - Coordinates with U204 and U205 Collection
 - **Coffee Table:** 56""W x 33”D x 20""H
 - **End Table:** 26”W x 26”D x 23.5”H
-- **Sofa Table:** 56”W x 20”D x 31”H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T204_Enzo.png,True,['#964B00']
-T206 Ardsley,t206-ardsley,"- Gray Wood Finish
+- **Sofa Table:** 56”W x 20”D x 31”H",0.0,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T204_Enzo.png'],False,['#964B00']
+Ardsley,t206-ardsley,"- Gray Wood Finish
 - Hand Carved accents
 - Traditional Style Table Apron and Legs
 - Hardwood Mixed Construction
 - Coordinates with U203 and U206 Collection
 - Coffee Table 48""W x 24""D x 19""H
-- End Table 24""W x 24""D x 24""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T206_Ardsley.png,True,['#808080']
-T207 Jackson,t207-jackson,"- Warm Brown Finish
+- End Table 24""W x 24""D x 24""H",809.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T206_Ardsley.png'],True,['#808080']
+Jackson,t207-jackson,"- Warm Brown Finish
 - Traditional Accented Table Apron
 - Squared Edge Tabletop
 - Coordinates with U207 Collection
 - Coffee Table a""W x b""D x c""H
-- End Table a""W x b'D x c""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T207_Jackson.png,True,['#964B00']
-T208 Carolmore,t208-carolmore,"- Ebony Black Wood Finish
+- End Table a""W x b'D x c""H",0.0,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T207_Jackson.png'],False,['#964B00']
+Carolmore,t208-carolmore,"- Ebony Black Wood Finish
 - Hard Carved Table Accents
 - Traditional Style Table Apron and Legs
 - Hardwood Mixed Construction
 - Coordinates U208 Collection
 - **Coffee Table:** 48""W x 24""D x 19""H
-- **End Table:** 24""W x 24""D x 24”H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T208_Carolmore.png,True,['#000000']
-T270 Jocelyn,t270-jocelyn,"- Brown Faux Marble Top
+- **End Table:** 24""W x 24""D x 24”H",809.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T208_Carolmore.png'],True,['#000000']
+Jocelyn,t270-t271-jocelyn,"- Brown Faux Marble Top
 - Chrome Table Base
 - Neutral Accents
 - Adjustable Levelers
 - Stainless Steel Hardware
 - **Coffee Table:** 35""W x 35""D x 19""H
-- **End Table:** 23""W x 23""D x 23""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T270_Jocelyn.png,True,"['#808080', '#964B00']"
-T285 Kaida,t285-kaida,"- 8mm Tempered Glass Tops
+- **End Table:** 23""W x 23""D x 23""H",389.99,OCCASIONAL COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T270_Jocelyn.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T271_Jocelyn.png']",True,"['#808080', '#964B00']"
+Kaida,t285-kaida,"- 8mm Tempered Glass Tops
 - Black Tempered Glass Base
 - Boat Shaped Design
 - Tubular Steel Chrome Pillars
 - Attached Glass Tops
 - **Coffee Table:** 48""W x 24""D x 20""H
-- **End Table:** 24""W x 24""D x 23""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T285_Kaida.png,True,['#000000']
-T300 Raine,t300-raine,"- 8mm Tempered Glass Tops
+- **End Table:** 24""W x 24""D x 23""H",359.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T285_Kaida.png'],True,['#000000']
+Raine,t300-raine,"- 8mm Tempered Glass Tops
 - Black Trim Accents
 - Tubular Infused Base
 - 8mm Tempered Glass Black Underlying Shelf
 - Electrostatic Baked on Gray Finish
 - **Coffee Table:** 48""W x 24""D x 19""H
-- **End Table:** 24""W x 24""D x 24”H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T300_Raine.png,True,"['#000000', '#808080']"
-T301 Sienna,t301-sienna,"- 8mm Black Tempered Glass Top
+- **End Table:** 24""W x 24""D x 24”H",319.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T300_Raine.png'],True,"['#000000', '#808080']"
+Sienna,t301-sienna,"- 8mm Black Tempered Glass Top
 - Black Tempered Glass Shelf
 - Tubular Steel Black Table Legs
 - Rounded Table Edges
@@ -1391,8 +1368,8 @@ T301 Sienna,t301-sienna,"- 8mm Black Tempered Glass Top
 - Black Accents
 - Chrome Tabletop Accents
 - **Coffee Table:** 48""W x 24""D x 19""H
-- **End Table:** 24""W x 24""D x 24""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T301_Sienna.png,True,['#000000']
-T302 Tahlia,t302-tahlia,"- 8mm Clear Tempered Glass Top
+- **End Table:** 24""W x 24""D x 24""H",319.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T301_Sienna.png'],True,['#000000']
+Tahlia,t302-tahlia,"- 8mm Clear Tempered Glass Top
 - Black Accented Trim
 - Black Tempered Glass Shelf
 - Tubular Steel Black Table Legs
@@ -1401,91 +1378,91 @@ T302 Tahlia,t302-tahlia,"- 8mm Clear Tempered Glass Top
 - Black Accents
 - Chrome Tabletop Accents
 - **Coffee Table:** 48""W x 24""D x 19""H
-- **End Table:** 24""W x 24""D x 24""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T302_Tahlia.png,True,['#000000']
-T304 Blakely,t304-blakely,"- 8mm Clear Tempered Glass Top
+- **End Table:** 24""W x 24""D x 24""H",319.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T302_Tahlia.png'],True,['#000000']
+Blakely,t304-blakely,"- 8mm Clear Tempered Glass Top
 - Bullnose Edges
 - Stroking Circle Bases
 - Chrome Finish
 - Attached Glass Tops
 - **Coffee Table:** 48""W x 31""D x 20""H
-- **End Table:** 26""W x 26""D x 22”H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T304_Blakely.png,True,[]
-T306-RD Astoria,t306-rd-astoria,"- 8mm Clear Tempered Glass
+- **End Table:** 26""W x 26""D x 22”H",319.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T304_Blakely.png'],True,[]
+Astoria,t306-rd-astoria,"- 8mm Clear Tempered Glass
 - High Gloss Red Finish
 - Beveled Edges
 - Chrome Accents
 - Geometric Molded Base
 - Coffee Table 48""W x 24""D x 18""H
-- End Table 24""W x 24""D x 22""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T306-RD_Astoria.png,True,['#FF0000']
-T307-BK Astoria,t307-bk-astoria,"- 8mm Clear Tempered Glass
+- End Table 24""W x 24""D x 22""H",479.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T306-RD_Astoria.png'],True,['#FF0000']
+Astoria,t307-bk-astoria,"- 8mm Clear Tempered Glass
 - High Gloss Black Finish
 - Beveled Edges
 - Chrome Accents
 - Geometric Molded Base
 - Coffee Table 48""W x 24""D x 18""H
-- End Table 24""W x 24""D x 22""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T307-BK_Astoria.png,True,['#000000']
-T308 Astoria,t308-astoria,"- 8mm Clear Tempered Glass
+- End Table 24""W x 24""D x 22""H",569.97,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T307-BK_Astoria.png'],True,['#000000']
+Astoria,t308-astoria,"- 8mm Clear Tempered Glass
 - High Gloss Gray Finish
 - Beveled Edges
 - Chrome Accents
 - Geometric Molded Base
 - **Coffee Table:** 48""W x 24""D x 18""H
-- **End Table:** 24""W x 24""D x 22""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T308_Astoria.png,True,['#808080']
-T309 Audrey,t309-audrey,"- 8mm Tempered Glass Tops
+- **End Table:** 24""W x 24""D x 22""H",519.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T308_Astoria.png'],True,['#808080']
+Audrey,t309-t310-t311-audrey,"- 8mm Tempered Glass Tops
 - Beveled Edges, Chrome Pillar Accents, 8mm Black Tempered Glass Shelf, High Gloss Red Finish Base
 - **Coffee Table:** 48""W x 24""D x 18""H
-- **End Table:** 24""W x 24""D x 22""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T309_Audrey.png,True,"['#000000', '#808080', '#FF0000']"
-T316 Kyla,t316-kyla,"- 8mm Clear Tempered Glass Top
+- **End Table:** 24""W x 24""D x 22""H",359.97,OCCASIONAL COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T309_Audrey.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T310_Audrey.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T311_Audrey.png']",True,"['#000000', '#808080', '#FF0000']"
+Kyla,t316-kyla,"- 8mm Clear Tempered Glass Top
 - Black Powder Coated Base
 - Tubular Steel Construction
 - Suction Cup Tabletop
 - Geometric Shape design
 - Coffee Table 48""W x 24""D x 19""H
-- End Table 22""W x 22""D x 24""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T316_Kyla.png,True,['#000000']
-T320 Beverly,t320-beverly,"- Curved Molded Base
+- End Table 22""W x 22""D x 24""H",269.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T316_Kyla.png'],True,['#000000']
+Beverly,t320-t321-t322-beverly,"- Curved Molded Base
 - Red High Gloss Finish
 - 8mm Tempered Glass Top
 - Attached Glass Top
-- **Coffee Table:** 49”W x 25""D x 19""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T320_Beverly.png,True,"['#000000', '#808080', '#FF0000']"
-T335 Melina,t335-melina,"- Brown Faux Marble Tabletop
+- **Coffee Table:** 49”W x 25""D x 19""H",319.99,OCCASIONAL COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T320_Beverly.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T321_Beverly.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T322_Beverly.png']",True,"['#000000', '#808080', '#FF0000']"
+Melina,t335-t336-melina,"- Brown Faux Marble Tabletop
 - Neutral Tone Accents
 - Black Powder Coated Table Legs
 - Hour Glass Inspired Accents
 - Adjustable table Levelers
 - Coffee Table 48""W x 24""D x 19""H
-- End Table 24""W x 24""D x 23""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T335_Melina.png,True,"['#000000', '#808080', '#964B00']"
-T340 Noelle,t340-noelle,"- 10mm Cleared Tempered Glass
+- End Table 24""W x 24""D x 23""H",289.99,OCCASIONAL COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T335_Melina.png', 'https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T336_Melina.png']",True,"['#000000', '#808080', '#964B00']"
+Noelle,t340-noelle,"- 10mm Cleared Tempered Glass
 - Beveled Glass Accents
 - Black Powder Coated Legs
 - Tubular Steel Construction
 - Chrome Accented Table Levelers
 - Coffee Table 48""W x 24""D x 19""H
-- End Table 24""W x 24""D x 23""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T340_Noelle.png,True,['#000000']
-T680 Waverly,t680-waverly,"- Black Faux Marble Tops
+- End Table 24""W x 24""D x 23""H",249.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T340_Noelle.png'],True,['#000000']
+Waverly,t680-waverly,"- Black Faux Marble Tops
 - White Accents
 - Polyurethane Finish
 - Gun Metal Gray Finish Legs
 - Grid Style Apron
 - Coffee Table 48""W x 24""D x 18""H
-- End Table 22""W x 20""D x 21""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T680_Waverly.png,True,"['#000000', '#808080', '#FFFFFF']"
-T700 Xandra,t700-xandra,"- Brown Faux Marble Tops
+- End Table 22""W x 20""D x 21""H",269.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T680_Waverly.png'],True,"['#000000', '#808080', '#FFFFFF']"
+Xandra,t700-xandra,"- Brown Faux Marble Tops
 - Light Brown Accents
 - Polyurethane Finish
 - Black Powder Coated Metal Legs
 - Coffee Table 48""W x 24""D x 16""H
-- End Table 22""W x 20""D x 21""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T700_Xandra.png,True,"['#000000', '#964B00']"
-T759 Yasmin,t759-yasmin,"- Brown Faux Marble Tops
+- End Table 22""W x 20""D x 21""H",229.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T700_Xandra.png'],True,"['#000000', '#964B00']"
+Yasmin,t759-yasmin,"- Brown Faux Marble Tops
 - Polyurethane Finish
 - Grid Style Apron
 - Gray Finish Legs
 - Coffee Table 44""W x 22""D x 18""H
-- End Table 22""W x 18"" D x 21""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T759_Yasmin.png,True,"['#808080', '#964B00']"
-T761 Arbor,t761-arbor,"- Gray Faux Marble Tops
+- End Table 22""W x 18"" D x 21""H",199.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T759_Yasmin.png'],True,"['#808080', '#964B00']"
+Arbor,t761-arbor,"- Gray Faux Marble Tops
 - Polyurethane Finish
 - Grid Style Apron
 - Gray Finish Legs
 - Coffee Table 44""W x 22""D x 18""H
-- End Table 22""W x 18"" D x 21""H",0,OCCASIONAL COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T761_Arbor.png,True,['#808080']
-W035 Archer,w035-archer,"- Platinum Silver Finish
+- End Table 22""W x 18"" D x 21""H",199.99,OCCASIONAL COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/T761_Arbor.png'],True,['#808080']
+Archer,w035-archer,"- Platinum Silver Finish
 - Mirror Insert Accents
 - Contemporary Front Apron Design
 - Fire Insert is interchangeable with Crystal Accents
@@ -1493,57 +1470,57 @@ W035 Archer,w035-archer,"- Platinum Silver Finish
 - Crystal Drawer Handles
 - Coordinates with B035 Bedroom Collection, D082 Dining Collection, and T035 Occasional Collection
 - Fireplace Insert Sold Separately
-- Fireplace Insert 63""W x 19""D x 36""H",0,ACCENTS COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/W035_Archer.png,True,['#C0C0C0']
-W125 Everett,w125-everett,"- Platinum Silver Finish
+- Fireplace Insert 63""W x 19""D x 36""H",719.99,ACCENTS COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/W035_Archer.png'],True,['#C0C0C0']
+Everett,w125-everett,"- Platinum Silver Finish
 - Mirror Front Incerts
 - Crystal Drawer Knobs
 - Entertainment Shelf
 - Subtle Beaded Accents
 - Fireplace Ready
 - Fireplace Insert Sold Separately
-- **TV Stand:** 60”W x 16""D x 35""H",0,ACCENTS COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/W125_Everett.png,True,['#C0C0C0']
-W498 Willow,w498-willow,"- 8mm Black Tempered Glass
+- **TV Stand:** 60”W x 16""D x 35""H",899.99,ACCENTS COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/W125_Everett.png'],True,['#C0C0C0']
+Willow,w498-willow,"- 8mm Black Tempered Glass
 - Tubular Steel Frame
 - Attached Top
 - Black Chrome Accents
 - Three Supporting Shelving Units
-- **TV Stand:** 55”W x 18""D x 22""H",0,ACCENTS COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/W498_Willow.png,True,['#000000']
-W500 Brinley,w500-brinley,"- Black Tempered Glass Tops
+- **TV Stand:** 55”W x 18""D x 22""H",179.99,ACCENTS COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/W498_Willow.png'],True,['#000000']
+Brinley,w500-brinley,"- Black Tempered Glass Tops
 - Tubular Steel Frame
 - Attached Top
 - Chrome Accents
 - Two Supporting Shelving Units
-- TV Stand 55""W x 18""D x 18""H",0,ACCENTS COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/W500_Brinley.png,True,['#000000']
-W502 Ariauna,w502-ariauna,"- Black Tempered Glass Tops
+- TV Stand 55""W x 18""D x 18""H",159.99,ACCENTS COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/W500_Brinley.png'],True,['#000000']
+Ariauna,w502-ariauna,"- Black Tempered Glass Tops
 - Tubular Steel Frame
 - Chrome Accents
 - Attached Top
 - Three Supporting Shelving Units
-- **TV Stand:** 42”W x 18""D x 22""H",0,ACCENTS COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/W502_Ariauna.png,True,['#000000']
-W600 Zaria,w600-zaria,"- LED Fire Burning Realistic Flame
+- **TV Stand:** 42”W x 18""D x 22""H",159.99,ACCENTS COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/W502_Ariauna.png'],True,['#000000']
+Zaria,w600-zaria,"- LED Fire Burning Realistic Flame
 - Faux Crystal Accents
 - LED Backlit
 - Dim Level Changes to Three Stages
-- **Fireplace Insert:** 27”W x 5""D x 18""H",0,ACCENTS COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/W600_Zaria.png,True,[]
-W605 Yara,w605-yara,"- Faux Wood Firewood Burning Log
+- **Fireplace Insert:** 27”W x 5""D x 18""H",269.99,ACCENTS COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/W600_Zaria.png'],True,[]
+Yara,w605-yara,"- Faux Wood Firewood Burning Log
 - Faux Brick Backlit
 - LED Realistic Flame
 - Dim Level Changes to Three Stages
 - Capable to Warm up to 400 Square Feet
 - Heat Function Can Be On/Off
-- **Fireplace Insert:** 27”W x 5""D x 18 H",0,ACCENTS COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/W605_Yara.png,True,[]
-A1000 Xanthe,a1000-xanthe,"- 8mm Mirror Overlaying MDF and Particle Board
+- **Fireplace Insert:** 27”W x 5""D x 18 H",259.99,ACCENTS COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/W605_Yara.png'],True,[]
+Xanthe,a1000-xanthe,"- 8mm Mirror Overlaying MDF and Particle Board
 - 3D Accented Effect
 - Multi Color LED Accents
 - Accented with White Lamp Shade
-- **LED Floor Lamp:** 12”W x 12""D x 54""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A1000_Xanthe.png,True,['#FFFFFF']
-A1010 Vienna,a1010-vienna,"- 8mm Mirror Overlaying MDF and Particle Board
+- **LED Floor Lamp:** 12”W x 12""D x 54""H",349.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A1000_Xanthe.png'],True,['#FFFFFF']
+Vienna,a1010-vienna,"- 8mm Mirror Overlaying MDF and Particle Board
 - 3D Accented Effect
 - Beveled Edges
 - Multi Color LED Accents
 - Accented with White Lamp Shade
-- **LED Floor Lamp:** 12”W x 10""D x 56""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A1010_Vienna.png,True,['#FFFFFF']
-"A1015 Tuscan, A1020 Allison","a1015-tuscan,-a1020-allison","- 8mm Mirror Overlaying MDF and Particle Board
+- **LED Floor Lamp:** 12”W x 10""D x 56""H",339.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A1010_Vienna.png'],True,['#FFFFFF']
+"Tuscan, A1020 Allison","a1015-tuscan,-a1020-allison","- 8mm Mirror Overlaying MDF and Particle Board
 - Crushed Glass Accents
 - Squared Box Design
 - Beveled Edges
@@ -1554,77 +1531,77 @@ A1010 Vienna,a1010-vienna,"- 8mm Mirror Overlaying MDF and Particle Board
 - Beveled Edges
 - Accented with White Lamp Shade
 - LED Floor Lamp 12""W x 12""D x 56""H
-- LED Floor Lamp 12""W x 12""D x 56""H",0,ACCESSORIES COLLECTION,"https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A1015_Tuscan,_A1020_Allison.png",True,['#FFFFFF']
-"A1025 Bryant, A1030 Everly","a1025-bryant,-a1030-everly","- 8mm Mirror Overlaying MDF and Particle Board
+- LED Floor Lamp 12""W x 12""D x 56""H",0.0,ACCESSORIES COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A1015_Tuscan,_A1020_Allison.png']",False,['#FFFFFF']
+"Bryant, A1030 Everly","a1025-bryant,-a1030-everly","- 8mm Mirror Overlaying MDF and Particle Board
 - Raindrop Glass Accents
 - Semi Vertical Desig n
 - Beveled Edges
 - Accented with White Lamp Shade
 - Trickle Effect
 - **A1025 Bryant Floor Lamp:** 12""W x 12""D x 56""H
-- **A1030 Everly Floor Lamp:** 12""W x 12""D x 56 ""H",0,ACCESSORIES COLLECTION,"https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A1025_Bryant,_A1030_Everly.png",True,['#FFFFFF']
-A1035 Genevieve,a1035-genevieve,"- 8mm Mirror Overlaying MDF and Particle Board
+- **A1030 Everly Floor Lamp:** 12""W x 12""D x 56 ""H",329.99,ACCESSORIES COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A1025_Bryant,_A1030_Everly.png']",True,['#FFFFFF']
+Genevieve,a1035-genevieve,"- 8mm Mirror Overlaying MDF and Particle Board
 - Crushed Glass Accents
 - Zig Zag Accent De sign
 - Beveled Edges
 - Accented with White Lamp Shade
-- **Floor Lamp:** 12 ""W x 10""D x 56""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A1035_Genevieve.png,True,['#FFFFFF']
-A2000 Isadora,a2000-isadora,"- 8mm Mirror Overlaying MDF and Particle Board
+- **Floor Lamp:** 12 ""W x 10""D x 56""H",0.0,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A1035_Genevieve.png'],False,['#FFFFFF']
+Isadora,a2000-isadora,"- 8mm Mirror Overlaying MDF and Particle Board
 - Fine Crushed Glass Accents
 - Beveled Edges
 - LED Backlit Accent Lighting
 - Black Glass Background
-- **LED Wall Art:** 47”W x 32”D x 2”H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A2000_Isadora.png,True,['#000000']
-A2010 Rayne,a2010-rayne,"- 8mm Tempered Glass Overlaying MDF and Particle Board
+- **LED Wall Art:** 47”W x 32”D x 2”H",319.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A2000_Isadora.png'],True,['#000000']
+Rayne,a2010-rayne,"- 8mm Tempered Glass Overlaying MDF and Particle Board
 - 8mm Mirror Overlaying MDF and Particle Board
 - Crushed Glass Accents
 - Beveled Edges
-- **World Map LED Wall Art:** 47°W x 32 D x 2""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A2010_Rayne.png,True,[]
-A2015 Serenity,a2015-serenity,"- 8m m Tempered Glass Overlaying MDF and Particle Board
+- **World Map LED Wall Art:** 47°W x 32 D x 2""H",319.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A2010_Rayne.png'],True,[]
+Serenity,a2015-serenity,"- 8m m Tempered Glass Overlaying MDF and Particle Board
 - LED Backlit Accents
 - Touch Button On/Off Function
 - Beveled Edges
-- **Tiger LED Wall Art:** 32""W x 39""D x 2""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A2015_Serenity.png,True,[]
-A2020 Talia,a2020-talia,"- 8mm Tempered Glass Overlaying MDF and Particle Board
+- **Tiger LED Wall Art:** 32""W x 39""D x 2""H",269.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A2015_Serenity.png'],True,[]
+Talia,a2020-talia,"- 8mm Tempered Glass Overlaying MDF and Particle Board
 - LED Backlit Accents
 - Touch Button On/Off Function
 - Beveled Edges
-- **Leopard LED Wall Art:** 32”W x 32""D x 2""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A2020_Talia.png,True,[]
-A2025 Finnegan,a2025-finnegan,"- 8mm Mirror Overlaying MDF and Particle Board
-- Beveled Edges
-- Mirrored Frame
-- LED Backlit Accents
-- Touch Button On/Off Function
-- **Heart LED Wall Art:** 32”W x 32""D x 2""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A2025_Finnegan.png,True,[]
-A2030 Greyson,a2030-greyson,"- 8mm Mirror Overlaying MDF and Particle Board
+- **Leopard LED Wall Art:** 32”W x 32""D x 2""H",219.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A2020_Talia.png'],True,[]
+Finnegan,a2025-finnegan,"- 8mm Mirror Overlaying MDF and Particle Board
 - Beveled Edges
 - Mirrored Frame
 - LED Backlit Accents
 - Touch Button On/Off Function
-- **Spade LED Wall Art:** 35”W x 24""D x 2""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A2030_Greyson.png,True,[]
-A2035 Holden,a2035-holden,"- 8mm Mirror Overlaying MDF and Particle Board
+- **Heart LED Wall Art:** 32”W x 32""D x 2""H",219.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A2025_Finnegan.png'],True,[]
+Greyson,a2030-greyson,"- 8mm Mirror Overlaying MDF and Particle Board
 - Beveled Edges
 - Mirrored Frame
 - LED Backlit Accents
 - Touch Button On/Off Function
-- **Skull LED Wall Art:** 24”W x 24""D x 2""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A2035_Holden.png,True,[]
-A3000 Isaiah,a3000-isaiah,"- 8mm Mirror Overlaying MDF and Particle Board
+- **Spade LED Wall Art:** 35”W x 24""D x 2""H",199.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A2030_Greyson.png'],True,[]
+Holden,a2035-holden,"- 8mm Mirror Overlaying MDF and Particle Board
+- Beveled Edges
+- Mirrored Frame
+- LED Backlit Accents
+- Touch Button On/Off Function
+- **Skull LED Wall Art:** 24”W x 24""D x 2""H",69.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A2035_Holden.png'],True,[]
+Isaiah,a3000-isaiah,"- 8mm Mirror Overlaying MDF and Particle Board
 - Crushed Glass Accents
 - 8mm Tempered Glass Storage Shelving
 - LED Backlit Accents
 - Roman Numeral Clock Design
 - Faux Crystal Drawer Knob
 - One Drawer Base Storage
-- **Grandfather Clock:** 18”W x 8""D x 63""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A3000_Isaiah.png,True,[]
-A3005 Jaxon,a3005-jaxon,"- 8mm Mirror Overlaying MDF and Particle Board
+- **Grandfather Clock:** 18”W x 8""D x 63""H",0.0,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A3000_Isaiah.png'],False,[]
+Jaxon,a3005-jaxon,"- 8mm Mirror Overlaying MDF and Particle Board
 - Crushed Glass Accents
 - Vertical Design Accents
 - Roman Numeral Clock Design
 - Beveled Edges
 - 8mm Tempered Glass Shelving
 - LED Backlit Accents
-- Grandfather Clock 18""W x 8""D x 63""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A3005_Jaxon.png,True,[]
-"A3010 Wilder, A3015 Xavier","a3010-wilder,-a3015-xavier","- 8mm Mirror Overlaying MDF and Particle Board
+- Grandfather Clock 18""W x 8""D x 63""H",0.0,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A3005_Jaxon.png'],False,[]
+"Wilder, A3015 Xavier","a3010-wilder,-a3015-xavier","- 8mm Mirror Overlaying MDF and Particle Board
 - Crushed Glass Accents
 - Mantle Style Design
 - Beveled Edges
@@ -1641,8 +1618,8 @@ A3005 Jaxon,a3005-jaxon,"- 8mm Mirror Overlaying MDF and Particle Board
 - Single Drawer Storage
 - Faux Crystal Drawer Knob
 - Grandfather Clock 18""W x 8""D x 63""H
-- Grandfather Clock 18""W x 8""D x 63""H",0,['ACCESSORIES COLLECTION'],"https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A3010_Wilder,_A3015_Xavier.png",True,[]
-"A3100 Loretta, A3105 Yates","a3100-loretta,-a3105-yates","- 8mm Mirror Overlaying MDF and Particle Board
+- Grandfather Clock 18""W x 8""D x 63""H",429.99,['ACCESSORIES COLLECTION'],"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A3010_Wilder,_A3015_Xavier.png']",True,[]
+"Loretta, A3105 Yates","a3100-loretta,-a3105-yates","- 8mm Mirror Overlaying MDF and Particle Board
 - Crushed Glass Accents
 - Beveled Edges
 - Reenforced Wall Hanging Mechanism
@@ -1654,8 +1631,8 @@ A3005 Jaxon,a3005-jaxon,"- 8mm Mirror Overlaying MDF and Particle Board
 - Mantle Upright Design
 - Reenforced Wall Hanging Mechanism
 - Roman Numeral Clock Design
-- Wall Clock 14""W x 3""D x 34""H",0,ACCESSORIES COLLECTION,"https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A3100_Loretta,_A3105_Yates.png",True,[]
-"A3200 Zaiden, A3205 Axl","a3200-zaiden,-a3205-axl","- 8mm Mirror Overlaying MDF and Particle Board
+- Wall Clock 14""W x 3""D x 34""H",139.99,ACCESSORIES COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A3100_Loretta,_A3105_Yates.png']",True,[]
+"Zaiden, A3205 Axl","a3200-zaiden,-a3205-axl","- 8mm Mirror Overlaying MDF and Particle Board
 - Crushed Glass Accents
 - Beveled Edges
 - Geometric Shape Accent Design
@@ -1667,14 +1644,14 @@ A3005 Jaxon,a3005-jaxon,"- 8mm Mirror Overlaying MDF and Particle Board
 - Roman Numeral Design Imputed in Frame
 - Reenforced Wall Hanging Mechanism
 - Wall Clock 24""W x 24""D x 2""H
-- Wall Clock 24""W x 24""D x 2""H",0,['ACCESSORIES COLLECTION'],"https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A3200_Zaiden,_A3205_Axl.png",True,[]
-"A3210 Beckham, A3215 Caden","a3210-beckham,-a3215-caden","- 8mm Mirror Overlaying MDF and Particle Board
+- Wall Clock 24""W x 24""D x 2""H",2.11999,['ACCESSORIES COLLECTION'],"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A3200_Zaiden,_A3205_Axl.png']",True,[]
+"Beckham, A3215 Caden","a3210-beckham,-a3215-caden","- 8mm Mirror Overlaying MDF and Particle Board
 - Crushed Glass Accents
 - Beveled Edges
 - Roman Numeral Accents Imputed in Frame
 - Reenforced Wall Hanging Mechanism
-- Wall Clock 24""W x 24""D x 2""H",0,ACCESSORIES COLLECTION,"https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A3210_Beckham,_A3215_Caden.png",True,[]
-"A4000 Darian, A4005 Ethan","a4000-darian,-a4005-ethan","- 8mm Mirror Overlaying MDF and Particle Board
+- Wall Clock 24""W x 24""D x 2""H",119.99,ACCESSORIES COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A3210_Beckham,_A3215_Caden.png']",True,[]
+"Darian, A4005 Ethan","a4000-darian,-a4005-ethan","- 8mm Mirror Overlaying MDF and Particle Board
 - Crushed Glass Accents
 - Beveled Edges
 - Tempered Glass Candle Holder Base
@@ -1683,16 +1660,16 @@ A3005 Jaxon,a3005-jaxon,"- 8mm Mirror Overlaying MDF and Particle Board
 - 8mm Tempered Glass Accents on Sides
 - Beveled Edges
 - **Accent Candleholder:** 12”W x 5""D x 13.5""H
-- **Accent Candleholder:** 8”W x 8.5""D x 14""H",0,ACCESSORIES COLLECTION,"https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A4000_Darian,_A4005_Ethan.png",True,[]
-"A4010 Fletcher, A4050 Gideon","a4010-fletcher,-a4050-gideon","- 8mm Mirror Overlaying MDF and Particle Board
+- **Accent Candleholder:** 8”W x 8.5""D x 14""H",119.99,ACCESSORIES COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A4000_Darian,_A4005_Ethan.png']",True,[]
+"Fletcher, A4050 Gideon","a4010-fletcher,-a4050-gideon","- 8mm Mirror Overlaying MDF and Particle Board
 - Ripple Effect Exterior and Interior Accents
 - Beveled Edges
 - Tempered Glass Accent for Candle Holder
 - **Fletcher:** 12""W x 4""D x 13""H
 - **Gideon A:** 5""W x 4""D x 18""H
 - **Gideon B:** 5""W x 4""D x 14""H
-- **Gideon C:** 5""W x 4""D x 10.5""H",0,ACCESSORIES COLLECTION,"https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A4010_Fletcher,_A4050_Gideon.png",True,[]
-"A4055 Harrison, A4060 Yvette","a4055-harrison,-a4060-yvette","- 8mm Mirror Overlaying MDF and Particle Board
+- **Gideon C:** 5""W x 4""D x 10.5""H",8999.0,ACCESSORIES COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A4010_Fletcher,_A4050_Gideon.png']",True,[]
+"Harrison, A4060 Yvette","a4055-harrison,-a4060-yvette","- 8mm Mirror Overlaying MDF and Particle Board
 - Fine CurshedInterior Accents
 - Beveled Edges
 - Tempered Glass Accent for Candle Holder
@@ -1701,79 +1678,79 @@ A3005 Jaxon,a3005-jaxon,"- 8mm Mirror Overlaying MDF and Particle Board
 - C. 5”W x 5”D x 11.5”H
 - **Yvette:** A. 5”W x 5”D x 15”H
 - B. 5”W x 5”D x 13”H
-- C. 5”W x 5”D x 11.5”H",0,ACCESSORIES COLLECTION,"https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A4055_Harrison,_A4060_Yvette.png",True,[]
-A5000 Axlene,a5000-axlene,"- King Size
+- C. 5”W x 5”D x 11.5”H",0.0,ACCESSORIES COLLECTION,"['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A4055_Harrison,_A4060_Yvette.png']",False,[]
+Axlene,a5000-axlene,"- King Size
 - 100% Memory Foam
 - Bamboo-Infused Cover
 - Roll Packed in Non-woven Bag
 - Pillow Protector Highly Advised to Keep Pillow Fresh
 - Relieves Insomnia, Snoring, Asthma, Neck Pain, TMJ, and Migranes
-- **King Size:** 36""W x 19""D",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A5000_Axlene.png,True,[]
-A5001 Zuriel,a5001-zuriel,"- Queen Size
+- **King Size:** 36""W x 19""D",0.0,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A5000_Axlene.png'],False,[]
+Zuriel,a5001-zuriel,"- Queen Size
 - 100% Memory Foam
 - Bamboo-Infused Cover
 - Roll Packed in Non-woven Bag
 - Pillow Protector Highly Advised to Keep Pillow Fresh
 - Relieves Insomnia, Snoring, Asthma, Neck Pain, TMJ, and Migranes
-- **Queen Size:** 28""W x 19""D",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A5001_Zuriel.png,True,[]
-ST100 Allie,st100-allie,"- Luxurious Velvet
+- **Queen Size:** 28""W x 19""D",129.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/A5001_Zuriel.png'],True,[]
+Allie,st100-allie,"- Luxurious Velvet
 - Hand Applied Silver Nail Head Trim
 - Chrome Base
 - Hydraulic Mechanism
 - Button Tufted Accents
 - Chrome Posterior Accent Handle
 - Available in Black, Gray, Pink, White
-- **Bar Stool:** 19” W x 22""D x 40-47.6""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST100_Allie.png,True,"['#000000', '#808080', '#C0C0C0', '#FFC0CB', '#FFFFFF']"
-ST105 Alma,st105-alma,"- Luxurious Velvet
+- **Bar Stool:** 19” W x 22""D x 40-47.6""H",249.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST100_Allie.png'],True,"['#000000', '#808080', '#C0C0C0', '#FFC0CB', '#FFFFFF']"
+Alma,st105-alma,"- Luxurious Velvet
 - Hand Applied Silver Nail Head Trim
 - Chrome Base
 - Hydraulic Mechanism
 - Button Tufted Accents
 - Available in Black, Gray, Pink, White
-- **Bar Stool:** 24""W x 22.4""D x 38-46""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST105_Alma.png,True,"['#000000', '#808080', '#C0C0C0', '#FFC0CB', '#FFFFFF']"
-ST110 Amelia,st110-amelia,"- Luxurious Velvet
+- **Bar Stool:** 24""W x 22.4""D x 38-46""H",139.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST105_Alma.png'],True,"['#000000', '#808080', '#C0C0C0', '#FFC0CB', '#FFFFFF']"
+Amelia,st110-amelia,"- Luxurious Velvet
 - Chrome Base
 - Hydraulic Mechanism
 - Button Tufted Accents
 - Available in Black, Gray, Pink, White
-- **Bar Stool:** 24""W x 24.4""D x 41-49""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST110_Amelia.png,True,"['#000000', '#808080', '#FFC0CB', '#FFFFFF']"
-ST115 Andrea,st115-andrea,"- Luxurious Velvet
+- **Bar Stool:** 24""W x 24.4""D x 41-49""H",129.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST110_Amelia.png'],True,"['#000000', '#808080', '#FFC0CB', '#FFFFFF']"
+Andrea,st115-andrea,"- Luxurious Velvet
 - Hand Applied Silver Nail Head Trim
 - Chrome Base
 - Hydraulic Mechanism
 - Button Tufted Accents
 - Diamond Stitching Posterior
 - Available in Black, Gray, Pink, White
-- **Bar Stool:** 21.3""W x 22""D x 41-49""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST115_Andrea.png,True,"['#000000', '#808080', '#C0C0C0', '#FFC0CB', '#FFFFFF']"
-ST120 Angelina,st120-angelina,"- Air Gel Leather
+- **Bar Stool:** 21.3""W x 22""D x 41-49""H",119.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST115_Andrea.png'],True,"['#000000', '#808080', '#C0C0C0', '#FFC0CB', '#FFFFFF']"
+Angelina,st120-angelina,"- Air Gel Leather
 - Chrome Base
 - Hydraulic Mechanism
 - Button Tufted Accents
 - Available in Black, Gray, White
-- **Bar Stool:** 24""W x 22""D x 38-46""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST120_Angelina.png,True,"['#000000', '#808080', '#FFFFFF']"
-ST125 Annabelle,st125-annabelle,"- Air Gel Leather
+- **Bar Stool:** 24""W x 22""D x 38-46""H",159.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST120_Angelina.png'],True,"['#000000', '#808080', '#FFFFFF']"
+Annabelle,st125-annabelle,"- Air Gel Leather
 - Chrome Base
 - Hydraulic Mechanism
 - Vertical Accent Stitching
 - Available in Black, Gray, White
-- **Bar Stool:** 23""W x 22""D x 37.4-45.2""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST125_Annabelle.png,True,"['#000000', '#808080', '#FFFFFF']"
-ST130 Antonio,st130-antonio,"- Air Gel Leather
+- **Bar Stool:** 23""W x 22""D x 37.4-45.2""H",149.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST125_Annabelle.png'],True,"['#000000', '#808080', '#FFFFFF']"
+Antonio,st130-antonio,"- Air Gel Leather
 - Chrome Base
 - Hydraulic Mechanism
 - Triangle Stitching Accents
 - Available in Black, Gray, White
-- **Bar Stool:** 20”W x 23""D x 36-44""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST130_Antonio.png,True,"['#000000', '#808080', '#FFFFFF']"
-ST135 Aria,st135-aria,"- Air Gel Leather
+- **Bar Stool:** 20”W x 23""D x 36-44""H",119.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST130_Antonio.png'],True,"['#000000', '#808080', '#FFFFFF']"
+Aria,st135-aria,"- Air Gel Leather
 - Chrome Base
 - Hydraulic Mechanism
 - Chrome Border Accents
 - Triangle Stitching Accents
 - Available in Black, Gray, White
-- **Bar Stool:** 18”W x 21.3""D x 35-43""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST135_Aria.png,True,"['#000000', '#808080', '#FFFFFF']"
-ST140 Ariel,st140-ariel,"- Air Gel Leather
+- **Bar Stool:** 18”W x 21.3""D x 35-43""H",119.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST135_Aria.png'],True,"['#000000', '#808080', '#FFFFFF']"
+Ariel,st140-ariel,"- Air Gel Leather
 - Chrome Base
 - Hydraulic Mechanism
 - Squared Stitching Design
 - Armless Design
 - Available in Black, Gray, White
-- **Bar Stool:** 17.3""W x 21""D x 37-44.5""H",0,ACCESSORIES COLLECTION,https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST140_Ariel.png,True,"['#000000', '#808080', '#FFFFFF']"
+- **Bar Stool:** 17.3""W x 21""D x 37-44.5""H",119.99,ACCESSORIES COLLECTION,['https://udrgctjqqcaalqzpbbyg.supabase.co/storage/v1/object/public/product-images/ST140_Ariel.png'],True,"['#000000', '#808080', '#FFFFFF']"

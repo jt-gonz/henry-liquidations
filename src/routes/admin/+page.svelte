@@ -61,9 +61,9 @@
 								<div
 									class="h-16 w-16 overflow-hidden rounded-lg border border-brand-light bg-brand-bg"
 								>
-									{#if product.image_url}
+									{#if product.image_url && product.image_url.length > 0}
 										<img
-											src={product.image_url}
+											src={product.image_url[0]}
 											alt={product.name}
 											class="h-full w-full object-cover"
 										/>
@@ -104,7 +104,7 @@
 								>
 								<form method="POST" action="?/delete" class="inline">
 									<input type="hidden" name="id" value={product.id} />
-									<input type="hidden" name="image_url" value={product.image_url} />
+									<input type="hidden" name="image_url" value={product.image_url?.[0] ?? ''} />
 									<button
 										type="submit"
 										class="cursor-pointer text-brand-brown transition-colors hover:text-brand-dark"

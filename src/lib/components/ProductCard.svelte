@@ -4,11 +4,14 @@
 	 *   name: string;
 	 *   slug: string;
 	 *   price: number;
-	 *   image_url: string;
+	 *   image_url: string[];
 	 *   category?: string;
 	 * }}
 	 */
 	let { name, slug, price, image_url, category = '' } = $props();
+
+	// Use the first image from the array, or empty string if no images
+	let displayImage = $derived(image_url && image_url.length > 0 ? image_url[0] : '');
 	let imageLoaded = $state(false);
 </script>
 
@@ -23,7 +26,7 @@
 			aria-hidden="true"
 		></div>
 		<img
-			src={image_url}
+			src={displayImage}
 			alt={name}
 			class="relative h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105 {imageLoaded
 				? 'opacity-100'

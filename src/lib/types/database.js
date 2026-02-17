@@ -24,7 +24,7 @@
  * @property {string}  description
  * @property {number}  price
  * @property {string}  category
- * @property {string}  image_url
+ * @property {string[]}  image_url
  * @property {boolean} in_stock
  * @property {ProductDimensions|null} dimensions
  * @property {string[]|null} colors
@@ -39,7 +39,7 @@
  * @property {string}  [description]
  * @property {number}  price
  * @property {string}  [category]
- * @property {string}  [image_url]
+ * @property {string[]}  [image_url]
  * @property {boolean} [in_stock]
  * @property {ProductDimensions|null} [dimensions]
  * @property {string[]|null} [colors]
@@ -54,7 +54,7 @@
  * @property {string}  [description]
  * @property {number}  [price]
  * @property {string}  [category]
- * @property {string}  [image_url]
+ * @property {string[]}  [image_url]
  * @property {boolean} [in_stock]
  * @property {ProductDimensions|null} [dimensions]
  * @property {string[]|null} [colors]
@@ -143,4 +143,4 @@
  * @property {QuoteUpdate} public.Tables.quotes.Update
  */
 
-export { };
+export {};

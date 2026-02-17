@@ -36,7 +36,7 @@
 							...item,
 							price: Number(fresh.price),
 							name: fresh.name,
-							image_url: fresh.image_url,
+							image_url: fresh.image_url?.[0] ?? item.image_url,
 							slug: fresh.slug
 							// Optional: handle out of stock logic here if desired
 						};
