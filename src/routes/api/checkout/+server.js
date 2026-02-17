@@ -44,7 +44,7 @@ export async function POST({ request, url }) {
 
 	// Build a lookup map
 	/** @type {Map<string, import('$lib/types/database.js').ProductRow>} */
-	const productMap = new Map((/** @type {any[]} */ (products)).map((p) => [p.id, p]));
+	const productMap = new Map(/** @type {any[]} */ (products).map((p) => [p.id, p]));
 
 	// ── 2. Build Stripe line_items with verified prices ──────────
 	/** @type {Stripe.Checkout.SessionCreateParams.LineItem[]} */
@@ -67,7 +67,7 @@ export async function POST({ request, url }) {
 				currency: 'usd',
 				product_data: {
 					name: product.name,
-					...(product.image_url ? { images: [product.image_url] } : {}),
+					...(product.image_url?.[0] ? { images: [product.image_url[0]] } : {}),
 					...(item.color ? { description: `Color: ${item.color}` } : {})
 				},
 				unit_amount: unitAmount

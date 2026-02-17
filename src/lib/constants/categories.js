@@ -16,11 +16,13 @@
 
 /** @type {Category[]} */
 export const CATEGORIES = [
-	{ value: 'LIVING ROOM COLLECTION', label: 'Living Room Collection' },
-	{ value: 'RECLINER COLLECTION', label: 'Recliner Collection' },
-	{ value: 'ACCENTS COLLECTION', label: 'Accents Collection' },
-	{ value: 'OCCASIONAL COLLECTION', label: 'Occasional Collection' },
-	{ value: 'ACCESSORIES COLLECTION', label: 'Accessories Collection' }
+    { value: 'LIVING ROOM COLLECTION', label: 'Living Room Collection' },
+    { value: 'RECLINER COLLECTION', label: 'Recliner Collection' },
+    { value: 'ACCENTS COLLECTION', label: 'Accents Collection' },
+    { value: 'OCCASIONAL COLLECTION', label: 'Occasional Collection' },
+    { value: 'ACCESSORIES COLLECTION', label: 'Accessories Collection' },
+    { value: 'UTILITIES', label: 'Utilities' },
+    { value: 'OTHER', label: 'Other' }
 ];
 
 /**
@@ -29,8 +31,8 @@ export const CATEGORIES = [
  * @returns {string} The display label, or the value itself if not found
  */
 export function getCategoryLabel(value) {
-	const category = CATEGORIES.find((cat) => cat.value === value);
-	return category?.label || value;
+    const category = CATEGORIES.find((cat) => cat.value === value);
+    return category?.label || value;
 }
 
 /**
@@ -38,5 +40,5 @@ export function getCategoryLabel(value) {
  * @returns {string[]} Array of category values
  */
 export function getCategoryValues() {
-	return CATEGORIES.map((cat) => cat.value);
+    return CATEGORIES.map((cat) => cat.value);
 }
