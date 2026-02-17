@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+@plugin '@tailwindcss/forms';
+
+@theme {
+  --color-primary: #1a1a1a;
+  --color-secondary: #e63946;
+  --color-accent: #f1faee;
+
+  --font-sans: 'Inter', sans-serif;
+}
