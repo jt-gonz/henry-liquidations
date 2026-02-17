@@ -110,13 +110,13 @@
 					<!-- Thumbnail -->
 					<a href="/product/{item.slug}" class="relative shrink-0">
 						<img src={item.image_url} alt={item.name} class="h-20 w-20 rounded-md object-cover" />
-						{#if item.color}
-							<div
-								class="absolute -right-1 -bottom-1 h-5 w-5 rounded-full border border-white shadow-sm ring-1 ring-gray-200"
-								style="background-color: {item.color}"
-								title="Color: {item.color}"
-							></div>
-						{/if}
+						<!-- {#if item.color} -->
+						<!-- 	<div -->
+						<!-- 		class="absolute -right-1 -bottom-1 h-5 w-5 rounded-full border border-white shadow-sm ring-1 ring-gray-200" -->
+						<!-- 		style="background-color: {item.color}" -->
+						<!-- 		title="Color: {item.color}" -->
+						<!-- 	></div> -->
+						<!-- {/if} -->
 					</a>
 
 					<!-- Info -->
