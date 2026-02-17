@@ -1,15 +1,18 @@
 <!-- Admin Dashboard -->
 <script>
 	let { data, form } = $props();
+
+	/** @type {any[]} */
+	const products = data.products ?? [];
 </script>
 
 <div>
 	<!-- ── Product Inventory ──────────────────────────────────── -->
 	<div class="mb-6 flex items-center justify-between">
-		<h1 class="text-2xl font-bold text-gray-900">Product Inventory</h1>
+		<h1 class="text-2xl font-bold text-brand-dark">Product Inventory</h1>
 		<a
 			href="/admin/add"
-			class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700"
+			class="rounded-md bg-brand-dark px-4 py-2 text-sm font-medium text-white hover:bg-brand-mid"
 		>
 			+ Add Product
 		</a>
@@ -27,31 +30,37 @@
 		</div>
 	{/if}
 
-	<div class="overflow-hidden rounded-lg bg-white shadow ring-1 ring-gray-900/5">
-		<table class="min-w-full divide-y divide-gray-300">
-			<thead class="bg-gray-50">
+	<div class="overflow-hidden rounded-lg bg-white shadow ring-1 ring-brand-light/50">
+		<table class="min-w-full divide-y divide-brand-light">
+			<thead class="bg-brand-bg">
 				<tr>
-					<th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Image</th>
-					<th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Name</th>
-					<th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Price</th>
-					<th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
-					<th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+					<th
+						scope="col"
+						class="py-3.5 pr-3 pl-4 text-left text-sm font-bold text-brand-dark sm:pl-6">Image</th
+					>
+					<th scope="col" class="px-3 py-3.5 text-left text-sm font-bold text-brand-dark">Name</th>
+					<th scope="col" class="px-3 py-3.5 text-left text-sm font-bold text-brand-dark">Price</th>
+					<th scope="col" class="px-3 py-3.5 text-left text-sm font-bold text-brand-dark">Status</th
+					>
+					<th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-6">
 						<span class="sr-only">Actions</span>
 					</th>
 				</tr>
 			</thead>
-			<tbody class="divide-y divide-gray-200 bg-white">
-				{#if data.products.length === 0}
+			<tbody class="divide-y divide-brand-light bg-white">
+				{#if products.length === 0}
 					<tr>
-						<td colspan="5" class="px-4 py-8 text-center text-sm text-gray-500">
+						<td colspan="5" class="px-4 py-8 text-center text-sm text-gray-600">
 							No products yet. Click "+ Add Product" to get started.
 						</td>
 					</tr>
 				{:else}
-					{#each data.products as product (product.id)}
-						<tr class="hover:bg-gray-50/50 transition-colors">
-							<td class="whitespace-nowrap py-4 pl-4 pr-3 sm:pl-6">
-								<div class="h-16 w-16 overflow-hidden rounded-lg bg-gray-100 border border-gray-200">
+					{#each products as product (product.id)}
+						<tr class="transition-colors hover:bg-brand-bg/50">
+							<td class="py-4 pr-3 pl-4 whitespace-nowrap sm:pl-6">
+								<div
+									class="h-16 w-16 overflow-hidden rounded-lg border border-brand-light bg-brand-bg"
+								>
 									{#if product.image_url}
 										<img
 											src={product.image_url}
@@ -59,29 +68,45 @@
 											class="h-full w-full object-cover"
 										/>
 									{:else}
-										<div class="flex h-full w-full items-center justify-center text-xs text-gray-400">
+										<div
+											class="flex h-full w-full items-center justify-center text-xs text-brand-mid"
+										>
 											No img
 										</div>
 									{/if}
 								</div>
 							</td>
-							<td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900">{product.name}</td>
-							<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${Number(product.price).toFixed(2)}</td>
-							<td class="whitespace-nowrap px-3 py-4 text-sm">
+							<td class="px-3 py-4 text-sm font-bold whitespace-nowrap text-brand-dark"
+								>{product.name}</td
+							>
+							<td class="px-3 py-4 text-sm font-medium whitespace-nowrap text-brand-brown"
+								>${Number(product.price).toFixed(2)}</td
+							>
+							<td class="px-3 py-4 text-sm whitespace-nowrap">
 								{#if product.in_stock}
-									<span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">In Stock</span>
+									<span
+										class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset"
+										>In Stock</span
+									>
 								{:else}
-									<span class="inline-flex items-center rounded-full bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">Sold</span>
+									<span
+										class="inline-flex items-center rounded-full bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset"
+										>Sold</span
+									>
 								{/if}
 							</td>
-							<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-								<a href="/admin/edit/{product.id}" class="text-indigo-600 hover:text-indigo-900 mr-4">Edit</a>
+							<td
+								class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-6"
+							>
+								<a href="/admin/edit/{product.id}" class="mr-4 text-brand-mid hover:text-brand-dark"
+									>Edit</a
+								>
 								<form method="POST" action="?/delete" class="inline">
 									<input type="hidden" name="id" value={product.id} />
 									<input type="hidden" name="image_url" value={product.image_url} />
 									<button
 										type="submit"
-										class="text-red-600 hover:text-red-900 transition-colors"
+										class="text-brand-brown transition-colors hover:text-brand-dark"
 										onclick={(e) => {
 											if (!confirm(`Delete "${product.name}"?`)) e.preventDefault();
 										}}
@@ -97,10 +122,9 @@
 		</table>
 	</div>
 
-	{#if data.products.length > 0}
-		<p class="mt-3 text-sm text-gray-500">
-			{data.products.length} product{data.products.length === 1 ? '' : 's'} total
+	{#if products.length > 0}
+		<p class="mt-3 text-sm text-gray-600">
+			{products.length} product{products.length === 1 ? '' : 's'} total
 		</p>
 	{/if}
 </div>
-

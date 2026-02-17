@@ -3,9 +3,18 @@
 @plugin '@tailwindcss/forms';
 
 @theme {
-  --color-primary: #1a1a1a;
-  --color-secondary: #e63946;
-  --color-accent: #f1faee;
+	/* Brand Colors - Earthy Palette */
+	--color-brand-dark: #373d20;
+	--color-brand-mid: #717744;
+	--color-brand-brown: #766153;
+	--color-brand-light: #bcbd8b;
+	--color-brand-bg: #eff1ed;
+	--color-brand-white: #ffffff;
 
-  --font-sans: 'Inter', sans-serif;
+	/* Legacy aliases for compatibility */
+	--color-primary: #373d20;
+	--color-secondary: #766153;
+	--color-accent: #717744;
+
+	--font-sans: 'Inter', sans-serif;
 }

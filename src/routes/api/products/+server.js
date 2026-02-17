@@ -19,9 +19,7 @@ export async function GET({ url }) {
 	const search = url.searchParams.get('search')?.trim();
 
 	// Build the query
-	let query = supabase
-		.from('products')
-		.select('*', { count: 'exact' });
+	let query = supabase.from('products').select('*', { count: 'exact' });
 
 	// ── Filters ─────────────────────────────────────────────
 	if (inStockParam === 'true') {
@@ -33,7 +31,10 @@ export async function GET({ url }) {
 
 	if (category) {
 		// Support multiple categories comma-separated
-		const cats = category.split(',').map((c) => c.trim()).filter(Boolean);
+		const cats = category
+			.split(',')
+			.map((c) => c.trim())
+			.filter(Boolean);
 		if (cats.length === 1) {
 			query = query.eq('category', cats[0]);
 		} else if (cats.length > 1) {
@@ -64,7 +65,9 @@ export async function GET({ url }) {
 		const [cursorDate, cursorId] = cursor.split('|');
 		if (cursorDate && cursorId) {
 			// Get items older than the cursor (or same date but smaller id)
-			query = query.or(`created_at.lt.${cursorDate},and(created_at.eq.${cursorDate},id.lt.${cursorId})`);
+			query = query.or(
+				`created_at.lt.${cursorDate},and(created_at.eq.${cursorDate},id.lt.${cursorId})`
+			);
 		}
 	}
 
@@ -74,7 +77,10 @@ export async function GET({ url }) {
 
 	if (error) {
 		console.error('Products API error:', error.message);
-		return json({ products: [], limit, total: 0, hasMore: false, nextCursor: null }, { status: 500 });
+		return json(
+			{ products: [], limit, total: 0, hasMore: false, nextCursor: null },
+			{ status: 500 }
+		);
 	}
 
 	const products = data ?? [];
@@ -84,7 +90,7 @@ export async function GET({ url }) {
 	/** @type {string | null} */
 	let nextCursor = null;
 	if (products.length === limit) {
-		const last = products[products.length - 1];
+		const last = /** @type {any} */ (products[products.length - 1]);
 		nextCursor = `${last.created_at}|${last.id}`;
 	}
 
