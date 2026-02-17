@@ -1,6 +1,7 @@
 <!-- Shop Page: Sidebar filters + search on left, product grid on right -->
 <script>
 	import ProductCard from '$lib/components/ProductCard.svelte';
+	import { CATEGORIES } from '$lib/constants/categories.js';
 
 	let { data } = $props();
 
@@ -12,14 +13,7 @@
 	let loading = $state(false);
 
 	// ── Filters ─────────────────────────────────────────────
-	// Categories mapped from units_processed.csv with display formatting
-	const categories = [
-		{ value: 'LIVING ROOM COLLECTION', label: 'Living Room Collection' },
-		{ value: 'RECLINER COLLECTION', label: 'Recliner Collection' },
-		{ value: 'ACCENTS COLLECTION', label: 'Accents Collection' },
-		{ value: 'OCCASIONAL COLLECTION', label: 'Occasional Collection' },
-		{ value: 'ACCESSORIES COLLECTION', label: 'Accessories Collection' }
-	];
+	// Categories imported from constants file - edit $lib/constants/categories.js to add more
 
 	let selectedCategory = $state('');
 
@@ -185,7 +179,7 @@
 						class="block w-full rounded-md border border-brand-light bg-brand-bg px-2 py-2 text-sm text-brand-dark focus:border-brand-mid focus:ring-brand-mid focus:outline-none"
 					>
 						<option value="">All Categories</option>
-						{#each categories as cat}
+						{#each CATEGORIES as cat}
 							<option value={cat.value}>{cat.label}</option>
 						{/each}
 					</select>
