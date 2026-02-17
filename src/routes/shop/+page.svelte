@@ -12,13 +12,13 @@
 	let loading = $state(false);
 
 	// ── Filters ─────────────────────────────────────────────
-	// Categories mapped from units_processed.csv
+	// Categories mapped from units_processed.csv with display formatting
 	const categories = [
-		'LIVING ROOM COLLECTION',
-		'RECLINER COLLECTION',
-		'ACCENTS COLLECTION',
-		'OCCASIONAL COLLECTION',
-		'ACCESSORIES COLLECTION'
+		{ value: 'LIVING ROOM COLLECTION', label: 'Living Room Collection' },
+		{ value: 'RECLINER COLLECTION', label: 'Recliner Collection' },
+		{ value: 'ACCENTS COLLECTION', label: 'Accents Collection' },
+		{ value: 'OCCASIONAL COLLECTION', label: 'Occasional Collection' },
+		{ value: 'ACCESSORIES COLLECTION', label: 'Accessories Collection' }
 	];
 
 	let selectedCategory = $state('');
@@ -186,7 +186,7 @@
 					>
 						<option value="">All Categories</option>
 						{#each categories as cat}
-							<option value={cat}>{cat}</option>
+							<option value={cat.value}>{cat.label}</option>
 						{/each}
 					</select>
 				</div>
