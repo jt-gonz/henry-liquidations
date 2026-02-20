@@ -26,9 +26,9 @@
 
 <div class="relative isolate overflow-hidden">
 	<!-- Hero Section -->
-	<div class="mx-auto max-w-7xl px-6 pt-10 pb-24 sm:pb-32 lg:flex lg:px-8 lg:py-20">
+	<div class="mx-auto max-w-7xl px-6 pt-2 pb-24 sm:pb-28 lg:flex lg:px-8 lg:py-20">
 		<div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
-			<div class="mt-24 sm:mt-32 lg:mt-16">
+			<div class="mt-24 sm:mt-28 lg:mt-16">
 				<a
 					href="#visit-us"
 					class="inline-flex items-center gap-1.5 rounded-full bg-brand-mid/10 px-3 py-1 text-md leading-6 font-semibold text-brand-mid ring-1 ring-brand-mid/10 ring-inset"
