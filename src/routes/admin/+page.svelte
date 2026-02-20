@@ -3,7 +3,7 @@
 	let { data, form } = $props();
 
 	/** @type {any[]} */
-	const products = data.products ?? [];
+	let products = $derived(/** @type {any} */ (data).products ?? []);
 </script>
 
 <div>

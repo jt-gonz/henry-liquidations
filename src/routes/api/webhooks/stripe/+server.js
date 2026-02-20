@@ -34,7 +34,7 @@ export async function POST({ request }) {
 	try {
 		event = stripe.webhooks.constructEvent(body, signature, STRIPE_WEBHOOK_SECRET);
 	} catch (err) {
-		console.error('Webhook signature verification failed:', /** @type {Error} */(err).message);
+		console.error('Webhook signature verification failed:', /** @type {Error} */ (err).message);
 		return text('Invalid signature', { status: 400 });
 	}
 	console.log('[webhook] verified event:', event.type);
@@ -76,13 +76,15 @@ export async function POST({ request }) {
 
 		// Fetch product details for the order record
 		const productIds = cartItems.map((i) => i.id);
-		const { data: products } = await supabaseAdmin
+		const { data: products } = await /** @type {any} */ (supabaseAdmin)
 			.from('products')
 			.select('id, name, price')
 			.in('id', productIds);
 
 		const orderItems = cartItems.map((item) => {
-			const product = products?.find((p) => p.id === item.id);
+			const product = products?.find(
+				(/** @type {{ id: string, name: string, price: number }} */ p) => p.id === item.id
+			);
 			return {
 				product_id: item.id,
 				name: product?.name ?? 'Unknown product',
@@ -91,11 +93,16 @@ export async function POST({ request }) {
 			};
 		});
 
-		console.log('[webhook] inserting order with', orderItems.length, 'items:', JSON.stringify(orderItems));
+		console.log(
+			'[webhook] inserting order with',
+			orderItems.length,
+			'items:',
+			JSON.stringify(orderItems)
+		);
 
 		// ── 2a. Insert the order ────────────────────────────────
 		const { error: orderError } = await supabaseAdmin.from('orders').insert(
-			/** @type {any} */({
+			/** @type {any} */ ({
 				stripe_session_id: session.id,
 				customer_email: customerEmail,
 				items: orderItems,
@@ -109,9 +116,9 @@ export async function POST({ request }) {
 
 		// ── 2b. Mark products as sold (out of stock) ────────────
 		if (productIds.length > 0) {
-			const { error: updateError } = await supabaseAdmin
+			const { error: updateError } = await /** @type {any} */ (supabaseAdmin)
 				.from('products')
-				.update(/** @type {any} */({ in_stock: false }))
+				.update({ in_stock: false })
 				.in('id', productIds);
 
 			if (updateError) {

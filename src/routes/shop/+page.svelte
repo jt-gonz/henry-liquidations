@@ -1,9 +1,11 @@
 <!-- Shop Page: Sidebar filters + search on left, product grid on right -->
 <script>
 	import ProductCard from '$lib/components/ProductCard.svelte';
-	import { CATEGORIES } from '$lib/constants/categories.js';
 
 	let { data } = $props();
+
+	/** @type {{ id: string, value: string, label: string, sort_order: number, is_active: boolean }[]} */
+	let categories = $derived(/** @type {any} */ (data).categories ?? []);
 
 	/** @type {import('$lib/types/database.js').ProductRow[]} */
 	let products = $state([]);
@@ -13,8 +15,6 @@
 	let loading = $state(false);
 
 	// ── Filters ─────────────────────────────────────────────
-	// Categories imported from constants file - edit $lib/constants/categories.js to add more
-
 	let selectedCategory = $state('');
 
 	// Price Range
@@ -128,6 +128,8 @@
 			inStock !== 'true' ||
 			searchQuery !== ''
 	);
+
+	let filtersOpen = $state(false);
 </script>
 
 <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -141,7 +143,41 @@
 	<div class="mt-8 lg:grid lg:grid-cols-4 lg:gap-x-8">
 		<!-- ── Left Sidebar: Search + Filters ────────────────── -->
 		<aside class="lg:col-span-1">
-			<div class="sticky top-4 space-y-6">
+			<!-- Mobile toggle -->
+			<div class="lg:hidden">
+				<button
+					onclick={() => (filtersOpen = !filtersOpen)}
+					class="flex w-full items-center justify-between rounded-md border border-brand-light bg-brand-bg px-4 py-3 text-sm font-medium text-brand-dark"
+				>
+					<span class="flex items-center gap-2">
+						<svg class="h-4 w-4 text-brand-mid" viewBox="0 0 20 20" fill="currentColor">
+							<path
+								fill-rule="evenodd"
+								d="M2.628 1.601C5.028 1.206 7.49 1 10 1s4.973.206 7.372.601a.75.75 0 01.628.74v2.288a2.25 2.25 0 01-.659 1.59l-4.682 4.683a2.25 2.25 0 00-.659 1.59v3.037c0 .684-.31 1.33-.844 1.757l-1.937 1.55A.75.75 0 018 18.25v-5.757a2.25 2.25 0 00-.659-1.591L2.659 6.22A2.25 2.25 0 012 4.629V2.34a.75.75 0 01.628-.74z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						Filters
+						{#if hasActiveFilters}
+							<span class="rounded-full bg-brand-dark px-2 py-0.5 text-xs text-white">Active</span>
+						{/if}
+					</span>
+					<svg
+						class="h-4 w-4 text-brand-mid transition-transform {filtersOpen ? 'rotate-180' : ''}"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z"
+							clip-rule="evenodd"
+						/>
+					</svg>
+				</button>
+			</div>
+
+			<!-- Filter panel — always visible on lg, collapsible on mobile -->
+			<div class="sticky top-4 space-y-6 {filtersOpen ? 'mt-4' : 'hidden'} lg:block">
 				<!-- Search Bar -->
 				<div>
 					<label for="search" class="mb-1 block text-xs font-medium text-brand-dark">Search</label>
@@ -179,7 +215,7 @@
 						class="block w-full rounded-md border border-brand-light bg-brand-bg px-2 py-2 text-sm text-brand-dark focus:border-brand-mid focus:ring-brand-mid focus:outline-none"
 					>
 						<option value="">All Categories</option>
-						{#each CATEGORIES as cat}
+						{#each categories as cat}
 							<option value={cat.value}>{cat.label}</option>
 						{/each}
 					</select>

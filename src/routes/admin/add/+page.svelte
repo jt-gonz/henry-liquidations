@@ -1,8 +1,8 @@
 <!-- Add Product Page -->
 <script>
-	import { CATEGORIES } from '$lib/constants/categories.js';
-
-	let { form } = $props();
+	let { data, form } = $props();
+	/** @type {{ id: string, value: string, label: string, sort_order: number, is_active: boolean }[]} */
+	let categories = $derived(/** @type {any} */ (data).categories ?? []);
 	let submitting = $state(false);
 
 	/** @type {string[]} */
@@ -74,7 +74,7 @@
 					class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none sm:text-sm"
 				>
 					<option value="">Select Category</option>
-					{#each CATEGORIES as cat}
+					{#each categories as cat}
 						<option value={cat.value} selected={form?.category === cat.value}>{cat.label}</option>
 					{/each}
 				</select>

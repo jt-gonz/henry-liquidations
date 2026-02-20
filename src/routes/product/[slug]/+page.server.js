@@ -10,7 +10,7 @@ export async function load({ params }) {
 	const { data: product, error: dbError } = await supabase
 		.from('products')
 		.select('*')
-		.eq('slug', params.slug)
+		.eq('slug', params.slug ?? '')
 		.single();
 
 	if (dbError || !product) {

@@ -1,10 +1,12 @@
 <!-- Admin: Manage Quotes -->
 <script>
 	let { data, form } = $props();
+	/** @type {any} */
+	let anyData = $derived(data);
 </script>
 
 <div>
-	<h1 class="text-2xl font-bold text-gray-900 mb-6">Customer Quotes</h1>
+	<h1 class="mb-6 text-2xl font-bold text-gray-900">Customer Quotes</h1>
 
 	{#if form?.quoteError}
 		<div class="mb-4 rounded-md bg-red-50 px-4 py-3 text-sm text-red-700">
@@ -25,8 +27,12 @@
 	{/if}
 
 	<!-- Add Quote Form -->
-	<form method="POST" action="?/addQuote" class="mb-8 rounded-lg bg-gray-50 p-6 ring-1 ring-gray-200">
-		<h2 class="text-sm font-semibold text-gray-900 mb-4">Add New Quote</h2>
+	<form
+		method="POST"
+		action="?/addQuote"
+		class="mb-8 rounded-lg bg-gray-50 p-6 ring-1 ring-gray-200"
+	>
+		<h2 class="mb-4 text-sm font-semibold text-gray-900">Add New Quote</h2>
 		<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 			<div class="sm:col-span-2">
 				<label for="quote" class="block text-sm font-medium text-gray-700">Quote</label>
@@ -62,11 +68,11 @@
 	</form>
 
 	<!-- Existing Quotes -->
-	{#if data.quotes.length === 0}
+	{#if anyData.quotes.length === 0}
 		<p class="text-sm text-gray-500">No quotes yet. Add one above.</p>
 	{:else}
 		<div class="space-y-3">
-			{#each data.quotes as q (q.id)}
+			{#each anyData.quotes as q (q.id)}
 				<div class="flex items-start justify-between rounded-lg bg-white p-4 ring-1 ring-gray-200">
 					<div class="min-w-0 flex-1">
 						<p class="text-sm text-gray-700">"{q.quote}"</p>
@@ -87,6 +93,8 @@
 				</div>
 			{/each}
 		</div>
-		<p class="mt-4 text-sm text-gray-400">{data.quotes.length} quote{data.quotes.length === 1 ? '' : 's'} total</p>
+		<p class="mt-4 text-sm text-gray-400">
+			{anyData.quotes.length} quote{anyData.quotes.length === 1 ? '' : 's'} total
+		</p>
 	{/if}
 </div>

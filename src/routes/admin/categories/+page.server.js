@@ -39,7 +39,7 @@ export const actions = {
 		// Convert value to uppercase with underscores
 		const normalizedValue = value.toUpperCase().replace(/\s+/g, '_');
 
-		const { error } = await supabase
+		const { error } = await /** @type {any} */ (supabase)
 			.from('categories')
 			.insert([{ value: normalizedValue, label, sort_order, is_active }]);
 
@@ -72,7 +72,7 @@ export const actions = {
 			return fail(400, { error: 'ID and label are required' });
 		}
 
-		const { error } = await supabase
+		const { error } = await /** @type {any} */ (supabase)
 			.from('categories')
 			.update({ label, sort_order, is_active })
 			.eq('id', id);

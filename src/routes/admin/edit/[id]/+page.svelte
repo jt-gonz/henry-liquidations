@@ -1,12 +1,28 @@
 <script>
-	import { CATEGORIES } from '$lib/constants/categories.js';
+	/** @typedef {{ id: string, name: string, slug: string, description: string, price: number, category: string, image_url: string[], in_stock: boolean, dimensions: { width?: number, height?: number, depth?: number, unit?: string } | null, colors: string[] | null, created_at: string }} Product */
+	/** @typedef {{ id: string, value: string, label: string, sort_order: number, is_active: boolean }} Category */
 
 	let { data, form } = $props();
+
+	/** @type {any} */
+	let anyData = $derived(data);
+	/** @type {any} */
+	let anyForm = $derived(form);
+
+	/** @type {Product} */
+	let product = $derived(anyData.product);
+
+	/** @type {Category[]} */
+	let categories = $derived(anyData.categories ?? []);
 	let submitting = $state(false);
 
 	/** @type {string[]} */
-	let colors = $state(data.product.colors ?? []);
+	let colors = $state([]);
 	let newColor = $state('#000000');
+
+	$effect(() => {
+		colors = anyData.product?.colors ?? [];
+	});
 
 	function addColor() {
 		if (newColor && !colors.includes(newColor)) {
@@ -25,9 +41,9 @@
 		<a href="/admin" class="text-sm font-medium text-gray-500 hover:text-gray-900">Cancel</a>
 	</div>
 
-	{#if form?.error}
+	{#if anyForm?.error}
 		<div class="mb-4 rounded-md bg-red-50 px-4 py-3 text-sm text-red-700">
-			{form.error}
+			{anyForm.error}
 		</div>
 	{/if}
 
@@ -47,7 +63,7 @@
 				name="name"
 				type="text"
 				required
-				value={form?.name ?? data.product.name}
+				value={anyForm?.name ?? product.name}
 				class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none sm:text-sm"
 			/>
 		</div>
@@ -63,7 +79,7 @@
 					step="0.01"
 					min="0"
 					required
-					value={form?.price ?? data.product.price}
+					value={anyForm?.price ?? product.price}
 					class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none sm:text-sm"
 				/>
 			</div>
@@ -76,10 +92,10 @@
 					class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none sm:text-sm"
 				>
 					<option value="">Select Category</option>
-					{#each CATEGORIES as cat}
+					{#each categories as cat}
 						<option
 							value={cat.value}
-							selected={(form?.category ?? data.product.category) === cat.value}>{cat.label}</option
+							selected={(anyForm?.category ?? product.category) === cat.value}>{cat.label}</option
 						>
 					{/each}
 				</select>
@@ -94,7 +110,7 @@
 				name="description"
 				rows="3"
 				class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none sm:text-sm"
-				>{form?.description ?? data.product.description ?? ''}</textarea
+				>{anyForm?.description ?? product.description ?? ''}</textarea
 			>
 		</div>
 
@@ -111,7 +127,7 @@
 							type="number"
 							step="0.1"
 							min="0"
-							value={data.product.dimensions?.width ?? ''}
+							value={product.dimensions?.width ?? ''}
 							class="mt-0.5 block w-full rounded-md border border-gray-300 px-1.5 py-1 text-xs shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none"
 						/>
 					</div>
@@ -123,7 +139,7 @@
 							type="number"
 							step="0.1"
 							min="0"
-							value={data.product.dimensions?.height ?? ''}
+							value={product.dimensions?.height ?? ''}
 							class="mt-0.5 block w-full rounded-md border border-gray-300 px-1.5 py-1 text-xs shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none"
 						/>
 					</div>
@@ -135,7 +151,7 @@
 							type="number"
 							step="0.1"
 							min="0"
-							value={data.product.dimensions?.depth ?? ''}
+							value={product.dimensions?.depth ?? ''}
 							class="mt-0.5 block w-full rounded-md border border-gray-300 px-1.5 py-1 text-xs shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none"
 						/>
 					</div>
@@ -146,11 +162,10 @@
 						name="dim_unit"
 						class="block w-full rounded-md border border-gray-300 px-1.5 py-1 text-xs shadow-sm focus:border-gray-500 focus:ring-gray-500 focus:outline-none"
 					>
-						<option value="in" selected={(data.product.dimensions?.unit ?? 'in') === 'in'}
-							>inches</option
+						<option value="in" selected={(product.dimensions?.unit ?? 'in') === 'in'}>inches</option
 						>
-						<option value="cm" selected={data.product.dimensions?.unit === 'cm'}>cm</option>
-						<option value="ft" selected={data.product.dimensions?.unit === 'ft'}>feet</option>
+						<option value="cm" selected={product.dimensions?.unit === 'cm'}>cm</option>
+						<option value="ft" selected={product.dimensions?.unit === 'ft'}>feet</option>
 					</select>
 				</div>
 			</fieldset>
@@ -198,8 +213,8 @@
 			<label for="image" class="block text-sm font-medium text-gray-700">Current Image</label>
 			<div class="mt-2 flex items-center gap-4">
 				<img
-					src={data.product.image_url?.[0] ?? ''}
-					alt={data.product.name}
+					src={product.image_url?.[0] ?? ''}
+					alt={product.name}
 					class="h-20 w-20 rounded-md border border-gray-200 object-cover"
 				/>
 				<div class="flex-1">

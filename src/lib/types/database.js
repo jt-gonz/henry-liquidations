@@ -100,6 +100,36 @@
  */
 
 /**
+ * @typedef {Object} CategoryRow
+ * @property {string} id
+ * @property {string} value
+ * @property {string} label
+ * @property {number} sort_order
+ * @property {boolean} is_active
+ * @property {string} created_at
+ */
+
+/**
+ * @typedef {Object} CategoryInsert
+ * @property {string} [id]
+ * @property {string} value
+ * @property {string} label
+ * @property {number} [sort_order]
+ * @property {boolean} [is_active]
+ * @property {string} [created_at]
+ */
+
+/**
+ * @typedef {Object} CategoryUpdate
+ * @property {string} [id]
+ * @property {string} [value]
+ * @property {string} [label]
+ * @property {number} [sort_order]
+ * @property {boolean} [is_active]
+ * @property {string} [created_at]
+ */
+
+/**
  * @typedef {Object} QuoteRow
  * @property {string} id
  * @property {string} quote
@@ -141,6 +171,10 @@
  * @property {QuoteRow}    public.Tables.quotes.Row
  * @property {QuoteInsert} public.Tables.quotes.Insert
  * @property {QuoteUpdate} public.Tables.quotes.Update
+ * @property {Object} public.Tables.categories
+ * @property {CategoryRow}    public.Tables.categories.Row
+ * @property {CategoryInsert} public.Tables.categories.Insert
+ * @property {CategoryUpdate} public.Tables.categories.Update
  */
 
 export {};

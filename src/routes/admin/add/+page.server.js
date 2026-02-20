@@ -1,5 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { supabaseAdmin } from '$lib/server/supabase.js';
+import { supabase, supabaseAdmin } from '$lib/server/supabase.js';
 
 /**
  * Generates a URL-friendly slug from a product name.
@@ -14,6 +14,17 @@ function slugify(name) {
 		.replace(/[\s_]+/g, '-')
 		.replace(/-+/g, '-')
 		.replace(/^-|-$/g, '');
+}
+
+/** @type {import('./$types').PageServerLoad} */
+export async function load() {
+	const { data: categories } = await supabase
+		.from('categories')
+		.select('id, value, label, sort_order')
+		.eq('is_active', true)
+		.order('sort_order', { ascending: true });
+
+	return { categories: categories ?? [] };
 }
 
 /** @type {import('@sveltejs/kit').Actions} */
@@ -93,7 +104,9 @@ export const actions = {
 					colors = parsed;
 				}
 			}
-		} catch { /* ignore */ }
+		} catch {
+			/* ignore */
+		}
 
 		// ── Upload image to Supabase Storage ────────────────────
 		// Use a unique filename to avoid collisions
@@ -125,7 +138,7 @@ export const actions = {
 
 		// ── Insert the product row ──────────────────────────────
 		const { error: insertError } = await supabaseAdmin.from('products').insert(
-			/** @type {any} */({
+			/** @type {any} */ ({
 				name,
 				slug,
 				description,

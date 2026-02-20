@@ -15,7 +15,7 @@
 	let currentImage = $derived(images[currentImageIndex] || '');
 
 	// Colors - initialize as null, then set in effect
-	let selectedColor = $state(product.colors?.[0] ?? null);
+	let selectedColor = $state(/** @type {string | null} */ (null));
 
 	// Update selectedColor when product changes
 	$effect(() => {
@@ -59,7 +59,7 @@
 			price: Number(product.price),
 			image_url: currentImage,
 			slug: product.slug,
-			color: selectedColor
+			color: selectedColor ?? undefined
 		});
 		added = true;
 		setTimeout(() => {
@@ -108,9 +108,12 @@
 		<!-- Product Image Gallery -->
 		<div class="flex flex-col gap-4">
 			<!-- Main Image -->
-			<button
+			<div
 				class="group relative aspect-square w-full cursor-zoom-in overflow-hidden rounded-2xl border border-brand-light bg-brand-bg object-cover sm:rounded-3xl"
 				onclick={openLightbox}
+				onkeydown={(e) => e.key === 'Enter' && openLightbox()}
+				role="button"
+				tabindex="0"
 				aria-label="View full size image"
 			>
 				{#if images.length > 0}
@@ -192,7 +195,7 @@
 						/>
 					</svg>
 				</div>
-			</button>
+			</div>
 
 			<!-- Thumbnail Gallery -->
 			{#if images.length > 1}

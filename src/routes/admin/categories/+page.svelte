@@ -7,6 +7,7 @@
 
 	// State for add/edit modal
 	let showModal = $state(false);
+	/** @type {{ id: string, value: string, label: string, sort_order: number, is_active: boolean } | null} */
 	let editingCategory = $state(null);
 	let newValue = $state('');
 	let newLabel = $state('');

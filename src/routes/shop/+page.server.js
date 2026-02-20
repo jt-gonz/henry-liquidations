@@ -15,9 +15,7 @@ export async function load({ url }) {
 	const inStock = url.searchParams.get('inStock') ?? 'true';
 	const search = url.searchParams.get('search')?.trim() ?? '';
 
-	let query = supabase
-		.from('products')
-		.select('*', { count: 'exact' });
+	let query = supabase.from('products').select('*', { count: 'exact' });
 
 	// Filters
 	if (inStock === 'true') {
@@ -27,7 +25,10 @@ export async function load({ url }) {
 	}
 
 	if (category) {
-		const cats = category.split(',').map((c) => c.trim()).filter(Boolean);
+		const cats = category
+			.split(',')
+			.map((c) => c.trim())
+			.filter(Boolean);
 		if (cats.length === 1) {
 			query = query.eq('category', cats[0]);
 		} else if (cats.length > 1) {
@@ -57,7 +58,13 @@ export async function load({ url }) {
 
 	if (error) {
 		console.error('Shop page load error:', error.message);
-		return { products: [], total: 0, hasMore: false, nextCursor: null, filters: { category, minPrice, maxPrice, inStock, search } };
+		return {
+			products: [],
+			total: 0,
+			hasMore: false,
+			nextCursor: null,
+			filters: { category, minPrice, maxPrice, inStock, search }
+		};
 	}
 
 	const products = data ?? [];
@@ -66,7 +73,9 @@ export async function load({ url }) {
 	/** @type {string | null} */
 	let nextCursor = null;
 	if (products.length === PAGE_SIZE) {
-		const last = /** @type {import('$lib/types/database.js').ProductRow} */ (products[products.length - 1]);
+		const last = /** @type {import('$lib/types/database.js').ProductRow} */ (
+			products[products.length - 1]
+		);
 		nextCursor = `${last.created_at}|${last.id}`;
 	}
 
@@ -88,12 +97,19 @@ export async function load({ url }) {
 	const globalMinPrice = /** @type {{ price: number } | null} */ (minData)?.price ?? 0;
 	const globalMaxPrice = /** @type {{ price: number } | null} */ (maxData)?.price ?? 5000;
 
+	const { data: categories } = await supabase
+		.from('categories')
+		.select('id, value, label, sort_order')
+		.eq('is_active', true)
+		.order('sort_order', { ascending: true });
+
 	return {
 		products,
 		total,
 		hasMore: !!nextCursor,
 		nextCursor,
 		filters: { category, minPrice, maxPrice, inStock, search },
-		priceBounds: { min: globalMinPrice, max: globalMaxPrice }
+		priceBounds: { min: globalMinPrice, max: globalMaxPrice },
+		categories: categories ?? []
 	};
 }
