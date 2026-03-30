@@ -293,7 +293,7 @@
 							slug={product.slug}
 							price={Number(product.price)}
 							image_url={product.image_url}
-							category={product.category}
+							category={product.categoryLabel || product.category}
 						/>
 					{/each}
 				</div>

@@ -4,9 +4,10 @@
 	import { fade, scale } from 'svelte/transition';
 	import { getColorName } from '$lib/constants/colors.js';
 
-	/** @type {{ data: { product: any } }} */
+	/** @type {{ data: { product: any, categoryLabel: string } }} */
 	let { data } = $props();
 	let product = $derived(data.product);
+	let categoryLabel = $derived(data.categoryLabel);
 	let added = $state(false);
 
 	// Image gallery state
@@ -262,12 +263,12 @@
 			</div>
 
 			<!-- Category Tag (below description) -->
-			{#if product.category}
+			{#if categoryLabel}
 				<div class="mt-4">
 					<span
 						class="inline-flex items-center rounded-full bg-brand-bg px-3 py-1 text-xs font-semibold tracking-wide text-brand-dark uppercase"
 					>
-						{product.category}
+						{categoryLabel}
 					</span>
 				</div>
 			{/if}

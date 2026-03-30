@@ -17,5 +17,20 @@ export async function load({ params }) {
 		throw error(404, 'Product not found');
 	}
 
-	return { product };
+	// Fetch the category label
+	let categoryLabel = product.category; // Default to the value if not found
+	if (product.category) {
+		const { data: category } = await supabase
+			.from('categories')
+			.select('label')
+			.eq('value', product.category)
+			.eq('is_active', true)
+			.single();
+		
+		if (category) {
+			categoryLabel = category.label;
+		}
+	}
+
+	return { product, categoryLabel };
 }

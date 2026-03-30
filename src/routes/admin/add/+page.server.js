@@ -36,7 +36,7 @@ export const actions = {
 		const priceStr = form.get('price')?.toString() ?? '';
 		const category = form.get('category')?.toString() ?? '';
 		const description = form.get('description')?.toString()?.trim() ?? '';
-		const imageFile = /** @type {File | null} */ (form.get('image'));
+		const imageFiles = /** @type {File[]} */ (form.getAll('images'));
 
 		// ── Validation ──────────────────────────────────────────
 		if (!name)
@@ -64,9 +64,12 @@ export const actions = {
 				category,
 				description
 			});
-		if (!imageFile || imageFile.size === 0) {
+		
+		// Filter out empty files and validate at least one image
+		const validImageFiles = imageFiles.filter(f => f && f.size > 0);
+		if (validImageFiles.length === 0) {
 			return fail(400, {
-				error: 'Product image is required.',
+				error: 'At least one product image is required.',
 				name,
 				price: priceStr,
 				category,
@@ -108,33 +111,45 @@ export const actions = {
 			/* ignore */
 		}
 
-		// ── Upload image to Supabase Storage ────────────────────
-		// Use a unique filename to avoid collisions
-		const ext = imageFile.name.split('.').pop() ?? 'jpg';
-		const fileName = `${slug}-${Date.now()}.${ext}`;
+		// ── Upload images to Supabase Storage ────────────────────
+		// Upload multiple images and collect their URLs
+		const imageUrls = [];
+		const uploadedFileNames = [];
+		
+		for (let i = 0; i < validImageFiles.length; i++) {
+			const imageFile = validImageFiles[i];
+			const ext = imageFile.name.split('.').pop() ?? 'jpg';
+			const fileName = `${slug}-${Date.now()}-${i}.${ext}`;
 
-		const { error: uploadError } = await supabaseAdmin.storage
-			.from('product-images')
-			.upload(fileName, imageFile, {
-				contentType: imageFile.type,
-				upsert: false
-			});
+			const { error: uploadError } = await supabaseAdmin.storage
+				.from('product-images')
+				.upload(fileName, imageFile, {
+					contentType: imageFile.type,
+					upsert: false
+				});
 
-		if (uploadError) {
-			console.error('Image upload failed:', uploadError.message);
-			return fail(500, {
-				error: 'Failed to upload image. Please try again.',
-				name,
-				price: priceStr,
-				category,
-				description
-			});
+			if (uploadError) {
+				console.error('Image upload failed:', uploadError.message);
+				
+				// Clean up already uploaded images on failure
+				if (uploadedFileNames.length > 0) {
+					await supabaseAdmin.storage.from('product-images').remove(uploadedFileNames);
+				}
+				
+				return fail(500, {
+					error: 'Failed to upload images. Please try again.',
+					name,
+					price: priceStr,
+					category,
+					description
+				});
+			}
+
+			// Get the public URL for the uploaded image
+			const { data: urlData } = supabaseAdmin.storage.from('product-images').getPublicUrl(fileName);
+			imageUrls.push(urlData.publicUrl);
+			uploadedFileNames.push(fileName);
 		}
-
-		// Get the public URL for the uploaded image
-		const { data: urlData } = supabaseAdmin.storage.from('product-images').getPublicUrl(fileName);
-
-		const imageUrl = urlData.publicUrl;
 
 		// ── Insert the product row ──────────────────────────────
 		const { error: insertError } = await supabaseAdmin.from('products').insert(
@@ -144,7 +159,7 @@ export const actions = {
 				description,
 				price,
 				category,
-				image_url: imageUrl,
+				image_url: imageUrls,
 				in_stock: true,
 				dimensions,
 				colors
@@ -154,8 +169,8 @@ export const actions = {
 		if (insertError) {
 			console.error('Product insert failed:', insertError.message);
 
-			// Clean up the uploaded image on failure
-			await supabaseAdmin.storage.from('product-images').remove([fileName]);
+			// Clean up the uploaded images on failure
+			await supabaseAdmin.storage.from('product-images').remove(uploadedFileNames);
 
 			// Handle unique slug collision
 			if (insertError.code === '23505') {

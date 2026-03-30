@@ -45,7 +45,9 @@ export const actions = {
 		const priceStr = form.get('price')?.toString() ?? '';
 		const category = form.get('category')?.toString() ?? '';
 		const description = form.get('description')?.toString()?.trim() ?? '';
-		const imageFile = /** @type {File | null} */ (form.get('image'));
+		const newImageFiles = /** @type {File[]} */ (form.getAll('newImages'));
+		const imagesToRemove = form.get('imagesToRemove')?.toString() ?? '';
+		const currentImages = form.get('currentImages')?.toString() ?? '[]';
 
 		// ── Validation ──────────────────────────────────────────
 		if (!name) return fail(400, { error: 'Product name is required.' });
@@ -98,25 +100,75 @@ export const actions = {
 			colors
 		};
 
-		// ── Handle Image Upload (Optional) ──────────────────────
-		if (imageFile && imageFile.size > 0) {
-			const ext = imageFile.name.split('.').pop() ?? 'jpg';
-			const fileName = `${slug}-${Date.now()}.${ext}`;
-
-			const { error: uploadError } = await supabaseAdmin.storage
-				.from('product-images')
-				.upload(fileName, imageFile, {
-					contentType: imageFile.type,
-					upsert: false
-				});
-
-			if (uploadError) {
-				return fail(500, { error: 'Failed to upload new image.' });
-			}
-
-			const { data: urlData } = supabaseAdmin.storage.from('product-images').getPublicUrl(fileName);
-			updates.image_url = [urlData.publicUrl];
+		// ── Handle Image Management ──────────────────────────────
+		// Parse current images and images to remove
+		let currentImageUrls = [];
+		try {
+			currentImageUrls = JSON.parse(currentImages);
+		} catch {
+			// If parsing fails, fetch current images from database
+			const { data: existingProduct } = await supabaseAdmin
+				.from('products')
+				.select('image_url')
+				.eq('id', params.id)
+				.single();
+			currentImageUrls = existingProduct?.image_url ?? [];
 		}
+
+		const removeUrls = imagesToRemove ? imagesToRemove.split(',').filter(Boolean) : [];
+		
+		// Remove images from storage if requested
+		if (removeUrls.length > 0) {
+			const filesToDelete = [];
+			for (const url of removeUrls) {
+				const marker = '/product-images/';
+				const idx = url.indexOf(marker);
+				if (idx !== -1) {
+					const filePath = url.slice(idx + marker.length);
+					filesToDelete.push(filePath);
+				}
+			}
+			if (filesToDelete.length > 0) {
+				await supabaseAdmin.storage.from('product-images').remove(filesToDelete);
+			}
+		}
+
+		// Filter out removed images from current images
+		let updatedImageUrls = currentImageUrls.filter((url) => !removeUrls.includes(url));
+
+		// Upload new images if provided
+		const validNewImages = newImageFiles.filter(f => f && f.size > 0);
+		if (validNewImages.length > 0) {
+			for (let i = 0; i < validNewImages.length; i++) {
+				const imageFile = validNewImages[i];
+				const ext = imageFile.name.split('.').pop() ?? 'jpg';
+				const fileName = `${slug}-${Date.now()}-${i}.${ext}`;
+
+				const { error: uploadError } = await supabaseAdmin.storage
+					.from('product-images')
+					.upload(fileName, imageFile, {
+						contentType: imageFile.type,
+						upsert: false
+					});
+
+				if (uploadError) {
+					console.error('Image upload failed:', uploadError.message);
+					return fail(500, { error: `Failed to upload image ${i + 1}.` });
+				}
+
+				const { data: urlData } = supabaseAdmin.storage
+					.from('product-images')
+					.getPublicUrl(fileName);
+				updatedImageUrls.push(urlData.publicUrl);
+			}
+		}
+
+		// Ensure at least one image remains
+		if (updatedImageUrls.length === 0) {
+			return fail(400, { error: 'Product must have at least one image.' });
+		}
+
+		updates.image_url = updatedImageUrls;
 
 		// ── Update Product ──────────────────────────────────────
 		// ── Update Product in Database ──────────────────────────

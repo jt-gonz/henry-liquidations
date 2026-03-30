@@ -70,11 +70,28 @@ export async function load({ url }) {
 	const products = data ?? [];
 	const total = count ?? 0;
 
+	// Fetch categories to map values to labels
+	const { data: categories } = await supabase
+		.from('categories')
+		.select('id, value, label, sort_order')
+		.eq('is_active', true)
+		.order('sort_order', { ascending: true });
+
+	const categoryMap = new Map(
+		(categories ?? []).map((cat) => [cat.value, cat.label])
+	);
+
+	// Add category labels to products
+	const productsWithLabels = products.map((product) => ({
+		...product,
+		categoryLabel: categoryMap.get(product.category) || product.category
+	}));
+
 	/** @type {string | null} */
 	let nextCursor = null;
-	if (products.length === PAGE_SIZE) {
+	if (productsWithLabels.length === PAGE_SIZE) {
 		const last = /** @type {import('$lib/types/database.js').ProductRow} */ (
-			products[products.length - 1]
+			productsWithLabels[productsWithLabels.length - 1]
 		);
 		nextCursor = `${last.created_at}|${last.id}`;
 	}
@@ -97,14 +114,8 @@ export async function load({ url }) {
 	const globalMinPrice = /** @type {{ price: number } | null} */ (minData)?.price ?? 0;
 	const globalMaxPrice = /** @type {{ price: number } | null} */ (maxData)?.price ?? 5000;
 
-	const { data: categories } = await supabase
-		.from('categories')
-		.select('id, value, label, sort_order')
-		.eq('is_active', true)
-		.order('sort_order', { ascending: true });
-
 	return {
-		products,
+		products: productsWithLabels,
 		total,
 		hasMore: !!nextCursor,
 		nextCursor,

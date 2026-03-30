@@ -20,8 +20,19 @@
 	let colors = $state([]);
 	let newColor = $state('#000000');
 
+	/** @type {string[]} */
+	let currentImages = $state([]);
+	/** @type {string[]} */
+	let imagesToRemove = $state([]);
+	
+	/** @type {File[]} */
+	let newImages = $state([]);
+	/** @type {string[]} */
+	let newImagePreviews = $state([]);
+
 	$effect(() => {
 		colors = anyData.product?.colors ?? [];
+		currentImages = anyData.product?.image_url ?? [];
 	});
 
 	function addColor() {
@@ -33,10 +44,48 @@
 	function removeColor(/** @type {string} */ color) {
 		colors = colors.filter((c) => c !== color);
 	}
+
+	/**
+	 * @param {string} imageUrl
+	 */
+	function markForRemoval(imageUrl) {
+		imagesToRemove = [...imagesToRemove, imageUrl];
+		currentImages = currentImages.filter((url) => url !== imageUrl);
+	}
+
+	/**
+	 * @param {Event} e
+	 */
+	function handleNewImageSelect(e) {
+		const input = /** @type {HTMLInputElement} */ (e.target);
+		if (input.files && input.files.length > 0) {
+			const files = Array.from(input.files);
+			newImages = [...newImages, ...files];
+			
+			// Generate preview URLs (client-side only)
+			if (typeof window !== 'undefined') {
+				files.forEach((file) => {
+					const url = URL.createObjectURL(file);
+					newImagePreviews = [...newImagePreviews, url];
+				});
+			}
+		}
+	}
+
+	/**
+	 * @param {number} index
+	 */
+	function removeNewImage(index) {
+		if (typeof window !== 'undefined') {
+			URL.revokeObjectURL(newImagePreviews[index]);
+		}
+		newImages = newImages.filter((_, i) => i !== index);
+		newImagePreviews = newImagePreviews.filter((_, i) => i !== index);
+	}
 </script>
 
-<div class="max-w-2xl">
-	<div class="mb-6 flex items-center justify-between">
+<div class="max-w-2xl px-4 py-6 sm:px-6 lg:px-8">
+	<div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 		<h1 class="text-2xl font-bold text-gray-900">Edit Product</h1>
 		<a href="/admin" class="text-sm font-medium text-gray-500 hover:text-gray-900">Cancel</a>
 	</div>
@@ -69,7 +118,7 @@
 		</div>
 
 		<!-- Row 2: Price + Category -->
-		<div class="grid grid-cols-2 gap-4">
+		<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 			<div>
 				<label for="price" class="block text-sm font-medium text-gray-700">Price ($)</label>
 				<input
@@ -115,7 +164,7 @@
 		</div>
 
 		<!-- Row 4: Dimensions + Colors -->
-		<div class="grid grid-cols-2 gap-4">
+		<div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
 			<fieldset class="rounded-md border border-gray-200 p-3">
 				<legend class="px-1 text-xs font-medium text-gray-700">Dimensions (optional)</legend>
 				<div class="mt-1 grid grid-cols-3 gap-2">
@@ -208,28 +257,91 @@
 			</fieldset>
 		</div>
 
-		<!-- Row 5: Image -->
+		<!-- Row 5: Image Gallery Management -->
 		<div>
-			<label for="image" class="block text-sm font-medium text-gray-700">Current Image</label>
-			<div class="mt-2 flex items-center gap-4">
-				<img
-					src={product.image_url?.[0] ?? ''}
-					alt={product.name}
-					class="h-20 w-20 rounded-md border border-gray-200 object-cover"
-				/>
-				<div class="flex-1">
-					<label for="image-upload" class="mb-1 block text-xs text-gray-500"
-						>Upload new image (optional)</label
-					>
-					<input
-						id="image-upload"
-						name="image"
-						type="file"
-						accept="image/*"
-						class="block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-gray-100 file:px-4 file:py-2 file:text-sm file:font-medium file:text-gray-700 hover:file:bg-gray-200"
-					/>
+			<label class="mb-2 block text-sm font-medium text-gray-700">Product Images</label>
+			
+			<!-- Current Images -->
+			{#if currentImages.length > 0}
+				<div class="mb-4">
+					<p class="mb-2 text-xs font-medium text-gray-600">Current Images:</p>
+					<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+						{#each currentImages as imageUrl, index (imageUrl)}
+							<div class="group relative aspect-square">
+								<img
+									src={imageUrl}
+									alt={`${product.name} - Image ${index + 1}`}
+									class="h-full w-full rounded-md border border-gray-200 object-cover"
+								/>
+								<button
+									type="button"
+									onclick={() => markForRemoval(imageUrl)}
+									class="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white opacity-0 shadow-md transition-opacity hover:bg-red-600 group-hover:opacity-100"
+									title="Remove image"
+								>
+									✕
+								</button>
+								{#if index === 0}
+									<span class="absolute bottom-1 left-1 rounded bg-brand-dark px-2 py-0.5 text-xs text-white">
+										Primary
+									</span>
+								{/if}
+							</div>
+						{/each}
+					</div>
 				</div>
+			{/if}
+
+			<!-- New Images Preview -->
+			{#if newImagePreviews.length > 0}
+				<div class="mb-4">
+					<p class="mb-2 text-xs font-medium text-gray-600">New Images to Add:</p>
+					<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+						{#each newImagePreviews as previewUrl, index (previewUrl)}
+							<div class="group relative aspect-square">
+								<img
+									src={previewUrl}
+									alt={`New Image ${index + 1}`}
+									class="h-full w-full rounded-md border border-gray-200 object-cover"
+								/>
+								<button
+									type="button"
+									onclick={() => removeNewImage(index)}
+									class="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white opacity-0 shadow-md transition-opacity hover:bg-red-600 group-hover:opacity-100"
+									title="Remove image"
+								>
+									✕
+								</button>
+								<span class="absolute bottom-1 left-1 rounded bg-green-600 px-2 py-0.5 text-xs text-white">
+									New
+								</span>
+							</div>
+						{/each}
+					</div>
+				</div>
+			{/if}
+
+			<!-- Add New Images -->
+			<div>
+				<label for="newImages" class="mb-1 block text-xs text-gray-500">Add More Images:</label>
+				<input
+					id="newImages"
+					name="newImages"
+					type="file"
+					accept="image/*"
+					multiple
+					onchange={handleNewImageSelect}
+					class="block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-gray-100 file:px-4 file:py-2 file:text-sm file:font-medium file:text-gray-700 hover:file:bg-gray-200"
+				/>
 			</div>
+
+			<!-- Hidden inputs for data submission -->
+			<input type="hidden" name="currentImages" value={JSON.stringify(currentImages)} />
+			<input type="hidden" name="imagesToRemove" value={imagesToRemove.join(',') } />
+			
+			<p class="mt-2 text-xs text-gray-500">
+				The first image in the gallery will be the primary product image. You must have at least one image.
+			</p>
 		</div>
 
 		<button

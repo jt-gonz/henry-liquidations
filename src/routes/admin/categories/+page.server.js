@@ -1,9 +1,9 @@
 import { fail } from '@sveltejs/kit';
-import { supabase } from '$lib/server/supabase.js';
+import { supabase, supabaseAdmin } from '$lib/server/supabase.js';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
-	const { data: categories, error } = await supabase
+	const { data: categories, error } = await supabaseAdmin
 		.from('categories')
 		.select('*')
 		.order('sort_order', { ascending: true });
@@ -39,7 +39,7 @@ export const actions = {
 		// Convert value to uppercase with underscores
 		const normalizedValue = value.toUpperCase().replace(/\s+/g, '_');
 
-		const { error } = await /** @type {any} */ (supabase)
+		const { error } = await /** @type {any} */ (supabaseAdmin)
 			.from('categories')
 			.insert([{ value: normalizedValue, label, sort_order, is_active }]);
 
@@ -72,7 +72,7 @@ export const actions = {
 			return fail(400, { error: 'ID and label are required' });
 		}
 
-		const { error } = await /** @type {any} */ (supabase)
+		const { error } = await /** @type {any} */ (supabaseAdmin)
 			.from('categories')
 			.update({ label, sort_order, is_active })
 			.eq('id', id);
@@ -93,7 +93,7 @@ export const actions = {
 			return fail(400, { error: 'Category ID is required' });
 		}
 
-		const { error } = await supabase.from('categories').delete().eq('id', id);
+		const { error } = await supabaseAdmin.from('categories').delete().eq('id', id);
 
 		if (error) {
 			console.error('Error deleting category:', error);

@@ -6,13 +6,13 @@
 	let products = $derived(/** @type {any} */ (data).products ?? []);
 </script>
 
-<div>
+<div class="px-4 py-6 sm:px-6 lg:px-8">
 	<!-- ── Product Inventory ──────────────────────────────────── -->
-	<div class="mb-6 flex items-center justify-between">
+	<div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 		<h1 class="text-2xl font-bold text-brand-dark">Product Inventory</h1>
 		<a
 			href="/admin/add"
-			class="rounded-md bg-brand-dark px-4 py-2 text-sm font-medium text-white hover:bg-brand-mid"
+			class="inline-flex items-center justify-center rounded-md bg-brand-dark px-4 py-2 text-sm font-medium text-white hover:bg-brand-mid"
 		>
 			+ Add Product
 		</a>
@@ -30,7 +30,7 @@
 		</div>
 	{/if}
 
-	<div class="overflow-hidden rounded-lg bg-white shadow ring-1 ring-brand-light/50">
+	<div class="overflow-x-auto rounded-lg bg-white shadow ring-1 ring-brand-light/50">
 		<table class="min-w-full divide-y divide-brand-light">
 			<thead class="bg-brand-bg">
 				<tr>
@@ -39,8 +39,8 @@
 						class="py-3.5 pr-3 pl-4 text-left text-sm font-bold text-brand-dark sm:pl-6">Image</th
 					>
 					<th scope="col" class="px-3 py-3.5 text-left text-sm font-bold text-brand-dark">Name</th>
-					<th scope="col" class="px-3 py-3.5 text-left text-sm font-bold text-brand-dark">Price</th>
-					<th scope="col" class="px-3 py-3.5 text-left text-sm font-bold text-brand-dark">Status</th
+					<th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-bold text-brand-dark sm:table-cell">Price</th>
+					<th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-bold text-brand-dark md:table-cell">Status</th
 					>
 					<th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-6">
 						<span class="sr-only">Actions</span>
@@ -59,7 +59,7 @@
 						<tr class="transition-colors hover:bg-brand-bg/50">
 							<td class="py-4 pr-3 pl-4 whitespace-nowrap sm:pl-6">
 								<div
-									class="h-16 w-16 overflow-hidden rounded-lg border border-brand-light bg-brand-bg"
+									class="h-12 w-12 overflow-hidden rounded-lg border border-brand-light bg-brand-bg sm:h-16 sm:w-16"
 								>
 									{#if product.image_url && product.image_url.length > 0}
 										<img
@@ -76,13 +76,27 @@
 									{/if}
 								</div>
 							</td>
-							<td class="px-3 py-4 text-sm font-bold whitespace-nowrap text-brand-dark"
-								>{product.name}</td
-							>
-							<td class="px-3 py-4 text-sm font-medium whitespace-nowrap text-brand-brown"
+							<td class="px-3 py-4 text-sm font-bold text-brand-dark">
+								<div class="max-w-[150px] truncate sm:max-w-none">{product.name}</div>
+								<div class="mt-1 text-xs font-medium text-brand-brown sm:hidden">
+									${Number(product.price).toFixed(2)}
+								</div>
+								{#if product.in_stock}
+									<span
+										class="mt-1 inline-flex items-center rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset md:hidden"
+										>In Stock</span
+									>
+								{:else}
+									<span
+										class="mt-1 inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset md:hidden"
+										>Sold</span
+									>
+								{/if}
+							</td>
+							<td class="hidden px-3 py-4 text-sm font-medium whitespace-nowrap text-brand-brown sm:table-cell"
 								>${Number(product.price).toFixed(2)}</td
 							>
-							<td class="px-3 py-4 text-sm whitespace-nowrap">
+							<td class="hidden px-3 py-4 text-sm whitespace-nowrap md:table-cell">
 								{#if product.in_stock}
 									<span
 										class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset"
@@ -98,23 +112,25 @@
 							<td
 								class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-6"
 							>
-								<a
-									href="/admin/edit/{product.id}"
-									class="mr-4 cursor-pointer text-brand-mid hover:text-brand-dark">Edit</a
-								>
-								<form method="POST" action="?/delete" class="inline">
-									<input type="hidden" name="id" value={product.id} />
-									<input type="hidden" name="image_url" value={product.image_url?.[0] ?? ''} />
-									<button
-										type="submit"
-										class="cursor-pointer text-brand-brown transition-colors hover:text-brand-dark"
-										onclick={(e) => {
-											if (!confirm(`Delete "${product.name}"?`)) e.preventDefault();
-										}}
+								<div class="flex flex-col gap-2 sm:flex-row sm:justify-end">
+									<a
+										href="/admin/edit/{product.id}"
+										class="cursor-pointer text-brand-mid hover:text-brand-dark">Edit</a
 									>
-										Delete<span class="sr-only">, {product.name}</span>
-									</button>
-								</form>
+									<form method="POST" action="?/delete" class="inline">
+										<input type="hidden" name="id" value={product.id} />
+										<input type="hidden" name="image_urls" value={JSON.stringify(product.image_url ?? [])} />
+										<button
+											type="submit"
+											class="cursor-pointer text-brand-brown transition-colors hover:text-brand-dark"
+											onclick={(e) => {
+												if (!confirm(`Delete "${product.name}"?`)) e.preventDefault();
+											}}
+										>
+											Delete<span class="sr-only">, {product.name}</span>
+										</button>
+									</form>
+								</div>
 							</td>
 						</tr>
 					{/each}

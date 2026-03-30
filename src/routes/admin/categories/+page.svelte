@@ -59,12 +59,12 @@
 	});
 </script>
 
-<div>
-	<div class="mb-6 flex items-center justify-between">
+<div class="px-4 py-6 sm:px-6 lg:px-8">
+	<div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 		<h1 class="text-2xl font-bold text-brand-dark">Categories</h1>
 		<button
 			onclick={openAddModal}
-			class="rounded-md bg-brand-dark px-4 py-2 text-sm font-medium text-white hover:bg-brand-mid"
+			class="inline-flex items-center justify-center rounded-md bg-brand-dark px-4 py-2 text-sm font-medium text-white hover:bg-brand-mid"
 		>
 			+ Add Category
 		</button>
@@ -82,7 +82,7 @@
 		</div>
 	{/if}
 
-	<div class="overflow-hidden rounded-lg bg-white shadow ring-1 ring-brand-light/50">
+	<div class="overflow-x-auto rounded-lg bg-white shadow ring-1 ring-brand-light/50">
 		<table class="min-w-full divide-y divide-brand-light">
 			<thead class="bg-brand-bg">
 				<tr>
@@ -91,10 +91,10 @@
 						class="py-3.5 pr-3 pl-4 text-left text-sm font-bold text-brand-dark sm:pl-6"
 						>Display Name</th
 					>
-					<th scope="col" class="px-3 py-3.5 text-left text-sm font-bold text-brand-dark"
+					<th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-bold text-brand-dark md:table-cell"
 						>Database Value</th
 					>
-					<th scope="col" class="px-3 py-3.5 text-left text-sm font-bold text-brand-dark"
+					<th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-bold text-brand-dark sm:table-cell"
 						>Sort Order</th
 					>
 					<th scope="col" class="px-3 py-3.5 text-left text-sm font-bold text-brand-dark">Status</th
@@ -115,17 +115,20 @@
 					{#each categories.sort((a, b) => a.sort_order - b.sort_order) as category (category.id)}
 						<tr class="transition-colors hover:bg-brand-bg/50">
 							<td
-								class="py-4 pr-3 pl-4 text-sm font-bold whitespace-nowrap text-brand-dark sm:pl-6"
+								class="py-4 pr-3 pl-4 text-sm font-bold text-brand-dark sm:pl-6"
 							>
 								{category.label}
+								<div class="mt-1 text-xs text-gray-500 md:hidden">
+									{category.value}
+								</div>
 							</td>
-							<td class="px-3 py-4 font-mono text-sm text-xs whitespace-nowrap text-gray-600">
+							<td class="hidden px-3 py-4 font-mono text-sm text-xs text-gray-600 md:table-cell">
 								{category.value}
 							</td>
-							<td class="px-3 py-4 text-sm whitespace-nowrap text-gray-600">
+							<td class="hidden px-3 py-4 text-sm text-gray-600 sm:table-cell">
 								{category.sort_order}
 							</td>
-							<td class="px-3 py-4 text-sm whitespace-nowrap">
+							<td class="px-3 py-4 text-sm">
 								{#if category.is_active}
 									<span
 										class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset"
@@ -139,32 +142,34 @@
 								{/if}
 							</td>
 							<td
-								class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-6"
+								class="relative py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-6"
 							>
-								<button
-									onclick={() => openEditModal(category)}
-									class="mr-4 cursor-pointer text-brand-mid hover:text-brand-dark"
-								>
-									Edit
-								</button>
-								<form method="POST" action="?/delete" class="inline">
-									<input type="hidden" name="id" value={category.id} />
+								<div class="flex flex-col gap-2 sm:flex-row sm:justify-end">
 									<button
-										type="submit"
-										class="cursor-pointer text-brand-brown transition-colors hover:text-brand-dark"
-										onclick={(e) => {
-											if (
-												!confirm(
-													`Delete category "${category.label}"?\n\nNote: Products using this category will keep the category value but won't be filterable.`
-												)
-											) {
-												e.preventDefault();
-											}
-										}}
+										onclick={() => openEditModal(category)}
+										class="cursor-pointer text-brand-mid hover:text-brand-dark"
 									>
-										Delete
+										Edit
 									</button>
-								</form>
+									<form method="POST" action="?/delete" class="inline">
+										<input type="hidden" name="id" value={category.id} />
+										<button
+											type="submit"
+											class="cursor-pointer text-brand-brown transition-colors hover:text-brand-dark"
+											onclick={(e) => {
+												if (
+													!confirm(
+														`Delete category "${category.label}"?\n\nNote: Products using this category will keep the category value but won't be filterable.`
+													)
+												) {
+													e.preventDefault();
+												}
+											}}
+										>
+											Delete
+										</button>
+									</form>
+								</div>
 							</td>
 						</tr>
 					{/each}
@@ -187,23 +192,21 @@
 		role="dialog"
 		aria-modal="true"
 	>
+		<!-- Background overlay -->
 		<div
-			class="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0"
-		>
-			<!-- Background overlay -->
-			<div
-				class="bg-opacity-75 fixed inset-0 bg-gray-500 transition-opacity"
-				aria-hidden="true"
-				onclick={closeModal}
-			></div>
+			class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+			aria-hidden="true"
+			onclick={closeModal}
+		></div>
 
+		<div class="flex min-h-screen items-center justify-center px-4 py-6 text-center sm:p-0">
 			<span class="hidden sm:inline-block sm:h-screen sm:align-middle" aria-hidden="true"
 				>&#8203;</span
 			>
 
 			<!-- Modal panel -->
 			<div
-				class="inline-block transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:align-middle"
+				class="relative inline-block transform overflow-hidden rounded-lg bg-white text-left align-middle shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
 			>
 				<form method="POST" action={editingCategory ? '?/update' : '?/create'}>
 					{#if editingCategory}

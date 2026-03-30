@@ -28,7 +28,7 @@ export const actions = {
 	delete: async ({ request }) => {
 		const form = await request.formData();
 		const id = form.get('id')?.toString();
-		const imageUrl = form.get('image_url')?.toString();
+		const imageUrls = form.get('image_urls')?.toString();
 
 		if (!id) {
 			return fail(400, { error: 'Product ID is required.' });
@@ -41,17 +41,26 @@ export const actions = {
 			return fail(500, { error: 'Failed to delete product.' });
 		}
 
-		// Best-effort: delete the image from storage
-		if (imageUrl) {
+		// Best-effort: delete all images from storage
+		if (imageUrls) {
 			try {
-				const marker = '/product-images/';
-				const idx = imageUrl.indexOf(marker);
-				if (idx !== -1) {
-					const filePath = imageUrl.slice(idx + marker.length);
-					await supabaseAdmin.storage.from('product-images').remove([filePath]);
+				const urls = JSON.parse(imageUrls);
+				const filesToDelete = [];
+				
+				for (const url of urls) {
+					const marker = '/product-images/';
+					const idx = url.indexOf(marker);
+					if (idx !== -1) {
+						const filePath = url.slice(idx + marker.length);
+						filesToDelete.push(filePath);
+					}
+				}
+				
+				if (filesToDelete.length > 0) {
+					await supabaseAdmin.storage.from('product-images').remove(filesToDelete);
 				}
 			} catch (e) {
-				console.error('Failed to delete image from storage:', e);
+				console.error('Failed to delete images from storage:', e);
 			}
 		}
 

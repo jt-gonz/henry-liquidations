@@ -86,13 +86,29 @@ export async function GET({ url }) {
 	const products = data ?? [];
 	const total = count ?? 0;
 
+	// Fetch categories to map values to labels
+	const { data: categories } = await supabase
+		.from('categories')
+		.select('value, label')
+		.eq('is_active', true);
+
+	const categoryMap = new Map(
+		(categories ?? []).map((cat) => [cat.value, cat.label])
+	);
+
+	// Add category labels to products
+	const productsWithLabels = products.map((product) => ({
+		...product,
+		categoryLabel: categoryMap.get(product.category) || product.category
+	}));
+
 	// Build the next cursor from the last item
 	/** @type {string | null} */
 	let nextCursor = null;
-	if (products.length === limit) {
-		const last = /** @type {any} */ (products[products.length - 1]);
+	if (productsWithLabels.length === limit) {
+		const last = /** @type {any} */ (productsWithLabels[productsWithLabels.length - 1]);
 		nextCursor = `${last.created_at}|${last.id}`;
 	}
 
-	return json({ products, limit, total, hasMore: !!nextCursor, nextCursor });
+	return json({ products: productsWithLabels, limit, total, hasMore: !!nextCursor, nextCursor });
 }
