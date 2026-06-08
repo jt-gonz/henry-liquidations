@@ -1,5 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { supabase, supabaseAdmin } from '$lib/server/supabase.js';
+import { trackServerEvent } from '$lib/analytics.js';
 
 /**
  * Generates a URL-friendly slug from a product name.
@@ -64,9 +65,9 @@ export const actions = {
 				category,
 				description
 			});
-		
+
 		// Filter out empty files and validate at least one image
-		const validImageFiles = imageFiles.filter(f => f && f.size > 0);
+		const validImageFiles = imageFiles.filter((f) => f && f.size > 0);
 		if (validImageFiles.length === 0) {
 			return fail(400, {
 				error: 'At least one product image is required.',
@@ -115,7 +116,7 @@ export const actions = {
 		// Upload multiple images and collect their URLs
 		const imageUrls = [];
 		const uploadedFileNames = [];
-		
+
 		for (let i = 0; i < validImageFiles.length; i++) {
 			const imageFile = validImageFiles[i];
 			const ext = imageFile.name.split('.').pop() ?? 'jpg';
@@ -130,12 +131,12 @@ export const actions = {
 
 			if (uploadError) {
 				console.error('Image upload failed:', uploadError.message);
-				
+
 				// Clean up already uploaded images on failure
 				if (uploadedFileNames.length > 0) {
 					await supabaseAdmin.storage.from('product-images').remove(uploadedFileNames);
 				}
-				
+
 				return fail(500, {
 					error: 'Failed to upload images. Please try again.',
 					name,
@@ -191,6 +192,16 @@ export const actions = {
 				description
 			});
 		}
+
+		// Track product creation
+		trackServerEvent('product_created', {
+			product_name: name,
+			product_price: price,
+			product_category: category,
+			image_count: imageUrls.length,
+			has_dimensions: dimensions !== null,
+			has_colors: colors !== null
+		});
 
 		throw redirect(303, '/admin');
 	}

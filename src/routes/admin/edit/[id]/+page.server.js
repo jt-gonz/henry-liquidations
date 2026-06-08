@@ -1,5 +1,6 @@
 import { fail, redirect, error } from '@sveltejs/kit';
 import { supabase, supabaseAdmin } from '$lib/server/supabase.js';
+import { trackServerEvent } from '$lib/analytics.js';
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async ({ params }) => {
@@ -116,7 +117,7 @@ export const actions = {
 		}
 
 		const removeUrls = imagesToRemove ? imagesToRemove.split(',').filter(Boolean) : [];
-		
+
 		// Remove images from storage if requested
 		if (removeUrls.length > 0) {
 			const filesToDelete = [];
@@ -137,7 +138,7 @@ export const actions = {
 		let updatedImageUrls = currentImageUrls.filter((url) => !removeUrls.includes(url));
 
 		// Upload new images if provided
-		const validNewImages = newImageFiles.filter(f => f && f.size > 0);
+		const validNewImages = newImageFiles.filter((f) => f && f.size > 0);
 		if (validNewImages.length > 0) {
 			for (let i = 0; i < validNewImages.length; i++) {
 				const imageFile = validNewImages[i];
@@ -180,6 +181,14 @@ export const actions = {
 		if (updateError) {
 			return fail(500, { error: 'Failed to update product.' });
 		}
+
+		// Track product update
+		trackServerEvent('product_updated', {
+			product_id: params.id,
+			product_name: name,
+			product_price: price,
+			product_category: category
+		});
 
 		throw redirect(303, '/admin');
 	}

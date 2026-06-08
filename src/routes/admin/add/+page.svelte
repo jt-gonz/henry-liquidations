@@ -1,5 +1,7 @@
 <!-- Add Product Page -->
 <script>
+	import { enhance } from '$app/forms';
+
 	let { data, form } = $props();
 	/** @type {{ id: string, value: string, label: string, sort_order: number, is_active: boolean }[]} */
 	let categories = $derived(/** @type {any} */ (data).categories ?? []);
@@ -40,6 +42,8 @@
 					previewUrls = [...previewUrls, url];
 				});
 			}
+			// Reset input so the user can select the same file again if they deleted it
+			input.value = '';
 		}
 	}
 
@@ -54,6 +58,47 @@
 		
 		selectedImages = selectedImages.filter((_, i) => i !== index);
 		previewUrls = previewUrls.filter((_, i) => i !== index);
+	}
+
+	/**
+	 * @param {File} file
+	 * @param {number} maxWidth
+	 * @returns {Promise<File>}
+	 */
+	async function compressImage(file, maxWidth = 1200) {
+		return new Promise((resolve) => {
+			const reader = new FileReader();
+			reader.onload = (e) => {
+				const img = new Image();
+				img.onload = () => {
+					const canvas = document.createElement('canvas');
+					const ctx = canvas.getContext('2d');
+					let width = img.width;
+					let height = img.height;
+
+					if (width > maxWidth) {
+						height = Math.round((height * maxWidth) / width);
+						width = maxWidth;
+					}
+
+					canvas.width = width;
+					canvas.height = height;
+					ctx.drawImage(img, 0, 0, width, height);
+
+					canvas.toBlob((blob) => {
+						if (!blob) return resolve(file);
+						resolve(new File([blob], file.name, {
+							type: 'image/jpeg',
+							lastModified: Date.now()
+						}));
+					}, 'image/jpeg', 0.8);
+				};
+				if (e.target?.result) {
+					img.src = e.target.result.toString();
+				}
+			};
+			reader.readAsDataURL(file);
+		});
 	}
 </script>
 
@@ -70,8 +115,19 @@
 		method="POST"
 		enctype="multipart/form-data"
 		class="space-y-6"
-		onsubmit={() => {
+		use:enhance={async ({ formData }) => {
 			submitting = true;
+			formData.delete('images');
+			
+			for (const file of selectedImages) {
+				const compressed = await compressImage(file);
+				formData.append('images', compressed);
+			}
+
+			return async ({ update }) => {
+				submitting = false;
+				update();
+			};
 		}}
 	>
 		<!-- Row 1: Name -->

@@ -1,5 +1,7 @@
 <!-- Admin Dashboard -->
 <script>
+	import { goto } from '$app/navigation';
+	
 	let { data, form } = $props();
 
 	/** @type {any[]} */
@@ -56,7 +58,10 @@
 					</tr>
 				{:else}
 					{#each products as product (product.id)}
-						<tr class="transition-colors hover:bg-brand-bg/50">
+						<tr 
+							class="cursor-pointer transition-colors hover:bg-brand-bg/50"
+							onclick={() => goto(`/admin/edit/${product.id}`)}
+						>
 							<td class="py-4 pr-3 pl-4 whitespace-nowrap sm:pl-6">
 								<div
 									class="h-12 w-12 overflow-hidden rounded-lg border border-brand-light bg-brand-bg sm:h-16 sm:w-16"
@@ -115,8 +120,9 @@
 								<div class="flex flex-col gap-2 sm:flex-row sm:justify-end">
 									<a
 										href="/admin/edit/{product.id}"
-										class="cursor-pointer text-brand-mid hover:text-brand-dark">Edit</a
-									>
+										class="cursor-pointer text-brand-mid hover:text-brand-dark"
+										onclick={(e) => e.stopPropagation()}
+									>Edit</a>
 									<form method="POST" action="?/delete" class="inline">
 										<input type="hidden" name="id" value={product.id} />
 										<input type="hidden" name="image_urls" value={JSON.stringify(product.image_url ?? [])} />
@@ -124,6 +130,7 @@
 											type="submit"
 											class="cursor-pointer text-brand-brown transition-colors hover:text-brand-dark"
 											onclick={(e) => {
+												e.stopPropagation();
 												if (!confirm(`Delete "${product.name}"?`)) e.preventDefault();
 											}}
 										>

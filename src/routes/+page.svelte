@@ -55,14 +55,14 @@
 				Discover incredible deals on high-end furniture. We source overstock and liquidation items
 				to bring you luxury for less.
 			</p>
-			<div class="mt-10 flex items-center gap-x-6">
+			<div class="mt-10 flex items-center gap-x-8">
 				<a
 					href="/shop"
-					class="rounded-md bg-brand-dark px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-mid focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
+					class="rounded-xl bg-brand-dark px-6 py-3.5 text-base font-bold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-mid hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
 					>Shop Collection</a
 				>
-				<a href="#features" class="text-sm leading-6 font-semibold text-brand-dark"
-					>Learn more <span aria-hidden="true">→</span></a
+				<a href="#features" class="group text-base leading-6 font-bold text-brand-dark transition-all duration-200 hover:text-brand-mid"
+					>Learn more <span aria-hidden="true" class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span></a
 				>
 			</div>
 		</div>
@@ -243,7 +243,7 @@
 			<div class="relative mx-auto mt-16 max-w-2xl">
 				<!-- Slide Container -->
 				<div
-					class="flex min-h-[180px] flex-col justify-center overflow-hidden rounded-2xl bg-brand-bg p-8 ring-1 ring-brand-light sm:p-12"
+					class="flex h-[400px] flex-col justify-center overflow-hidden rounded-2xl bg-brand-bg p-8 ring-1 ring-brand-light sm:h-[320px] sm:p-12"
 				>
 					{#each quotes as q, i (q.id)}
 						{#if i === currentSlide}

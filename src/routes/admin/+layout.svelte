@@ -1,6 +1,19 @@
 <script>
+	import { onMount } from 'svelte';
+	import { track } from '@vercel/analytics';
+
 	let { data, children } = $props();
 	let mobileMenuOpen = $state(false);
+
+	// Track admin access
+	onMount(() => {
+		if (data.user?.email) {
+			track('admin_access', {
+				admin_email: data.user.email,
+				timestamp: new Date().toISOString()
+			});
+		}
+	});
 
 	function toggleMobileMenu() {
 		mobileMenuOpen = !mobileMenuOpen;
@@ -20,7 +33,12 @@
 			class="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-gray-700 shadow-lg ring-1 ring-gray-200 transition-all hover:shadow-xl hover:ring-gray-300"
 		>
 			<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M4 6h16M4 12h16M4 18h16"
+				/>
 			</svg>
 			<span>Admin Menu</span>
 		</button>
@@ -126,10 +144,7 @@
 	{#if mobileMenuOpen}
 		<div class="fixed inset-0 z-50 flex items-center justify-center p-4 lg:hidden">
 			<!-- Backdrop -->
-			<div
-				class="fixed inset-0 bg-black/50 backdrop-blur-sm"
-				onclick={closeMobileMenu}
-			></div>
+			<div class="fixed inset-0 bg-black/50 backdrop-blur-sm" onclick={closeMobileMenu}></div>
 
 			<!-- Menu Panel -->
 			<div class="relative w-full max-w-md rounded-2xl bg-white shadow-2xl">
@@ -142,7 +157,12 @@
 					>
 						<span class="sr-only">Close menu</span>
 						<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M6 18L18 6M6 6l12 12"
+							/>
 						</svg>
 					</button>
 				</div>
@@ -185,7 +205,9 @@
 					>
 						<span class="text-gray-400 group-hover:text-gray-500">
 							<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
-								><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg
+								><path
+									d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+								/></svg
 							>
 						</span>
 						Categories
@@ -216,7 +238,7 @@
 							>
 								{data.user.email[0].toUpperCase()}
 							</div>
-							<div class="flex-1 min-w-0">
+							<div class="min-w-0 flex-1">
 								<p class="truncate text-sm font-medium text-gray-700">
 									{data.user.email}
 								</p>

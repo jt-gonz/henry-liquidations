@@ -3,12 +3,26 @@
 	import { addToCart } from '$lib/stores/cart.js';
 	import { fade, scale } from 'svelte/transition';
 	import { getColorName } from '$lib/constants/colors.js';
+	import { track } from '@vercel/analytics';
 
 	/** @type {{ data: { product: any, categoryLabel: string } }} */
 	let { data } = $props();
 	let product = $derived(data.product);
 	let categoryLabel = $derived(data.categoryLabel);
 	let added = $state(false);
+
+	// Track product view on page load
+	$effect(() => {
+		if (product?.id) {
+			track('product_view', {
+				product_id: product.id,
+				product_name: product.name,
+				product_price: Number(product.price),
+				category: categoryLabel,
+				in_stock: product.in_stock
+			});
+		}
+	});
 
 	// Image gallery state
 	let images = $derived(product.image_url || []);
@@ -62,6 +76,16 @@
 			slug: product.slug,
 			color: selectedColor ?? undefined
 		});
+
+		// Track add to cart event
+		track('add_to_cart', {
+			product_id: product.id,
+			product_name: product.name,
+			product_price: Number(product.price),
+			category: categoryLabel,
+			color: selectedColor ?? 'none'
+		});
+
 		added = true;
 		setTimeout(() => {
 			added = false;

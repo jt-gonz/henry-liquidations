@@ -1,5 +1,6 @@
 import { fail } from '@sveltejs/kit';
 import { supabase, supabaseAdmin } from '$lib/server/supabase.js';
+import { trackServerEvent } from '$lib/analytics.js';
 
 /**
  * Load all products for the admin dashboard table.
@@ -41,12 +42,17 @@ export const actions = {
 			return fail(500, { error: 'Failed to delete product.' });
 		}
 
+		// Track product deletion
+		trackServerEvent('product_deleted', {
+			product_id: id
+		});
+
 		// Best-effort: delete all images from storage
 		if (imageUrls) {
 			try {
 				const urls = JSON.parse(imageUrls);
 				const filesToDelete = [];
-				
+
 				for (const url of urls) {
 					const marker = '/product-images/';
 					const idx = url.indexOf(marker);
@@ -55,7 +61,7 @@ export const actions = {
 						filesToDelete.push(filePath);
 					}
 				}
-				
+
 				if (filesToDelete.length > 0) {
 					await supabaseAdmin.storage.from('product-images').remove(filesToDelete);
 				}
