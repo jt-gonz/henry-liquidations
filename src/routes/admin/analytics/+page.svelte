@@ -89,9 +89,9 @@
 	<div class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
 		<div class="rounded-lg bg-white p-4 shadow ring-1 ring-brand-light/50">
 			<h2 class="text-sm font-bold text-brand-dark">Daily traffic (14 days)</h2>
-			<div class="mt-4 flex h-32 items-end gap-1">
+			<div class="mt-4 flex h-32 gap-1">
 				{#each dailyViews as day, i (day.date)}
-					<div class="flex flex-1 flex-col items-center gap-1">
+					<div class="flex h-full flex-1 flex-col items-center justify-end gap-1">
 						<div
 							class="w-full rounded-t bg-brand-mid/70 transition-all hover:bg-brand-mid"
 							style="height: {Math.max(3, (day.count / maxViews) * 100)}%"
@@ -107,9 +107,9 @@
 
 		<div class="rounded-lg bg-white p-4 shadow ring-1 ring-brand-light/50">
 			<h2 class="text-sm font-bold text-brand-dark">Daily revenue (14 days)</h2>
-			<div class="mt-4 flex h-32 items-end gap-1">
+			<div class="mt-4 flex h-32 gap-1">
 				{#each dailyRevenue as day, i (day.date)}
-					<div class="flex flex-1 flex-col items-center gap-1">
+					<div class="flex h-full flex-1 flex-col items-center justify-end gap-1">
 						<div
 							class="w-full rounded-t bg-brand-brown/70 transition-all hover:bg-brand-brown"
 							style="height: {Math.max(3, (day.total / maxRevenue) * 100)}%"

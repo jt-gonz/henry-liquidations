@@ -1,8 +1,31 @@
 <!-- Home Page: Landing / welcome page -->
 <script>
+	import { fade } from 'svelte/transition';
+	import ProductCard from '$lib/components/ProductCard.svelte';
+
 	let { data } = $props();
 	let quotes = $derived(/** @type {any[]} */ (data.quotes) ?? []);
+	let newArrivals = $derived(/** @type {any[]} */ (data.newArrivals) ?? []);
+	let washerDryerProducts = $derived(/** @type {any[]} */ (data.washerDryerProducts) ?? []);
 	let currentSlide = $state(0);
+	let showScrollHint = $state(true);
+
+	$effect(() => {
+		function handleScroll() {
+			showScrollHint = window.scrollY < 80;
+		}
+		handleScroll();
+		window.addEventListener('scroll', handleScroll, { passive: true });
+		return () => window.removeEventListener('scroll', handleScroll);
+	});
+
+	function scrollToNextSection() {
+		window.scrollTo({ top: window.innerHeight * 0.8, behavior: 'smooth' });
+	}
+
+	const pageTitle = "Henry's Liquidation Store | Furniture & Appliances at Liquidation Prices";
+	const pageDescription =
+		'Shop overstock and liquidation furniture and appliances, including washers and dryers, at up to 70% off retail. New arrivals daily in Lafayette, IN.';
 
 	/** @type {ReturnType<typeof setInterval> | undefined} */
 	let autoPlay;
@@ -23,6 +46,14 @@
 		return () => clearInterval(autoPlay);
 	});
 </script>
+
+<svelte:head>
+	<title>{pageTitle}</title>
+	<meta name="description" content={pageDescription} />
+	<meta property="og:title" content={pageTitle} />
+	<meta property="og:description" content={pageDescription} />
+	<meta property="og:type" content="website" />
+</svelte:head>
 
 <div class="relative isolate overflow-hidden">
 	<!-- Hero Section -->
@@ -58,7 +89,7 @@
 			<div class="mt-10 flex items-center gap-x-8">
 				<a
 					href="/shop"
-					class="rounded-xl bg-brand-dark px-6 py-3.5 text-base font-bold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-mid hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
+					class="rounded-xl bg-brand-brown px-6 py-3.5 text-base font-bold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-brown-dark hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-brown"
 					>Shop Collection</a
 				>
 				<a href="#features" class="group text-base leading-6 font-bold text-brand-dark transition-all duration-200 hover:text-brand-mid"
@@ -82,6 +113,89 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- New Arrivals -->
+	{#if newArrivals.length > 0}
+		<section class="mx-auto max-w-7xl px-6 pb-20 lg:px-8">
+			<div class="flex items-end justify-between gap-4">
+				<div>
+					<h2 class="text-base leading-7 font-semibold text-brand-brown">Fresh Stock</h2>
+					<p class="mt-2 text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl">
+						New Arrivals
+					</p>
+				</div>
+				<a
+					href="/shop"
+					class="hidden shrink-0 text-sm font-bold text-brand-brown transition-colors hover:text-brand-brown-dark sm:block"
+					>Shop All →</a
+				>
+			</div>
+			<div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
+				{#each newArrivals as product (product.id)}
+					<ProductCard
+						id={product.id}
+						name={product.name}
+						slug={product.slug}
+						price={Number(product.price)}
+						image_url={product.image_url}
+						category={product.categoryLabel || product.category}
+						in_stock={product.in_stock}
+						created_at={product.created_at}
+						colors={product.colors}
+					/>
+				{/each}
+			</div>
+			<a
+				href="/shop"
+				class="mt-6 block text-center text-sm font-bold text-brand-brown transition-colors hover:text-brand-brown-dark sm:hidden"
+				>Shop All →</a
+			>
+		</section>
+	{/if}
+
+	<!-- Washers & Dryers Spotlight -->
+	{#if washerDryerProducts.length > 0}
+		<section class="bg-brand-accent/10 py-20">
+			<div class="mx-auto max-w-7xl px-6 lg:px-8">
+				<div class="flex items-end justify-between gap-4">
+					<div>
+						<h2 class="text-base leading-7 font-semibold text-brand-brown">Big Savings</h2>
+						<p class="mt-2 text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl">
+							Washers &amp; Dryers
+						</p>
+						<p class="mt-2 text-base text-gray-600">
+							Quality laundry appliances at liquidation prices — while they last.
+						</p>
+					</div>
+					<a
+						href="/shop?washerDryer=true"
+						class="hidden shrink-0 rounded-xl bg-brand-brown px-5 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-brown-dark sm:block"
+						>Shop Washers &amp; Dryers</a
+					>
+				</div>
+				<div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
+					{#each washerDryerProducts as product (product.id)}
+						<ProductCard
+							id={product.id}
+							name={product.name}
+							slug={product.slug}
+							price={Number(product.price)}
+							image_url={product.image_url}
+							category={product.categoryLabel || product.category}
+							in_stock={product.in_stock}
+							created_at={product.created_at}
+							colors={product.colors}
+						/>
+					{/each}
+				</div>
+				<a
+					href="/shop?washerDryer=true"
+					class="mt-6 block rounded-xl bg-brand-brown px-5 py-3 text-center text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-brand-brown-dark sm:hidden"
+					>Shop Washers &amp; Dryers</a
+				>
+			</div>
+		</section>
+	{/if}
 
 	<!-- Value Propositions -->
 	<section id="features" class="mx-auto mt-12 max-w-7xl px-6 pb-20 lg:px-8">
@@ -315,6 +429,20 @@
 		</section>
 	{/if}
 </div>
+
+{#if showScrollHint}
+	<button
+		type="button"
+		onclick={scrollToNextSection}
+		transition:fade={{ duration: 250 }}
+		aria-label="Scroll down"
+		class="fixed bottom-6 left-1/2 z-30 flex h-10 w-10 -translate-x-1/2 animate-bounce items-center justify-center rounded-full bg-white text-brand-brown shadow-md ring-1 ring-brand-light transition-colors hover:text-brand-brown-dark"
+	>
+		<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+		</svg>
+	</button>
+{/if}
 
 <style>
 	@keyframes fade-in {

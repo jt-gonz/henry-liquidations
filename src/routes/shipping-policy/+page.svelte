@@ -1,4 +1,12 @@
 <!-- Shipping & Delivery Policy -->
+<svelte:head>
+	<title>Shipping &amp; Delivery Policy | Henry's Liquidation Store</title>
+	<meta
+		name="description"
+		content="Read our shipping and delivery policy, including processing times and delivery options."
+	/>
+</svelte:head>
+
 <div class="mx-auto max-w-3xl px-6 py-16 sm:px-8">
 	<h1 class="text-4xl font-bold tracking-tight text-brand-dark sm:text-5xl">
 		Shipping &amp; Delivery Policy

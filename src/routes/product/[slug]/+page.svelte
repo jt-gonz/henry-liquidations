@@ -9,7 +9,17 @@
 	let { data } = $props();
 	let product = $derived(data.product);
 	let categoryLabel = $derived(data.categoryLabel);
+	let canonicalUrl = $derived(/** @type {any} */ (data).canonicalUrl ?? '');
 	let added = $state(false);
+
+	let pageTitle = $derived(`${product.name} | Henry's Liquidation Store`);
+	let pageDescription = $derived(
+		(product.description || `Shop ${product.name} at liquidation prices.`)
+			.replace(/\s+/g, ' ')
+			.trim()
+			.slice(0, 160)
+	);
+	let ogImage = $derived(product.image_url?.[0] ?? '');
 
 	// Track product view on page load
 	$effect(() => {
@@ -28,6 +38,14 @@
 	let images = $derived(product.image_url || []);
 	let currentImageIndex = $state(0);
 	let currentImage = $derived(images[currentImageIndex] || '');
+
+	// Track which image indices failed to load so we can show a placeholder.
+	let failedImages = $state(/** @type {Set<number>} */ (new Set()));
+	/** @param {number} index */
+	function markImageFailed(index) {
+		failedImages = new Set(failedImages).add(index);
+	}
+	let mainImageFailed = $derived(failedImages.has(currentImageIndex));
 
 	// Colors - initialize as null, then set in effect
 	let selectedColor = $state(/** @type {string | null} */ (null));
@@ -107,6 +125,21 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{pageTitle}</title>
+	<meta name="description" content={pageDescription} />
+	<meta property="og:title" content={pageTitle} />
+	<meta property="og:description" content={pageDescription} />
+	<meta property="og:type" content="product" />
+	{#if ogImage}
+		<meta property="og:image" content={ogImage} />
+	{/if}
+	{#if canonicalUrl}
+		<meta property="og:url" content={canonicalUrl} />
+		<link rel="canonical" href={canonicalUrl} />
+	{/if}
+</svelte:head>
+
 <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
 	<nav aria-label="Breadcrumb" class="mb-8">
 		<ol role="list" class="flex items-center space-x-2">
@@ -141,16 +174,35 @@
 				tabindex="0"
 				aria-label="View full size image"
 			>
-				{#if images.length > 0}
+				{#if images.length > 0 && !mainImageFailed}
 					<img
 						src={currentImage}
 						alt={product.name}
 						class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
 						loading="lazy"
+						onerror={() => markImageFailed(currentImageIndex)}
 					/>
 				{:else}
-					<div class="flex h-full w-full items-center justify-center text-brand-mid">
-						No image available
+					<div class="flex h-full w-full flex-col items-center justify-center gap-2 text-brand-mid">
+						<svg
+							class="h-12 w-12"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							stroke-width="1.5"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M21 8.25V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V8.25A2.25 2.25 0 015.25 6h13.5A2.25 2.25 0 0121 8.25z"
+							/>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M8.25 9.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+							/>
+						</svg>
+						<span class="text-sm font-medium">No Image Available</span>
 					</div>
 				{/if}
 
@@ -236,12 +288,25 @@
 							aria-label="View image {index + 1} of {images.length}"
 							aria-current={index === currentImageIndex ? 'true' : 'false'}
 						>
-							<img
-								src={img}
-								alt="{product.name} - view {index + 1}"
-								class="h-full w-full object-cover"
-								loading="lazy"
-							/>
+							{#if failedImages.has(index)}
+								<div class="flex h-full w-full items-center justify-center bg-brand-bg text-brand-mid">
+									<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M21 8.25V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V8.25A2.25 2.25 0 015.25 6h13.5A2.25 2.25 0 0121 8.25z"
+										/>
+									</svg>
+								</div>
+							{:else}
+								<img
+									src={img}
+									alt="{product.name} - view {index + 1}"
+									class="h-full w-full object-cover"
+									loading="lazy"
+									onerror={() => markImageFailed(index)}
+								/>
+							{/if}
 						</button>
 					{/each}
 				</div>
@@ -354,7 +419,7 @@
 					<div class="flex flex-1 flex-col sm:flex-row sm:items-center sm:gap-6">
 						<button
 							onclick={handleAddToCart}
-							class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-brand-dark px-8 py-3 text-base font-medium text-white transition-colors duration-200 hover:bg-brand-mid focus:ring-2 focus:ring-brand-mid focus:ring-offset-2 focus:ring-offset-brand-bg focus:outline-none sm:w-full {added
+							class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-brand-brown px-8 py-3 text-base font-medium text-white transition-colors duration-200 hover:bg-brand-brown-dark focus:ring-2 focus:ring-brand-brown focus:ring-offset-2 focus:ring-offset-brand-bg focus:outline-none sm:w-full {added
 								? 'bg-green-600 hover:bg-green-700'
 								: ''}"
 						>

@@ -6,7 +6,7 @@ import { supabase } from '$lib/server/supabase.js';
  *
  * @type {import('@sveltejs/kit').ServerLoad}
  */
-export async function load({ params }) {
+export async function load({ params, url }) {
 	const { data: product, error: dbError } = await supabase
 		.from('products')
 		.select('*')
@@ -32,5 +32,5 @@ export async function load({ params }) {
 		}
 	}
 
-	return { product, categoryLabel };
+	return { product, categoryLabel, canonicalUrl: url.href };
 }

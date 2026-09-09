@@ -9,8 +9,23 @@
 	let total = $derived(items.reduce((sum, item) => sum + item.price * item.quantity, 0));
 	let itemCount = $derived(items.reduce((sum, item) => sum + item.quantity, 0));
 
+	const PLACEHOLDER_IMAGE =
+		'data:image/svg+xml;utf8,' +
+		encodeURIComponent(
+			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><rect width="80" height="80" rx="8" fill="#FBF3E9"/><g fill="none" stroke="#8A7A6D" stroke-width="2"><path d="M20 52l12-12a4 4 0 015 0l12 12m-6-6l4-4a4 4 0 015 0l8 8" stroke-linecap="round" stroke-linejoin="round"/><rect x="16" y="18" width="48" height="44" rx="4"/><circle cx="30" cy="30" r="3"/></g></svg>'
+		);
+
+	/** @param {Event} event */
+	function handleImageError(event) {
+		const img = /** @type {HTMLImageElement} */ (event.currentTarget);
+		img.onerror = null;
+		img.src = PLACEHOLDER_IMAGE;
+	}
+
 	let checkingOut = $state(false);
 	let checkoutError = $state('');
+
+	const pageTitle = "Your Cart | Henry's Liquidation Store";
 
 	onMount(async () => {
 		if ($cart.length === 0) return;
@@ -103,6 +118,11 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{pageTitle}</title>
+	<meta name="description" content="Review the items in your cart and check out securely." />
+</svelte:head>
+
 <div class="mx-auto max-w-3xl px-4 py-8">
 	<h1 class="mb-6 text-3xl font-bold text-brand-dark">Your Cart</h1>
 
@@ -115,7 +135,7 @@
 			<p class="mt-2 text-gray-500">Looks like you haven't added anything to your cart yet.</p>
 			<a
 				href="/shop"
-				class="mt-8 inline-block rounded-xl bg-brand-dark px-8 py-3.5 text-base font-bold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-mid hover:shadow-lg"
+				class="mt-8 inline-block rounded-xl bg-brand-brown px-8 py-3.5 text-base font-bold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-brown-dark hover:shadow-lg"
 			>
 				Browse Products
 			</a>
@@ -126,7 +146,12 @@
 				<div class="flex items-center gap-4 py-4">
 					<!-- Thumbnail -->
 					<a href="/product/{item.slug}" class="relative shrink-0">
-						<img src={item.image_url} alt={item.name} class="h-20 w-20 rounded-md object-cover" />
+						<img
+							src={item.image_url}
+							alt={item.name}
+							class="h-20 w-20 rounded-md bg-brand-bg object-cover"
+							onerror={handleImageError}
+						/>
 						<!-- {#if item.color} -->
 						<!-- 	<div -->
 						<!-- 		class="absolute -right-1 -bottom-1 h-5 w-5 rounded-full border border-white shadow-sm ring-1 ring-gray-200" -->
@@ -212,7 +237,7 @@
 			<button
 				onclick={handleCheckout}
 				disabled={checkingOut}
-				class="w-full rounded-lg bg-brand-dark px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-brand-mid disabled:cursor-not-allowed disabled:opacity-50"
+				class="w-full rounded-lg bg-brand-brown px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-brand-brown-dark disabled:cursor-not-allowed disabled:opacity-50"
 			>
 				{checkingOut ? 'Redirecting to Stripe…' : 'Proceed to Checkout'}
 			</button>

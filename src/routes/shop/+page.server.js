@@ -2,6 +2,31 @@ import { supabase } from '$lib/server/supabase.js';
 
 const PAGE_SIZE = 12;
 
+/** @type {Record<string, { col: 'created_at' | 'price', asc: boolean }>} */
+const SORT_OPTIONS = {
+	newest: { col: 'created_at', asc: false },
+	price_asc: { col: 'price', asc: true },
+	price_desc: { col: 'price', asc: false }
+};
+
+/**
+ * Whether a product's first image is likely to actually load. A handful of
+ * products have filenames with unencoded commas/spaces that fail to load in
+ * the browser — this can't be known for certain without fetching the URL,
+ * but it's a cheap, effective heuristic for de-prioritizing the known cases.
+ * @param {any} product
+ */
+function hasReliableImage(product) {
+	const url = product.image_url?.[0];
+	if (!url) return false;
+	try {
+		const filename = decodeURIComponent(url.split('/').pop() ?? '');
+		return !/[,\s]/.test(filename);
+	} catch {
+		return false;
+	}
+}
+
 /**
  * Load the first batch of products for the shop page.
  * Supports filters passed via URL search params.
@@ -14,6 +39,10 @@ export async function load({ url }) {
 	const maxPrice = url.searchParams.get('maxPrice') ?? '';
 	const inStock = url.searchParams.get('inStock') ?? 'true';
 	const search = url.searchParams.get('search')?.trim() ?? '';
+	const washerDryer = url.searchParams.get('washerDryer') === 'true';
+	const sortParam = url.searchParams.get('sort') ?? 'newest';
+	const sort = SORT_OPTIONS[sortParam] ? sortParam : 'newest';
+	const { col: sortCol, asc: sortAsc } = SORT_OPTIONS[sort];
 
 	let query = supabase.from('products').select('*', { count: 'exact' });
 
@@ -24,7 +53,12 @@ export async function load({ url }) {
 		query = query.eq('in_stock', false);
 	}
 
-	if (category) {
+	// The "Washers & Dryers" quick filter is mutually exclusive with the
+	// category dropdown — there's no dedicated subcategory, so it's a
+	// name match within Appliances.
+	if (washerDryer) {
+		query = query.eq('category', 'APPLIANCES').or('name.ilike.%washer%,name.ilike.%dryer%');
+	} else if (category) {
 		const cats = category
 			.split(',')
 			.map((c) => c.trim())
@@ -50,8 +84,8 @@ export async function load({ url }) {
 	}
 
 	query = query
-		.order('created_at', { ascending: false })
-		.order('id', { ascending: false })
+		.order(sortCol, { ascending: sortAsc })
+		.order('id', { ascending: sortAsc })
 		.limit(PAGE_SIZE);
 
 	const { data, error, count } = await query;
@@ -63,7 +97,7 @@ export async function load({ url }) {
 			total: 0,
 			hasMore: false,
 			nextCursor: null,
-			filters: { category, minPrice, maxPrice, inStock, search }
+			filters: { category, minPrice, maxPrice, inStock, search, washerDryer, sort }
 		};
 	}
 
@@ -77,9 +111,7 @@ export async function load({ url }) {
 		.eq('is_active', true)
 		.order('sort_order', { ascending: true });
 
-	const categoryMap = new Map(
-		(categories ?? []).map((cat) => [cat.value, cat.label])
-	);
+	const categoryMap = new Map((categories ?? []).map((cat) => [cat.value, cat.label]));
 
 	// Add category labels to products
 	const productsWithLabels = products.map((product) => ({
@@ -93,8 +125,13 @@ export async function load({ url }) {
 		const last = /** @type {import('$lib/types/database.js').ProductRow} */ (
 			productsWithLabels[productsWithLabels.length - 1]
 		);
-		nextCursor = `${last.created_at}|${last.id}`;
+		nextCursor = `${last[sortCol]}|${last.id}`;
 	}
+
+	// Push products with a broken/missing image toward the end of this page
+	// only — doesn't affect which items land on which page (cursor above is
+	// already computed from the real DB order), just their order within it.
+	productsWithLabels.sort((a, b) => Number(hasReliableImage(b)) - Number(hasReliableImage(a)));
 
 	// Fetch global min/max prices for the slider
 	const { data: minData } = await supabase
@@ -119,7 +156,7 @@ export async function load({ url }) {
 		total,
 		hasMore: !!nextCursor,
 		nextCursor,
-		filters: { category, minPrice, maxPrice, inStock, search },
+		filters: { category, minPrice, maxPrice, inStock, search, washerDryer, sort },
 		priceBounds: { min: globalMinPrice, max: globalMaxPrice },
 		categories: categories ?? []
 	};
