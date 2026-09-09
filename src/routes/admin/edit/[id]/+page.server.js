@@ -36,6 +36,14 @@ function slugify(name) {
 }
 
 /**
+ * @param {string[]} storageFileNames
+ */
+async function cleanupUploadedFiles(storageFileNames) {
+	if (storageFileNames.length === 0) return;
+	await supabaseAdmin.storage.from('product-images').remove(storageFileNames);
+}
+
+/**
  * @type {import('./$types').Actions}
  */
 export const actions = {
@@ -47,8 +55,8 @@ export const actions = {
 		const category = form.get('category')?.toString() ?? '';
 		const description = form.get('description')?.toString()?.trim() ?? '';
 		const newImageFiles = /** @type {File[]} */ (form.getAll('newImages'));
-		const imagesToRemove = form.get('imagesToRemove')?.toString() ?? '';
-		const currentImages = form.get('currentImages')?.toString() ?? '[]';
+		const newImageIds = form.getAll('newImageIds').map((v) => v.toString());
+		const imageOrderRaw = form.get('imageOrder')?.toString() ?? '';
 
 		// ── Validation ──────────────────────────────────────────
 		if (!name) return fail(400, { error: 'Product name is required.' });
@@ -56,6 +64,17 @@ export const actions = {
 			return fail(400, { error: 'A valid price is required.' });
 		}
 		if (!category) return fail(400, { error: 'Category is required.' });
+
+		/** @type {unknown} */
+		let imageOrder;
+		try {
+			imageOrder = JSON.parse(imageOrderRaw);
+			if (!Array.isArray(imageOrder)) throw new Error('imageOrder is not an array');
+		} catch {
+			return fail(400, {
+				error: 'Image data is out of sync. Please refresh the page and try again.'
+			});
+		}
 
 		const price = Number(priceStr);
 		const slug = slugify(name);
@@ -101,85 +120,135 @@ export const actions = {
 			colors
 		};
 
-		// ── Handle Image Management ──────────────────────────────
-		// Parse current images and images to remove
-		let currentImageUrls = [];
-		try {
-			currentImageUrls = JSON.parse(currentImages);
-		} catch {
-			// If parsing fails, fetch current images from database
-			const { data: existingProduct } = await supabaseAdmin
-				.from('products')
-				.select('image_url')
-				.eq('id', params.id)
-				.single();
-			currentImageUrls = existingProduct?.image_url ?? [];
+		// ── Re-fetch the product's real current images ──────────
+		// (not just what the client echoed back — guards against a stale tab
+		// overwriting a since-changed product)
+		const { data: existingProduct, error: fetchError } = await supabaseAdmin
+			.from('products')
+			.select('image_url')
+			.eq('id', params.id)
+			.single();
+
+		if (fetchError || !existingProduct) {
+			return fail(404, { error: 'This product could not be found. It may have been deleted.' });
 		}
 
-		const removeUrls = imagesToRemove ? imagesToRemove.split(',').filter(Boolean) : [];
+		/** @type {string[]} */
+		const currentImageUrls = existingProduct.image_url ?? [];
+		const currentImageSet = new Set(currentImageUrls);
 
-		// Remove images from storage if requested
-		if (removeUrls.length > 0) {
-			const filesToDelete = [];
-			for (const url of removeUrls) {
-				const marker = '/product-images/';
-				const idx = url.indexOf(marker);
-				if (idx !== -1) {
-					const filePath = url.slice(idx + marker.length);
-					filesToDelete.push(filePath);
-				}
-			}
-			if (filesToDelete.length > 0) {
-				await supabaseAdmin.storage.from('product-images').remove(filesToDelete);
-			}
-		}
-
-		// Filter out removed images from current images
-		let updatedImageUrls = currentImageUrls.filter((url) => !removeUrls.includes(url));
-
-		// Upload new images if provided
+		// ── Upload new images first — nothing destructive happens ───
+		// until this succeeds.
 		const validNewImages = newImageFiles.filter((f) => f && f.size > 0);
-		if (validNewImages.length > 0) {
-			for (let i = 0; i < validNewImages.length; i++) {
-				const imageFile = validNewImages[i];
-				const ext = imageFile.name.split('.').pop() ?? 'jpg';
-				const fileName = `${slug}-${Date.now()}-${i}.${ext}`;
+		/** @type {string[]} */
+		const uploadedFileNames = [];
+		/** @type {Map<string, string>} */
+		const idToUrl = new Map();
 
-				const { error: uploadError } = await supabaseAdmin.storage
-					.from('product-images')
-					.upload(fileName, imageFile, {
-						contentType: imageFile.type,
-						upsert: false
-					});
+		for (let i = 0; i < validNewImages.length; i++) {
+			const imageFile = validNewImages[i];
+			const ext = imageFile.name.split('.').pop() ?? 'jpg';
+			const fileName = `${slug}-${Date.now()}-${i}.${ext}`;
 
-				if (uploadError) {
-					console.error('Image upload failed:', uploadError.message);
-					return fail(500, { error: `Failed to upload image ${i + 1}.` });
+			const { error: uploadError } = await supabaseAdmin.storage
+				.from('product-images')
+				.upload(fileName, imageFile, {
+					contentType: imageFile.type,
+					upsert: false
+				});
+
+			if (uploadError) {
+				console.error('Image upload failed:', uploadError.message);
+				await cleanupUploadedFiles(uploadedFileNames);
+				return fail(500, { error: `Failed to upload image ${i + 1}.` });
+			}
+
+			uploadedFileNames.push(fileName);
+			const { data: urlData } = supabaseAdmin.storage
+				.from('product-images')
+				.getPublicUrl(fileName);
+			const id = newImageIds[i];
+			if (id) idToUrl.set(id, urlData.publicUrl);
+		}
+
+		// ── Reconstruct the final image order from the client's token
+		// list, resolving each token against either the freshly-uploaded
+		// images or the product's real current images. Any token that
+		// doesn't resolve means the client's view was stale — fail loudly
+		// rather than silently guessing at the "right" order.
+		/** @type {string[]} */
+		const updatedImageUrls = [];
+		let hasUnresolvedToken = false;
+
+		for (const token of imageOrder) {
+			if (typeof token !== 'string') {
+				hasUnresolvedToken = true;
+				break;
+			}
+			if (token.startsWith('new:')) {
+				const resolvedUrl = idToUrl.get(token.slice(4));
+				if (!resolvedUrl) {
+					hasUnresolvedToken = true;
+					break;
 				}
-
-				const { data: urlData } = supabaseAdmin.storage
-					.from('product-images')
-					.getPublicUrl(fileName);
-				updatedImageUrls.push(urlData.publicUrl);
+				updatedImageUrls.push(resolvedUrl);
+			} else {
+				if (!currentImageSet.has(token)) {
+					hasUnresolvedToken = true;
+					break;
+				}
+				updatedImageUrls.push(token);
 			}
 		}
 
-		// Ensure at least one image remains
+		if (hasUnresolvedToken) {
+			await cleanupUploadedFiles(uploadedFileNames);
+			return fail(400, {
+				error: 'Image data changed since you loaded this page. Please refresh and try again.'
+			});
+		}
+
 		if (updatedImageUrls.length === 0) {
+			await cleanupUploadedFiles(uploadedFileNames);
 			return fail(400, { error: 'Product must have at least one image.' });
 		}
 
 		updates.image_url = updatedImageUrls;
 
-		// ── Update Product ──────────────────────────────────────
-		// ── Update Product in Database ──────────────────────────
+		// ── Update Product in Database ───────────────────────────
 		const { error: updateError } = await /** @type {any} */ (supabaseAdmin)
 			.from('products')
 			.update(updates)
 			.eq('id', params.id);
 
 		if (updateError) {
+			await cleanupUploadedFiles(uploadedFileNames);
 			return fail(500, { error: 'Failed to update product.' });
+		}
+
+		// ── Only now — with the DB successfully pointing at the new set —
+		// delete storage files for images that were dropped. This is the
+		// last, least-reversible step, gated behind DB success so a failure
+		// anywhere above leaves the product in its original, consistent state.
+		const keptUrls = new Set(updatedImageUrls);
+		const removedUrls = currentImageUrls.filter((url) => !keptUrls.has(url));
+		if (removedUrls.length > 0) {
+			const filesToDelete = [];
+			for (const url of removedUrls) {
+				const marker = '/product-images/';
+				const idx = url.indexOf(marker);
+				if (idx !== -1) filesToDelete.push(url.slice(idx + marker.length));
+			}
+			if (filesToDelete.length > 0) {
+				const { error: removeError } = await supabaseAdmin.storage
+					.from('product-images')
+					.remove(filesToDelete);
+				if (removeError) {
+					// Non-fatal: the product record is already correctly saved,
+					// this just leaves an orphaned file in storage.
+					console.error('Failed to clean up removed images from storage:', removeError.message);
+				}
+			}
 		}
 
 		// Track product update
