@@ -324,11 +324,25 @@
 				</p>
 				<div>
 					{#if product.in_stock}
+						{@const lowStock =
+							product.available_quantity !== null &&
+							product.available_quantity !== undefined &&
+							product.available_quantity <= 3}
 						<span
-							class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800"
+							class="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium {lowStock
+								? 'bg-red-100 text-red-800'
+								: 'bg-green-100 text-green-800'}"
 						>
-							<span class="mr-1.5 h-2 w-2 rounded-full bg-green-600"></span>
-							In Stock
+							<span
+								class="mr-1.5 h-2 w-2 rounded-full {lowStock ? 'bg-red-600' : 'bg-green-600'}"
+							></span>
+							{#if lowStock}
+								Only {product.available_quantity} left
+							{:else if product.available_quantity !== null && product.available_quantity !== undefined}
+								{product.available_quantity} in Stock
+							{:else}
+								In Stock
+							{/if}
 						</span>
 					{:else}
 						<span

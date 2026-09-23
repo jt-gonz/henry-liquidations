@@ -11,6 +11,7 @@
 	 *   image_url: string[];
 	 *   category?: string;
 	 *   in_stock?: boolean;
+	 *   available_quantity?: number | null;
 	 *   created_at?: string | null;
 	 *   colors?: string[] | null;
 	 * }}
@@ -23,9 +24,21 @@
 		image_url,
 		category = '',
 		in_stock = true,
+		available_quantity = null,
 		created_at = null,
 		colors = null
 	} = $props();
+
+	const LOW_STOCK_THRESHOLD = 3;
+	let showCount = $derived(
+		in_stock && available_quantity !== null && available_quantity !== undefined
+	);
+	let lowStock = $derived(
+		in_stock &&
+			available_quantity !== null &&
+			available_quantity !== undefined &&
+			available_quantity <= LOW_STOCK_THRESHOLD
+	);
 
 	// Use the first image from the array, or empty string if no images
 	let displayImage = $derived(image_url && image_url.length > 0 ? image_url[0] : '');
@@ -123,6 +136,12 @@
 				>
 					Sold
 				</div>
+			{:else if lowStock}
+				<div
+					class="absolute top-2 right-2 rounded-md bg-red-600 px-2 py-1 text-xs font-bold tracking-wide text-white uppercase"
+				>
+					Only {available_quantity} left
+				</div>
 			{:else if isNew}
 				<div
 					class="absolute top-2 right-2 rounded-md bg-brand-accent px-2 py-1 text-xs font-bold tracking-wide text-white uppercase"
@@ -135,7 +154,12 @@
 			<h3 class="text-sm font-bold text-brand-dark transition-colors group-hover:text-brand-brown">
 				{name}
 			</h3>
-			<p class="mt-1 text-lg font-medium text-brand-brown">${price.toFixed(2)}</p>
+			<div class="mt-1 flex items-baseline gap-2">
+				<p class="text-lg font-medium text-brand-brown">${price.toFixed(2)}</p>
+				{#if showCount && !lowStock}
+					<p class="text-xs text-brand-mid">{available_quantity} in stock</p>
+				{/if}
+			</div>
 		</div>
 	</a>
 

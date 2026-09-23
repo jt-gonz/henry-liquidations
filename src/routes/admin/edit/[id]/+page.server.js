@@ -110,6 +110,13 @@ export const actions = {
 			/* ignore */
 		}
 
+		// ── Parse optional stock quantity ────────────────────────
+		const stockQuantityStr = form.get('stock_quantity')?.toString().trim() ?? '';
+		if (stockQuantityStr !== '' && (isNaN(Number(stockQuantityStr)) || Number(stockQuantityStr) < 0)) {
+			return fail(400, { error: 'Stock quantity must be 0 or more.' });
+		}
+		const stockQuantity = stockQuantityStr === '' ? null : Math.floor(Number(stockQuantityStr));
+
 		/** @type {import('$lib/types/database.js').ProductUpdate} */
 		const updates = {
 			name,
@@ -123,14 +130,24 @@ export const actions = {
 		// ── Re-fetch the product's real current images ──────────
 		// (not just what the client echoed back — guards against a stale tab
 		// overwriting a since-changed product)
-		const { data: existingProduct, error: fetchError } = await supabaseAdmin
+		const { data: existingProduct, error: fetchError } = await /** @type {any} */ (supabaseAdmin)
 			.from('products')
-			.select('image_url')
+			.select('image_url, bundle_component_ids')
 			.eq('id', params.id)
 			.single();
 
 		if (fetchError || !existingProduct) {
 			return fail(404, { error: 'This product could not be found. It may have been deleted.' });
+		}
+
+		// A bundle's stock is always computed from its components — never
+		// let a stray form field override that here, even if one somehow
+		// arrives (e.g. a stale tab from before it became a bundle).
+		if (!existingProduct.bundle_component_ids?.length) {
+			updates.stock_quantity = stockQuantity;
+			if (stockQuantity !== null) {
+				updates.in_stock = stockQuantity > 0;
+			}
 		}
 
 		/** @type {string[]} */

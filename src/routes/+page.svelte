@@ -140,6 +140,7 @@
 						image_url={product.image_url}
 						category={product.categoryLabel || product.category}
 						in_stock={product.in_stock}
+						available_quantity={product.available_quantity}
 						created_at={product.created_at}
 						colors={product.colors}
 					/>

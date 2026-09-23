@@ -6,6 +6,8 @@
 	import { formatBytes } from '$lib/utils/imageCompression.js';
 
 	let { data, form } = $props();
+	/** @type {any} */
+	let anyForm = $derived(form);
 	/** @type {{ id: string, value: string, label: string, sort_order: number, is_active: boolean }[]} */
 	let categories = $derived(/** @type {any} */ (data).categories ?? []);
 	let submitting = $state(false);
@@ -123,6 +125,26 @@
 							{/each}
 						</select>
 					</div>
+				</div>
+
+				<div>
+					<label for="stock_quantity" class="block text-sm font-medium text-brand-dark"
+						>Stock Quantity <span class="font-normal text-brand-mid">(optional)</span></label
+					>
+					<input
+						id="stock_quantity"
+						name="stock_quantity"
+						type="number"
+						step="1"
+						min="0"
+						placeholder="Leave blank for a single one-of-a-kind item"
+						value={anyForm?.stock_quantity ?? ''}
+						class="mt-1 block w-full rounded-md border border-brand-light px-3 py-2 shadow-sm focus:border-brand-mid focus:ring-brand-mid focus:outline-none sm:text-sm"
+					/>
+					<p class="mt-1 text-xs text-brand-mid">
+						Set this if you have multiple identical units. Leave blank for a unique piece — it'll
+						just flip to "Sold" when purchased.
+					</p>
 				</div>
 
 				<div>

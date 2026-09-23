@@ -1,5 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { supabase } from '$lib/server/supabase.js';
+import { withComputedStock } from '$lib/server/stock.js';
 
 /**
  * Load a single product by its slug.
@@ -17,6 +18,8 @@ export async function load({ params, url }) {
 		throw error(404, 'Product not found');
 	}
 
+	const [productWithStock] = await withComputedStock(supabase, [product]);
+
 	// Fetch the category label
 	let categoryLabel = product.category; // Default to the value if not found
 	if (product.category) {
@@ -32,5 +35,5 @@ export async function load({ params, url }) {
 		}
 	}
 
-	return { product, categoryLabel, canonicalUrl: url.href };
+	return { product: productWithStock, categoryLabel, canonicalUrl: url.href };
 }

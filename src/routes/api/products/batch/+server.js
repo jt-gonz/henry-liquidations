@@ -1,5 +1,6 @@
 import { json } from '@sveltejs/kit';
 import { supabase } from '$lib/server/supabase.js';
+import { withComputedStock } from '$lib/server/stock.js';
 
 /**
  * POST /api/products/batch
@@ -22,15 +23,17 @@ export async function POST({ request }) {
         return json({ products: [] });
     }
 
-    const { data: products, error } = await supabase
+    const { data, error } = await supabase
         .from('products')
-        .select('id, name, price, in_stock, image_url, slug')
+        .select('id, name, price, in_stock, image_url, slug, stock_quantity, bundle_component_ids')
         .in('id', ids);
 
     if (error) {
         console.error('Batch product fetch error:', error.message);
         return json({ error: 'Failed to fetch products.' }, { status: 500 });
     }
+
+    const products = await withComputedStock(supabase, data ?? []);
 
     return json({ products });
 }

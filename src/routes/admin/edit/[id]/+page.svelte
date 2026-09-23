@@ -4,7 +4,7 @@
 	import ColorPicker from '$lib/components/admin/ColorPicker.svelte';
 	import { formatBytes } from '$lib/utils/imageCompression.js';
 
-	/** @typedef {{ id: string, name: string, slug: string, description: string, price: number, category: string, image_url: string[], in_stock: boolean, dimensions: { width?: number, height?: number, depth?: number, unit?: string } | null, colors: string[] | null, created_at: string }} Product */
+	/** @typedef {{ id: string, name: string, slug: string, description: string, price: number, category: string, image_url: string[], in_stock: boolean, dimensions: { width?: number, height?: number, depth?: number, unit?: string } | null, colors: string[] | null, created_at: string, stock_quantity: number | null, bundle_component_ids: string[] | null }} Product */
 	/** @typedef {{ id: string, value: string, label: string, sort_order: number, is_active: boolean }} Category */
 
 	let { data, form } = $props();
@@ -172,6 +172,30 @@
 						>{anyForm?.description ?? product.description ?? ''}</textarea
 					>
 				</div>
+
+				{#if product.bundle_component_ids?.length}
+					<div class="rounded-md bg-brand-bg px-3 py-2 text-sm text-brand-mid">
+						This is a bundle — its stock is computed automatically from its component
+						products, not set directly. Manage quantities from
+						<a href="/admin/inventory" class="underline hover:text-brand-dark">Inventory</a>.
+					</div>
+				{:else}
+					<div>
+						<label for="stock_quantity" class="block text-sm font-medium text-brand-dark"
+							>Stock Quantity <span class="font-normal text-brand-mid">(optional)</span></label
+						>
+						<input
+							id="stock_quantity"
+							name="stock_quantity"
+							type="number"
+							step="1"
+							min="0"
+							placeholder="Leave blank for a single one-of-a-kind item"
+							value={anyForm?.stock_quantity ?? product.stock_quantity ?? ''}
+							class="mt-1 block w-full rounded-md border border-brand-light px-3 py-2 shadow-sm focus:border-brand-mid focus:ring-brand-mid focus:outline-none sm:text-sm"
+						/>
+					</div>
+				{/if}
 			</div>
 		</div>
 

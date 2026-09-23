@@ -1,5 +1,6 @@
 import { json } from '@sveltejs/kit';
 import { supabase } from '$lib/server/supabase.js';
+import { withComputedStock } from '$lib/server/stock.js';
 
 /** @type {Record<string, { col: 'created_at' | 'price', asc: boolean }>} */
 const SORT_OPTIONS = {
@@ -125,8 +126,11 @@ export async function GET({ url }) {
 		);
 	}
 
-	const products = data ?? [];
+	const rawProducts = data ?? [];
 	const total = count ?? 0;
+
+	// Recompute live, bundle-aware stock (see src/lib/server/stock.js)
+	const products = await withComputedStock(supabase, rawProducts);
 
 	// Fetch categories to map values to labels
 	const { data: categories } = await supabase

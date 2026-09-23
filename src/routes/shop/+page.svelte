@@ -8,7 +8,7 @@
 	/** @type {{ id: string, value: string, label: string, sort_order: number, is_active: boolean }[]} */
 	let categories = $derived(/** @type {any} */ (data).categories ?? []);
 
-	/** @type {import('$lib/types/database.js').ProductRow[]} */
+	/** @type {(import('$lib/types/database.js').ProductRow & { categoryLabel?: string, available_quantity?: number | null })[]} */
 	let products = $state([]);
 	let total = $state(0);
 	let hasMore = $state(false);
@@ -520,6 +520,7 @@
 							image_url={product.image_url}
 							category={product.categoryLabel || product.category}
 							in_stock={product.in_stock}
+							available_quantity={product.available_quantity}
 							created_at={product.created_at}
 							colors={product.colors}
 						/>

@@ -29,6 +29,8 @@
  * @property {ProductDimensions|null} dimensions
  * @property {string[]|null} colors
  * @property {string}  created_at
+ * @property {number|null} stock_quantity
+ * @property {string[]|null} bundle_component_ids
  */
 
 /**
@@ -44,6 +46,8 @@
  * @property {ProductDimensions|null} [dimensions]
  * @property {string[]|null} [colors]
  * @property {string}  [created_at]
+ * @property {number|null} [stock_quantity]
+ * @property {string[]|null} [bundle_component_ids]
  */
 
 /**
@@ -59,6 +63,8 @@
  * @property {ProductDimensions|null} [dimensions]
  * @property {string[]|null} [colors]
  * @property {string}  [created_at]
+ * @property {number|null} [stock_quantity]
+ * @property {string[]|null} [bundle_component_ids]
  */
 
 /**

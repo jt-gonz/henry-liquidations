@@ -1,4 +1,5 @@
 import { supabase } from '$lib/server/supabase.js';
+import { withComputedStock } from '$lib/server/stock.js';
 
 const PAGE_SIZE = 12;
 
@@ -101,8 +102,12 @@ export async function load({ url }) {
 		};
 	}
 
-	const products = data ?? [];
+	const rawProducts = data ?? [];
 	const total = count ?? 0;
+
+	// Recompute live, bundle-aware stock (a bundle's stored in_stock can go
+	// briefly stale between sales of its components — see src/lib/server/stock.js)
+	const products = await withComputedStock(supabase, rawProducts);
 
 	// Fetch categories to map values to labels
 	const { data: categories } = await supabase
@@ -114,7 +119,7 @@ export async function load({ url }) {
 	const categoryMap = new Map((categories ?? []).map((cat) => [cat.value, cat.label]));
 
 	// Add category labels to products
-	const productsWithLabels = products.map((product) => ({
+	const productsWithLabels = /** @type {any[]} */ (products).map((product) => ({
 		...product,
 		categoryLabel: categoryMap.get(product.category) || product.category
 	}));
@@ -122,9 +127,7 @@ export async function load({ url }) {
 	/** @type {string | null} */
 	let nextCursor = null;
 	if (productsWithLabels.length === PAGE_SIZE) {
-		const last = /** @type {import('$lib/types/database.js').ProductRow} */ (
-			productsWithLabels[productsWithLabels.length - 1]
-		);
+		const last = /** @type {any} */ (productsWithLabels[productsWithLabels.length - 1]);
 		nextCursor = `${last[sortCol]}|${last.id}`;
 	}
 

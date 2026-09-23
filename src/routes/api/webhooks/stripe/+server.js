@@ -78,7 +78,7 @@ export async function POST({ request }) {
 		const productIds = cartItems.map((i) => i.id);
 		const { data: products } = await /** @type {any} */ (supabaseAdmin)
 			.from('products')
-			.select('id, name, price')
+			.select('id, name, price, stock_quantity, bundle_component_ids, in_stock')
 			.in('id', productIds);
 
 		const orderItems = cartItems.map((item) => {
@@ -114,15 +114,85 @@ export async function POST({ request }) {
 			console.error('Failed to record order:', orderError.message);
 		}
 
-		// ── 2b. Mark products as sold (out of stock) ────────────
-		if (productIds.length > 0) {
+		// ── 2b. Decrement stock (bundle-aware) ──────────────────
+		// A bundle (e.g. "King Bed-Dresser-Mirror") has no stock of its
+		// own — buying one decrements each of its component pieces
+		// instead, so a standalone "King Bed" listing and every bundle
+		// that needs a king bed all stay correctly in sync automatically.
+		/** @type {Map<string, number>} */
+		const pieceDecrements = new Map();
+		/** @type {string[]} */
+		const legacyIds = [];
+
+		for (const item of cartItems) {
+			const product = products?.find((/** @type {any} */ p) => p.id === item.id);
+			if (!product) continue;
+
+			if (product.bundle_component_ids?.length > 0) {
+				for (const componentId of product.bundle_component_ids) {
+					pieceDecrements.set(componentId, (pieceDecrements.get(componentId) ?? 0) + item.quantity);
+				}
+			} else if (product.stock_quantity !== null && product.stock_quantity !== undefined) {
+				pieceDecrements.set(product.id, (pieceDecrements.get(product.id) ?? 0) + item.quantity);
+			} else {
+				// Legacy single-unit listing: no quantity tracked at all.
+				legacyIds.push(product.id);
+			}
+		}
+
+		for (const [pieceId, qty] of pieceDecrements) {
+			const { error: decrementError } = await /** @type {any} */ (supabaseAdmin).rpc(
+				'decrement_stock',
+				{ p_product_id: pieceId, p_qty: qty }
+			);
+			if (decrementError) {
+				console.error(`Failed to decrement stock for ${pieceId}:`, decrementError.message);
+			}
+		}
+
+		if (legacyIds.length > 0) {
 			const { error: updateError } = await /** @type {any} */ (supabaseAdmin)
 				.from('products')
 				.update({ in_stock: false })
-				.in('id', productIds);
-
+				.in('id', legacyIds);
 			if (updateError) {
-				console.error('Failed to update stock:', updateError.message);
+				console.error('Failed to update legacy stock:', updateError.message);
+			}
+		}
+
+		// ── 2c. Refresh in_stock on any bundles built from the pieces
+		// that just changed, so the storefront's "in stock" filter (a
+		// plain SQL column check) doesn't lag behind reality. The exact
+		// available count is always recomputed live on read regardless —
+		// this just keeps the stored flag from going stale.
+		if (pieceDecrements.size > 0) {
+			const changedPieceIds = Array.from(pieceDecrements.keys());
+			const { data: affectedBundles } = await /** @type {any} */ (supabaseAdmin)
+				.from('products')
+				.select('id, bundle_component_ids')
+				.overlaps('bundle_component_ids', changedPieceIds);
+
+			if (affectedBundles?.length > 0) {
+				const allComponentIds = Array.from(
+					new Set(affectedBundles.flatMap((/** @type {any} */ b) => b.bundle_component_ids))
+				);
+				const { data: componentRows } = await supabaseAdmin
+					.from('products')
+					.select('id, stock_quantity')
+					.in('id', allComponentIds);
+				const stockById = new Map(
+					(/** @type {any[]} */ (componentRows) ?? []).map((c) => [c.id, c.stock_quantity])
+				);
+
+				for (const bundle of affectedBundles) {
+					const available = Math.min(
+						...bundle.bundle_component_ids.map((/** @type {string} */ id) => stockById.get(id) ?? 0)
+					);
+					await /** @type {any} */ (supabaseAdmin)
+						.from('products')
+						.update({ in_stock: available > 0 })
+						.eq('id', bundle.id);
+				}
 			}
 		}
 	}

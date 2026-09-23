@@ -3,6 +3,7 @@ import Stripe from 'stripe';
 import { STRIPE_SECRET_KEY } from '$env/static/private';
 import { supabase } from '$lib/server/supabase.js';
 import { getColorName } from '$lib/constants/colors.js';
+import { withComputedStock } from '$lib/server/stock.js';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY);
 
@@ -33,19 +34,23 @@ export async function POST({ request, url }) {
 	// ── 1. Look up authentic prices from the database ────────────
 	const productIds = cartItems.map((/** @type {{ id: string }} */ i) => i.id);
 
-	const { data: products, error: dbError } = await supabase
+	const { data: rawProducts, error: dbError } = await supabase
 		.from('products')
-		.select('id, name, price, in_stock, image_url')
+		.select('id, name, price, in_stock, image_url, stock_quantity, bundle_component_ids')
 		.in('id', productIds);
 
-	if (dbError || !products) {
+	if (dbError || !rawProducts) {
 		console.error('Checkout DB error:', dbError?.message);
 		return json({ error: 'Failed to verify products.' }, { status: 500 });
 	}
 
+	// Bundle-aware availability: a bundle's stored in_stock can lag behind
+	// its components selling elsewhere, so recompute live rather than
+	// trusting the column — this is the last check before charging a card.
+	const products = await withComputedStock(supabase, rawProducts);
+
 	// Build a lookup map
-	/** @type {Map<string, import('$lib/types/database.js').ProductRow>} */
-	const productMap = new Map(/** @type {any[]} */ (products).map((p) => [p.id, p]));
+	const productMap = new Map(products.map((p) => [p.id, p]));
 
 	// ── 2. Build Stripe line_items with verified prices ──────────
 	/** @type {Stripe.Checkout.SessionCreateParams.LineItem[]} */
@@ -59,6 +64,21 @@ export async function POST({ request, url }) {
 		}
 		if (!product.in_stock) {
 			return json({ error: `"${product.name}" is no longer available.` }, { status: 400 });
+		}
+		if (
+			product.available_quantity !== null &&
+			product.available_quantity !== undefined &&
+			item.quantity > product.available_quantity
+		) {
+			return json(
+				{
+					error:
+						product.available_quantity === 0
+							? `"${product.name}" is no longer available.`
+							: `Only ${product.available_quantity} of "${product.name}" left in stock.`
+				},
+				{ status: 400 }
+			);
 		}
 
 		const unitAmount = Math.round(Number(product.price) * 100); // cents

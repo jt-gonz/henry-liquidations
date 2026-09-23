@@ -81,6 +81,25 @@ export const actions = {
 		const price = Number(priceStr);
 		const slug = slugify(name);
 
+		// ── Parse optional stock quantity ────────────────────────
+		// Left blank, a product keeps the legacy single-unit behavior
+		// (in_stock boolean only, no numeric count shown).
+		const stockQuantityStr = form.get('stock_quantity')?.toString().trim() ?? '';
+		/** @type {number | null} */
+		let stockQuantity = null;
+		if (stockQuantityStr !== '') {
+			if (isNaN(Number(stockQuantityStr)) || Number(stockQuantityStr) < 0) {
+				return fail(400, {
+					error: 'Stock quantity must be 0 or more.',
+					name,
+					price: priceStr,
+					category,
+					description
+				});
+			}
+			stockQuantity = Math.floor(Number(stockQuantityStr));
+		}
+
 		// ── Parse optional dimensions ────────────────────────────
 		const dimW = form.get('dim_width')?.toString();
 		const dimH = form.get('dim_height')?.toString();
@@ -161,9 +180,10 @@ export const actions = {
 				price,
 				category,
 				image_url: imageUrls,
-				in_stock: true,
+				in_stock: stockQuantity === null ? true : stockQuantity > 0,
 				dimensions,
-				colors
+				colors,
+				stock_quantity: stockQuantity
 			})
 		);
 

@@ -1,4 +1,5 @@
 import { supabase } from '$lib/server/supabase.js';
+import { withComputedStock } from '$lib/server/stock.js';
 
 const NEW_ARRIVALS_LIMIT = 8;
 const WASHER_DRYER_LIMIT = 6;
@@ -77,8 +78,14 @@ export async function load() {
 		console.error('Failed to load washer/dryer products:', washerDryerError.message);
 	}
 
-	const newArrivals = prioritizeImages(newArrivalsPool ?? [], NEW_ARRIVALS_LIMIT);
-	const washerDryerProducts = prioritizeImages(washerDryerPool ?? [], WASHER_DRYER_LIMIT);
+	const newArrivals = await withComputedStock(
+		supabase,
+		prioritizeImages(newArrivalsPool ?? [], NEW_ARRIVALS_LIMIT)
+	);
+	const washerDryerProducts = await withComputedStock(
+		supabase,
+		prioritizeImages(washerDryerPool ?? [], WASHER_DRYER_LIMIT)
+	);
 
 	const { data: categories } = await supabase
 		.from('categories')
