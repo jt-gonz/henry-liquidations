@@ -8,6 +8,7 @@
 	 *   name: string;
 	 *   slug: string;
 	 *   price: number;
+	 *   compare_at_price?: number | null;
 	 *   image_url: string[];
 	 *   category?: string;
 	 *   in_stock?: boolean;
@@ -21,6 +22,7 @@
 		name,
 		slug,
 		price,
+		compare_at_price = null,
 		image_url,
 		category = '',
 		in_stock = true,
@@ -28,6 +30,11 @@
 		created_at = null,
 		colors = null
 	} = $props();
+
+	let onSale = $derived(!!compare_at_price && compare_at_price > price);
+	let discountPercent = $derived(
+		onSale ? Math.round((1 - price / (compare_at_price ?? price)) * 100) : 0
+	);
 
 	const LOW_STOCK_THRESHOLD = 3;
 	let showCount = $derived(
@@ -130,6 +137,13 @@
 					{category}
 				</div>
 			{/if}
+			{#if onSale}
+				<div
+					class="absolute top-2 left-2 rounded-md bg-red-600 px-2 py-1 text-xs font-bold tracking-wide text-white uppercase"
+				>
+					{discountPercent}% Off
+				</div>
+			{/if}
 			{#if !in_stock}
 				<div
 					class="absolute top-2 right-2 rounded-md bg-brand-dark px-2 py-1 text-xs font-bold tracking-wide text-white uppercase"
@@ -156,6 +170,9 @@
 			</h3>
 			<div class="mt-1 flex items-baseline gap-2">
 				<p class="text-lg font-medium text-brand-brown">${price.toFixed(2)}</p>
+				{#if onSale}
+					<p class="text-sm text-brand-mid line-through">${(compare_at_price ?? 0).toFixed(2)}</p>
+				{/if}
 				{#if showCount && !lowStock}
 					<p class="text-xs text-brand-mid">{available_quantity} in stock</p>
 				{/if}

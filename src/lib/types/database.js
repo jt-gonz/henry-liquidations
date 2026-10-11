@@ -23,6 +23,7 @@
  * @property {string}  slug
  * @property {string}  description
  * @property {number}  price
+ * @property {number|null} compare_at_price
  * @property {string}  category
  * @property {string[]}  image_url
  * @property {boolean} in_stock
@@ -40,6 +41,7 @@
  * @property {string}  slug
  * @property {string}  [description]
  * @property {number}  price
+ * @property {number|null} [compare_at_price]
  * @property {string}  [category]
  * @property {string[]}  [image_url]
  * @property {boolean} [in_stock]
@@ -57,6 +59,7 @@
  * @property {string}  [slug]
  * @property {string}  [description]
  * @property {number}  [price]
+ * @property {number|null} [compare_at_price]
  * @property {string}  [category]
  * @property {string[]}  [image_url]
  * @property {boolean} [in_stock]

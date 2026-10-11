@@ -12,6 +12,11 @@
 	let canonicalUrl = $derived(/** @type {any} */ (data).canonicalUrl ?? '');
 	let added = $state(false);
 
+	let onSale = $derived(!!product.compare_at_price && product.compare_at_price > product.price);
+	let discountPercent = $derived(
+		onSale ? Math.round((1 - product.price / (product.compare_at_price ?? product.price)) * 100) : 0
+	);
+
 	let pageTitle = $derived(`${product.name} | Henry's Liquidation Store`);
 	let pageDescription = $derived(
 		(product.description || `Shop ${product.name} at liquidation prices.`)
@@ -322,6 +327,16 @@
 				<p class="text-3xl font-medium tracking-tight text-brand-brown">
 					${Number(product.price).toFixed(2)}
 				</p>
+				{#if onSale}
+					<p class="text-lg text-brand-mid line-through">
+						${Number(product.compare_at_price).toFixed(2)}
+					</p>
+					<span
+						class="rounded-md bg-red-600 px-2 py-1 text-xs font-bold tracking-wide text-white uppercase"
+					>
+						{discountPercent}% Off
+					</span>
+				{/if}
 				<div>
 					{#if product.in_stock}
 						{@const lowStock =

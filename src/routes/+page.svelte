@@ -137,6 +137,9 @@
 						name={product.name}
 						slug={product.slug}
 						price={Number(product.price)}
+						compare_at_price={product.compare_at_price != null
+							? Number(product.compare_at_price)
+							: null}
 						image_url={product.image_url}
 						category={product.categoryLabel || product.category}
 						in_stock={product.in_stock}
@@ -181,6 +184,9 @@
 							name={product.name}
 							slug={product.slug}
 							price={Number(product.price)}
+							compare_at_price={product.compare_at_price != null
+								? Number(product.compare_at_price)
+								: null}
 							image_url={product.image_url}
 							category={product.categoryLabel || product.category}
 							in_stock={product.in_stock}
