@@ -3,6 +3,7 @@ import { dev } from '$app/environment';
 import { createClient } from '@supabase/supabase-js';
 import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
 import { supabaseAdmin } from '$lib/server/supabase.js';
+import { isBotUserAgent } from '$lib/server/botDetection.js';
 
 /** Cookie options — secure only in production (HTTP in dev won't send Secure cookies) */
 const cookieOpts = {
@@ -36,6 +37,10 @@ function isTrackablePageView(event) {
 	if (pathname === '/login') return false;
 	// Skip static assets (favicon.ico, robots.txt, *.js, *.css, *.png, ...)
 	if (/\.[a-zA-Z0-9]+$/.test(pathname)) return false;
+	// Skip search crawlers, link-unfurl bots, uptime monitors, generic HTTP
+	// clients — they never execute JS, so Vercel's client-side analytics
+	// never counts them, but they'd otherwise inflate our server-side count.
+	if (isBotUserAgent(event.request.headers.get('user-agent') ?? '')) return false;
 	return true;
 }
 

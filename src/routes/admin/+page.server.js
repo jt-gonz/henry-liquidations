@@ -2,23 +2,39 @@ import { fail } from '@sveltejs/kit';
 import { supabase, supabaseAdmin } from '$lib/server/supabase.js';
 import { trackServerEvent } from '$lib/analytics.js';
 
+const PAGE_SIZE = 25;
+
 /**
- * Load all products for the admin dashboard table.
+ * Load one page of products for the admin dashboard table.
  *
  * @type {import('@sveltejs/kit').ServerLoad}
  */
-export async function load() {
-	const { data: products, error } = await supabase
+export async function load({ url }) {
+	const page = Math.max(1, parseInt(url.searchParams.get('page') ?? '1', 10) || 1);
+	const from = (page - 1) * PAGE_SIZE;
+	const to = from + PAGE_SIZE - 1;
+
+	const { data: products, error, count } = await supabase
 		.from('products')
-		.select('*')
-		.order('created_at', { ascending: false });
+		.select('*', { count: 'exact' })
+		.order('created_at', { ascending: false })
+		.range(from, to);
 
 	if (error) {
 		console.error('Failed to load products:', error.message);
-		return { products: [] };
+		return { products: [], page: 1, totalPages: 1, totalCount: 0, from: 0, to: 0 };
 	}
 
-	return { products: products ?? [] };
+	const totalCount = count ?? 0;
+
+	return {
+		products: products ?? [],
+		page,
+		totalPages: Math.max(1, Math.ceil(totalCount / PAGE_SIZE)),
+		totalCount,
+		from,
+		to: Math.min(to, totalCount - 1)
+	};
 }
 
 /** @type {import('@sveltejs/kit').Actions} */

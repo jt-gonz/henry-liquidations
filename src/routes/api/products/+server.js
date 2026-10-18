@@ -1,31 +1,8 @@
 import { json } from '@sveltejs/kit';
 import { supabase } from '$lib/server/supabase.js';
 import { withComputedStock } from '$lib/server/stock.js';
-
-/** @type {Record<string, { col: 'created_at' | 'price', asc: boolean }>} */
-const SORT_OPTIONS = {
-	newest: { col: 'created_at', asc: false },
-	price_asc: { col: 'price', asc: true },
-	price_desc: { col: 'price', asc: false }
-};
-
-/**
- * Whether a product's first image is likely to actually load. A handful of
- * products have filenames with unencoded commas/spaces that fail to load in
- * the browser — this can't be known for certain without fetching the URL,
- * but it's a cheap, effective heuristic for de-prioritizing the known cases.
- * @param {any} product
- */
-function hasReliableImage(product) {
-	const url = product.image_url?.[0];
-	if (!url) return false;
-	try {
-		const filename = decodeURIComponent(url.split('/').pop() ?? '');
-		return !/[,\s]/.test(filename);
-	} catch {
-		return false;
-	}
-}
+import { parseProductFilters, buildProductQuery } from '$lib/server/productFilters.js';
+import { hasReliableImage } from '$lib/server/productImages.js';
 
 /**
  * GET /api/products?limit=12&cursor=<sortValue>|<id>&category=Living+Room&minPrice=10&maxPrice=500&inStock=true&search=sofa&sort=newest&washerDryer=true
@@ -39,62 +16,9 @@ function hasReliableImage(product) {
 export async function GET({ url }) {
 	const limit = Math.min(50, Math.max(1, parseInt(url.searchParams.get('limit') ?? '12', 10)));
 	const cursor = url.searchParams.get('cursor');
-	const category = url.searchParams.get('category');
-	const minPrice = url.searchParams.get('minPrice');
-	const maxPrice = url.searchParams.get('maxPrice');
-	const inStockParam = url.searchParams.get('inStock');
-	const search = url.searchParams.get('search')?.trim();
-	const washerDryer = url.searchParams.get('washerDryer') === 'true';
-	const sortParam = url.searchParams.get('sort') ?? 'newest';
-	const sort = SORT_OPTIONS[sortParam] ? sortParam : 'newest';
-	const { col: sortCol, asc: sortAsc } = SORT_OPTIONS[sort];
-
-	// Build the query
-	let query = supabase.from('products').select('*', { count: 'exact' });
-
-	// ── Filters ─────────────────────────────────────────────
-	if (inStockParam === 'true') {
-		query = query.eq('in_stock', true);
-	} else if (inStockParam === 'false') {
-		query = query.eq('in_stock', false);
-	}
-	// Default: show all when inStock is not specified
-
-	// The "Washers & Dryers" quick filter is mutually exclusive with the
-	// category filter — there's no dedicated subcategory, so it's a name
-	// match within Appliances.
-	if (washerDryer) {
-		query = query.eq('category', 'APPLIANCES').or('name.ilike.%washer%,name.ilike.%dryer%');
-	} else if (category) {
-		// Support multiple categories comma-separated
-		const cats = category
-			.split(',')
-			.map((c) => c.trim())
-			.filter(Boolean);
-		if (cats.length === 1) {
-			query = query.eq('category', cats[0]);
-		} else if (cats.length > 1) {
-			query = query.in('category', cats);
-		}
-	}
-
-	if (minPrice) {
-		const min = Number(minPrice);
-		if (!isNaN(min)) query = query.gte('price', min);
-	}
-	if (maxPrice) {
-		const max = Number(maxPrice);
-		if (!isNaN(max)) query = query.lte('price', max);
-	}
-
-	// ── Search (on-demand ilike) ────────────────────────────
-	if (search && search.length > 0) {
-		// Search across name and description using OR
-		query = query.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
-	}
-
-	// ── Ordering ────────────────────────────────────────────
-	query = query.order(sortCol, { ascending: sortAsc }).order('id', { ascending: sortAsc });
+	const filters = parseProductFilters(url.searchParams);
+	const { query: baseQuery, sortCol, sortAsc } = buildProductQuery(supabase, filters);
+	let query = baseQuery;
 
 	// ── Cursor-based pagination ─────────────────────────────
 	if (cursor) {
@@ -104,7 +28,8 @@ export async function GET({ url }) {
 
 		// Sorting by price means the cursor value must be numeric — reject
 		// malformed cursors rather than interpolating untrusted input.
-		const isValidCursorValue = sortCol === 'price' ? cursorValue !== '' && !isNaN(Number(cursorValue)) : cursorValue !== '';
+		const isValidCursorValue =
+			sortCol === 'price' ? cursorValue !== '' && !isNaN(Number(cursorValue)) : cursorValue !== '';
 
 		if (isValidCursorValue && cursorId) {
 			const cmp = sortAsc ? 'gt' : 'lt';
@@ -138,9 +63,7 @@ export async function GET({ url }) {
 		.select('value, label')
 		.eq('is_active', true);
 
-	const categoryMap = new Map(
-		(categories ?? []).map((cat) => [cat.value, cat.label])
-	);
+	const categoryMap = new Map((categories ?? []).map((cat) => [cat.value, cat.label]));
 
 	// Add category labels to products
 	const productsWithLabels = products.map((product) => ({

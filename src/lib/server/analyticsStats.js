@@ -25,61 +25,35 @@ function buildDailyBuckets(days) {
 /**
  * Traffic stats derived from the first-party `page_views` table
  * (Vercel Web Analytics has no public read API, so we track this ourselves).
+ *
+ * Aggregated entirely in Postgres via the get_traffic_stats() RPC (see
+ * supabase/migrations/007_page_view_stats_rpc.sql) rather than pulling raw
+ * rows into JS — PostgREST silently caps unbounded selects at 1000 rows,
+ * which used to make this table's growth corrupt both the "last 7 days"
+ * KPI and the daily chart (see migration comment for the full story).
  */
 export async function getTrafficStats() {
-	const since30 = daysAgoIso(30);
-	const since7 = daysAgoIso(7);
-
-	const { data: rows, error } = await supabaseAdmin
-		.from('page_views')
-		.select('path, visitor_id, created_at')
-		.gte('created_at', since30)
-		.order('created_at', { ascending: true });
-
 	const dailyBuckets = buildDailyBuckets(14);
-
-	if (error) {
-		console.error('Failed to load page views:', error.message);
-		return {
-			pageViews30d: 0,
-			pageViews7d: 0,
-			uniqueVisitors30d: 0,
-			uniqueVisitors7d: 0,
-			topPages: [],
-			dailyViews: [...dailyBuckets.entries()].map(([date, count]) => ({ date, count }))
-		};
-	}
-
-	const views = /** @type {{ path: string, visitor_id: string, created_at: string }[]} */ (
-		rows ?? []
-	);
-	const views7d = views.filter((v) => v.created_at >= since7);
-
-	/** @type {Map<string, number>} */
-	const pageCounts = new Map();
-	for (const v of views) {
-		pageCounts.set(v.path, (pageCounts.get(v.path) ?? 0) + 1);
-	}
-	const topPages = [...pageCounts.entries()]
-		.sort((a, b) => b[1] - a[1])
-		.slice(0, 5)
-		.map(([path, count]) => ({ path, count }));
-
-	for (const v of views) {
-		const key = v.created_at.slice(0, 10);
-		if (dailyBuckets.has(key)) {
-			dailyBuckets.set(key, /** @type {number} */ (dailyBuckets.get(key)) + 1);
-		}
-	}
-
-	return {
-		pageViews30d: views.length,
-		pageViews7d: views7d.length,
-		uniqueVisitors30d: new Set(views.map((v) => v.visitor_id)).size,
-		uniqueVisitors7d: new Set(views7d.map((v) => v.visitor_id)).size,
-		topPages,
+	const fallback = {
+		pageViews30d: 0,
+		pageViews7d: 0,
+		uniqueVisitors30d: 0,
+		uniqueVisitors7d: 0,
+		topPages: [],
 		dailyViews: [...dailyBuckets.entries()].map(([date, count]) => ({ date, count }))
 	};
+
+	const { data, error } = await /** @type {any} */ (supabaseAdmin).rpc('get_traffic_stats', {
+		days_back: 30,
+		daily_days: 14
+	});
+
+	if (error) {
+		console.error('Failed to load traffic stats:', error.message);
+		return fallback;
+	}
+
+	return { ...fallback, .../** @type {object} */ (data) };
 }
 
 /**

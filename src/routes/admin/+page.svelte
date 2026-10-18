@@ -1,11 +1,19 @@
 <!-- Admin Dashboard -->
 <script>
 	import { goto } from '$app/navigation';
-	
+	import { enhance } from '$app/forms';
+	import Badge from '$lib/components/ui/Badge.svelte';
+	import Pagination from '$lib/components/ui/Pagination.svelte';
+
 	let { data, form } = $props();
 
 	/** @type {any[]} */
 	let products = $derived(/** @type {any} */ (data).products ?? []);
+	let page = $derived(/** @type {any} */ (data).page ?? 1);
+	let totalPages = $derived(/** @type {any} */ (data).totalPages ?? 1);
+	let totalCount = $derived(/** @type {any} */ (data).totalCount ?? 0);
+	let fromIndex = $derived(/** @type {any} */ (data).from ?? 0);
+	let toIndex = $derived(/** @type {any} */ (data).to ?? 0);
 </script>
 
 <div class="px-4 py-6 sm:px-6 lg:px-8">
@@ -86,33 +94,19 @@
 								<div class="mt-1 text-xs font-medium text-brand-brown sm:hidden">
 									${Number(product.price).toFixed(2)}
 								</div>
-								{#if product.in_stock}
-									<span
-										class="mt-1 inline-flex items-center rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset md:hidden"
-										>In Stock</span
-									>
-								{:else}
-									<span
-										class="mt-1 inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset md:hidden"
-										>Sold</span
-									>
-								{/if}
+								<div class="mt-1 md:hidden">
+									<Badge tone={product.in_stock ? 'admin-in-stock' : 'admin-sold'} pill uppercase={false}>
+										{product.in_stock ? 'In Stock' : 'Sold'}
+									</Badge>
+								</div>
 							</td>
 							<td class="hidden px-3 py-4 text-sm font-medium whitespace-nowrap text-brand-brown sm:table-cell"
 								>${Number(product.price).toFixed(2)}</td
 							>
 							<td class="hidden px-3 py-4 text-sm whitespace-nowrap md:table-cell">
-								{#if product.in_stock}
-									<span
-										class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset"
-										>In Stock</span
-									>
-								{:else}
-									<span
-										class="inline-flex items-center rounded-full bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset"
-										>Sold</span
-									>
-								{/if}
+								<Badge tone={product.in_stock ? 'admin-in-stock' : 'admin-sold'} pill uppercase={false}>
+									{product.in_stock ? 'In Stock' : 'Sold'}
+								</Badge>
 							</td>
 							<td
 								class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-6"
@@ -123,7 +117,7 @@
 										class="cursor-pointer text-brand-mid hover:text-brand-dark"
 										onclick={(e) => e.stopPropagation()}
 									>Edit</a>
-									<form method="POST" action="?/delete" class="inline">
+									<form method="POST" action="?/delete" class="inline" use:enhance>
 										<input type="hidden" name="id" value={product.id} />
 										<input type="hidden" name="image_urls" value={JSON.stringify(product.image_url ?? [])} />
 										<button
@@ -146,9 +140,15 @@
 		</table>
 	</div>
 
-	{#if products.length > 0}
-		<p class="mt-3 text-sm text-gray-600">
-			{products.length} product{products.length === 1 ? '' : 's'} total
-		</p>
+	{#if totalCount > 0}
+		<div class="mt-4 flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
+			<p class="text-sm text-brand-mid">
+				Showing <span class="font-medium text-brand-dark">{fromIndex + 1}</span>–<span
+					class="font-medium text-brand-dark">{toIndex + 1}</span
+				>
+				of <span class="font-medium text-brand-dark">{totalCount}</span> products
+			</p>
+			<Pagination {page} {totalPages} makeHref={(p) => `/admin?page=${p}`} />
+		</div>
 	{/if}
 </div>

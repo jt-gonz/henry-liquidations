@@ -2,11 +2,29 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import ProductCard from '$lib/components/ProductCard.svelte';
+	import { DEFAULT_OG_IMAGE } from '$lib/constants/seo.js';
 
 	let { data } = $props();
 	let quotes = $derived(/** @type {any[]} */ (data.quotes) ?? []);
 	let newArrivals = $derived(/** @type {any[]} */ (data.newArrivals) ?? []);
 	let washerDryerProducts = $derived(/** @type {any[]} */ (data.washerDryerProducts) ?? []);
+	let canonicalUrl = $derived(/** @type {any} */ (data).canonicalUrl ?? '');
+
+	let websiteJsonLd = $derived(
+		JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'WebSite',
+			name: "Henry's Liquidation Store",
+			url: canonicalUrl || undefined,
+			potentialAction: canonicalUrl
+				? {
+						'@type': 'SearchAction',
+						target: `${canonicalUrl}shop?search={search_term_string}`,
+						'query-input': 'required name=search_term_string'
+					}
+				: undefined
+		})
+	);
 	let currentSlide = $state(0);
 	let showScrollHint = $state(true);
 
@@ -50,9 +68,21 @@
 <svelte:head>
 	<title>{pageTitle}</title>
 	<meta name="description" content={pageDescription} />
+	{#if canonicalUrl}
+		<link rel="canonical" href={canonicalUrl} />
+	{/if}
 	<meta property="og:title" content={pageTitle} />
 	<meta property="og:description" content={pageDescription} />
 	<meta property="og:type" content="website" />
+	<meta property="og:image" content={DEFAULT_OG_IMAGE} />
+	{#if canonicalUrl}
+		<meta property="og:url" content={canonicalUrl} />
+	{/if}
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={pageTitle} />
+	<meta name="twitter:description" content={pageDescription} />
+	<meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+	{@html `<script type="application/ld+json">${websiteJsonLd}</script>`}
 </svelte:head>
 
 <div class="relative isolate overflow-hidden">
@@ -89,7 +119,7 @@
 			<div class="mt-10 flex items-center gap-x-8">
 				<a
 					href="/shop"
-					class="rounded-xl bg-brand-brown px-6 py-3.5 text-base font-bold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-brown-dark hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-brown"
+					class="rounded-xl bg-brand-brown px-6 py-3.5 text-base font-bold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-dark hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-brown"
 					>Shop Collection</a
 				>
 				<a href="#features" class="group text-base leading-6 font-bold text-brand-dark transition-all duration-200 hover:text-brand-mid"
@@ -126,7 +156,7 @@
 				</div>
 				<a
 					href="/shop"
-					class="hidden shrink-0 text-sm font-bold text-brand-brown transition-colors hover:text-brand-brown-dark sm:block"
+					class="hidden shrink-0 text-sm font-bold text-brand-brown transition-colors hover:text-brand-dark sm:block"
 					>Shop All →</a
 				>
 			</div>
@@ -151,7 +181,7 @@
 			</div>
 			<a
 				href="/shop"
-				class="mt-6 block text-center text-sm font-bold text-brand-brown transition-colors hover:text-brand-brown-dark sm:hidden"
+				class="mt-6 block text-center text-sm font-bold text-brand-brown transition-colors hover:text-brand-dark sm:hidden"
 				>Shop All →</a
 			>
 		</section>
@@ -172,8 +202,8 @@
 						</p>
 					</div>
 					<a
-						href="/shop?washerDryer=true"
-						class="hidden shrink-0 rounded-xl bg-brand-brown px-5 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-brown-dark sm:block"
+						href="/shop/washers-dryers"
+						class="hidden shrink-0 rounded-xl bg-brand-brown px-5 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-dark sm:block"
 						>Shop Washers &amp; Dryers</a
 					>
 				</div>
@@ -196,8 +226,8 @@
 					{/each}
 				</div>
 				<a
-					href="/shop?washerDryer=true"
-					class="mt-6 block rounded-xl bg-brand-brown px-5 py-3 text-center text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-brand-brown-dark sm:hidden"
+					href="/shop/washers-dryers"
+					class="mt-6 block rounded-xl bg-brand-brown px-5 py-3 text-center text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-brand-dark sm:hidden"
 					>Shop Washers &amp; Dryers</a
 				>
 			</div>
@@ -443,7 +473,7 @@
 		onclick={scrollToNextSection}
 		transition:fade={{ duration: 250 }}
 		aria-label="Scroll down"
-		class="fixed bottom-6 left-1/2 z-30 flex h-10 w-10 -translate-x-1/2 animate-bounce items-center justify-center rounded-full bg-white text-brand-brown shadow-md ring-1 ring-brand-light transition-colors hover:text-brand-brown-dark"
+		class="fixed bottom-6 left-1/2 z-30 flex h-10 w-10 -translate-x-1/2 animate-bounce items-center justify-center rounded-full bg-white text-brand-brown shadow-md ring-1 ring-brand-light transition-colors hover:text-brand-dark"
 	>
 		<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 			<path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />

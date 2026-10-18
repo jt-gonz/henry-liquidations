@@ -1,6 +1,8 @@
 <script>
 	import { addToCart } from '$lib/stores/cart.js';
 	import { track } from '@vercel/analytics';
+	import Badge from '$lib/components/ui/Badge.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
 
 	/**
 	 * @type {{
@@ -131,37 +133,19 @@
 				/>
 			{/if}
 			{#if category}
-				<div
-					class="absolute bottom-2 left-2 rounded-md bg-white/90 px-2 py-1 text-xs font-medium text-brand-dark backdrop-blur-sm"
-				>
+				<Badge tone="neutral" uppercase={false} class="absolute bottom-2 left-2">
 					{category}
-				</div>
+				</Badge>
 			{/if}
 			{#if onSale}
-				<div
-					class="absolute top-2 left-2 rounded-md bg-red-600 px-2 py-1 text-xs font-bold tracking-wide text-white uppercase"
-				>
-					{discountPercent}% Off
-				</div>
+				<Badge tone="sale" class="absolute top-2 left-2">{discountPercent}% Off</Badge>
 			{/if}
 			{#if !in_stock}
-				<div
-					class="absolute top-2 right-2 rounded-md bg-brand-dark px-2 py-1 text-xs font-bold tracking-wide text-white uppercase"
-				>
-					Sold
-				</div>
+				<Badge tone="sold" class="absolute top-2 right-2">Sold</Badge>
 			{:else if lowStock}
-				<div
-					class="absolute top-2 right-2 rounded-md bg-red-600 px-2 py-1 text-xs font-bold tracking-wide text-white uppercase"
-				>
-					Only {available_quantity} left
-				</div>
+				<Badge tone="low-stock" class="absolute top-2 right-2">Only {available_quantity} left</Badge>
 			{:else if isNew}
-				<div
-					class="absolute top-2 right-2 rounded-md bg-brand-accent px-2 py-1 text-xs font-bold tracking-wide text-white uppercase"
-				>
-					New
-				</div>
+				<Badge tone="new" class="absolute top-2 right-2">New</Badge>
 			{/if}
 		</div>
 		<div class="p-4 {in_stock ? 'pb-14' : ''}">
@@ -181,14 +165,12 @@
 	</a>
 
 	{#if in_stock}
-		<button
-			type="button"
+		<Button
 			onclick={handleAddToCart}
-			class="absolute right-3 bottom-3 left-3 rounded-md px-3 py-2 text-xs font-semibold text-white shadow transition-colors {added
-				? 'bg-green-600'
-				: 'bg-brand-brown hover:bg-brand-brown-dark'}"
+			size="sm"
+			class="absolute right-3 bottom-3 left-3 {added ? '!bg-green-600 hover:!bg-green-600' : ''}"
 		>
 			{added ? 'Added ✓' : 'Add to Cart'}
-		</button>
+		</Button>
 	{/if}
 </div>
