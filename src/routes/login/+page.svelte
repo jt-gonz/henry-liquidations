@@ -3,6 +3,11 @@
 	let { form } = $props();
 </script>
 
+<svelte:head>
+	<title>Manager Login | Henry's Liquidation Store</title>
+	<meta name="robots" content="noindex, nofollow" />
+</svelte:head>
+
 <div class="flex min-h-[60vh] items-center justify-center px-4">
 	<div class="w-full max-w-sm">
 		<h1 class="mb-6 text-center text-2xl font-bold text-gray-900">Manager Login</h1>

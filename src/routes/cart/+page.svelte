@@ -121,6 +121,7 @@
 <svelte:head>
 	<title>{pageTitle}</title>
 	<meta name="description" content="Review the items in your cart and check out securely." />
+	<meta name="robots" content="noindex, follow" />
 </svelte:head>
 
 <div class="mx-auto max-w-3xl px-4 py-8">
@@ -135,7 +136,7 @@
 			<p class="mt-2 text-gray-500">Looks like you haven't added anything to your cart yet.</p>
 			<a
 				href="/shop"
-				class="mt-8 inline-block rounded-xl bg-brand-brown px-8 py-3.5 text-base font-bold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-brown-dark hover:shadow-lg"
+				class="mt-8 inline-block rounded-xl bg-brand-brown px-8 py-3.5 text-base font-bold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-dark hover:shadow-lg"
 			>
 				Browse Products
 			</a>
@@ -237,7 +238,7 @@
 			<button
 				onclick={handleCheckout}
 				disabled={checkingOut}
-				class="w-full rounded-lg bg-brand-brown px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-brand-brown-dark disabled:cursor-not-allowed disabled:opacity-50"
+				class="w-full rounded-lg bg-brand-brown px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-50"
 			>
 				{checkingOut ? 'Redirecting to Stripe…' : 'Proceed to Checkout'}
 			</button>

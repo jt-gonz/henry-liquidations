@@ -1,21 +1,7 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { supabase, supabaseAdmin } from '$lib/server/supabase.js';
 import { trackServerEvent } from '$lib/analytics.js';
-
-/**
- * Generates a URL-friendly slug from a product name.
- * @param {string} name
- * @returns {string}
- */
-function slugify(name) {
-	return name
-		.toLowerCase()
-		.trim()
-		.replace(/[^\w\s-]/g, '')
-		.replace(/[\s_]+/g, '-')
-		.replace(/-+/g, '-')
-		.replace(/^-|-$/g, '');
-}
+import { slugify } from '$lib/server/slugify.js';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {

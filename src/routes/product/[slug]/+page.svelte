@@ -26,6 +26,37 @@
 	);
 	let ogImage = $derived(product.image_url?.[0] ?? '');
 
+	let productJsonLd = $derived(
+		JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'Product',
+			name: product.name,
+			description: pageDescription,
+			image: product.image_url ?? [],
+			category: categoryLabel,
+			offers: {
+				'@type': 'Offer',
+				priceCurrency: 'USD',
+				price: Number(product.price).toFixed(2),
+				availability: product.in_stock
+					? 'https://schema.org/InStock'
+					: 'https://schema.org/OutOfStock',
+				url: canonicalUrl || undefined
+			}
+		})
+	);
+
+	let breadcrumbJsonLd = $derived(
+		JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Shop', item: canonicalUrl ? new URL('/shop', canonicalUrl).href : undefined },
+				{ '@type': 'ListItem', position: 2, name: product.name, item: canonicalUrl || undefined }
+			]
+		})
+	);
+
 	// Track product view on page load
 	$effect(() => {
 		if (product?.id) {
@@ -143,6 +174,14 @@
 		<meta property="og:url" content={canonicalUrl} />
 		<link rel="canonical" href={canonicalUrl} />
 	{/if}
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={pageTitle} />
+	<meta name="twitter:description" content={pageDescription} />
+	{#if ogImage}
+		<meta name="twitter:image" content={ogImage} />
+	{/if}
+	{@html `<script type="application/ld+json">${productJsonLd}</script>`}
+	{@html `<script type="application/ld+json">${breadcrumbJsonLd}</script>`}
 </svelte:head>
 
 <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -448,7 +487,7 @@
 					<div class="flex flex-1 flex-col sm:flex-row sm:items-center sm:gap-6">
 						<button
 							onclick={handleAddToCart}
-							class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-brand-brown px-8 py-3 text-base font-medium text-white transition-colors duration-200 hover:bg-brand-brown-dark focus:ring-2 focus:ring-brand-brown focus:ring-offset-2 focus:ring-offset-brand-bg focus:outline-none sm:w-full {added
+							class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-brand-brown px-8 py-3 text-base font-medium text-white transition-colors duration-200 hover:bg-brand-dark focus:ring-2 focus:ring-brand-brown focus:ring-offset-2 focus:ring-offset-brand-bg focus:outline-none sm:w-full {added
 								? 'bg-green-600 hover:bg-green-700'
 								: ''}"
 						>

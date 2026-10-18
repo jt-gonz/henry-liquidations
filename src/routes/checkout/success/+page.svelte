@@ -13,6 +13,11 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Order Confirmed | Henry's Liquidation Store</title>
+	<meta name="robots" content="noindex, follow" />
+</svelte:head>
+
 <div class="mx-auto max-w-xl px-4 py-24 text-center">
 	<div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
 		<svg class="h-8 w-8 text-green-600" viewBox="0 0 20 20" fill="currentColor">

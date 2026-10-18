@@ -1,10 +1,15 @@
 <!-- Shipping & Delivery Policy -->
+<script>
+	import { page } from '$app/stores';
+</script>
+
 <svelte:head>
 	<title>Shipping &amp; Delivery Policy | Henry's Liquidation Store</title>
 	<meta
 		name="description"
 		content="Read our shipping and delivery policy, including processing times and delivery options."
 	/>
+	<link rel="canonical" href={$page.url.origin + '/shipping-policy'} />
 </svelte:head>
 
 <div class="mx-auto max-w-3xl px-6 py-16 sm:px-8">

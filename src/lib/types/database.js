@@ -113,6 +113,7 @@
  * @property {string} id
  * @property {string} value
  * @property {string} label
+ * @property {string} slug
  * @property {number} sort_order
  * @property {boolean} is_active
  * @property {string} created_at
@@ -123,6 +124,7 @@
  * @property {string} [id]
  * @property {string} value
  * @property {string} label
+ * @property {string} [slug]
  * @property {number} [sort_order]
  * @property {boolean} [is_active]
  * @property {string} [created_at]
@@ -133,6 +135,7 @@
  * @property {string} [id]
  * @property {string} [value]
  * @property {string} [label]
+ * @property {string} [slug]
  * @property {number} [sort_order]
  * @property {boolean} [is_active]
  * @property {string} [created_at]

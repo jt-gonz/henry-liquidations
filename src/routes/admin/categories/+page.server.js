@@ -1,5 +1,7 @@
 import { fail } from '@sveltejs/kit';
 import { supabase, supabaseAdmin } from '$lib/server/supabase.js';
+import { slugify } from '$lib/server/slugify.js';
+import { WASHER_DRYER_SLUG } from '$lib/server/productFilters.js';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
@@ -39,14 +41,20 @@ export const actions = {
 		// Convert value to uppercase with underscores
 		const normalizedValue = value.toUpperCase().replace(/\s+/g, '_');
 
+		// "washers-dryers" is reserved for the synthetic Washers & Dryers
+		// filter (see WASHER_DRYER_SLUG) — it has no categories row, so a
+		// real category can't be created at that URL.
+		let slug = slugify(label);
+		if (slug === WASHER_DRYER_SLUG) slug = `${slug}-collection`;
+
 		const { error } = await /** @type {any} */ (supabaseAdmin)
 			.from('categories')
-			.insert([{ value: normalizedValue, label, sort_order, is_active }]);
+			.insert([{ value: normalizedValue, label, slug, sort_order, is_active }]);
 
 		if (error) {
 			if (error.code === '23505') {
 				return fail(400, {
-					error: `Category "${normalizedValue}" already exists`,
+					error: `Category "${normalizedValue}" (or its URL slug) already exists`,
 					value,
 					label,
 					sort_order,
