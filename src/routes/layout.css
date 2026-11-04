@@ -20,6 +20,13 @@
 	--radius-sm: 0.375rem;
 	--radius-md: 0.5rem;
 	--radius-lg: 0.75rem;
+	--radius-xl: 1.125rem; /* media tier: product images, hero frame, modals, popovers */
+
+	/* Elevation — brand-tinted (walnut), not neutral gray */
+	--shadow-xs: 0 1px 2px 0 rgb(43 36 32 / 0.06);
+	--shadow-card: 0 2px 8px -2px rgb(43 36 32 / 0.1), 0 1px 2px rgb(43 36 32 / 0.06);
+	--shadow-card-hover: 0 14px 28px -10px rgb(43 36 32 / 0.2), 0 2px 4px rgb(43 36 32 / 0.08);
+	--shadow-popover: 0 16px 40px -12px rgb(43 36 32 / 0.22);
 
 	--font-sans: 'Inter', sans-serif;
 }

@@ -51,19 +51,6 @@
 		</div>
 		<nav class="space-y-1">
 			<a
-				href="/admin"
-				class="group flex items-center rounded-md border-l-4 border-transparent px-3 py-2 text-sm font-medium text-gray-700 transition-all hover:border-gray-900 hover:bg-gray-50 hover:text-gray-900"
-			>
-				<span class="mr-3 text-gray-400 group-hover:text-gray-500">
-					<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
-						><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" /><path
-							d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"
-						/></svg
-					>
-				</span>
-				Dashboard
-			</a>
-			<a
 				href="/admin/analytics"
 				class="group flex items-center rounded-md border-l-4 border-transparent px-3 py-2 text-sm font-medium text-gray-700 transition-all hover:border-gray-900 hover:bg-gray-50 hover:text-gray-900"
 			>
@@ -116,6 +103,51 @@
 					>
 				</span>
 				Categories
+			</a>
+			<a
+				href="/admin/shipping-rates"
+				class="group flex items-center rounded-md border-l-4 border-transparent px-3 py-2 text-sm font-medium text-gray-700 transition-all hover:border-gray-900 hover:bg-gray-50 hover:text-gray-900"
+			>
+				<span class="mr-3 text-gray-400 group-hover:text-gray-500">
+					<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
+						><path
+							d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM18.5 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
+						/><path
+							d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0h4.1a2.5 2.5 0 014.9 0H19a1 1 0 001-1v-4.586a1 1 0 00-.293-.707l-3.414-3.414A1 1 0 0015.586 6H14V5a1 1 0 00-1-1H3z"
+						/></svg
+					>
+				</span>
+				Shipping Rates
+			</a>
+			<a
+				href="/admin/orders"
+				class="group flex items-center rounded-md border-l-4 border-transparent px-3 py-2 text-sm font-medium text-gray-700 transition-all hover:border-gray-900 hover:bg-gray-50 hover:text-gray-900"
+			>
+				<span class="mr-3 text-gray-400 group-hover:text-gray-500">
+					<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
+						><path
+							fill-rule="evenodd"
+							d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM2 9v5a2 2 0 002 2h12a2 2 0 002-2V9H2zm3 3a1 1 0 011-1h4a1 1 0 110 2H6a1 1 0 01-1-1z"
+							clip-rule="evenodd"
+						/></svg
+					>
+				</span>
+				Orders
+			</a>
+			<a
+				href="/admin/newsletter"
+				class="group flex items-center rounded-md border-l-4 border-transparent px-3 py-2 text-sm font-medium text-gray-700 transition-all hover:border-gray-900 hover:bg-gray-50 hover:text-gray-900"
+			>
+				<span class="mr-3 text-gray-400 group-hover:text-gray-500">
+					<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
+						><path
+							d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
+						/><path
+							d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
+						/></svg
+					>
+				</span>
+				Newsletter
 			</a>
 			<a
 				href="/admin/quotes"
@@ -172,7 +204,12 @@
 	{#if mobileMenuOpen}
 		<div class="fixed inset-0 z-50 flex items-center justify-center p-4 lg:hidden">
 			<!-- Backdrop -->
-			<div class="fixed inset-0 bg-black/50 backdrop-blur-sm" onclick={closeMobileMenu}></div>
+			<button
+				type="button"
+				class="fixed inset-0 cursor-default bg-black/50 backdrop-blur-sm"
+				aria-label="Close menu"
+				onclick={closeMobileMenu}
+			></button>
 
 			<!-- Menu Panel -->
 			<div class="relative w-full max-w-md rounded-2xl bg-white shadow-2xl">
@@ -196,20 +233,6 @@
 				</div>
 
 				<nav class="space-y-2 px-4 py-6">
-					<a
-						href="/admin"
-						onclick={closeMobileMenu}
-						class="group flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 hover:text-gray-900"
-					>
-						<span class="text-gray-400 group-hover:text-gray-500">
-							<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
-								><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" /><path
-									d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"
-								/></svg
-							>
-						</span>
-						Dashboard
-					</a>
 					<a
 						href="/admin/analytics"
 						onclick={closeMobileMenu}
@@ -269,6 +292,54 @@
 							>
 						</span>
 						Categories
+					</a>
+					<a
+						href="/admin/shipping-rates"
+						onclick={closeMobileMenu}
+						class="group flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 hover:text-gray-900"
+					>
+						<span class="text-gray-400 group-hover:text-gray-500">
+							<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
+								><path
+									d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM18.5 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
+								/><path
+									d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0h4.1a2.5 2.5 0 014.9 0H19a1 1 0 001-1v-4.586a1 1 0 00-.293-.707l-3.414-3.414A1 1 0 0015.586 6H14V5a1 1 0 00-1-1H3z"
+								/></svg
+							>
+						</span>
+						Shipping Rates
+					</a>
+					<a
+						href="/admin/orders"
+						onclick={closeMobileMenu}
+						class="group flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 hover:text-gray-900"
+					>
+						<span class="text-gray-400 group-hover:text-gray-500">
+							<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
+								><path
+									fill-rule="evenodd"
+									d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM2 9v5a2 2 0 002 2h12a2 2 0 002-2V9H2zm3 3a1 1 0 011-1h4a1 1 0 110 2H6a1 1 0 01-1-1z"
+									clip-rule="evenodd"
+								/></svg
+							>
+						</span>
+						Orders
+					</a>
+					<a
+						href="/admin/newsletter"
+						onclick={closeMobileMenu}
+						class="group flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 hover:text-gray-900"
+					>
+						<span class="text-gray-400 group-hover:text-gray-500">
+							<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
+								><path
+									d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
+								/><path
+									d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
+								/></svg
+							>
+						</span>
+						Newsletter
 					</a>
 					<a
 						href="/admin/quotes"

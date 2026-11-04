@@ -30,6 +30,26 @@ export const WASHER_DRYER_FILTER = {
 export { WASHER_DRYER_SLUG } from '$lib/constants/shop.js';
 
 /**
+ * Escapes a value for safe interpolation into a raw PostgREST `.or()`
+ * filter string. Without this, a search term containing a comma, period,
+ * or parenthesis would be parsed as extra filter syntax instead of a
+ * literal value — wrapping in double quotes (with internal backslashes/
+ * quotes escaped) is the escaping PostgREST itself expects there.
+ * @param {string} value
+ */
+function escapeOrValue(value) {
+	return `"${value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
+}
+
+/**
+ * Escapes POSIX regex metacharacters so a literal word can be dropped into a `~*` pattern.
+ * @param {string} value
+ */
+function escapeRegex(value) {
+	return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
  * Normalizes the shop/products-API filter params from a URLSearchParams
  * into one consistent shape.
  * @param {URLSearchParams} searchParams
@@ -97,11 +117,28 @@ export function buildProductQuery(client, filters = {}) {
 	}
 
 	if (filters.search && filters.search.length > 0) {
-		const term = filters.search;
-		// Also matches the raw category value (e.g. "RECLINER COLLECTION"),
-		// so searching "recliner" now surfaces the right products even
-		// without typing the exact product name.
-		query = query.or(`name.ilike.%${term}%,description.ilike.%${term}%,category.ilike.%${term}%`);
+		// Match word-by-word (AND across words, OR across columns) instead of
+		// the whole phrase as one substring, so "bed queen" and "queen bed"
+		// both surface "Queen Bed Frame" regardless of word order. Each
+		// .or() call below becomes its own AND'd condition — chaining them
+		// is what gives the AND-of-ORs shape.
+		const words = filters.search.split(/\s+/).filter(Boolean).slice(0, 8);
+
+		for (const word of words) {
+			const likePattern = escapeOrValue(`%${word}%`);
+			// Category is matched as a whole word, not a plain substring —
+			// category values are underscore-joined collection names (e.g.
+			// "BEDROOM_COLLECTION"), and a substring match would make a common
+			// word like "bed" match nearly every bedroom product. Boundaries are
+			// start/end-of-string or an underscore (not `\y`, which treats `_`
+			// as a word character and so would never match "bedroom" inside
+			// "BEDROOM_COLLECTION"). Whole-word matching still lets "recliner"
+			// surface "RECLINER_COLLECTION" without needing the exact product name.
+			const categoryPattern = escapeOrValue(`(^|_)${escapeRegex(word)}($|_)`);
+			query = query.or(
+				`name.ilike.${likePattern},description.ilike.${likePattern},category.imatch.${categoryPattern}`
+			);
+		}
 	}
 
 	query = query.order(sortCol, { ascending: sortAsc }).order('id', { ascending: sortAsc });

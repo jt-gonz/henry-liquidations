@@ -209,6 +209,6 @@ export const actions = {
 			has_colors: colors !== null
 		});
 
-		throw redirect(303, '/admin');
+		throw redirect(303, '/admin/inventory');
 	}
 };

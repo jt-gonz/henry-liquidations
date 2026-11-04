@@ -63,10 +63,14 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Edit Product | Admin | Henry's Liquidation Store</title>
+</svelte:head>
+
 <div class="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
 	<div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 		<h1 class="text-2xl font-bold text-brand-dark">Edit Product</h1>
-		<a href="/admin" class="text-sm font-medium text-brand-mid hover:text-brand-dark">Cancel</a>
+		<a href="/admin/inventory" class="text-sm font-medium text-brand-mid hover:text-brand-dark">Cancel</a>
 	</div>
 
 	{#if anyForm?.error}

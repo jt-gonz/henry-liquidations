@@ -3,12 +3,17 @@
 	import { fade } from 'svelte/transition';
 	import ProductCard from '$lib/components/ProductCard.svelte';
 	import { DEFAULT_OG_IMAGE } from '$lib/constants/seo.js';
+	import { page } from '$app/stores';
 
 	let { data } = $props();
 	let quotes = $derived(/** @type {any[]} */ (data.quotes) ?? []);
 	let newArrivals = $derived(/** @type {any[]} */ (data.newArrivals) ?? []);
+	// Hero collage pulls real inventory photos instead of stock photography —
+	// only arrivals that actually have an image are eligible.
+	let heroProducts = $derived(newArrivals.filter((p) => p.image_url?.[0]).slice(0, 3));
 	let washerDryerProducts = $derived(/** @type {any[]} */ (data.washerDryerProducts) ?? []);
 	let canonicalUrl = $derived(/** @type {any} */ (data).canonicalUrl ?? '');
+	let ogImage = $derived($page.url.origin + DEFAULT_OG_IMAGE);
 
 	let websiteJsonLd = $derived(
 		JSON.stringify({
@@ -74,14 +79,14 @@
 	<meta property="og:title" content={pageTitle} />
 	<meta property="og:description" content={pageDescription} />
 	<meta property="og:type" content="website" />
-	<meta property="og:image" content={DEFAULT_OG_IMAGE} />
+	<meta property="og:image" content={ogImage} />
 	{#if canonicalUrl}
 		<meta property="og:url" content={canonicalUrl} />
 	{/if}
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={pageTitle} />
 	<meta name="twitter:description" content={pageDescription} />
-	<meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+	<meta name="twitter:image" content={ogImage} />
 	{@html `<script type="application/ld+json">${websiteJsonLd}</script>`}
 </svelte:head>
 
@@ -92,7 +97,7 @@
 			<div class="mt-24 sm:mt-28 lg:mt-16">
 				<a
 					href="#visit-us"
-					class="inline-flex items-center gap-1.5 rounded-full bg-brand-mid/10 px-3 py-1 text-md leading-6 font-semibold text-brand-mid ring-1 ring-brand-mid/10 ring-inset"
+					class="text-md inline-flex items-center gap-1.5 rounded-full bg-brand-mid/10 px-3 py-1 leading-6 font-semibold text-brand-mid ring-1 ring-brand-mid/10 ring-inset"
 				>
 					<span>Visit us</span>
 					<svg
@@ -122,26 +127,65 @@
 					class="rounded-xl bg-brand-brown px-6 py-3.5 text-base font-bold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-dark hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-brown"
 					>Shop Collection</a
 				>
-				<a href="#features" class="group text-base leading-6 font-bold text-brand-dark transition-all duration-200 hover:text-brand-mid"
-					>Learn more <span aria-hidden="true" class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span></a
+				<a
+					href="#features"
+					class="group text-base leading-6 font-bold text-brand-dark transition-all duration-200 hover:text-brand-mid"
+					>Learn more <span
+						aria-hidden="true"
+						class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span
+					></a
 				>
 			</div>
 		</div>
-		<div
-			class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:mt-0 lg:mr-0 lg:ml-10 lg:max-w-none lg:flex-none xl:ml-32"
-		>
-			<div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
-				<div
-					class="-m-2 rounded-xl bg-brand-dark/5 p-2 ring-1 ring-brand-dark/10 ring-inset lg:-m-4 lg:rounded-2xl lg:p-4"
+		{#if heroProducts.length > 0}
+			<div
+				class="relative mx-auto mt-16 w-full max-w-md sm:mt-24 lg:mt-0 lg:ml-10 lg:max-w-lg xl:ml-20"
+			>
+				<!-- Real inventory, not stock photography — a small catalog-style collage of current new arrivals -->
+				<a
+					href="/product/{heroProducts[0].slug}"
+					class="group relative block aspect-[4/3] overflow-hidden rounded-[var(--radius-xl)] bg-brand-dark/5 shadow-card-hover ring-1 ring-brand-dark/10"
 				>
 					<img
-						src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-						alt="Furniture showcase"
-						class="w-[55rem] rounded-md shadow-2xl ring-1 ring-brand-dark/10"
+						src={heroProducts[0].image_url?.[0]}
+						alt={heroProducts[0].name}
+						class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+						fetchpriority="high"
 					/>
-				</div>
+					<span
+						class="absolute top-3 left-3 rounded-full bg-white/95 px-3 py-1 text-sm font-semibold text-brand-brown shadow-sm"
+					>
+						${Number(heroProducts[0].price).toFixed(2)}
+					</span>
+				</a>
+
+				{#if heroProducts[1]}
+					<a
+						href="/product/{heroProducts[1].slug}"
+						class="group absolute -bottom-8 -left-6 block aspect-square w-28 overflow-hidden rounded-[var(--radius-lg)] bg-brand-dark/5 shadow-card-hover ring-4 ring-brand-bg sm:w-36"
+					>
+						<img
+							src={heroProducts[1].image_url?.[0]}
+							alt={heroProducts[1].name}
+							class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+						/>
+					</a>
+				{/if}
+
+				{#if heroProducts[2]}
+					<a
+						href="/product/{heroProducts[2].slug}"
+						class="group absolute -top-8 -right-6 hidden aspect-square w-32 overflow-hidden rounded-[var(--radius-lg)] bg-brand-dark/5 shadow-card-hover ring-4 ring-brand-bg sm:block sm:w-40"
+					>
+						<img
+							src={heroProducts[2].image_url?.[0]}
+							alt={heroProducts[2].name}
+							class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+						/>
+					</a>
+				{/if}
 			</div>
-		</div>
+		{/if}
 	</div>
 
 	<!-- New Arrivals -->
@@ -161,7 +205,7 @@
 				>
 			</div>
 			<div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
-				{#each newArrivals as product (product.id)}
+				{#each newArrivals as product, i (product.id)}
 					<ProductCard
 						id={product.id}
 						name={product.name}
@@ -176,6 +220,7 @@
 						available_quantity={product.available_quantity}
 						created_at={product.created_at}
 						colors={product.colors}
+						priority={i < 4}
 					/>
 				{/each}
 			</div>
@@ -252,7 +297,20 @@
 						<div
 							class="absolute top-0 left-0 flex h-9 w-9 items-center justify-center rounded-lg bg-brand-dark"
 						>
-							<span class="text-lg font-bold text-white">%</span>
+							<svg
+								class="h-5 w-5 text-white"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="1.75"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581a1.5 1.5 0 002.122 0l4.318-4.318a1.5 1.5 0 000-2.122l-9.581-9.581A2.25 2.25 0 009.568 3z"
+								/>
+								<path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+							</svg>
 						</div>
 						Unbeatable Prices
 					</dt>
@@ -265,7 +323,19 @@
 						<div
 							class="absolute top-0 left-0 flex h-9 w-9 items-center justify-center rounded-lg bg-brand-dark"
 						>
-							<span class="text-lg text-white">✓</span>
+							<svg
+								class="h-5 w-5 text-white"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="1.75"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M9 12.75l1.5 1.5L15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+								/>
+							</svg>
 						</div>
 						Quality Guaranteed
 					</dt>
@@ -279,7 +349,19 @@
 						<div
 							class="absolute top-0 left-0 flex h-9 w-9 items-center justify-center rounded-lg bg-brand-dark"
 						>
-							<span class="text-lg text-white">↻</span>
+							<svg
+								class="h-5 w-5 text-white"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="1.75"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+								/>
+							</svg>
 						</div>
 						Instant Availability
 					</dt>
@@ -292,7 +374,19 @@
 						<div
 							class="absolute top-0 left-0 flex h-9 w-9 items-center justify-center rounded-lg bg-brand-dark"
 						>
-							<span class="text-lg text-white">🔒</span>
+							<svg
+								class="h-5 w-5 text-white"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="1.75"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+								/>
+							</svg>
 						</div>
 						Secure Checkout
 					</dt>

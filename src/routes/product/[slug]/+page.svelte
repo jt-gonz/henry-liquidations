@@ -34,6 +34,8 @@
 			description: pageDescription,
 			image: product.image_url ?? [],
 			category: categoryLabel,
+			sku: product.id,
+			brand: { '@type': 'Brand', name: "Henry's Liquidation Store" },
 			offers: {
 				'@type': 'Offer',
 				priceCurrency: 'USD',
@@ -41,6 +43,9 @@
 				availability: product.in_stock
 					? 'https://schema.org/InStock'
 					: 'https://schema.org/OutOfStock',
+				// Liquidation/overstock inventory, not secondhand — NewCondition is
+				// the accurate schema.org value for these items.
+				itemCondition: 'https://schema.org/NewCondition',
 				url: canonicalUrl || undefined
 			}
 		})
@@ -51,7 +56,12 @@
 			'@context': 'https://schema.org',
 			'@type': 'BreadcrumbList',
 			itemListElement: [
-				{ '@type': 'ListItem', position: 1, name: 'Shop', item: canonicalUrl ? new URL('/shop', canonicalUrl).href : undefined },
+				{
+					'@type': 'ListItem',
+					position: 1,
+					name: 'Shop',
+					item: canonicalUrl ? new URL('/shop', canonicalUrl).href : undefined
+				},
 				{ '@type': 'ListItem', position: 2, name: product.name, item: canonicalUrl || undefined }
 			]
 		})
@@ -211,7 +221,7 @@
 		<div class="flex flex-col gap-4">
 			<!-- Main Image -->
 			<div
-				class="group relative aspect-square w-full cursor-zoom-in overflow-hidden rounded-2xl border border-brand-light bg-brand-bg object-cover sm:rounded-3xl"
+				class="group relative aspect-square w-full cursor-zoom-in overflow-hidden rounded-[var(--radius-xl)] border border-brand-light bg-brand-bg object-cover shadow-card"
 				onclick={openLightbox}
 				onkeydown={(e) => e.key === 'Enter' && openLightbox()}
 				role="button"
@@ -223,7 +233,8 @@
 						src={currentImage}
 						alt={product.name}
 						class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-						loading="lazy"
+						loading="eager"
+						fetchpriority="high"
 						onerror={() => markImageFailed(currentImageIndex)}
 					/>
 				{:else}
@@ -333,8 +344,16 @@
 							aria-current={index === currentImageIndex ? 'true' : 'false'}
 						>
 							{#if failedImages.has(index)}
-								<div class="flex h-full w-full items-center justify-center bg-brand-bg text-brand-mid">
-									<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+								<div
+									class="flex h-full w-full items-center justify-center bg-brand-bg text-brand-mid"
+								>
+									<svg
+										class="h-6 w-6"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										stroke-width="1.5"
+									>
 										<path
 											stroke-linecap="round"
 											stroke-linejoin="round"
@@ -387,8 +406,7 @@
 								? 'bg-red-100 text-red-800'
 								: 'bg-green-100 text-green-800'}"
 						>
-							<span
-								class="mr-1.5 h-2 w-2 rounded-full {lowStock ? 'bg-red-600' : 'bg-green-600'}"
+							<span class="mr-1.5 h-2 w-2 rounded-full {lowStock ? 'bg-red-600' : 'bg-green-600'}"
 							></span>
 							{#if lowStock}
 								Only {product.available_quantity} left
@@ -544,7 +562,7 @@
 			<div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
 				<!-- Modal panel -->
 				<div
-					class="relative transform overflow-hidden rounded-lg bg-transparent text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-5xl"
+					class="relative transform overflow-hidden rounded-[var(--radius-xl)] bg-transparent text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-5xl"
 					transition:scale={{ duration: 300, start: 0.95 }}
 					onclick={closeLightbox}
 					onkeydown={(e) => e.key === 'Enter' && closeLightbox()}

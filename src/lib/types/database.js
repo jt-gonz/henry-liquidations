@@ -79,6 +79,24 @@
  */
 
 /**
+ * @typedef {'pickup' | 'ship'} FulfillmentMethod
+ */
+
+/**
+ * Shape of Stripe's `collected_information.shipping_details` (see
+ * src/routes/api/webhooks/stripe/+server.js), stored as-is on the order.
+ * @typedef {Object} OrderShippingAddress
+ * @property {string|null} name
+ * @property {Object} address
+ * @property {string|null} address.line1
+ * @property {string|null} address.line2
+ * @property {string|null} address.city
+ * @property {string|null} address.state
+ * @property {string|null} address.postal_code
+ * @property {string|null} address.country
+ */
+
+/**
  * @typedef {Object} OrderRow
  * @property {string}        id
  * @property {string|null}   stripe_session_id
@@ -86,6 +104,10 @@
  * @property {OrderItem[]}   items
  * @property {PaymentStatus} payment_status
  * @property {string}        created_at
+ * @property {FulfillmentMethod|null} fulfillment_method
+ * @property {string|null}   shipping_zip
+ * @property {number|null}   shipping_fee
+ * @property {OrderShippingAddress|null} shipping_address
  */
 
 /**
@@ -96,6 +118,10 @@
  * @property {OrderItem[]}   items
  * @property {PaymentStatus} [payment_status]
  * @property {string}        [created_at]
+ * @property {FulfillmentMethod|null} [fulfillment_method]
+ * @property {string|null}   [shipping_zip]
+ * @property {number|null}   [shipping_fee]
+ * @property {OrderShippingAddress|null} [shipping_address]
  */
 
 /**
@@ -106,6 +132,49 @@
  * @property {OrderItem[]}   [items]
  * @property {PaymentStatus} [payment_status]
  * @property {string}        [created_at]
+ * @property {FulfillmentMethod|null} [fulfillment_method]
+ * @property {string|null}   [shipping_zip]
+ * @property {number|null}   [shipping_fee]
+ * @property {OrderShippingAddress|null} [shipping_address]
+ */
+
+/**
+ * @typedef {Object} ShippingRateRow
+ * @property {string}  id
+ * @property {string}  label
+ * @property {number|null} zip_start
+ * @property {number|null} zip_end
+ * @property {number}  fee
+ * @property {number}  sort_order
+ * @property {boolean} is_active
+ * @property {boolean} is_fallback
+ * @property {string}  created_at
+ */
+
+/**
+ * @typedef {Object} ShippingRateInsert
+ * @property {string}  [id]
+ * @property {string}  label
+ * @property {number|null} [zip_start]
+ * @property {number|null} [zip_end]
+ * @property {number}  fee
+ * @property {number}  [sort_order]
+ * @property {boolean} [is_active]
+ * @property {boolean} [is_fallback]
+ * @property {string}  [created_at]
+ */
+
+/**
+ * @typedef {Object} ShippingRateUpdate
+ * @property {string}  [id]
+ * @property {string}  [label]
+ * @property {number|null} [zip_start]
+ * @property {number|null} [zip_end]
+ * @property {number}  [fee]
+ * @property {number}  [sort_order]
+ * @property {boolean} [is_active]
+ * @property {boolean} [is_fallback]
+ * @property {string}  [created_at]
  */
 
 /**
@@ -166,7 +235,88 @@
  */
 
 /**
+ * @typedef {Object} NewsletterSubscriberRow
+ * @property {string} id
+ * @property {string} email
+ * @property {string|null} source
+ * @property {string} created_at
+ */
+
+/**
+ * @typedef {Object} NewsletterSubscriberInsert
+ * @property {string} [id]
+ * @property {string} email
+ * @property {string|null} [source]
+ * @property {string} [created_at]
+ */
+
+/**
+ * @typedef {Object} NewsletterSubscriberUpdate
+ * @property {string} [id]
+ * @property {string} [email]
+ * @property {string|null} [source]
+ * @property {string} [created_at]
+ */
+
+/**
+ * @typedef {Object} PageViewRow
+ * @property {number} id
+ * @property {string} path
+ * @property {string} visitor_id
+ * @property {string|null} referrer
+ * @property {string} created_at
+ */
+
+/**
+ * @typedef {Object} PageViewInsert
+ * @property {number} [id]
+ * @property {string} path
+ * @property {string} visitor_id
+ * @property {string|null} [referrer]
+ * @property {string} [created_at]
+ */
+
+/**
+ * @typedef {Object} PageViewUpdate
+ * @property {number} [id]
+ * @property {string} [path]
+ * @property {string} [visitor_id]
+ * @property {string|null} [referrer]
+ * @property {string} [created_at]
+ */
+
+/**
+ * @typedef {Object} PendingCheckoutItemRow
+ * @property {string} session_id
+ * @property {Object[]} items
+ * @property {string} created_at
+ */
+
+/**
+ * @typedef {Object} PendingCheckoutItemInsert
+ * @property {string} session_id
+ * @property {Object[]} items
+ * @property {string} [created_at]
+ */
+
+/**
+ * @typedef {Object} PendingCheckoutItemUpdate
+ * @property {string} [session_id]
+ * @property {Object[]} [items]
+ * @property {string} [created_at]
+ */
+
+/**
  * Supabase Database type definition.
+ *
+ * Each table carries a `Relationships` field and the schema carries empty
+ * `Views`/`Functions` maps even though this project doesn't use either -
+ * @supabase/supabase-js's `SupabaseClient<Database>` only resolves table
+ * Row/Insert/Update types when `Database['public']` structurally satisfies
+ * its internal `GenericSchema` constraint (which requires exactly those
+ * fields). Without them, the constraint fails to match and every typed
+ * query silently resolves to `never` instead of raising a visible error -
+ * which is what was happening before these were added.
  *
  * @typedef {Object} Database
  * @property {Object} public
@@ -175,18 +325,44 @@
  * @property {ProductRow}    public.Tables.products.Row
  * @property {ProductInsert} public.Tables.products.Insert
  * @property {ProductUpdate} public.Tables.products.Update
+ * @property {never[]} public.Tables.products.Relationships
  * @property {Object} public.Tables.orders
  * @property {OrderRow}    public.Tables.orders.Row
  * @property {OrderInsert} public.Tables.orders.Insert
  * @property {OrderUpdate} public.Tables.orders.Update
+ * @property {never[]} public.Tables.orders.Relationships
  * @property {Object} public.Tables.quotes
  * @property {QuoteRow}    public.Tables.quotes.Row
  * @property {QuoteInsert} public.Tables.quotes.Insert
  * @property {QuoteUpdate} public.Tables.quotes.Update
+ * @property {never[]} public.Tables.quotes.Relationships
  * @property {Object} public.Tables.categories
  * @property {CategoryRow}    public.Tables.categories.Row
  * @property {CategoryInsert} public.Tables.categories.Insert
  * @property {CategoryUpdate} public.Tables.categories.Update
+ * @property {never[]} public.Tables.categories.Relationships
+ * @property {Object} public.Tables.shipping_rates
+ * @property {ShippingRateRow}    public.Tables.shipping_rates.Row
+ * @property {ShippingRateInsert} public.Tables.shipping_rates.Insert
+ * @property {ShippingRateUpdate} public.Tables.shipping_rates.Update
+ * @property {never[]} public.Tables.shipping_rates.Relationships
+ * @property {Object} public.Tables.newsletter_subscribers
+ * @property {NewsletterSubscriberRow}    public.Tables.newsletter_subscribers.Row
+ * @property {NewsletterSubscriberInsert} public.Tables.newsletter_subscribers.Insert
+ * @property {NewsletterSubscriberUpdate} public.Tables.newsletter_subscribers.Update
+ * @property {never[]} public.Tables.newsletter_subscribers.Relationships
+ * @property {Object} public.Tables.page_views
+ * @property {PageViewRow}    public.Tables.page_views.Row
+ * @property {PageViewInsert} public.Tables.page_views.Insert
+ * @property {PageViewUpdate} public.Tables.page_views.Update
+ * @property {never[]} public.Tables.page_views.Relationships
+ * @property {Object} public.Tables.pending_checkout_items
+ * @property {PendingCheckoutItemRow}    public.Tables.pending_checkout_items.Row
+ * @property {PendingCheckoutItemInsert} public.Tables.pending_checkout_items.Insert
+ * @property {PendingCheckoutItemUpdate} public.Tables.pending_checkout_items.Update
+ * @property {never[]} public.Tables.pending_checkout_items.Relationships
+ * @property {Record<never, never>} public.Views
+ * @property {Record<never, never>} public.Functions
  */
 
 export {};

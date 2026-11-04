@@ -5,39 +5,96 @@
 	import Chip from '$lib/components/ui/Chip.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import { WASHER_DRYER_SLUG } from '$lib/constants/shop.js';
+	import { DEFAULT_OG_IMAGE } from '$lib/constants/seo.js';
+	import { debounce } from '$lib/utils/debounce.js';
+	import { page } from '$app/stores';
 
 	let { data } = $props();
+	let ogImage = $derived($page.url.origin + DEFAULT_OG_IMAGE);
 
 	/** @type {{ id: string, value: string, label: string, slug: string, sort_order: number, is_active: boolean }[]} */
 	let categories = $derived(/** @type {any} */ (data).categories ?? []);
-	let pageTitle = $derived(/** @type {any} */ (data).pageTitle ?? "Shop Collection | Henry's Liquidation Store");
+	let pageTitle = $derived(
+		/** @type {any} */ (data).pageTitle ?? "Shop Collection | Henry's Liquidation Store"
+	);
 	let pageDescription = $derived(
 		/** @type {any} */ (data).pageDescription ??
 			'Browse our full collection of liquidation furniture and appliances.'
 	);
 	let canonicalUrl = $derived(/** @type {any} */ (data).canonicalUrl ?? '');
 
+	// Seeded directly from `data` (not an empty/default value filled in later
+	// by the $effect below) so the first server-rendered HTML — what a
+	// crawler that doesn't execute JS sees — already shows the real product
+	// grid, category label, and breadcrumb instead of a blank "Shop
+	// Collection" shell. $state initial values run during SSR; $effect does
+	// not, which is exactly the gap this seeding closes.
 	/** @type {(import('$lib/types/database.js').ProductRow & { categoryLabel?: string, available_quantity?: number | null })[]} */
-	let products = $state([]);
-	let total = $state(0);
-	let hasMore = $state(false);
+	let products = $state(data.products ?? []);
+	let total = $state(/** @type {any} */ (data).total ?? 0);
+	let hasMore = $state(data.hasMore ?? false);
 	/** @type {string | null} */
-	let nextCursor = $state(null);
+	let nextCursor = $state(data.nextCursor ?? null);
 	let loading = $state(false);
 
 	// ── Filters ─────────────────────────────────────────────
-	let selectedCategory = $state('');
-	let categorySlug = $state('');
-	let minPrice = $state('');
-	let maxPrice = $state('');
-	let inStock = $state('true');
-	let searchQuery = $state('');
-	let washerDryer = $state(false);
-	let sortBy = $state('newest');
+	let selectedCategory = $state(data.filters?.category ?? '');
+	let categorySlug = $state(/** @type {any} */ (data).categorySlug ?? '');
+	let minPrice = $state(data.filters?.minPrice ?? '');
+	let maxPrice = $state(data.filters?.maxPrice ?? '');
+	let inStock = $state(data.filters?.inStock ?? 'true');
+	let searchQuery = $state(data.filters?.search ?? '');
+	let washerDryer = $state(data.filters?.washerDryer ?? false);
+	let sortBy = $state(data.filters?.sort ?? 'newest');
 	let moreFiltersOpen = $state(false);
 
-	/** @type {ReturnType<typeof setTimeout> | undefined} */
-	let debounceTimeout;
+	let currentCategoryLabel = $derived.by(() => {
+		if (washerDryer) return 'Washers & Dryers';
+		return categories.find((c) => c.value === selectedCategory)?.label ?? 'Shop Collection';
+	});
+
+	let breadcrumbJsonLd = $derived.by(() =>
+		JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{
+					'@type': 'ListItem',
+					position: 1,
+					name: 'Shop',
+					item: canonicalUrl ? new URL('/shop', canonicalUrl).href : undefined
+				},
+				...(currentCategoryLabel !== 'Shop Collection'
+					? [
+							{
+								'@type': 'ListItem',
+								position: 2,
+								name: currentCategoryLabel,
+								item: canonicalUrl || undefined
+							}
+						]
+					: [])
+			]
+		})
+	);
+
+	// `products` is seeded from `data` above, so this is already correct on
+	// the very first server-rendered response — capped to the current page
+	// in hand (crawlers don't need the full category replayed via scroll).
+	let itemListJsonLd = $derived.by(() =>
+		JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'ItemList',
+			itemListElement: products.slice(0, 24).map((p, i) => ({
+				'@type': 'ListItem',
+				position: i + 1,
+				url: canonicalUrl ? new URL(`/product/${p.slug}`, canonicalUrl).href : undefined
+			}))
+		})
+	);
+
+	/** Debounced apply for free-typing inputs (search, price) so we don't navigate on every keystroke. */
+	const applyFiltersDebounced = debounce(() => applyFilters(), 400);
 
 	// Initialize and sync when server data changes
 	$effect(() => {
@@ -106,12 +163,6 @@
 	// filters change in quick succession.
 	function applyFilters() {
 		goto(categoryHref(categorySlug), { keepFocus: true, noScroll: true });
-	}
-
-	/** Debounced apply for free-typing inputs (search, price) so we don't navigate on every keystroke. */
-	function applyFiltersDebounced() {
-		clearTimeout(debounceTimeout);
-		debounceTimeout = setTimeout(applyFilters, 400);
 	}
 
 	function handleAvailabilityChange() {
@@ -207,8 +258,7 @@
 				remove: () => goto(categoryHref(''), { keepFocus: true, noScroll: true })
 			});
 		} else if (selectedCategory) {
-			const label =
-				categories.find((c) => c.value === selectedCategory)?.label ?? selectedCategory;
+			const label = categories.find((c) => c.value === selectedCategory)?.label ?? selectedCategory;
 			chips.push({
 				key: 'category',
 				label,
@@ -258,28 +308,47 @@
 	<meta property="og:title" content={pageTitle} />
 	<meta property="og:description" content={pageDescription} />
 	<meta property="og:type" content="website" />
+	<meta property="og:image" content={ogImage} />
 	{#if canonicalUrl}
 		<meta property="og:url" content={canonicalUrl} />
 	{/if}
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={pageTitle} />
 	<meta name="twitter:description" content={pageDescription} />
+	<meta name="twitter:image" content={ogImage} />
+	{@html `<script type="application/ld+json">${breadcrumbJsonLd}</script>`}
+	{#if products.length > 0}
+		{@html `<script type="application/ld+json">${itemListJsonLd}</script>`}
+	{/if}
 </svelte:head>
 
 <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
 	<div class="border-b border-brand-light pb-10">
+		{#if currentCategoryLabel !== 'Shop Collection'}
+			<nav aria-label="Breadcrumb" class="mb-3">
+				<ol role="list" class="flex items-center gap-2 text-sm">
+					<li><a href="/shop" class="font-medium text-brand-mid hover:text-brand-dark">Shop</a></li>
+					<li class="text-brand-light" aria-hidden="true">/</li>
+					<li>
+						<span class="font-medium text-brand-dark" aria-current="page"
+							>{currentCategoryLabel}</span
+						>
+					</li>
+				</ol>
+			</nav>
+		{/if}
 		<h1 class="text-4xl font-bold tracking-tight text-brand-dark">
-			{washerDryer
-				? 'Washers & Dryers'
-				: (categories.find((c) => c.value === selectedCategory)?.label ?? 'Shop Collection')}
+			{currentCategoryLabel}
 		</h1>
 		<p class="mt-4 text-base text-brand-mid">
-			Our latest arrivals of discounted premium furniture. Updated daily.
+			{pageDescription}
 		</p>
 	</div>
 
 	<!-- ── Top filter bar: search + category pill rail + sort ───────────── -->
-	<div class="sticky top-[73px] z-30 -mx-4 mt-6 space-y-3 bg-brand-bg/95 px-4 py-3 backdrop-blur-sm sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+	<div
+		class="sticky top-[73px] z-30 -mx-4 mt-6 space-y-3 bg-brand-bg/95 px-4 py-3 backdrop-blur-sm sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
+	>
 		<div class="flex flex-col gap-3 sm:flex-row sm:items-center">
 			<!-- Search -->
 			<div class="relative flex-1">
@@ -356,7 +425,8 @@
 							class="absolute top-full right-0 z-50 mt-2 w-72 space-y-5 rounded-[var(--radius-lg)] border border-brand-light bg-white p-5 shadow-xl"
 						>
 							<div>
-								<span class="mb-1.5 block text-xs font-semibold tracking-wide text-brand-dark uppercase"
+								<span
+									class="mb-1.5 block text-xs font-semibold tracking-wide text-brand-dark uppercase"
 									>Price Range</span
 								>
 								<div class="flex items-center gap-2">
@@ -392,7 +462,9 @@
 								</div>
 							</div>
 
-							<label class="flex cursor-pointer items-center gap-2.5 text-sm text-brand-dark select-none">
+							<label
+								class="flex cursor-pointer items-center gap-2.5 text-sm text-brand-dark select-none"
+							>
 								<input
 									type="checkbox"
 									checked={inStock === ''}
@@ -431,27 +503,47 @@
 		</div>
 
 		<!-- Category pill rail — Washers & Dryers pinned first, our best-seller -->
-		<div class="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-			<Chip
-				label="Washers & Dryers"
-				active={washerDryer}
-				accent
-				href={categoryHref(WASHER_DRYER_SLUG)}
-			>
-				<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-					<circle cx="12" cy="13" r="5" />
-					<path stroke-linecap="round" d="M5 3h2M9 3h2" />
-					<path stroke-linecap="round" d="M12 13a3.5 3.5 0 0 0 3.5-3.5" />
-				</svg>
-			</Chip>
-			<Chip label="All" active={!washerDryer && !selectedCategory} href={categoryHref('')} />
-			{#each categories as cat (cat.id)}
+		<div class="relative -mx-4 sm:-mx-6 lg:-mx-8">
+			<div class="flex gap-2 overflow-x-auto px-4 pb-1 sm:px-6 lg:px-8">
 				<Chip
-					label={cat.label}
-					active={!washerDryer && selectedCategory === cat.value}
-					href={categoryHref(cat.slug)}
-				/>
-			{/each}
+					label="Washers & Dryers"
+					active={washerDryer}
+					accent
+					href={categoryHref(WASHER_DRYER_SLUG)}
+				>
+					<svg
+						class="h-3.5 w-3.5"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+					>
+						<circle cx="12" cy="13" r="5" />
+						<path stroke-linecap="round" d="M5 3h2M9 3h2" />
+						<path stroke-linecap="round" d="M12 13a3.5 3.5 0 0 0 3.5-3.5" />
+					</svg>
+				</Chip>
+				<Chip label="All" active={!washerDryer && !selectedCategory} href={categoryHref('')} />
+				{#each categories as cat (cat.id)}
+					<Chip
+						label={cat.label}
+						active={!washerDryer && selectedCategory === cat.value}
+						href={categoryHref(cat.slug)}
+					/>
+				{/each}
+			</div>
+			<!-- Edge fades hint that the rail scrolls further in each direction.
+			     Widths match the row's own px-4/sm:px-6/lg:px-8 padding exactly,
+			     so the fade only covers the gutter and never bleeds into (and
+			     visually clips) the first/last chip. -->
+			<div
+				class="pointer-events-none absolute top-0 left-0 h-full w-4 bg-gradient-to-r from-brand-bg/95 to-transparent sm:w-6 lg:w-8"
+				aria-hidden="true"
+			></div>
+			<div
+				class="pointer-events-none absolute top-0 right-0 h-full w-4 bg-gradient-to-l from-brand-bg/95 to-transparent sm:w-6 lg:w-8"
+				aria-hidden="true"
+			></div>
 		</div>
 	</div>
 
@@ -482,12 +574,23 @@
 		</p>
 
 		{#if products.length === 0}
-			<p class="py-12 text-center text-brand-mid">
-				No products match your criteria. Try adjusting your filters.
-			</p>
+			<div class="flex flex-col items-center gap-5 py-16 text-center">
+				<p class="text-brand-mid">No products match your criteria.</p>
+				{#if hasActiveFilters}
+					<Button variant="outline" onclick={clearFilters}>Clear all filters</Button>
+				{/if}
+				<div class="flex flex-wrap justify-center gap-2">
+					<span class="w-full text-xs font-semibold tracking-wide text-brand-mid uppercase">
+						Or browse a category
+					</span>
+					{#each categories.slice(0, 6) as cat (cat.id)}
+						<Chip label={cat.label} href={categoryHref(cat.slug)} />
+					{/each}
+				</div>
+			</div>
 		{:else}
 			<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
-				{#each products as product (product.id)}
+				{#each products as product, i (product.id)}
 					<ProductCard
 						id={product.id}
 						name={product.name}
@@ -502,6 +605,7 @@
 						available_quantity={product.available_quantity}
 						created_at={product.created_at}
 						colors={product.colors}
+						priority={i < 4}
 					/>
 				{/each}
 			</div>

@@ -26,9 +26,10 @@
 	} = $props();
 
 	const variants = {
-		primary: 'bg-brand-brown text-white shadow-sm hover:bg-brand-dark',
-		secondary: 'bg-brand-dark text-white shadow-sm hover:bg-brand-brown',
-		outline: 'border border-brand-light bg-transparent text-brand-dark hover:border-brand-brown hover:text-brand-brown',
+		primary: 'bg-brand-brown text-white shadow-card hover:shadow-card-hover hover:bg-brand-dark',
+		secondary: 'bg-brand-dark text-white shadow-card hover:shadow-card-hover hover:bg-brand-brown',
+		outline:
+			'border border-brand-light bg-transparent text-brand-dark hover:border-brand-brown hover:text-brand-brown',
 		ghost: 'bg-transparent text-brand-dark hover:bg-brand-light/40'
 	};
 

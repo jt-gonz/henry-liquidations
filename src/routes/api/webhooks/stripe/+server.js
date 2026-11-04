@@ -51,13 +51,41 @@ export async function POST({ request }) {
 
 		/** @type {{ id: string, quantity: number }[]} */
 		let cartItems = [];
-		try {
-			const raw = metadata.product_ids;
-			if (raw && raw.length > 0) {
-				cartItems = JSON.parse(raw);
+
+		// ── Primary source: the full cart stored server-side at checkout
+		// time (see /api/checkout). Unlike Stripe metadata, this has no
+		// 500-char-per-value size cap, so it's never truncated for a large
+		// cart. Metadata below is only a fallback for older in-flight
+		// sessions or if this row is somehow missing.
+		const { data: pendingRow, error: pendingError } = await supabaseAdmin
+			.from('pending_checkout_items')
+			.select('items')
+			.eq('session_id', session.id)
+			.maybeSingle();
+
+		if (pendingError) {
+			console.error('[webhook] Failed to read pending_checkout_items:', pendingError.message);
+		} else if (pendingRow && /** @type {any[]} */ (pendingRow.items)?.length > 0) {
+			cartItems = /** @type {{ id: string, quantity: number }[]} */ (pendingRow.items);
+		}
+
+		if (cartItems.length === 0) {
+			try {
+				const raw = metadata.product_ids;
+				if (raw && raw.length > 0) {
+					const parsed = JSON.parse(raw);
+					// Current format is compact [id, quantity] tuples; still accept
+					// the older {id, quantity, color?} object shape in case a
+					// checkout session created before this change is still in flight.
+					cartItems = parsed.map((/** @type {any} */ entry) =>
+						Array.isArray(entry)
+							? { id: entry[0], quantity: entry[1] }
+							: { id: entry.id, quantity: entry.quantity }
+					);
+				}
+			} catch (e) {
+				console.error('Failed to parse product_ids metadata:', e);
 			}
-		} catch (e) {
-			console.error('Failed to parse product_ids metadata:', e);
 		}
 
 		if (cartItems.length === 0) {
@@ -101,12 +129,21 @@ export async function POST({ request }) {
 		);
 
 		// ── 2a. Insert the order ────────────────────────────────
+		const fulfillmentMethod = metadata.fulfillment_method === 'ship' ? 'ship' : 'pickup';
+
 		const { error: orderError } = await supabaseAdmin.from('orders').insert(
 			/** @type {any} */ ({
 				stripe_session_id: session.id,
 				customer_email: customerEmail,
 				items: orderItems,
-				payment_status: 'paid'
+				payment_status: 'paid',
+				fulfillment_method: metadata.fulfillment_method ?? null,
+				shipping_zip: metadata.shipping_zip ?? null,
+				shipping_fee: metadata.shipping_fee ? Number(metadata.shipping_fee) : null,
+				shipping_address:
+					fulfillmentMethod === 'ship'
+						? (session.collected_information?.shipping_details ?? null)
+						: null
 			})
 		);
 
@@ -193,6 +230,18 @@ export async function POST({ request }) {
 						.update({ in_stock: available > 0 })
 						.eq('id', bundle.id);
 				}
+			}
+		}
+
+		// Best-effort cleanup — the row has served its purpose once the
+		// order is recorded, and leaving it around has no benefit.
+		if (pendingRow) {
+			const { error: cleanupError } = await supabaseAdmin
+				.from('pending_checkout_items')
+				.delete()
+				.eq('session_id', session.id);
+			if (cleanupError) {
+				console.error('[webhook] Failed to clean up pending_checkout_items row:', cleanupError.message);
 			}
 		}
 	}

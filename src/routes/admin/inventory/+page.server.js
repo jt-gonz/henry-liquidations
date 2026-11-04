@@ -77,6 +77,46 @@ export const actions = {
 	},
 
 	/**
+	 * Delete a product by ID.
+	 */
+	delete: async ({ request }) => {
+		const form = await request.formData();
+		const id = form.get('id')?.toString();
+		const imageUrls = form.get('image_urls')?.toString();
+
+		if (!id) return fail(400, { error: 'Product ID is required.' });
+
+		const { error } = await supabaseAdmin.from('products').delete().eq('id', id);
+
+		if (error) {
+			console.error('Failed to delete product:', error.message);
+			return fail(500, { error: 'Failed to delete product.' });
+		}
+
+		trackServerEvent('product_deleted', { product_id: id });
+
+		// Best-effort: delete all images from storage
+		if (imageUrls) {
+			try {
+				const urls = JSON.parse(imageUrls);
+				const filesToDelete = [];
+				for (const url of urls) {
+					const marker = '/product-images/';
+					const idx = url.indexOf(marker);
+					if (idx !== -1) filesToDelete.push(url.slice(idx + marker.length));
+				}
+				if (filesToDelete.length > 0) {
+					await supabaseAdmin.storage.from('product-images').remove(filesToDelete);
+				}
+			} catch (e) {
+				console.error('Failed to delete images from storage:', e);
+			}
+		}
+
+		return { deleted: true };
+	},
+
+	/**
 	 * Toggle in_stock directly for legacy items that don't track a
 	 * quantity at all.
 	 */

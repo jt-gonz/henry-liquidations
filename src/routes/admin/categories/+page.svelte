@@ -59,6 +59,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Categories | Admin | Henry's Liquidation Store</title>
+</svelte:head>
+
 <div class="px-4 py-6 sm:px-6 lg:px-8">
 	<div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 		<h1 class="text-2xl font-bold text-brand-dark">Categories</h1>

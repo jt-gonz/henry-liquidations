@@ -1,9 +1,10 @@
 import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
 import { STRIPE_SECRET_KEY } from '$env/static/private';
-import { supabase } from '$lib/server/supabase.js';
+import { supabase, supabaseAdmin } from '$lib/server/supabase.js';
 import { getColorName } from '$lib/constants/colors.js';
 import { withComputedStock } from '$lib/server/stock.js';
+import { getShippingFeeForZip } from '$lib/server/shippingRates.js';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY);
 
@@ -29,6 +30,13 @@ export async function POST({ request, url }) {
 	const cartItems = body?.items;
 	if (!Array.isArray(cartItems) || cartItems.length === 0) {
 		return json({ error: 'Cart is empty.' }, { status: 400 });
+	}
+
+	const fulfillmentMethod = body?.fulfillmentMethod === 'ship' ? 'ship' : 'pickup';
+	const zip = body?.zip;
+
+	if (fulfillmentMethod === 'ship' && !zip) {
+		return json({ error: 'A ZIP code is required for shipping.' }, { status: 400 });
 	}
 
 	// ── 1. Look up authentic prices from the database ────────────
@@ -97,6 +105,29 @@ export async function POST({ request, url }) {
 		});
 	}
 
+	// ── 2b. Compute the shipping fee server-side (never trust the
+	// client's earlier /api/shipping-quote response — same defensive
+	// posture as the product prices above) ───────────────────────
+	let shippingFee = null;
+	let shippingLabel = null;
+	if (fulfillmentMethod === 'ship') {
+		const shippingResult = await getShippingFeeForZip(supabaseAdmin, zip);
+		if ('error' in shippingResult) {
+			return json({ error: shippingResult.error }, { status: 400 });
+		}
+		shippingFee = shippingResult.fee;
+		shippingLabel = shippingResult.label;
+
+		lineItems.push({
+			price_data: {
+				currency: 'usd',
+				product_data: { name: shippingLabel || 'Shipping' },
+				unit_amount: Math.round(shippingFee * 100)
+			},
+			quantity: 1
+		});
+	}
+
 	// ── 3. Create Stripe Checkout Session ────────────────────────
 	try {
 		const session = await stripe.checkout.sessions.create({
@@ -106,17 +137,42 @@ export async function POST({ request, url }) {
 			cancel_url: `${url.origin}/checkout/cancel`,
 			// Collect customer email on Stripe's hosted page
 			customer_creation: 'if_required',
-			// Store product IDs in metadata so the webhook can reference them
+			...(fulfillmentMethod === 'ship'
+				? { shipping_address_collection: { allowed_countries: ['US'] } }
+				: {}),
+			// Store product IDs + fulfillment info in metadata so the webhook can
+			// reference them. Stripe caps each metadata value at 500 characters,
+			// so this intentionally omits `color` (the webhook never reads it —
+			// it's only used above for the Stripe line item's own description)
+			// and uses a compact [id, quantity] tuple instead of a keyed object
+			// to fit more items per cart before hitting that cap.
 			metadata: {
 				product_ids: JSON.stringify(
-					cartItems.map((/** @type {{ id: string, quantity: number, color?: string }} */ i) => ({
-						id: i.id,
-						quantity: i.quantity,
-						...(i.color ? { color: i.color } : {})
-					}))
-				)
+					cartItems.map((/** @type {{ id: string, quantity: number }} */ i) => [i.id, i.quantity])
+				),
+				fulfillment_method: fulfillmentMethod,
+				...(fulfillmentMethod === 'ship'
+					? { shipping_zip: zip, shipping_fee: String(shippingFee) }
+					: {})
 			}
 		});
+
+		// Store the full cart (no size cap, unlike Stripe metadata above) so
+		// the webhook can reconstruct the order without relying on metadata
+		// at all. Best-effort: metadata.product_ids above still exists as a
+		// fallback the webhook checks if this write fails or this row is
+		// somehow missing by the time the webhook fires.
+		const { error: pendingError } = await supabaseAdmin.from('pending_checkout_items').insert({
+			session_id: session.id,
+			items: cartItems.map((/** @type {{ id: string, quantity: number, color?: string }} */ i) => ({
+				id: i.id,
+				quantity: i.quantity,
+				...(i.color ? { color: i.color } : {})
+			}))
+		});
+		if (pendingError) {
+			console.error('Failed to store pending checkout items:', pendingError.message);
+		}
 
 		return json({ url: session.url });
 	} catch (err) {

@@ -11,6 +11,9 @@
 	let categoryFilter = $state('all');
 	let stockFilter = $state('all');
 
+	const PAGE_SIZE = 25;
+	let page = $state(1);
+
 	let categories = $derived(
 		Array.from(new Set(products.map((p) => p.category))).sort()
 	);
@@ -34,6 +37,17 @@
 		})
 	);
 
+	// Reset to page 1 whenever the filtered set changes shape (new search,
+	// category, or stock filter) so the user isn't stranded on a page past
+	// the end of a now-smaller result set.
+	$effect(() => {
+		filtered;
+		page = 1;
+	});
+
+	let totalPages = $derived(Math.max(1, Math.ceil(filtered.length / PAGE_SIZE)));
+	let paginated = $derived(filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE));
+
 	let totals = $derived({
 		total: products.length,
 		inStock: products.filter((p) => p.in_stock).length,
@@ -52,6 +66,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Inventory | Admin | Henry's Liquidation Store</title>
+</svelte:head>
+
 <div class="px-4 py-6 sm:px-6 lg:px-8">
 	<div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 		<h1 class="text-2xl font-bold text-brand-dark">Inventory</h1>
@@ -59,6 +77,11 @@
 
 	{#if form?.error}
 		<div class="mb-4 rounded-md bg-red-50 px-4 py-3 text-sm text-red-700">{form.error}</div>
+	{/if}
+	{#if form?.deleted}
+		<div class="mb-4 rounded-md bg-green-50 px-4 py-3 text-sm text-green-700">
+			Product deleted successfully.
+		</div>
 	{/if}
 
 	<!-- Summary -->
@@ -120,17 +143,18 @@
 					<th class="hidden px-3 py-3 text-left text-sm font-bold text-brand-dark sm:table-cell">Price</th>
 					<th class="px-3 py-3 text-left text-sm font-bold text-brand-dark">Stock</th>
 					<th class="px-3 py-3 text-left text-sm font-bold text-brand-dark">Status</th>
+					<th class="relative px-3 py-3"><span class="sr-only">Actions</span></th>
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-brand-light bg-white">
-				{#if filtered.length === 0}
+				{#if paginated.length === 0}
 					<tr>
-						<td colspan="5" class="px-4 py-8 text-center text-sm text-gray-600">
+						<td colspan="6" class="px-4 py-8 text-center text-sm text-gray-600">
 							No products match those filters.
 						</td>
 					</tr>
 				{:else}
-					{#each filtered as product (product.id)}
+					{#each paginated as product (product.id)}
 						<tr>
 							<td class="py-3 pr-3 pl-4 sm:pl-6">
 								<div class="flex items-center gap-3">
@@ -214,10 +238,51 @@
 									</span>
 								{/if}
 							</td>
+							<td class="px-3 py-3 text-right text-sm font-medium whitespace-nowrap">
+								<form method="POST" action="?/delete" class="inline" use:enhance>
+									<input type="hidden" name="id" value={product.id} />
+									<input
+										type="hidden"
+										name="image_urls"
+										value={JSON.stringify(product.image_url ?? [])}
+									/>
+									<button
+										type="submit"
+										class="text-brand-brown transition-colors hover:text-brand-dark"
+										onclick={(e) => {
+											if (!confirm(`Delete "${product.name}"?`)) e.preventDefault();
+										}}
+									>
+										Delete<span class="sr-only">, {product.name}</span>
+									</button>
+								</form>
+							</td>
 						</tr>
 					{/each}
 				{/if}
 			</tbody>
 		</table>
 	</div>
+
+	{#if totalPages > 1}
+		<div class="mt-4 flex items-center justify-center gap-3">
+			<button
+				type="button"
+				disabled={page <= 1}
+				onclick={() => (page = Math.max(1, page - 1))}
+				class="rounded-md border border-brand-light px-3 py-1.5 text-sm font-medium text-brand-dark disabled:cursor-not-allowed disabled:opacity-40"
+			>
+				Prev
+			</button>
+			<span class="text-sm text-brand-mid">Page {page} of {totalPages}</span>
+			<button
+				type="button"
+				disabled={page >= totalPages}
+				onclick={() => (page = Math.min(totalPages, page + 1))}
+				class="rounded-md border border-brand-light px-3 py-1.5 text-sm font-medium text-brand-dark disabled:cursor-not-allowed disabled:opacity-40"
+			>
+				Next
+			</button>
+		</div>
+	{/if}
 </div>

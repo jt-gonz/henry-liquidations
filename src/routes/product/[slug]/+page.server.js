@@ -18,22 +18,25 @@ export async function load({ params, url }) {
 		throw error(404, 'Product not found');
 	}
 
-	const [productWithStock] = await withComputedStock(supabase, [product]);
+	// Neither depends on the other's result — fetch concurrently.
+	const [[productWithStock], { data: category }] = await Promise.all([
+		withComputedStock(supabase, [product]),
+		product.category
+			? supabase
+					.from('categories')
+					.select('label')
+					.eq('value', product.category)
+					.eq('is_active', true)
+					.single()
+			: Promise.resolve({ data: null })
+	]);
 
-	// Fetch the category label
-	let categoryLabel = product.category; // Default to the value if not found
-	if (product.category) {
-		const { data: category } = await supabase
-			.from('categories')
-			.select('label')
-			.eq('value', product.category)
-			.eq('is_active', true)
-			.single();
-		
-		if (category) {
-			categoryLabel = category.label;
-		}
-	}
+	const categoryLabel = category?.label ?? product.category;
 
-	return { product: productWithStock, categoryLabel, canonicalUrl: url.href };
+	// Strip query params (UTM/tracking params from shared links, etc.) so
+	// the canonical always points to the clean URL, same as every other
+	// page's canonical — url.href would otherwise leak them in.
+	const canonicalUrl = `${url.origin}${url.pathname}`;
+
+	return { product: productWithStock, categoryLabel, canonicalUrl };
 }

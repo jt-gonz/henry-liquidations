@@ -22,11 +22,19 @@ export async function GET({ url }) {
 		supabase.from('categories').select('slug').eq('is_active', true).not('slug', 'is', null)
 	]);
 
-	const staticEntries = [urlEntry(`${origin}/`), urlEntry(`${origin}/shop`), urlEntry(`${origin}/shipping-policy`)];
+	// Listing pages change whenever the newest product does — reuse that as
+	// their lastmod rather than tracking a separate "page last changed" date.
+	const newestProductDate = products?.[0]?.created_at?.slice(0, 10);
+
+	const staticEntries = [
+		urlEntry(`${origin}/`, newestProductDate),
+		urlEntry(`${origin}/shop`, newestProductDate),
+		urlEntry(`${origin}/shipping-policy`)
+	];
 
 	const categoryEntries = [
-		...(categories ?? []).map((c) => urlEntry(`${origin}/shop/${c.slug}`)),
-		urlEntry(`${origin}/shop/${WASHER_DRYER_SLUG}`)
+		...(categories ?? []).map((c) => urlEntry(`${origin}/shop/${c.slug}`, newestProductDate)),
+		urlEntry(`${origin}/shop/${WASHER_DRYER_SLUG}`, newestProductDate)
 	];
 
 	const productEntries = (products ?? []).map((p) =>

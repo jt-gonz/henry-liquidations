@@ -1,15 +1,27 @@
 <!-- Shipping & Delivery Policy -->
 <script>
 	import { page } from '$app/stores';
+	import { DEFAULT_OG_IMAGE } from '$lib/constants/seo.js';
+
+	const pageTitle = "Shipping & Delivery Policy | Henry's Liquidation Store";
+	const pageDescription =
+		'Read our shipping and delivery policy, including processing times and delivery options.';
+	let ogImage = $derived($page.url.origin + DEFAULT_OG_IMAGE);
 </script>
 
 <svelte:head>
-	<title>Shipping &amp; Delivery Policy | Henry's Liquidation Store</title>
-	<meta
-		name="description"
-		content="Read our shipping and delivery policy, including processing times and delivery options."
-	/>
+	<title>{pageTitle}</title>
+	<meta name="description" content={pageDescription} />
 	<link rel="canonical" href={$page.url.origin + '/shipping-policy'} />
+	<meta property="og:title" content={pageTitle} />
+	<meta property="og:description" content={pageDescription} />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content={ogImage} />
+	<meta property="og:url" content={$page.url.origin + '/shipping-policy'} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={pageTitle} />
+	<meta name="twitter:description" content={pageDescription} />
+	<meta name="twitter:image" content={ogImage} />
 </svelte:head>
 
 <div class="mx-auto max-w-3xl px-6 py-16 sm:px-8">

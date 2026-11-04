@@ -17,6 +17,7 @@
 	 *   available_quantity?: number | null;
 	 *   created_at?: string | null;
 	 *   colors?: string[] | null;
+	 *   priority?: boolean;
 	 * }}
 	 */
 	let {
@@ -30,7 +31,8 @@
 		in_stock = true,
 		available_quantity = null,
 		created_at = null,
-		colors = null
+		colors = null,
+		priority = false
 	} = $props();
 
 	let onSale = $derived(!!compare_at_price && compare_at_price > price);
@@ -93,7 +95,7 @@
 </script>
 
 <div
-	class="group relative overflow-hidden rounded-lg bg-brand-bg shadow-sm ring-1 ring-brand-light transition-all hover:shadow-lg hover:ring-brand-brown/30"
+	class="group relative overflow-hidden rounded-xl bg-brand-bg shadow-card ring-1 ring-brand-light transition-all hover:shadow-card-hover hover:ring-brand-brown/30"
 >
 	<a href="/product/{slug}" class="block">
 		<div class="relative aspect-square overflow-hidden bg-brand-bg">
@@ -101,7 +103,13 @@
 				<div
 					class="flex h-full w-full flex-col items-center justify-center gap-2 bg-brand-light/20 text-brand-mid"
 				>
-					<svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+					<svg
+						class="h-10 w-10"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						stroke-width="1.5"
+					>
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -127,7 +135,8 @@
 					class="relative h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105 {imageLoaded
 						? 'opacity-100'
 						: 'opacity-0'} {!in_stock ? 'grayscale' : ''}"
-					loading="lazy"
+					loading={priority ? 'eager' : 'lazy'}
+					fetchpriority={priority ? 'high' : undefined}
 					onload={() => (imageLoaded = true)}
 					onerror={() => (imageFailed = true)}
 				/>
@@ -143,7 +152,8 @@
 			{#if !in_stock}
 				<Badge tone="sold" class="absolute top-2 right-2">Sold</Badge>
 			{:else if lowStock}
-				<Badge tone="low-stock" class="absolute top-2 right-2">Only {available_quantity} left</Badge>
+				<Badge tone="low-stock" class="absolute top-2 right-2">Only {available_quantity} left</Badge
+				>
 			{:else if isNew}
 				<Badge tone="new" class="absolute top-2 right-2">New</Badge>
 			{/if}

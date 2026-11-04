@@ -114,13 +114,11 @@ export async function handle({ event, resolve }) {
 	if (isTrackablePageView(event)) {
 		try {
 			const visitorId = getOrSetVisitorId(event);
-			const { error: trackError } = await supabaseAdmin.from('page_views').insert(
-				/** @type {any} */ ({
-					path: event.url.pathname,
-					visitor_id: visitorId,
-					referrer: event.request.headers.get('referer')?.slice(0, 500) ?? null
-				})
-			);
+			const { error: trackError } = await supabaseAdmin.from('page_views').insert({
+				path: event.url.pathname,
+				visitor_id: visitorId,
+				referrer: event.request.headers.get('referer')?.slice(0, 500) ?? null
+			});
 			if (trackError) {
 				console.error('Failed to record page view:', trackError.message);
 			}

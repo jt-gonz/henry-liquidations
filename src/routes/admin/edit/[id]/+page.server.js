@@ -262,6 +262,6 @@ export const actions = {
 			product_category: category
 		});
 
-		throw redirect(303, '/admin');
+		throw redirect(303, '/admin/inventory');
 	}
 };
