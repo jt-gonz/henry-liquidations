@@ -11,9 +11,8 @@
 	let { children } = $props();
 
 	// Admin is an internal tool, not a marketing page — the full storefront
-	// footer (About Us blurb, newsletter signup, etc.) is unnecessary scroll
-	// length and noise there, and would otherwise expose the public-facing
-	// newsletter form inside the admin panel.
+	// footer (About Us blurb, contact info, etc.) is unnecessary scroll
+	// length and noise there.
 	let showFooter = $derived(!$page.url.pathname.startsWith('/admin'));
 
 	// Sitewide LocalBusiness structured data — NAP matches Footer.svelte.

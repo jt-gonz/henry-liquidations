@@ -135,21 +135,6 @@
 				Orders
 			</a>
 			<a
-				href="/admin/newsletter"
-				class="group flex items-center rounded-md border-l-4 border-transparent px-3 py-2 text-sm font-medium text-gray-700 transition-all hover:border-gray-900 hover:bg-gray-50 hover:text-gray-900"
-			>
-				<span class="mr-3 text-gray-400 group-hover:text-gray-500">
-					<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
-						><path
-							d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
-						/><path
-							d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-						/></svg
-					>
-				</span>
-				Newsletter
-			</a>
-			<a
 				href="/admin/quotes"
 				class="group flex items-center rounded-md border-l-4 border-transparent px-3 py-2 text-sm font-medium text-gray-700 transition-all hover:border-gray-900 hover:bg-gray-50 hover:text-gray-900"
 			>
@@ -324,22 +309,6 @@
 							>
 						</span>
 						Orders
-					</a>
-					<a
-						href="/admin/newsletter"
-						onclick={closeMobileMenu}
-						class="group flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 hover:text-gray-900"
-					>
-						<span class="text-gray-400 group-hover:text-gray-500">
-							<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
-								><path
-									d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
-								/><path
-									d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-								/></svg
-							>
-						</span>
-						Newsletter
 					</a>
 					<a
 						href="/admin/quotes"

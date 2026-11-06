@@ -235,30 +235,6 @@
  */
 
 /**
- * @typedef {Object} NewsletterSubscriberRow
- * @property {string} id
- * @property {string} email
- * @property {string|null} source
- * @property {string} created_at
- */
-
-/**
- * @typedef {Object} NewsletterSubscriberInsert
- * @property {string} [id]
- * @property {string} email
- * @property {string|null} [source]
- * @property {string} [created_at]
- */
-
-/**
- * @typedef {Object} NewsletterSubscriberUpdate
- * @property {string} [id]
- * @property {string} [email]
- * @property {string|null} [source]
- * @property {string} [created_at]
- */
-
-/**
  * @typedef {Object} PageViewRow
  * @property {number} id
  * @property {string} path
@@ -346,11 +322,6 @@
  * @property {ShippingRateInsert} public.Tables.shipping_rates.Insert
  * @property {ShippingRateUpdate} public.Tables.shipping_rates.Update
  * @property {never[]} public.Tables.shipping_rates.Relationships
- * @property {Object} public.Tables.newsletter_subscribers
- * @property {NewsletterSubscriberRow}    public.Tables.newsletter_subscribers.Row
- * @property {NewsletterSubscriberInsert} public.Tables.newsletter_subscribers.Insert
- * @property {NewsletterSubscriberUpdate} public.Tables.newsletter_subscribers.Update
- * @property {never[]} public.Tables.newsletter_subscribers.Relationships
  * @property {Object} public.Tables.page_views
  * @property {PageViewRow}    public.Tables.page_views.Row
  * @property {PageViewInsert} public.Tables.page_views.Insert

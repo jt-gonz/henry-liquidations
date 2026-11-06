@@ -241,11 +241,6 @@
 							<td class="px-3 py-3 text-right text-sm font-medium whitespace-nowrap">
 								<form method="POST" action="?/delete" class="inline" use:enhance>
 									<input type="hidden" name="id" value={product.id} />
-									<input
-										type="hidden"
-										name="image_urls"
-										value={JSON.stringify(product.image_url ?? [])}
-									/>
 									<button
 										type="submit"
 										class="text-brand-brown transition-colors hover:text-brand-dark"

@@ -1,10 +1,6 @@
-<script>
-	import NewsletterSignup from '$lib/components/NewsletterSignup.svelte';
-</script>
-
 <footer class="mt-auto border-t border-brand-light bg-brand-dark">
 	<div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-		<div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+		<div class="grid grid-cols-1 gap-8 md:grid-cols-3">
 			<div>
 				<h3 class="text-sm font-semibold tracking-wider text-brand-bg uppercase">About Us</h3>
 				<p class="mt-4 text-base text-brand-light">
@@ -84,15 +80,6 @@
 						1355 Sagamore Pkwy N, Lafayette, IN 47904
 					</li>
 				</ul>
-			</div>
-			<div>
-				<h3 class="text-sm font-semibold tracking-wider text-brand-bg uppercase">
-					New Arrival Alerts
-				</h3>
-				<p class="mt-4 text-base text-brand-light">
-					Get an email when fresh liquidation stock hits the floor.
-				</p>
-				<NewsletterSignup source="footer" class="mt-4" />
 			</div>
 		</div>
 		<div class="mt-12 border-t border-brand-mid pt-8 text-center">

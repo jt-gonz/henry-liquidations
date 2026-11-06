@@ -82,9 +82,19 @@ export const actions = {
 	delete: async ({ request }) => {
 		const form = await request.formData();
 		const id = form.get('id')?.toString();
-		const imageUrls = form.get('image_urls')?.toString();
 
 		if (!id) return fail(400, { error: 'Product ID is required.' });
+
+		// Re-fetch the product's real image URLs server-side rather than
+		// trusting whatever the client posted — the delete form shouldn't be
+		// able to tell storage to remove arbitrary paths that don't actually
+		// belong to the product being deleted (same posture as the edit
+		// action's image handling in admin/edit/[id]/+page.server.js).
+		const { data: existingProduct } = await supabaseAdmin
+			.from('products')
+			.select('image_url')
+			.eq('id', id)
+			.single();
 
 		const { error } = await supabaseAdmin.from('products').delete().eq('id', id);
 
@@ -96,11 +106,11 @@ export const actions = {
 		trackServerEvent('product_deleted', { product_id: id });
 
 		// Best-effort: delete all images from storage
-		if (imageUrls) {
+		const imageUrls = /** @type {any} */ (existingProduct)?.image_url;
+		if (imageUrls?.length > 0) {
 			try {
-				const urls = JSON.parse(imageUrls);
 				const filesToDelete = [];
-				for (const url of urls) {
+				for (const url of imageUrls) {
 					const marker = '/product-images/';
 					const idx = url.indexOf(marker);
 					if (idx !== -1) filesToDelete.push(url.slice(idx + marker.length));
