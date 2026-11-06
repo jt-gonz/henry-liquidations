@@ -66,16 +66,16 @@
 		name="description"
 		content="Shop overstock and liquidation furniture and appliances at up to 70% off retail in Lafayette, IN."
 	/>
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=3" />
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=3" />
-	<link rel="icon" type="image/x-icon" href="/favicon.ico?v=3" />
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=3" />
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=4" />
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=4" />
+	<link rel="icon" type="image/x-icon" href="/favicon.ico?v=4" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=4" />
 	<link
 		rel="apple-touch-icon-precomposed"
 		sizes="180x180"
-		href="/apple-touch-icon-precomposed.png?v=3"
+		href="/apple-touch-icon-precomposed.png?v=4"
 	/>
-	<link rel="shortcut icon" href="/favicon.ico?v=3" />
+	<link rel="shortcut icon" href="/favicon.ico?v=4" />
 	<link rel="manifest" href="/manifest.json" />
 	<meta name="theme-color" content="#2B2420" />
 	<!-- Product photos are served from Supabase storage — preconnect so the
