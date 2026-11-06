@@ -116,6 +116,7 @@ export async function handle({ event, resolve }) {
 			const visitorId = getOrSetVisitorId(event);
 			const { error: trackError } = await supabaseAdmin.from('page_views').insert({
 				path: event.url.pathname,
+				search: event.url.search,
 				visitor_id: visitorId,
 				referrer: event.request.headers.get('referer')?.slice(0, 500) ?? null
 			});

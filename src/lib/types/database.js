@@ -238,6 +238,7 @@
  * @typedef {Object} PageViewRow
  * @property {number} id
  * @property {string} path
+ * @property {string|null} search
  * @property {string} visitor_id
  * @property {string|null} referrer
  * @property {string} created_at
@@ -247,6 +248,7 @@
  * @typedef {Object} PageViewInsert
  * @property {number} [id]
  * @property {string} path
+ * @property {string|null} [search]
  * @property {string} visitor_id
  * @property {string|null} [referrer]
  * @property {string} [created_at]
@@ -256,8 +258,78 @@
  * @typedef {Object} PageViewUpdate
  * @property {number} [id]
  * @property {string} [path]
+ * @property {string|null} [search]
  * @property {string} [visitor_id]
  * @property {string|null} [referrer]
+ * @property {string} [created_at]
+ */
+
+/**
+ * @typedef {Object} SearchQueryRow
+ * @property {string} id
+ * @property {string} term
+ * @property {number} result_count
+ * @property {string|null} category
+ * @property {string|null} visitor_id
+ * @property {string} created_at
+ */
+
+/**
+ * @typedef {Object} SearchQueryInsert
+ * @property {string} [id]
+ * @property {string} term
+ * @property {number} result_count
+ * @property {string|null} [category]
+ * @property {string|null} [visitor_id]
+ * @property {string} [created_at]
+ */
+
+/**
+ * @typedef {Object} SearchQueryUpdate
+ * @property {string} [id]
+ * @property {string} [term]
+ * @property {number} [result_count]
+ * @property {string|null} [category]
+ * @property {string|null} [visitor_id]
+ * @property {string} [created_at]
+ */
+
+/**
+ * @typedef {Object} ReportRow
+ * @property {string} id
+ * @property {'week'|'month'|'quarter'} period_type
+ * @property {string} period_start
+ * @property {string} period_end
+ * @property {object} metrics
+ * @property {string} recipient
+ * @property {'sent'|'failed'} status
+ * @property {string|null} error_message
+ * @property {string} created_at
+ */
+
+/**
+ * @typedef {Object} ReportInsert
+ * @property {string} [id]
+ * @property {'week'|'month'|'quarter'} period_type
+ * @property {string} period_start
+ * @property {string} period_end
+ * @property {object} metrics
+ * @property {string} recipient
+ * @property {'sent'|'failed'} status
+ * @property {string|null} [error_message]
+ * @property {string} [created_at]
+ */
+
+/**
+ * @typedef {Object} ReportUpdate
+ * @property {string} [id]
+ * @property {'week'|'month'|'quarter'} [period_type]
+ * @property {string} [period_start]
+ * @property {string} [period_end]
+ * @property {object} [metrics]
+ * @property {string} [recipient]
+ * @property {'sent'|'failed'} [status]
+ * @property {string|null} [error_message]
  * @property {string} [created_at]
  */
 
@@ -332,6 +404,16 @@
  * @property {PendingCheckoutItemInsert} public.Tables.pending_checkout_items.Insert
  * @property {PendingCheckoutItemUpdate} public.Tables.pending_checkout_items.Update
  * @property {never[]} public.Tables.pending_checkout_items.Relationships
+ * @property {Object} public.Tables.search_queries
+ * @property {SearchQueryRow}    public.Tables.search_queries.Row
+ * @property {SearchQueryInsert} public.Tables.search_queries.Insert
+ * @property {SearchQueryUpdate} public.Tables.search_queries.Update
+ * @property {never[]} public.Tables.search_queries.Relationships
+ * @property {Object} public.Tables.reports
+ * @property {ReportRow}    public.Tables.reports.Row
+ * @property {ReportInsert} public.Tables.reports.Insert
+ * @property {ReportUpdate} public.Tables.reports.Update
+ * @property {never[]} public.Tables.reports.Relationships
  * @property {Record<never, never>} public.Views
  * @property {Record<never, never>} public.Functions
  */

@@ -4,7 +4,7 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import { injectAnalytics } from '@vercel/analytics/sveltekit';
 	import { page } from '$app/stores';
-	import { PUBLIC_SUPABASE_URL } from '$env/static/public';
+	import { PUBLIC_SUPABASE_URL, PUBLIC_CLARITY_PROJECT_ID } from '$env/static/public';
 
 	injectAnalytics();
 
@@ -13,7 +13,16 @@
 	// Admin is an internal tool, not a marketing page — the full storefront
 	// footer (About Us blurb, contact info, etc.) is unnecessary scroll
 	// length and noise there.
-	let showFooter = $derived(!$page.url.pathname.startsWith('/admin'));
+	let isAdminRoute = $derived($page.url.pathname.startsWith('/admin'));
+	let showFooter = $derived(!isAdminRoute);
+
+	// Microsoft Clarity (heatmaps, scrollmaps, session replay, rage-click
+	// detection) — see the Design Signal Playbook. Public storefront only —
+	// excludes /admin and /login, same posture as page_views tracking in
+	// hooks.server.js — and inert until PUBLIC_CLARITY_PROJECT_ID is set.
+	let showClarity = $derived(
+		!isAdminRoute && $page.url.pathname !== '/login' && !!PUBLIC_CLARITY_PROJECT_ID
+	);
 
 	// Sitewide LocalBusiness structured data — NAP matches Footer.svelte.
 	let localBusinessJsonLd = $derived(
@@ -84,6 +93,15 @@
 	<link rel="preconnect" href={PUBLIC_SUPABASE_URL} crossorigin="anonymous" />
 	<link rel="dns-prefetch" href={PUBLIC_SUPABASE_URL} />
 	{@html `<script type="application/ld+json">${localBusinessJsonLd}</script>`}
+	{#if showClarity}
+		{@html `<script type="text/javascript">
+			(function(c,l,a,r,i,t,y){
+				c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+				t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+				y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+			})(window, document, "clarity", "script", "${PUBLIC_CLARITY_PROJECT_ID}");
+		</script>`}
+	{/if}
 </svelte:head>
 
 <div class="flex min-h-screen flex-col">

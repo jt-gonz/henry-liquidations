@@ -1,5 +1,5 @@
 import { error, redirect } from '@sveltejs/kit';
-import { supabase } from '$lib/server/supabase.js';
+import { supabase, supabaseAdmin } from '$lib/server/supabase.js';
 import { withComputedStock } from '$lib/server/stock.js';
 import { parseProductFilters, buildProductQuery, WASHER_DRYER_SLUG } from '$lib/server/productFilters.js';
 import { hasReliableImage } from '$lib/server/productImages.js';
@@ -15,7 +15,7 @@ const SITE_NAME = "Henry's Liquidation Store";
  *
  * @type {import('@sveltejs/kit').ServerLoad}
  */
-export async function load({ url, params }) {
+export async function load({ url, params, cookies }) {
 	const { data: categoriesData } = await supabase
 		.from('categories')
 		.select('id, value, label, slug, sort_order')
@@ -102,6 +102,25 @@ export async function load({ url, params }) {
 
 	const rawProducts = data ?? [];
 	const total = count ?? 0;
+
+	// Best-effort: log the search so zero-result terms can be reviewed later
+	// (see the Design Signal Playbook). Awaited (not fire-and-forget) since
+	// an unawaited promise isn't guaranteed to finish before a serverless
+	// function's response is sent — same posture as the page_views insert
+	// in hooks.server.js.
+	if (filters.search) {
+		try {
+			const { error: logError } = await supabaseAdmin.from('search_queries').insert({
+				term: filters.search,
+				result_count: total,
+				category: filters.category || null,
+				visitor_id: cookies.get('vid') ?? null
+			});
+			if (logError) console.error('Failed to log search query:', logError.message);
+		} catch (err) {
+			console.error('Failed to log search query:', err);
+		}
+	}
 
 	// Recompute live, bundle-aware stock (a bundle's stored in_stock can go
 	// briefly stale between sales of its components — see src/lib/server/stock.js)
