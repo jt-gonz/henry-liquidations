@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import Button from '$lib/components/ui/Button.svelte';
 	import SearchBar from '$lib/components/SearchBar.svelte';
+	import Logo from '$lib/components/Logo.svelte';
 
 	/** @type {{ class?: string }} */
 	let { class: className = '' } = $props();
@@ -31,13 +32,9 @@
 		class="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-3 sm:px-6 sm:py-4 lg:px-8"
 	>
 		<a href="/" class="flex min-w-0 items-center gap-2 sm:gap-3">
-			<img
-				src="/logo.png.avif"
-				alt="Henry's Liquidation Store"
-				class="h-9 w-auto shrink-0 drop-shadow-md sm:h-12"
-			/>
+			<Logo class="h-8 w-auto shrink-0 text-white sm:h-10" />
 			<span
-				class="hidden truncate text-xl font-bold tracking-tight text-white drop-shadow-sm sm:block sm:text-2xl"
+				class="hidden truncate text-xl font-bold tracking-tight text-white sm:block sm:text-2xl"
 				>Henry's Liquidation</span
 			>
 		</a>
