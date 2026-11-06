@@ -1,5 +1,10 @@
+<script>
+	import Logo from '$lib/components/Logo.svelte';
+</script>
+
 <footer class="mt-auto border-t border-brand-light bg-brand-dark">
 	<div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+		<Logo variant="stacked" class="mb-10 text-brand-bg" />
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-3">
 			<div>
 				<h3 class="text-sm font-semibold tracking-wider text-brand-bg uppercase">About Us</h3>
