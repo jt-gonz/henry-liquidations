@@ -29,7 +29,8 @@ export async function GET({ url }) {
 	const staticEntries = [
 		urlEntry(`${origin}/`, newestProductDate),
 		urlEntry(`${origin}/shop`, newestProductDate),
-		urlEntry(`${origin}/shipping-policy`)
+		urlEntry(`${origin}/shipping-policy`),
+		urlEntry(`${origin}/privacy-policy`)
 	];
 
 	const categoryEntries = [

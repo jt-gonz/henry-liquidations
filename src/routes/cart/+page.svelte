@@ -211,77 +211,76 @@
 	{:else}
 		<div class="divide-y divide-brand-light border-t border-b border-brand-light">
 			{#each items as item (item.color ? `${item.id}-${item.color}` : item.id)}
-				<div class="flex items-center gap-4 py-4">
-					<!-- Thumbnail -->
-					<a href="/product/{item.slug}" class="relative shrink-0">
-						<img
-							src={item.image_url}
-							alt={item.name}
-							class="h-20 w-20 rounded-md bg-brand-bg object-cover"
-							onerror={handleImageError}
-						/>
-						<!-- {#if item.color} -->
-						<!-- 	<div -->
-						<!-- 		class="absolute -right-1 -bottom-1 h-5 w-5 rounded-full border border-white shadow-sm ring-1 ring-gray-200" -->
-						<!-- 		style="background-color: {item.color}" -->
-						<!-- 		title="Color: {item.color}" -->
-						<!-- 	></div> -->
-						<!-- {/if} -->
-					</a>
-
-					<!-- Info -->
-					<div class="min-w-0 flex-1">
-						<a
-							href="/product/{item.slug}"
-							class="text-sm font-bold text-brand-dark hover:underline"
-						>
-							{item.name}
+				<div class="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:gap-4">
+					<!-- Thumbnail + info — always a row; takes full width on mobile
+					     (stacked above the controls row) and shares the row with
+					     them on larger screens via sm:flex-1. -->
+					<div class="flex min-w-0 items-center gap-4 sm:flex-1">
+						<a href="/product/{item.slug}" class="relative shrink-0">
+							<img
+								src={item.image_url}
+								alt={item.name}
+								class="h-20 w-20 rounded-md bg-brand-bg object-cover"
+								onerror={handleImageError}
+							/>
 						</a>
-						<p class="mt-1 text-sm font-medium text-brand-brown">${item.price.toFixed(2)}</p>
-						{#if item.color}
-							<div class="mt-1 flex items-center gap-1.5">
-								<span class="text-xs text-brand-mid">Color:</span>
-								<div
-									class="h-3 w-3 rounded-full border border-brand-light"
-									style="background-color: {item.color}"
-								></div>
-								<span class="text-xs text-brand-mid">{getColorName(item.color)}</span>
-							</div>
-						{/if}
+
+						<div class="min-w-0 flex-1">
+							<a
+								href="/product/{item.slug}"
+								class="text-sm font-bold text-brand-dark hover:underline"
+							>
+								{item.name}
+							</a>
+							<p class="mt-1 text-sm font-medium text-brand-brown">${item.price.toFixed(2)}</p>
+							{#if item.color}
+								<div class="mt-1 flex items-center gap-1.5">
+									<span class="text-xs text-brand-mid">Color:</span>
+									<div
+										class="h-3 w-3 rounded-full border border-brand-light"
+										style="background-color: {item.color}"
+									></div>
+									<span class="text-xs text-brand-mid">{getColorName(item.color)}</span>
+								</div>
+							{/if}
+						</div>
 					</div>
 
-					<!-- Quantity Controls -->
-					<div class="flex items-center gap-2">
+					<!-- Quantity, line total, remove — its own row on mobile
+					     (spread out for easier tapping), tucked to the right of
+					     the thumbnail/info row on larger screens. -->
+					<div class="flex items-center justify-between gap-4 pl-24 sm:justify-start sm:pl-0">
+						<div class="flex items-center gap-2">
+							<button
+								onclick={() => updateQuantity(item.id, item.quantity - 1, item.color)}
+								class="flex h-8 w-8 items-center justify-center rounded border border-brand-light text-brand-dark hover:bg-brand-bg"
+								aria-label="Decrease quantity"
+							>
+								-
+							</button>
+							<span class="w-8 text-center text-sm font-bold text-brand-dark">{item.quantity}</span
+							>
+							<button
+								onclick={() => updateQuantity(item.id, item.quantity + 1, item.color)}
+								class="flex h-8 w-8 items-center justify-center rounded border border-brand-light text-brand-dark hover:bg-brand-bg"
+								aria-label="Increase quantity"
+							>
+								+
+							</button>
+						</div>
+
+						<p class="text-right text-sm font-bold text-brand-brown sm:w-20">
+							${(item.price * item.quantity).toFixed(2)}
+						</p>
+
 						<button
-							onclick={() => updateQuantity(item.id, item.quantity - 1, item.color)}
-							class="flex h-8 w-8 items-center justify-center rounded border border-brand-light text-brand-dark hover:bg-brand-bg"
-							aria-label="Decrease quantity"
+							onclick={() => removeFromCart(item.id, item.color)}
+							class="text-sm text-brand-brown hover:text-brand-dark"
+							aria-label="Remove {item.name}"
 						>
-							-
-						</button>
-						<span class="w-8 text-center text-sm font-bold text-brand-dark">{item.quantity}</span>
-						<button
-							onclick={() => updateQuantity(item.id, item.quantity + 1, item.color)}
-							class="flex h-8 w-8 items-center justify-center rounded border border-brand-light text-brand-dark hover:bg-brand-bg"
-							aria-label="Increase quantity"
-						>
-							+
+							Remove
 						</button>
 					</div>
-
-					<!-- Line total -->
-					<p class="w-20 text-right text-sm font-bold text-brand-brown">
-						${(item.price * item.quantity).toFixed(2)}
-					</p>
-
-					<!-- Remove -->
-					<button
-						onclick={() => removeFromCart(item.id, item.color)}
-						class="text-sm text-brand-brown hover:text-brand-dark"
-						aria-label="Remove {item.name}"
-					>
-						Remove
-					</button>
 				</div>
 			{/each}
 		</div>

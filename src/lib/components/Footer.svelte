@@ -25,6 +25,11 @@
 							>Shipping Policy</a
 						>
 					</li>
+					<li>
+						<a href="/privacy-policy" class="text-base text-brand-light hover:text-white"
+							>Privacy Policy</a
+						>
+					</li>
 				</ul>
 			</div>
 			<div>
