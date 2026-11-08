@@ -221,6 +221,7 @@
 						created_at={product.created_at}
 						colors={product.colors}
 						priority={i < 4}
+						productSet={product.product_sets}
 					/>
 				{/each}
 			</div>
@@ -267,6 +268,7 @@
 							in_stock={product.in_stock}
 							created_at={product.created_at}
 							colors={product.colors}
+							productSet={product.product_sets}
 						/>
 					{/each}
 				</div>

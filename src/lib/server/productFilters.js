@@ -83,7 +83,21 @@ export function parseProductFilters(searchParams) {
 export function buildProductQuery(client, filters = {}) {
 	const { col: sortCol, asc: sortAsc } = SORT_OPTIONS[filters.sort ?? ''] ?? SORT_OPTIONS.newest;
 
-	let query = client.from('products').select('*', { count: 'exact' });
+	// Join each product's set (if it has one) so a listing card can link
+	// to the set's own page and show an "N options" badge, without an
+	// extra query per card.
+	let query = client.from('products').select('*, product_sets(slug, name, member_count)', { count: 'exact' });
+
+	// A set's members would otherwise each show up as their own grid
+	// card — the exact "duplicate-looking items from the same set"
+	// problem product_sets exists to fix. Only the one flagged member
+	// per set appears in browse/category grids. Search is deliberately
+	// exempted: finding "nightstand" should surface that exact piece
+	// (pre-selected on its set's page), not just whichever piece
+	// happens to be the set's default card.
+	if (!filters.search) {
+		query = query.eq('is_primary_listing', true);
+	}
 
 	if (filters.inStock === 'true') {
 		query = query.eq('in_stock', true);
@@ -139,6 +153,15 @@ export function buildProductQuery(client, filters = {}) {
 				`name.ilike.${likePattern},description.ilike.${likePattern},category.imatch.${categoryPattern}`
 			);
 		}
+
+		// A bundle's name is every one of its pieces strung together
+		// ("King Bed Frame - Dresser - Mirror - Chest - Nightstand"), so
+		// it incidentally matches a search for any single component word
+		// — showing up as a second, same-image card right next to the
+		// individual piece that's the actual relevant result. Bundles
+		// are still fully discoverable (and purchasable) from their
+		// set's own page; search is for finding one specific item.
+		query = query.is('bundle_component_ids', null);
 	}
 
 	query = query.order(sortCol, { ascending: sortAsc }).order('id', { ascending: sortAsc });

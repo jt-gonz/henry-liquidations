@@ -32,6 +32,9 @@
  * @property {string}  created_at
  * @property {number|null} stock_quantity
  * @property {string[]|null} bundle_component_ids
+ * @property {string|null} set_id
+ * @property {string|null} piece_type
+ * @property {string|null} item_code
  */
 
 /**
@@ -50,6 +53,9 @@
  * @property {string}  [created_at]
  * @property {number|null} [stock_quantity]
  * @property {string[]|null} [bundle_component_ids]
+ * @property {string|null} [set_id]
+ * @property {string|null} [piece_type]
+ * @property {string|null} [item_code]
  */
 
 /**
@@ -68,6 +74,39 @@
  * @property {string}  [created_at]
  * @property {number|null} [stock_quantity]
  * @property {string[]|null} [bundle_component_ids]
+ * @property {string|null} [set_id]
+ * @property {string|null} [piece_type]
+ * @property {string|null} [item_code]
+ */
+
+/**
+ * @typedef {Object} ProductSetRow
+ * @property {string} id
+ * @property {string} slug
+ * @property {string} name
+ * @property {string} category
+ * @property {string|null} hero_image_url
+ * @property {string} created_at
+ */
+
+/**
+ * @typedef {Object} ProductSetInsert
+ * @property {string} [id]
+ * @property {string} slug
+ * @property {string} name
+ * @property {string} category
+ * @property {string|null} [hero_image_url]
+ * @property {string} [created_at]
+ */
+
+/**
+ * @typedef {Object} ProductSetUpdate
+ * @property {string} [id]
+ * @property {string} [slug]
+ * @property {string} [name]
+ * @property {string} [category]
+ * @property {string|null} [hero_image_url]
+ * @property {string} [created_at]
  */
 
 /**
@@ -414,6 +453,11 @@
  * @property {ReportInsert} public.Tables.reports.Insert
  * @property {ReportUpdate} public.Tables.reports.Update
  * @property {never[]} public.Tables.reports.Relationships
+ * @property {Object} public.Tables.product_sets
+ * @property {ProductSetRow}    public.Tables.product_sets.Row
+ * @property {ProductSetInsert} public.Tables.product_sets.Insert
+ * @property {ProductSetUpdate} public.Tables.product_sets.Update
+ * @property {never[]} public.Tables.product_sets.Relationships
  * @property {Record<never, never>} public.Views
  * @property {Record<never, never>} public.Functions
  */

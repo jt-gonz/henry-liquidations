@@ -18,6 +18,7 @@
 	 *   created_at?: string | null;
 	 *   colors?: string[] | null;
 	 *   priority?: boolean;
+	 *   productSet?: { slug: string, name: string, member_count: number } | null;
 	 * }}
 	 */
 	let {
@@ -32,8 +33,15 @@
 		available_quantity = null,
 		created_at = null,
 		colors = null,
-		priority = false
+		priority = false,
+		productSet = null
 	} = $props();
+
+	// Cards for a set's primary listing link to the set's own page
+	// (which groups every piece/bundle onto one page) instead of this
+	// specific item's slug, with `?item=` so it still lands pre-selected
+	// on exactly this item — see src/routes/product/[slug]/+page.server.js.
+	let href = $derived(productSet ? `/product/${productSet.slug}?item=${slug}` : `/product/${slug}`);
 
 	let onSale = $derived(!!compare_at_price && compare_at_price > price);
 	let discountPercent = $derived(
@@ -97,7 +105,7 @@
 <div
 	class="group relative overflow-hidden rounded-xl bg-brand-bg shadow-card ring-1 ring-brand-light transition-all hover:shadow-card-hover hover:ring-brand-brown/30"
 >
-	<a href="/product/{slug}" class="block">
+	<a {href} class="block">
 		<div class="relative aspect-square overflow-hidden bg-brand-bg">
 			{#if showPlaceholder}
 				<div
@@ -144,6 +152,11 @@
 			{#if category}
 				<Badge tone="neutral" uppercase={false} class="absolute bottom-2 left-2">
 					{category}
+				</Badge>
+			{/if}
+			{#if productSet && productSet.member_count > 1}
+				<Badge tone="neutral" uppercase={false} class="absolute bottom-2 right-2">
+					{productSet.member_count} options
 				</Badge>
 			{/if}
 			{#if onSale}

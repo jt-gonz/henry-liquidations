@@ -1,16 +1,77 @@
-<!-- Product Detail Page -->
+<!-- Product Detail Page — also serves as a set's grouped page when
+     data.members has more than one entry (see +page.server.js) -->
 <script>
 	import { addToCart } from '$lib/stores/cart.js';
 	import { fade, scale } from 'svelte/transition';
 	import { getColorName } from '$lib/constants/colors.js';
 	import { track } from '@vercel/analytics';
+	import { replaceState } from '$app/navigation';
 
-	/** @type {{ data: { product: any, categoryLabel: string } }} */
+	/** @type {{ data: { members: any[], selectedId: string, set: any, categoryLabel: string, canonicalUrl: string } }} */
 	let { data } = $props();
-	let product = $derived(data.product);
+	let members = $derived(data.members);
 	let categoryLabel = $derived(data.categoryLabel);
-	let canonicalUrl = $derived(/** @type {any} */ (data).canonicalUrl ?? '');
+	let canonicalUrl = $derived(data.canonicalUrl ?? '');
 	let added = $state(false);
+
+	// Which member is currently shown/purchasable. Re-syncs only when
+	// `data` itself changes (a real navigation to a different product),
+	// never from our own in-page selector clicks below — those update
+	// the URL via replaceState, which doesn't re-run load().
+	let selectedId = $state(data.selectedId);
+	$effect(() => {
+		selectedId = data.selectedId;
+	});
+	let product = $derived(members.find((m) => m.id === selectedId) ?? members[0]);
+
+	// Piece/bundle selector — only meaningful when this is a set.
+	/** @type {Record<string, number>} */
+	const PIECE_ORDER = { K: 1, Q: 2, D: 3, M: 4, C: 5, N: 6 };
+	/** @param {any} m */
+	function sortRank(m) {
+		if (m.bundle_component_ids?.length) return -m.bundle_component_ids.length;
+		return PIECE_ORDER[m.piece_type] ?? 99;
+	}
+	let sortedMembers = $derived([...members].sort((a, b) => sortRank(a) - sortRank(b)));
+
+	// The set's name minus its trailing "... Set" category word (e.g.
+	// "White Bedroom Set" -> "White") — individual piece names that
+	// start with this finish word get it trimmed in the selector list,
+	// since the set's own heading already establishes it. Bundle names
+	// ("King Bed Frame - Dresser - Mirror") never start with it, so
+	// they're shown in full either way.
+	let finishPrefix = $derived(
+		data.set ? data.set.name.replace(/\s*(Bedroom|Appliance|Accessories|Occasional)\s*Set.*/i, '').trim() : ''
+	);
+	/** @param {any} m */
+	function pieceLabel(m) {
+		if (finishPrefix && m.name.toLowerCase().startsWith(finishPrefix.toLowerCase())) {
+			const rest = m.name.slice(finishPrefix.length).trim();
+			return rest || m.name;
+		}
+		return m.name;
+	}
+	/** @param {any} m */
+	function bundleSavings(m) {
+		if (!m.bundle_component_ids?.length) return null;
+		const componentTotal = m.bundle_component_ids.reduce((/** @type {number} */ sum, /** @type {string} */ id) => {
+			const c = members.find((x) => x.id === id);
+			return sum + (c ? Number(c.price) : 0);
+		}, 0);
+		const savings = componentTotal - Number(m.price);
+		return savings > 0.01 ? savings : null;
+	}
+
+	/** @param {string} id */
+	function selectMember(id) {
+		if (id === selectedId) return;
+		selectedId = id;
+		const m = members.find((x) => x.id === id);
+		if (!m) return;
+		const url = new URL(window.location.href);
+		url.searchParams.set('item', m.slug);
+		replaceState(url, {});
+	}
 
 	let onSale = $derived(!!product.compare_at_price && product.compare_at_price > product.price);
 	let discountPercent = $derived(
@@ -84,6 +145,12 @@
 	let images = $derived(product.image_url || []);
 	let currentImageIndex = $state(0);
 	let currentImage = $derived(images[currentImageIndex] || '');
+
+	// Switching pieces should start back at that piece's own lead photo.
+	$effect(() => {
+		product;
+		currentImageIndex = 0;
+	});
 
 	// Track which image indices failed to load so we can show a placeholder.
 	let failedImages = $state(/** @type {Set<number>} */ (new Set()));
@@ -378,7 +445,12 @@
 
 		<!-- Product Info -->
 		<div class="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-			<!-- Title etc. existing code -->
+			<!-- When this is a set, the heading is the set's own name (e.g.
+			     "White Bedroom Set") with the selected piece as a subtitle —
+			     the piece selector below is what actually picks the item. -->
+			{#if data.set}
+				<p class="text-sm font-semibold tracking-wide text-brand-mid uppercase">{data.set.name}</p>
+			{/if}
 			<h1 class="text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl">{product.name}</h1>
 
 			<div class="mt-3 flex items-end gap-4">
@@ -465,6 +537,42 @@
 							<li>Depth: {product.dimensions.depth}{unitLabels[product.dimensions.unit] ?? '"'}</li>
 						{/if}
 					</ul>
+				</div>
+			{/if}
+
+			<!-- Piece / bundle selector — only for sets with more than one
+			     member. Picking one swaps price/description/stock/images
+			     and retargets Add to Cart, no page reload. -->
+			{#if sortedMembers.length > 1}
+				<div class="mt-6 border-t border-brand-light pt-6">
+					<h3 class="text-sm font-bold text-brand-dark">Choose your piece</h3>
+					<div class="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+						{#each sortedMembers as m (m.id)}
+							{@const isBundle = !!m.bundle_component_ids?.length}
+							{@const savings = bundleSavings(m)}
+							{@const isSelected = m.id === product.id}
+							<button
+								type="button"
+								onclick={() => selectMember(m.id)}
+								aria-pressed={isSelected}
+								class="flex items-center justify-between gap-3 rounded-lg border px-3 py-2.5 text-left text-sm transition-colors {isSelected
+									? 'border-brand-brown bg-brand-brown/5'
+									: 'border-brand-light hover:border-brand-mid'}"
+							>
+								<span class="min-w-0">
+									<span class="block truncate font-medium text-brand-dark">{pieceLabel(m)}</span>
+									{#if isBundle}
+										<span class="text-xs text-brand-mid"
+											>Bundle{savings ? ` — save $${savings.toFixed(2)}` : ''}</span
+										>
+									{:else if !m.in_stock}
+										<span class="text-xs text-red-600">Sold out</span>
+									{/if}
+								</span>
+								<span class="shrink-0 font-semibold text-brand-brown">${Number(m.price).toFixed(2)}</span>
+							</button>
+						{/each}
+					</div>
 				</div>
 			{/if}
 

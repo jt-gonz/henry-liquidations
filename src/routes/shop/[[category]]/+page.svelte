@@ -29,7 +29,7 @@
 	// grid, category label, and breadcrumb instead of a blank "Shop
 	// Collection" shell. $state initial values run during SSR; $effect does
 	// not, which is exactly the gap this seeding closes.
-	/** @type {(import('$lib/types/database.js').ProductRow & { categoryLabel?: string, available_quantity?: number | null })[]} */
+	/** @type {(import('$lib/types/database.js').ProductRow & { categoryLabel?: string, available_quantity?: number | null, product_sets?: { slug: string, name: string, member_count: number } | null })[]} */
 	let products = $state(data.products ?? []);
 	let total = $state(/** @type {any} */ (data).total ?? 0);
 	let hasMore = $state(data.hasMore ?? false);
@@ -606,6 +606,7 @@
 						created_at={product.created_at}
 						colors={product.colors}
 						priority={i < 4}
+						productSet={product.product_sets}
 					/>
 				{/each}
 			</div>
