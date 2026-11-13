@@ -86,6 +86,8 @@
  * @property {string} name
  * @property {string} category
  * @property {string|null} hero_image_url
+ * @property {number} member_count
+ * @property {number|null} min_price
  * @property {string} created_at
  */
 
@@ -96,6 +98,8 @@
  * @property {string} name
  * @property {string} category
  * @property {string|null} [hero_image_url]
+ * @property {number} [member_count]
+ * @property {number|null} [min_price]
  * @property {string} [created_at]
  */
 
@@ -106,6 +110,8 @@
  * @property {string} [name]
  * @property {string} [category]
  * @property {string|null} [hero_image_url]
+ * @property {number} [member_count]
+ * @property {number|null} [min_price]
  * @property {string} [created_at]
  */
 

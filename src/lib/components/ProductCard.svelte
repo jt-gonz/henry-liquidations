@@ -18,7 +18,7 @@
 	 *   created_at?: string | null;
 	 *   colors?: string[] | null;
 	 *   priority?: boolean;
-	 *   productSet?: { slug: string, name: string, member_count: number } | null;
+	 *   productSet?: { slug: string, name: string, member_count: number, min_price?: number | null } | null;
 	 * }}
 	 */
 	let {
@@ -43,7 +43,18 @@
 	// on exactly this item — see src/routes/product/[slug]/+page.server.js.
 	let href = $derived(productSet ? `/product/${productSet.slug}?item=${slug}` : `/product/${slug}`);
 
-	let onSale = $derived(!!compare_at_price && compare_at_price > price);
+	// A grouped card's own listing is usually the fullest (priciest)
+	// bundle — "From $143.99" is the honest, more inviting entry point
+	// for a card that actually has 10 options behind it. The sale-price
+	// strikethrough only ever describes one specific item's discount,
+	// so it's suppressed here rather than shown next to a "from" price
+	// it doesn't belong to.
+	let isGrouped = $derived(!!productSet && productSet.member_count > 1);
+	let displayPrice = $derived(
+		isGrouped && productSet?.min_price != null ? productSet.min_price : price
+	);
+
+	let onSale = $derived(!isGrouped && !!compare_at_price && compare_at_price > price);
 	let discountPercent = $derived(
 		onSale ? Math.round((1 - price / (compare_at_price ?? price)) * 100) : 0
 	);
@@ -176,18 +187,26 @@
 				{name}
 			</h3>
 			<div class="mt-1 flex items-baseline gap-2">
-				<p class="text-lg font-medium text-brand-brown">${price.toFixed(2)}</p>
-				{#if onSale}
-					<p class="text-sm text-brand-mid line-through">${(compare_at_price ?? 0).toFixed(2)}</p>
+				{#if isGrouped}
+					<p class="text-lg font-medium text-brand-brown">From ${displayPrice.toFixed(2)}</p>
+				{:else}
+					<p class="text-lg font-medium text-brand-brown">${displayPrice.toFixed(2)}</p>
+					{#if onSale}
+						<p class="text-sm text-brand-mid line-through">${(compare_at_price ?? 0).toFixed(2)}</p>
+					{/if}
 				{/if}
-				{#if showCount && !lowStock}
+				{#if showCount && !lowStock && !isGrouped}
 					<p class="text-xs text-brand-mid">{available_quantity} in stock</p>
 				{/if}
 			</div>
 		</div>
 	</a>
 
-	{#if in_stock}
+	{#if isGrouped}
+		<Button href={href} size="sm" variant="outline" class="absolute right-3 bottom-3 left-3 !bg-white">
+			View Options
+		</Button>
+	{:else if in_stock}
 		<Button
 			onclick={handleAddToCart}
 			size="sm"

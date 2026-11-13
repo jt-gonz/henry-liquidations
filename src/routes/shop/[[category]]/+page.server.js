@@ -8,6 +8,28 @@ const PAGE_SIZE = 12;
 const SITE_NAME = "Henry's Liquidation Store";
 
 /**
+ * Category URLs from before the storefront adopted the supplier's own
+ * taxonomy (see supabase/migrations/021_supplier_category_taxonomy.sql).
+ * These were in the sitemap, so they redirect to their nearest live
+ * equivalent rather than 404-ing. A target that no longer exists — or
+ * has no stock yet, so it isn't an active category — falls back to the
+ * full catalog, which is still a useful place to land.
+ *
+ * @type {Record<string, string | null>}
+ */
+const LEGACY_CATEGORY_SLUGS = {
+	'bedroom-collection': 'bedrooms',
+	'living-room-collection': 'living-rooms',
+	'dining-collection': 'dining-rooms',
+	'occasional-collection': 'occasional',
+	'accents-collection': 'accents-tv-stands',
+	'recliner-collection': 'living-rooms',
+	'accessories-collection': 'supplies',
+	'office-collection': null,
+	'outdoor-collection': null
+};
+
+/**
  * Load the first batch of products for the shop page. Supports filters via
  * URL search params, plus an optional `/shop/{category}` path segment that
  * resolves to a real, server-rendered, individually-titled category
@@ -48,6 +70,14 @@ export async function load({ url, params, cookies }) {
 		washerDryer = true;
 	} else if (params.category) {
 		categoryRow = categories.find((c) => c.slug === params.category) ?? null;
+
+		if (!categoryRow && params.category in LEGACY_CATEGORY_SLUGS) {
+			const target = LEGACY_CATEGORY_SLUGS[params.category];
+			const live = target ? categories.find((c) => c.slug === target) : null;
+			const qs = url.search;
+			throw redirect(301, live ? `/shop/${live.slug}${qs}` : `/shop${qs}`);
+		}
+
 		if (!categoryRow) throw error(404, 'Category not found');
 	}
 

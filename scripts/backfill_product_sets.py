@@ -43,11 +43,43 @@ from collections import Counter, defaultdict
 
 CSV_PATH = "catalog_import.csv"
 
+# The storefront uses the supplier's own taxonomy (see
+# supabase/migrations/021_supplier_category_taxonomy.sql), which the
+# CSV carries verbatim in its `raw_category` column — not the looser
+# `category` column, which still holds the old "<Room> COLLECTION"
+# names from the original import.
+SUPPLIER_CATEGORY_VALUES = {
+    "Bedrooms": "BEDROOMS",
+    "Living Rooms": "LIVING_ROOMS",
+    "Dining Rooms": "DINING_ROOMS",
+    "Occasional": "OCCASIONAL",
+    "Accent Chair": "ACCENT_CHAIR",
+    "Accents & TV Stands": "ACCENTS_TV_STANDS",
+    "Bunk Beds": "BUNK_BEDS",
+    "Day Beds": "DAY_BEDS",
+    "Glamour": "GLAMOUR",
+    "Stools": "STOOLS",
+    "Accessories": "ACCESSORIES",
+    "Supplies": "SUPPLIES",
+}
+
+# How a set made of each category's pieces is named, e.g. the B071
+# bedroom pieces become the "White Bedroom Set". Keep these strings
+# stable: the set's slug is derived from this name, so changing one
+# re-slugs (and therefore duplicates) every set in that category.
 CATEGORY_LABELS = {
-    "BEDROOM COLLECTION": "Bedroom Set",
-    "APPLIANCES": "Appliance Set",
-    "ACCESSORIES COLLECTION": "Accessories Set",
-    "OCCASIONAL COLLECTION": "Occasional Set",
+    "Bedrooms": "Bedroom Set",
+    "Living Rooms": "Living Room Set",
+    "Dining Rooms": "Dining Set",
+    "Occasional": "Occasional Set",
+    "Accent Chair": "Accent Chair Set",
+    "Accents & TV Stands": "Accents Set",
+    "Bunk Beds": "Bunk Bed Set",
+    "Day Beds": "Day Bed Set",
+    "Glamour": "Glamour Set",
+    "Stools": "Stool Set",
+    "Accessories": "Accessories Set",
+    "Supplies": "Supplies Set",
 }
 
 # Piece-type words to strip off the end of an individual piece's name
@@ -162,7 +194,7 @@ def main():
     while True:
         batch = (
             supabase.table("products")
-            .select("id,slug,image_url,in_stock,bundle_component_ids")
+            .select("id,slug,image_url,in_stock,bundle_component_ids,price")
             .range(offset, offset + page - 1)
             .execute()
             .data
@@ -178,12 +210,12 @@ def main():
 
     for entry_num, entry_rows in multi_row_groups.items():
         entry_name = entry_rows[0]["entry_name"]
-        raw_category = entry_rows[0]["category"]  # CSV's space form, e.g. "BEDROOM COLLECTION" — CATEGORY_LABELS is keyed on this
-        # The live products table was normalized to the underscore form
-        # categories.value actually uses ("BEDROOM_COLLECTION") — see
-        # migration 014. Only the *stored* value needs that form; the
-        # CATEGORY_LABELS lookup below must stay keyed on raw_category.
-        category = raw_category.replace(" ", "_")
+        # The supplier's own category name ("Bedrooms"), which both the
+        # stored categories.value and the set's display label derive from.
+        supplier_category = entry_rows[0]["raw_category"]
+        category = SUPPLIER_CATEGORY_VALUES.get(
+            supplier_category, supplier_category.upper().replace(" ", "_")
+        )
 
         # Resolve this set's member products; skip (and report) any row
         # whose slug isn't actually live (e.g. sold through/removed
@@ -213,7 +245,7 @@ def main():
                 piece_names.append(stripped)
 
         finish = common_prefix_words(piece_names)
-        category_label = CATEGORY_LABELS.get(raw_category, "Set")
+        category_label = CATEGORY_LABELS.get(supplier_category, "Set")
         set_name = f"{finish} {category_label}".strip() if finish else f"{category_label} ({entry_name})"
         set_slug = slugify(f"{set_name} {entry_name}")
 
@@ -230,12 +262,24 @@ def main():
             skipped_sets.append(entry_name)
             continue
 
+        # Cheapest way into the set — grid cards show it as "From $X",
+        # since the card's own listing is usually the priciest bundle.
+        member_prices = [
+            float(slug_to_product[r["slug"]]["price"])
+            for pid, r in member_ids
+            if slug_to_product[r["slug"]].get("price") is not None
+        ]
+        min_price = min(member_prices) if member_prices else None
+
         existing_set = (
             supabase.table("product_sets").select("id").eq("slug", set_slug).maybe_single().execute()
         )
         if existing_set and existing_set.data:
             set_id = existing_set.data["id"]
-            supabase.table("product_sets").update({"member_count": len(member_ids)}).eq("id", set_id).execute()
+            supabase.table("product_sets").update({
+                "member_count": len(member_ids),
+                "min_price": min_price,
+            }).eq("id", set_id).execute()
         else:
             inserted = (
                 supabase.table("product_sets")
@@ -245,6 +289,7 @@ def main():
                     "category": category,
                     "hero_image_url": hero_image_url,
                     "member_count": len(member_ids),
+                    "min_price": min_price,
                 })
                 .execute()
             )

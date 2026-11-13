@@ -86,7 +86,9 @@ export function buildProductQuery(client, filters = {}) {
 	// Join each product's set (if it has one) so a listing card can link
 	// to the set's own page and show an "N options" badge, without an
 	// extra query per card.
-	let query = client.from('products').select('*, product_sets(slug, name, member_count)', { count: 'exact' });
+	let query = client
+		.from('products')
+		.select('*, product_sets(slug, name, member_count, min_price)', { count: 'exact' });
 
 	// A set's members would otherwise each show up as their own grid
 	// card — the exact "duplicate-looking items from the same set"
