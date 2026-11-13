@@ -2,6 +2,7 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import ProductCard from '$lib/components/ProductCard.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
 	import { DEFAULT_OG_IMAGE } from '$lib/constants/seo.js';
 	import { page } from '$app/stores';
 
@@ -122,11 +123,7 @@
 				to bring you luxury for less.
 			</p>
 			<div class="mt-10 flex items-center gap-x-8">
-				<a
-					href="/shop"
-					class="rounded-xl bg-brand-brown px-6 py-3.5 text-base font-bold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-dark hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-brown"
-					>Shop Collection</a
-				>
+				<Button href="/shop" pill size="lg">Shop Collection</Button>
 				<a
 					href="#features"
 					class="group text-base leading-6 font-bold text-brand-dark transition-all duration-200 hover:text-brand-mid"
@@ -247,11 +244,9 @@
 							Quality laundry appliances at liquidation prices — while they last.
 						</p>
 					</div>
-					<a
-						href="/shop/washers-dryers"
-						class="hidden shrink-0 rounded-xl bg-brand-brown px-5 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-dark sm:block"
-						>Shop Washers &amp; Dryers</a
-					>
+					<div class="hidden shrink-0 sm:block">
+						<Button href="/shop/washers-dryers" pill>Shop Washers &amp; Dryers</Button>
+					</div>
 				</div>
 				<div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
 					{#each washerDryerProducts as product (product.id)}
@@ -272,128 +267,47 @@
 						/>
 					{/each}
 				</div>
-				<a
-					href="/shop/washers-dryers"
-					class="mt-6 block rounded-xl bg-brand-brown px-5 py-3 text-center text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-brand-dark sm:hidden"
-					>Shop Washers &amp; Dryers</a
-				>
+				<Button href="/shop/washers-dryers" pill class="mt-6 w-full sm:hidden">
+					Shop Washers &amp; Dryers
+				</Button>
 			</div>
 		</section>
 	{/if}
 
 	<!-- Value Propositions -->
 	<section id="features" class="mx-auto mt-12 max-w-7xl px-6 pb-20 lg:px-8">
-		<div class="mx-auto max-w-2xl lg:text-center">
-			<h2 class="text-base leading-7 font-semibold text-brand-mid">Why Choose Us</h2>
-			<p class="mt-2 text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl">
-				Everything you need, nothing you don't
-			</p>
-			<p class="mt-6 text-lg leading-8 text-gray-600">
-				We keep our overhead low so we can pass the savings directly to you.
-			</p>
-		</div>
-		<div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-			<dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-6 lg:max-w-none lg:grid-cols-2 lg:gap-y-8">
-				<div class="relative pl-16">
-					<dt class="text-sm leading-6 font-semibold text-brand-dark">
-						<div
-							class="absolute top-0 left-0 flex h-9 w-9 items-center justify-center rounded-lg bg-brand-dark"
-						>
-							<svg
-								class="h-5 w-5 text-white"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								stroke-width="1.75"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581a1.5 1.5 0 002.122 0l4.318-4.318a1.5 1.5 0 000-2.122l-9.581-9.581A2.25 2.25 0 009.568 3z"
-								/>
-								<path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
-							</svg>
-						</div>
-						Unbeatable Prices
-					</dt>
-					<dd class="mt-1 text-sm leading-6 text-gray-600">
-						Save up to 70% off retail prices on brand new and like-new furniture.
+		<div
+			class="overflow-hidden rounded-[var(--radius-xl)] bg-brand-dark shadow-card-hover lg:grid lg:grid-cols-5"
+		>
+			<div class="flex flex-col justify-center gap-3 p-10 lg:col-span-2 lg:p-14">
+				<p class="text-sm leading-6 font-semibold text-brand-light/70">Why shop liquidation</p>
+				<p class="text-5xl font-bold tracking-tight text-white sm:text-6xl">
+					Up to <span class="text-brand-brown">70%</span> off
+				</p>
+				<p class="mt-2 text-base leading-7 text-brand-light/80">
+					No showroom, no middleman markup — just a warehouse full of overstock, passed on to
+					you at liquidation prices.
+				</p>
+			</div>
+			<dl
+				class="divide-y divide-brand-light bg-brand-bg lg:col-span-3 lg:grid lg:grid-cols-3 lg:divide-y-0 lg:divide-x"
+			>
+				<div class="flex flex-col gap-2 p-8">
+					<dt class="text-sm font-semibold text-brand-dark">Quality guaranteed</dt>
+					<dd class="text-sm leading-6 text-gray-600">
+						Every piece is hand-inspected by our team before it reaches the floor.
 					</dd>
 				</div>
-				<div class="relative pl-16">
-					<dt class="text-sm leading-6 font-semibold text-brand-dark">
-						<div
-							class="absolute top-0 left-0 flex h-9 w-9 items-center justify-center rounded-lg bg-brand-dark"
-						>
-							<svg
-								class="h-5 w-5 text-white"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								stroke-width="1.75"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M9 12.75l1.5 1.5L15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-								/>
-							</svg>
-						</div>
-						Quality Guaranteed
-					</dt>
-					<dd class="mt-1 text-sm leading-6 text-gray-600">
-						Every piece is hand-inspected by our team to ensure it meets our strict quality
-						standards.
+				<div class="flex flex-col gap-2 p-8">
+					<dt class="text-sm font-semibold text-brand-dark">Instant availability</dt>
+					<dd class="text-sm leading-6 text-gray-600">
+						If it's on the site, it's in our warehouse — no weeks-long delivery wait.
 					</dd>
 				</div>
-				<div class="relative pl-16">
-					<dt class="text-sm leading-6 font-semibold text-brand-dark">
-						<div
-							class="absolute top-0 left-0 flex h-9 w-9 items-center justify-center rounded-lg bg-brand-dark"
-						>
-							<svg
-								class="h-5 w-5 text-white"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								stroke-width="1.75"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-								/>
-							</svg>
-						</div>
-						Instant Availability
-					</dt>
-					<dd class="mt-1 text-sm leading-6 text-gray-600">
-						If it's on the site, it's in our warehouse. No waiting weeks for delivery.
-					</dd>
-				</div>
-				<div class="relative pl-16">
-					<dt class="text-sm leading-6 font-semibold text-brand-dark">
-						<div
-							class="absolute top-0 left-0 flex h-9 w-9 items-center justify-center rounded-lg bg-brand-dark"
-						>
-							<svg
-								class="h-5 w-5 text-white"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								stroke-width="1.75"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-								/>
-							</svg>
-						</div>
-						Secure Checkout
-					</dt>
-					<dd class="mt-1 text-sm leading-6 text-gray-600">
-						Transactions are encrypted and processed securely by Stripe.
+				<div class="flex flex-col gap-2 p-8">
+					<dt class="text-sm font-semibold text-brand-dark">Secure checkout</dt>
+					<dd class="text-sm leading-6 text-gray-600">
+						Every transaction is encrypted and processed securely by Stripe.
 					</dd>
 				</div>
 			</dl>
